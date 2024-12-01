@@ -1,0 +1,1 @@
+ALTER TABLE "forms" ALTER COLUMN "creator_id" DROP NOT NULL;

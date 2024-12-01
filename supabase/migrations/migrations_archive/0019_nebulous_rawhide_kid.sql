@@ -1,0 +1,1 @@
+ALTER TABLE "blog_posts" ALTER COLUMN "tags" SET DATA TYPE text;

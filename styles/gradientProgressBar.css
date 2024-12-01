@@ -1,0 +1,5 @@
+/* gradientProgressBar.css */
+#nprogress .bar {
+  background: linear-gradient(to right, #0053df, #00a3df) !important;
+  height: 4px !important;
+}

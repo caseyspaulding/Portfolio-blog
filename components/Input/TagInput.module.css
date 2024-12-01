@@ -1,0 +1,47 @@
+.tagInputContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.label {
+  font-size: 0.875rem;
+  color: #333;
+  font-weight: 500;
+}
+
+.inputWrapper {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  border: 1px solid #ddd;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.chip {
+  display: flex;
+  align-items: center;
+  background-color: #e0e0e0;
+  padding: 2px 8px;
+  border-radius: 12px;
+  margin: 2px;
+  font-size: 0.875rem;
+}
+
+.chipClose {
+  margin-left: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666;
+  font-size: 0.875rem;
+}
+
+.input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 4px;
+  font-size: 0.875rem;
+}

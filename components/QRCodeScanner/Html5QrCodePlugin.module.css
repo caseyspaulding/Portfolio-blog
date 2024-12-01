@@ -1,0 +1,92 @@
+/* Html5QrCodePlugin.module.css */
+
+/* Custom styles for the QR code scanner button */
+.qrCodeButton {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.qrCodeButton:hover {
+    background-color: #45a049;
+}
+
+.qrCodeButton:active {
+    background-color: #39843b;
+    transform: translateY(2px);
+}
+
+/* Custom styles for the "Scan an Image File" link */
+.qrCodeScanLink {
+    text-decoration: underline;
+    cursor: pointer;
+    color: #007BFF; /* Change this to your preferred color */
+    transition: color 0.3s ease;
+}
+
+.qrCodeScanLink:hover {
+    color: #0056b3; /* Darken color on hover */
+}
+
+/* Custom styles for the stop scanning button */
+.qrCodeStopButton {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.qrCodeStopButton:hover {
+    background-color: #c82333;
+}
+
+.qrCodeStopButton:active {
+    background-color: #bd2130;
+    transform: translateY(2px);
+}
+
+/* Custom styles for the camera selection dropdown */
+.qrCodeCameraSelect {
+    padding: 8px 12px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+.qrCodeCameraSelect:focus {
+    border-color: #007BFF;
+    outline: none;
+}
+.qrCodeStopButton {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.qrCodeStopButton:hover {
+    background-color: #c82333;
+}
+
+.qrCodeStopButton:active {
+    background-color: #bd2130;
+    transform: translateY(2px);
+}

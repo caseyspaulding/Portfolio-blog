@@ -1,0 +1,120 @@
+:root {
+    --main-blue: #90caf9;
+    --main-white: #fff;
+    --main-grey: #f1f1f1; /* Update to a lighter grey */
+    --main-dark-grey: #121212;
+    --main-ease: cubic-bezier(.65,.05,.36,1);
+    --input-background: #ffffff; /* Lighter background color for input fields */
+    --input-border-color: #ccc; /* Subtle border color */
+    --input-focus-color: #057cdd; /* Light blue for focus */
+}
+
+/* OUTLINED INPUT STYLES */
+.outlined-input {
+    position: relative;
+    margin: 1rem 0; /* Add spacing around input fields */
+}
+
+.outlined-input input {
+    color: var(--main-dark-grey);
+    height: 3rem; /* Adjust height to match surrounding fields */
+    outline: 1px solid var(--input-border-color);
+    border-radius: 8px; /* Add rounded corners */
+    border: none;
+    background-color: var(--input-background);
+    padding: 0 1rem; /* Add padding for better spacing */
+    font-size: 1rem; /* Adjust font size to match surrounding fields */
+    transition: outline 0.2s var(--main-ease), background-color 0.2s var(--main-ease);
+}
+
+.outlined-input label {
+    position: absolute;
+    top: 50%;
+    left: 1rem; /* Adjust left position for better alignment */
+    transform: translateY(-50%);
+    background-color: transparent; /* Make label background transparent */
+    color: #615f5f; /* Lighter text color */
+    text-align: left;
+    transition: 0.2s var(--main-ease);
+    font-size: 1rem;
+    pointer-events: none;
+    padding: 0 5px;
+}
+
+.outlined-input input:not(:placeholder-shown) ~ label,
+.outlined-input input:focus ~ label {
+    top: -0.2rem; /* Raise the label on focus */
+    left: 0.75rem;
+    font-size: 0.75rem; /* Smaller font size on focus */
+    background-color: var(--main-white); /* Background color for label */
+    padding: 0 0.25rem; /* Padding around label */
+}
+
+.outlined-input input:focus {
+    outline: 2px solid var(--input-focus-color) !important; /* Focus outline color */
+}
+
+.outlined-input input:hover {
+    outline: 1px solid var(--main-dark-grey); /* Subtle hover effect */
+}
+
+/* STANDARD INPUT STYLES */
+.standard-input {
+    position: relative;
+    margin: 1rem 0; /* Add spacing around input fields */
+}
+
+.standard-input input {
+    color: var(--main-dark-grey);
+    height: 3rem; /* Adjust height */
+    border: none;
+    border-bottom: 1px solid var(--input-border-color);
+    background-color: var(--input-background);
+    padding: 0 1rem; /* Add padding */
+    font-size: 1rem; /* Adjust font size */
+    transition: border-color 0.2s var(--main-ease);
+    outline: none;
+}
+
+.standard-input label {
+    position: absolute;
+    top: 50%;
+    left: 1rem; /* Adjust left position */
+    transform: translateY(-50%);
+    background-color: transparent;
+    color: #777575; /* Lighter text color */
+    text-align: left;
+    transition: 0.2s var(--main-ease);
+    font-size: 1rem;
+    pointer-events: none;
+    padding: 0 5px;
+}
+
+.standard-input input:not(:placeholder-shown) ~ label,
+.standard-input input:focus ~ label {
+    top: -0.5rem; /* Raise the label */
+    left: 0.75rem;
+    font-size: 0.75rem; /* Smaller font size on focus */
+    background-color: var(--input-background); /* Label background */
+    padding: 0 0.25rem; /* Label padding */
+}
+
+.standard-input .underline {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transform: scaleX(0);
+    transition: transform 0.2s var(--main-ease);
+    border-bottom: 2px solid var(--input-focus-color);
+}
+
+.standard-input input:focus ~ .underline {
+    transform: scaleX(1);
+}
+.standard-input input:hover {
+    border-bottom: 2px solid var(--main-dark-grey); /* Hover effect */
+}
+.standard-input input:focus ~ label {
+    color: var(--input-focus-color) !important; /* Focus color for label */
+}

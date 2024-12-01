@@ -1,0 +1,32 @@
+@font-face {
+  font-family: 'Digital7';
+  src: url('/fonts/digital-7.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Digital7Mono';
+  src: url('/fonts/digital-7 (mono).ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Digital7MonoItalic';
+  src: url('/fonts/digital-7 (mono italic).ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Digital7Italic';
+  src: url('/fonts/digital-7 (italic).ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+/* Apply custom font to a specific class */
+.customFont {
+  font-family: 'Digital7', sans-serif; /* Apply the default digital font */
+}

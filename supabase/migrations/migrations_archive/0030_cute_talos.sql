@@ -1,0 +1,1 @@
+ALTER TABLE "blog_posts" ALTER COLUMN "author" SET DATA TYPE integer;

@@ -1,0 +1,82 @@
+/* QrCodeScanner.module.css */
+
+.qr-scanner-container {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.qr-scanner-video {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+}
+
+.qr-scan-result {
+  margin-top: 12px;
+  color: green;
+}
+
+.qr-scan-error {
+  margin-top: 12px;
+  color: red;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  width: 100%;
+}
+
+.controls select,
+.controls button {
+  padding: 8px;
+  font-size: 16px;
+  margin-right: 8px;
+}
+
+.controls input[type="file"] {
+  padding: 8px;
+  font-size: 16px;
+}
+.bg-cover {
+  background-size: cover;
+}
+
+.bg-center {
+  background-position: center;
+}
+
+.bg-slate-100 {
+  background-color: #f7fafc;
+}
+
+.relative {
+  position: relative;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.rounded-2xl {
+  border-radius: 1rem; /* Or use the same value as the rounded corners of your video */
+}
+
+/* Style for the scanning region outline */
+.scan-region-highlight {
+  border: 4px dashed #4CAF50; /* Custom border style */
+  border-radius: 12px; /* Rounded corners */
+}
+
+/* Optional: Style for the SVG overlay */
+.scan-region-highlight-svg {
+  stroke: #4CAF50; /* Stroke color */
+  stroke-width: 3; /* Stroke width */
+}
