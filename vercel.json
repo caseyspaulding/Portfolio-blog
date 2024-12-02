@@ -1,15 +1,9 @@
 {
-  "redirects": [
-    {
-      "source": "/:path*",
-      "destination": "https://eventjacket.com/:path*",
-      "permanent": true,
-      "has": [
-        {
-          "type": "host",
-          "value": "www.eventjacket.com"
-        }
-      ]
+  "version": 2,
+  
+  "build": {
+    "env": {
+      "NODE_VERSION": "18" 
     }
-  ]
+  }
 }

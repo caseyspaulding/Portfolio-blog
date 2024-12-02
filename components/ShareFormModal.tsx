@@ -10,7 +10,7 @@ import
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Share, Copy, Share2 } from 'lucide-react';
+import { Share, Copy, Share2, Icon } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast"// Adjusted import path for useToast
 import { EnvelopeOpenIcon } from '@heroicons/react/24/outline';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -153,11 +153,7 @@ export default function ShareFormModal ( { form, orgId }: ShareFormModalProps )
                     ) : button.icon === EnvelopeOpenIcon ? (
                       <button.icon className="w-6 h-6  text-blue-500" />
                     ) : (
-                      <FontAwesomeIcon
-                        icon={ button.icon as IconDefinition }
-                        size="lg"
-                        color="#2563eb"
-                      />
+                      <Icon iconNode={ [] }></Icon>
                     ) }
                   </a>
                 ) ) }

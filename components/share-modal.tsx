@@ -10,11 +10,11 @@ import
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Share, Copy } from 'lucide-react';
+import { Share, Copy, Icon } from 'lucide-react';
 import Image from 'next/image';
 import { EnvelopeOpenIcon } from '@heroicons/react/24/outline';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebook, faTwitter, faWhatsapp, faFacebookMessenger, IconDefinition, faXTwitter } from '@fortawesome/free-brands-svg-icons';
+import { faFacebook,  faWhatsapp, faFacebookMessenger, IconDefinition, faXTwitter } from '@fortawesome/free-brands-svg-icons';
 import React from 'react';
 
 interface ShareModalProps
@@ -106,11 +106,7 @@ export default function ShareModal ( { eventName }: ShareModalProps )
                   ) : button.icon === EnvelopeOpenIcon ? (
                     <button.icon className="w-6 h-6 text-blue-500" />
                   ) : (
-                    <FontAwesomeIcon
-                      icon={ button.icon as IconDefinition }
-                      size="lg"
-                      color="#2563eb"
-                    />
+                    <Icon iconNode={ [] }> </Icon>
                   ) }
                 </a>
               ) ) }

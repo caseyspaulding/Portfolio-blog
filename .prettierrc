@@ -1,6 +1,7 @@
 {
     "endOfLine": "auto",
     "plugins": ["prettier-plugin-tailwindcss"],
+     "tailwindConfig": "./tailwind.config.js",
     "semi": true,
     "singleQuote": true,
     "trailingComma": "none",
