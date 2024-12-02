@@ -1,9 +1,11 @@
 {
   "version": 2,
-  
   "build": {
     "env": {
-      "NODE_VERSION": "18" 
+      "NODE_VERSION": "18"
     }
+  },
+  "functions": {
+    "runtime": "nodejs18.x"
   }
 }
