@@ -5,7 +5,7 @@ const people = [
     role: 'Founder / Developer',
     imageUrl:
       '/images/avatars/caseyProfilePic.jpg',
-    bio: 'Hi, I’m Casey, the founder of EventJacket. I spent 20 years in the Navy, learning the importance of discipline, reliability, and service. After teaching for two years and transitioning into software development, I saw an opportunity to give back to nonprofits—organizations that are often overlooked by large tech platforms. EventJacket is my way of helping them thrive, with tools that are affordable, powerful, and built for their needs.',
+    bio: 'Hi, I’m Casey, the founder of CaseySpaulding. I spent 20 years in the Navy, learning the importance of discipline, reliability, and service. After teaching for two years and transitioning into software development, I saw an opportunity to give back to nonprofits—organizations that are often overlooked by large tech platforms. CaseySpaulding is my way of helping them thrive, with tools that are affordable, powerful, and built for their needs.',
     xUrl: 'https://x.com/caseyspaulding_',
     linkedinUrl: 'https://www.linkedin.com/in/caseyspaulding/',
   },
@@ -16,7 +16,7 @@ const timeline = [
   {
     name: 'Founded Company',
     description:
-      'EventJacket was born out of a passion for simplifying event management. ',
+      'CaseySpaulding was born out of a passion for simplifying event management. ',
     date: 'Aug 2024',
     dateTime: '2024-08',
   },
@@ -129,7 +129,7 @@ export default function AboutHeroBig ()
               <div className="mt-6 max-w-xl lg:mt-0 xl:col-end-1 xl:row-start-1">
 
                 <p className="text-lg leading-8 mt-3 text-gray-600">
-                  EventJacket was born from the realization that I could build a simple, effective, event mananagement platform to handle everything from ticket sales, event pages, and marketing without the complexity of using multiple systems.
+                  CaseySpaulding was born from the realization that I could build a simple, effective, event mananagement platform to handle everything from ticket sales, event pages, and marketing without the complexity of using multiple systems.
                 </p>
               </div>
               <img
@@ -151,14 +151,14 @@ export default function AboutHeroBig ()
             <div className="mt-6 flex flex-col gap-x-8 gap-y-20 lg:flex-row">
               <div className="lg:w-full lg:max-w-2xl lg:flex-auto">
                 <p className="text-xl leading-8 text-gray-600">
-                  At EventJacket, we're on a mission to give event organizers the tools they need to plan like a pro, wow their attendees, and make every event a hit!
+                  At CaseySpaulding, we're on a mission to give event organizers the tools they need to plan like a pro, wow their attendees, and make every event a hit!
                 </p>
                 <div className="mt-10 max-w-xl text-base leading-7 text-gray-700">
                   <p>
                     We believe great events can inspire, connect, and make magic happen. That’s why we’ve crafted a platform that takes care of all the tricky stuff, so organizers can focus on what really counts: creating unforgettable moments.
                   </p>
                   <p className="mt-10">
-                    Our mission is to simplify event planning and elevate the experience for everyone involved. With EventJacket, you can streamline your operations, engage your audience, and let your creativity shine—without getting bogged down by the details.
+                    Our mission is to simplify event planning and elevate the experience for everyone involved. With CaseySpaulding, you can streamline your operations, engage your audience, and let your creativity shine—without getting bogged down by the details.
                   </p>
                   <p className="mt-10">
                     We’re committed to continuously improving our platform, making sure it evolves with your needs. Whether you’re planning a small meetup or a large conference, we’re here to help you make it extraordinary.
@@ -193,7 +193,7 @@ export default function AboutHeroBig ()
           <div className="mx-auto max-w-2xl lg:mx-0">
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Our Commitment</h2>
             <p className="mt-6 text-lg leading-8 text-gray-600">
-              We are committed to making event management more accessible, particularly for nonprofits and community organizations. We know budgets can be tight, so we designed EventJacket to be affordable without compromising on the features you need:
+              We are committed to making event management more accessible, particularly for nonprofits and community organizations. We know budgets can be tight, so we designed CaseySpaulding to be affordable without compromising on the features you need:
             </p>
           </div>
           <dl className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 text-base leading-7 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3">
@@ -209,29 +209,29 @@ export default function AboutHeroBig ()
         <div className="mx-auto mt-32 max-w-7xl px-6 sm:mt-40 lg:px-8">
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">What Makes Us Different</h2>
           <p className="mt-6 text-lg leading-8 text-gray-600">
-            EventJacket is not just another event management tool—it was built from the ground up by someone who has walked in your shoes. After 20 years in the Navy, and working for a nonprofit, I’ve seen firsthand the challenges nonprofits face when juggling multiple tools just to keep an event running smoothly.
+            CaseySpaulding is not just another event management tool—it was built from the ground up by someone who has walked in your shoes. After 20 years in the Navy, and working for a nonprofit, I’ve seen firsthand the challenges nonprofits face when juggling multiple tools just to keep an event running smoothly.
           </p>
           <p className="mt-6 text-lg leading-8 text-gray-600">
-            With EventJacket, you’re not dealing with a faceless corporation; you’re working with a founder who knows exactly what you need, and who’s directly involved in making sure you get it.
+            With CaseySpaulding, you’re not dealing with a faceless corporation; you’re working with a founder who knows exactly what you need, and who’s directly involved in making sure you get it.
           </p>
           <p className="mt-6 text-lg leading-8 text-gray-600">
-            Our platform simplifies event management by combining everything in one place—ticket sales, vendor coordination, volunteer management, and more. Designed to save you time and money, EventJacket adapts to your needs, whether you're organizing a small community gathering or a large festival.
+            Our platform simplifies event management by combining everything in one place—ticket sales, vendor coordination, volunteer management, and more. Designed to save you time and money, CaseySpaulding adapts to your needs, whether you're organizing a small community gathering or a large festival.
           </p>
 
           <h2 className="text-3xl mt-6 font-bold tracking-tight text-gray-900 sm:text-4xl">Our Inspiration</h2>
           <p className="mt-6 text-lg leading-8 text-gray-600">
-            The inspiration behind EventJacket comes from real-world experience. I was volunteering at my friends non-profit, and I saw how hard it was to manage everything with several disconnected tools—each adding its own complexity and cost. It became clear to me that event organizers, especially in nonprofits, deserve a solution that simplifies their workload without breaking their budget.
+            The inspiration behind CaseySpaulding comes from real-world experience. I was volunteering at my friends non-profit, and I saw how hard it was to manage everything with several disconnected tools—each adding its own complexity and cost. It became clear to me that event organizers, especially in nonprofits, deserve a solution that simplifies their workload without breaking their budget.
           </p>
           <p className="mt-6 text-lg leading-8 text-gray-600">
-            EventJacket was born out of the need for a single, all-in-one platform that serves nonprofits and community organizations—helping them create impactful events without the hassle. I knew there was a better way, and that’s what EventJacket delivers.
+            CaseySpaulding was born out of the need for a single, all-in-one platform that serves nonprofits and community organizations—helping them create impactful events without the hassle. I knew there was a better way, and that’s what CaseySpaulding delivers.
           </p>
 
           <h2 className="text-3xl mt-6 font-bold tracking-tight text-gray-900 sm:text-4xl">Looking Ahead</h2>
           <p className="mt-6 text-lg leading-8 text-gray-600">
-            At EventJacket, we’re constantly evolving to meet the needs of our users. As both the founder and developer, I’m dedicated to adding new features, improving the user experience, and keeping our platform accessible and affordable for all nonprofits.
+            At CaseySpaulding, we’re constantly evolving to meet the needs of our users. As both the founder and developer, I’m dedicated to adding new features, improving the user experience, and keeping our platform accessible and affordable for all nonprofits.
           </p>
           <p className="mt-6 text-lg leading-8 text-gray-600">
-            Whether you’re planning your first small event or managing your largest festival yet, EventJacket grows with you, offering a reliable, all-in-one solution that lets you focus on what truly matters: delivering memorable experiences for your attendees. We handle the logistics, so you can focus on making an impact.
+            Whether you’re planning your first small event or managing your largest festival yet, CaseySpaulding grows with you, offering a reliable, all-in-one solution that lets you focus on what truly matters: delivering memorable experiences for your attendees. We handle the logistics, so you can focus on making an impact.
           </p>
         </div>
         <div className="bg-white py-24 md:py-32">

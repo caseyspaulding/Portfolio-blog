@@ -1,27 +1,29 @@
-import {
-  Button,
-  DarkThemeToggle,
-  Navbar,
-  NavbarBrand,
-  NavbarCollapse,
-  NavbarLink,
-  NavbarToggle,
-} from "flowbite-react";
+import
+  {
+    Button,
+    DarkThemeToggle,
+    Navbar,
+    NavbarBrand,
+    NavbarCollapse,
+    NavbarLink,
+    NavbarToggle,
+  } from "flowbite-react";
 import Link from "next/link";
 
-export function RootNavbar() {
+export function RootNavbar ()
+{
   return (
     <Navbar fluid rounded>
-      <NavbarBrand as={ Link } href="https://www.eventjacket.com">
+      <NavbarBrand as={ Link } href="https://www.CaseySpaulding.com">
         <img
           alt=""
           src="https://flowbite.com/docs/images/logo.svg"
-          width={36}
-          height={36}
+          width={ 36 }
+          height={ 36 }
           className="mr-3 h-6 sm:h-9"
         />
         <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-          Eventjacket
+          CaseySpaulding
         </span>
       </NavbarBrand>
       <div className="flex gap-2 md:order-2">
@@ -32,10 +34,10 @@ export function RootNavbar() {
           Getting started
         </Button>
         <DarkThemeToggle />
-        <NavbarToggle theme={{ icon: "h-5 w-5 shrink-0" }} />
+        <NavbarToggle theme={ { icon: "h-5 w-5 shrink-0" } } />
       </div>
       <NavbarCollapse>
-        <NavbarLink as={Link} href="/" active>
+        <NavbarLink as={ Link } href="/" active>
           <p>Home</p>
         </NavbarLink>
         <NavbarLink

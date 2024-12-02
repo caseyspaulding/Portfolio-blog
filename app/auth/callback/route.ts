@@ -11,7 +11,7 @@ export async function GET ( request: Request )
 
     if ( !code )
     {
-      return NextResponse.redirect( 'https://www.eventjacket.com/auth/error?message=Missing%20authorization%20code' );
+      return NextResponse.redirect( 'https://www.CaseySpaulding.com/auth/error?message=Missing%20authorization%20code' );
     }
 
     const supabase = await createClient();
@@ -21,14 +21,14 @@ export async function GET ( request: Request )
     if ( exchangeError )
     {
       console.error( 'Error exchanging code for session:', exchangeError );
-      return NextResponse.redirect( 'https://www.eventjacket.com/auth/error?message=Auth%20error' );
+      return NextResponse.redirect( 'https://www.CaseySpaulding.com/auth/error?message=Auth%20error' );
     }
 
-    return NextResponse.redirect( 'https://www.eventjacket.com/auth/onboarding' );
+    return NextResponse.redirect( 'https://www.CaseySpaulding.com/auth/onboarding' );
 
   } catch ( error )
   {
     console.error( 'Unexpected error:', error );
-    return NextResponse.redirect( 'https://www.eventjacket.com/auth/error?message=Server%20error' );
+    return NextResponse.redirect( 'https://www.CaseySpaulding.com/auth/error?message=Server%20error' );
   }
 }

@@ -3,7 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export function NavbarMain() {
+export function NavbarMain ()
+{
   return (
     <nav className="fixed z-50 w-full border-b border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-800 sm:py-2">
       <div className="px-4 py-3 lg:px-6">
@@ -11,14 +12,14 @@ export function NavbarMain() {
           <div className="flex items-center justify-start">
             <Link href="/" className="mr-4 flex">
               <Image
-                width={32}
-                height={32}
+                width={ 32 }
+                height={ 32 }
                 src="/images/logo.svg"
                 className="mr-3 h-8"
                 alt=""
               />
               <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
-                EventJacket
+                CaseySpaulding
               </span>
             </Link>
             <div className="hidden sm:ml-6 sm:flex">

@@ -2,8 +2,9 @@
 
 import React, { useEffect, useState, use } from 'react';
 
-export default function RefreshStripe(props: { params: Promise<{ id: string }> }) {
-    const params = use(props.params);
+export default function RefreshStripe ( props: { params: Promise<{ id: string }> } )
+{
+    const params = use( props.params );
     const [ accountLinkCreatePending, setAccountLinkCreatePending ] = useState( false );
     const [ error, setError ] = useState( false );
     const [ accountId, setAccountId ] = useState<string | null>( null );
@@ -50,11 +51,11 @@ export default function RefreshStripe(props: { params: Promise<{ id: string }> }
     return (
         <div className="container">
             <div className="banner">
-                <h2>EventJacket</h2>
+                <h2>CaseySpaulding</h2>
             </div>
             <div className="content">
                 <h2>Add information to start accepting money</h2>
-                <p>EventJacket partners with Stripe to help you receive payments securely.</p>
+                <p>CaseySpaulding partners with Stripe to help you receive payments securely.</p>
                 { error && <p className="error">Something went wrong!</p> }
             </div>
             <div className="dev-callout">

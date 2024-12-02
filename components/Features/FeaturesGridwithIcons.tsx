@@ -1,4 +1,4 @@
- 
+
 
 import
 {
@@ -10,7 +10,7 @@ import
   UserGroupIcon,
 } from "@heroicons/react/24/outline";
 
-import 'animate.css';  
+import 'animate.css';
 
 
 const features = [
@@ -54,23 +54,23 @@ const features = [
 
 export default function FeaturesGridWithIcons ()
 {
-  
- 
+
+
   return (
     <><div className="relative py-14 sm:py-22 lg:py-10 bg-slate-100">
 
       <div className="mx-auto max-w-md px-6 text-center sm:max-w-3xl lg:max-w-7xl lg:px-8">
         <h2 className="text-lg font-semibold text-transparent bg-clip-text bg-gradient-to-b from-blue-700 to-blue-500">
-          EventJacket Features
+          CaseySpaulding Features
         </h2>
         <p
-          
+
           className={ `mt-2 text-3xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-yellow-500 to-yellow-300 sm:text-4xl animate__animated animate__fadeInUp` }
         >
           Everything you need to manage your event
         </p>
         <p className="animate__animated animate__fadeInLeft mx-auto mt-5 max-w-prose text-xl text-gray-700">
-          EventJacket provides a comprehensive suite of tools to help you manage
+          CaseySpaulding provides a comprehensive suite of tools to help you manage
           your events efficiently and effectively.
         </p>
         <div className="mt-20">
@@ -87,7 +87,7 @@ export default function FeaturesGridWithIcons ()
                   <div className="-mt-6">
                     <span
                       className="inline-flex items-center justify-center rounded-xl p-3 shadow-lg bg-gradient-to-l from-yellow-300 to-yellow-400 "
-                      
+
                     >
                       <feature.icon aria-hidden="true" className="h-8 w-8 text-white" />
                     </span>

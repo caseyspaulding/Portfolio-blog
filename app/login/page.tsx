@@ -25,8 +25,9 @@ declare global
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function LoginComponent(props: { searchParams: Promise<any> }) {
-    const searchParams = use(props.searchParams);
+export default function LoginComponent ( props: { searchParams: Promise<any> } )
+{
+    const searchParams = use( props.searchParams );
 
     const [ email, setEmail ] = useState( "" );
     const [ password, setPassword ] = useState( "" );
@@ -153,8 +154,8 @@ export default function LoginComponent(props: { searchParams: Promise<any> }) {
         <>
             <Head>
                 <title>Login </title>
-                <meta name="description" content="Login to your EventJacket account to manage your events." />
-                
+                <meta name="description" content="Login to your CaseySpaulding account to manage your events." />
+
             </Head>
             {/* Google Sign-In Script */ }
             <Script
@@ -175,7 +176,7 @@ export default function LoginComponent(props: { searchParams: Promise<any> }) {
                     <div className="w-full max-w-md lg:w-96 bg-white p-6 rounded-3xl shadow-2xl">
                         <div className="mb-1">
                             <img
-                                alt="EventJacket Logo"
+                                alt="CaseySpaulding Logo"
                                 src="/images/logo-full.png"
                                 className="h-12 w-auto mx-auto"
                             />
@@ -224,28 +225,28 @@ export default function LoginComponent(props: { searchParams: Promise<any> }) {
                         </div>
                         <form className="flex flex-col gap-3" onSubmit={ handleLogin }>
                             <Input
-                                
+
                                 name="email"
                                 placeholder="Enter your email"
                                 type="email"
-                              
+
                                 value={ email }
                                 onChange={ ( e ) => setEmail( e.target.value ) }
                                 required
                             />
                             <Input
-                                
-                                
+
+
                                 name="password"
                                 placeholder="Enter your password"
                                 type={ isVisible ? "text" : "password" }
-                               
+
                                 value={ password }
                                 onChange={ ( e ) => setPassword( e.target.value ) }
                                 required
                             />
                             <div className="flex items-center justify-between px-1 py-2">
-                               
+
                                 <Link className="text-default-500" href="/auth/reset-password" >
                                     Forgot password?
                                 </Link>

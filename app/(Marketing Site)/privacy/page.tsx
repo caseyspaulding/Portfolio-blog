@@ -4,23 +4,24 @@ import NavBar1 from '@/components/NavBarTW/NavBar1';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Privacy Policy - EventJacket',
+    title: 'Privacy Policy - CaseySpaulding',
     description:
-        "Your privacy is important to us. It is EventJacket's policy to respect your privacy regarding any information we may collect from you across our website, http://eventjacket.com, and other sites we own and operate."
+        "Your privacy is important to us. It is CaseySpaulding's policy to respect your privacy regarding any information we may collect from you across our website, http://CaseySpaulding.com, and other sites we own and operate."
 };
 
-export default function PrivacyPolicy() {
+export default function PrivacyPolicy ()
+{
     return (
         <>
             <NavBar1 />
             <HeaderCentered
                 title="Privacy Policy"
-                description="Your privacy is important to us. It is EventJacket's policy to respect your privacy regarding any information we may collect from you across our website, http://eventjacket.com, and other sites we own and operate."
+                description="Your privacy is important to us. It is CaseySpaulding's policy to respect your privacy regarding any information we may collect from you across our website, http://CaseySpaulding.com, and other sites we own and operate."
             />
             <div className="mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="mx-auto mb-7 max-w-7xl bg-white p-6 text-gray-800  ">
                     <p className="mb-6">
-                        At EventJacket, accessible from EventJacket.com, one of our main priorities
+                        At CaseySpaulding, accessible from CaseySpaulding.com, one of our main priorities
                         is the privacy of our visitors. This Privacy Policy document contains types
                         of information that is collected and recorded by Event Jacket and how we use
                         it.
@@ -122,7 +123,7 @@ export default function PrivacyPolicy() {
 
                     <h2 className="mb-4 text-xl font-bold">Third Party Privacy Policies</h2>
                     <p className="mb-6">
-                        EventJacket's Privacy Policy does not apply to other advertisers or
+                        CaseySpaulding's Privacy Policy does not apply to other advertisers or
                         websites. Thus, we are advising you to consult the respective Privacy
                         Policies of these third-party ad servers for more detailed information. It
                         may include their practices and instructions about how to opt-out of certain

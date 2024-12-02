@@ -10,31 +10,31 @@ export function FeeCalculator ()
 {
   const [ ticketPrice, setTicketPrice ] = useState( 30 )
   const [ feePayer, setFeePayer ] = useState( 'buyer' )
-  const [ eventJacketFee, setEventJacketFee ] = useState( 0 )
+  const [ CaseySpauldingFee, setCaseySpauldingFee ] = useState( 0 )
   const [ processingFee, setProcessingFee ] = useState( 0 )
   const [ buyerPays, setBuyerPays ] = useState( 0 )
   const [ youReceive, setYouReceive ] = useState( 0 )
 
   useEffect( () =>
   {
-    const baseEventJacketFee = 0.25
+    const baseCaseySpauldingFee = 0.25
     const processingPercentage = 0.029
     const processingFixed = 0.30
 
-    let calculatedEventJacketFee = baseEventJacketFee
+    let calculatedCaseySpauldingFee = baseCaseySpauldingFee
     let calculatedProcessingFee = ( ticketPrice * processingPercentage ) + processingFixed
 
     if ( feePayer === 'buyer' )
     {
-      setBuyerPays( ticketPrice + calculatedEventJacketFee + calculatedProcessingFee )
+      setBuyerPays( ticketPrice + calculatedCaseySpauldingFee + calculatedProcessingFee )
       setYouReceive( ticketPrice )
     } else
     {
       setBuyerPays( ticketPrice )
-      setYouReceive( ticketPrice - calculatedEventJacketFee - calculatedProcessingFee )
+      setYouReceive( ticketPrice - calculatedCaseySpauldingFee - calculatedProcessingFee )
     }
 
-    setEventJacketFee( calculatedEventJacketFee )
+    setCaseySpauldingFee( calculatedCaseySpauldingFee )
     setProcessingFee( calculatedProcessingFee )
   }, [ ticketPrice, feePayer ] )
 
@@ -42,7 +42,7 @@ export function FeeCalculator ()
     <Card className="w-full max-w-md mx-auto shadow-md sm:p-3 lg:p-1 shadow-yellow-300" >
       <CardHeader>
         <CardTitle className="text-3xl font-bold text-center text-blue-600">
-          Calculate your EventJacket fees
+          Calculate your CaseySpaulding fees
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-6">
@@ -86,8 +86,8 @@ export function FeeCalculator ()
         <Card className="bg-gray-100">
           <CardContent className="p-4 space-y-2">
             <div className="flex justify-between">
-              <span>EventJacket Fee:</span>
-              <span className="font-semibold text-blue-600">${ eventJacketFee.toFixed( 2 ) }</span>
+              <span>CaseySpaulding Fee:</span>
+              <span className="font-semibold text-blue-600">${ CaseySpauldingFee.toFixed( 2 ) }</span>
             </div>
             <div className="flex justify-between">
               <span>Credit Card Processing:</span>

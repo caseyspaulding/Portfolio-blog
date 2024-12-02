@@ -11,7 +11,7 @@ export async function GET ( request: Request )
 
         if ( !code )
         {
-            return NextResponse.redirect( 'https://www.eventjacket.com/auth/sign-in?message=Missing%20authorization%20code' );
+            return NextResponse.redirect( 'https://www.CaseySpaulding.com/auth/sign-in?message=Missing%20authorization%20code' );
         }
 
         const supabase = await createClient();
@@ -21,7 +21,7 @@ export async function GET ( request: Request )
         if ( exchangeError )
         {
             console.error( 'Error exchanging code for session:', exchangeError );
-            return NextResponse.redirect( 'https://www.eventjacket.com/auth/sign-in?message=Auth%20error' );
+            return NextResponse.redirect( 'https://www.CaseySpaulding.com/auth/sign-in?message=Auth%20error' );
         }
 
         const { user } = session;
@@ -36,14 +36,14 @@ export async function GET ( request: Request )
         if ( profileError )
         {
             console.error( 'Error fetching user profile:', profileError );
-            return NextResponse.redirect( 'https://www.eventjacket.com/auth/onboarding' );
+            return NextResponse.redirect( 'https://www.CaseySpaulding.com/auth/onboarding' );
         }
 
         // Check if the user already has an organization
         if ( !profile || !profile.org_id )
         {
             // Redirect to onboarding if no organization exists
-            return NextResponse.redirect( 'https://www.eventjacket.com/auth/onboarding' );
+            return NextResponse.redirect( 'https://www.CaseySpaulding.com/auth/onboarding' );
         }
 
         // Fetch the organization name if the profile has an org_id
@@ -56,16 +56,16 @@ export async function GET ( request: Request )
         if ( orgError || !org )
         {
             console.error( 'Error fetching organization:', orgError );
-            return NextResponse.redirect( 'https://www.eventjacket.com/auth/sign-in?message=Could%20not%20fetch%20organization' );
+            return NextResponse.redirect( 'https://www.CaseySpaulding.com/auth/sign-in?message=Could%20not%20fetch%20organization' );
         }
 
         // Properly encode the organization name for the URL
         const encodedOrgName = encodeURIComponent( org.name );
-        return NextResponse.redirect( `https://www.eventjacket.com/dashboard/${ encodedOrgName }` );
+        return NextResponse.redirect( `https://www.CaseySpaulding.com/dashboard/${ encodedOrgName }` );
 
     } catch ( error )
     {
         console.error( 'Unexpected error:', error );
-        return NextResponse.redirect( 'https://www.eventjacket.com/auth/sign-in?message=Server%20error' );
+        return NextResponse.redirect( 'https://www.CaseySpaulding.com/auth/sign-in?message=Server%20error' );
     }
 }

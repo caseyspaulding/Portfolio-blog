@@ -147,7 +147,7 @@ export default function SubscriptionBilling ()
             </p>
           </div>
           <div className="space-y-2">
-            <Button className="w-full">Upgrade to EventJacket Plus</Button>
+            <Button className="w-full">Upgrade to CaseySpaulding Plus</Button>
             <Button variant="outline" className="w-full">Start 30-day free trial</Button>
           </div>
         </div>
@@ -158,7 +158,7 @@ export default function SubscriptionBilling ()
           remainder of your subscription period and billed immediately.
         </p>
         <p className="text-sm text-gray-500 mt-2">
-          By subscribing to EventJacket Plus you agree to our{ " " }
+          By subscribing to CaseySpaulding Plus you agree to our{ " " }
           <a href="#" className="text-blue-600 hover:underline">Terms of Use</a> and{ " " }
           <a href="#" className="text-blue-600 hover:underline">Privacy Policy</a>.
         </p>

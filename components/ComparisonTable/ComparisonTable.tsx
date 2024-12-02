@@ -5,8 +5,8 @@ const ComparisonTable = () =>
   // Data structure to hold product names and their corresponding logo URLs
   const products = [
     {
-      name: 'EventJacket',
-      logo: 'https://www.eventjacket.com/images/logo_Icon.png',
+      name: 'CaseySpaulding',
+      logo: 'https://www.CaseySpaulding.com/images/logo_Icon.png',
     },
     {
       name: 'EventBrite',
@@ -25,7 +25,7 @@ const ComparisonTable = () =>
       rows: [
         {
           label: 'Company',
-          values: [ 'EventJacket', 'EventBrite', 'TicketLeap' ],
+          values: [ 'CaseySpaulding', 'EventBrite', 'TicketLeap' ],
         },
       ],
     },

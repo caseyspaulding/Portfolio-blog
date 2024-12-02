@@ -15,27 +15,27 @@ const faqs = [
   {
     id: 3,
     question: 'Can I customize the registration form for my event?',
-    answer: 'Yes, EventJacket allows you to create custom registration forms. You can add fields to collect specific information from attendees, such as dietary requirements, session preferences, or any other details relevant to your event.'
+    answer: 'Yes, CaseySpaulding allows you to create custom registration forms. You can add fields to collect specific information from attendees, such as dietary requirements, session preferences, or any other details relevant to your event.'
   },
   {
     id: 4,
-    question: 'How does the check-in process work with EventJacket?',
-    answer: 'EventJacket provides a streamlined check-in process using QR codes. Attendees receive a unique QR code with their ticket, which can be scanned using our mobile app or a compatible device at the event entrance for quick and efficient check-in.'
+    question: 'How does the check-in process work with CaseySpaulding?',
+    answer: 'CaseySpaulding provides a streamlined check-in process using QR codes. Attendees receive a unique QR code with their ticket, which can be scanned using our mobile app or a compatible device at the event entrance for quick and efficient check-in.'
   },
   {
     id: 5,
     question: 'How secure are my payments?',
-    answer: "EventJacket is powered by Stripe with Stripe Connect, an enterprise-level payment platform that has achieved PCI-DSS 3.2.1 Level 1 certification — the highest standard of data security recognized in the payment industry! This means your financial information and your attendees' payment details are kept exceptionally secure. Rest assured, you can trust us to protect your data."
+    answer: "CaseySpaulding is powered by Stripe with Stripe Connect, an enterprise-level payment platform that has achieved PCI-DSS 3.2.1 Level 1 certification — the highest standard of data security recognized in the payment industry! This means your financial information and your attendees' payment details are kept exceptionally secure. Rest assured, you can trust us to protect your data."
   },
   {
     id: 6,
-    question: 'Is it possible to manage multiple events simultaneously on EventJacket?',
-    answer: 'Yes, EventJacket is designed to handle multiple events concurrently. You can create, manage, and track numerous events from a single dashboard, making it ideal for event planners, organizations, or venues that host various events.'
+    question: 'Is it possible to manage multiple events simultaneously on CaseySpaulding?',
+    answer: 'Yes, CaseySpaulding is designed to handle multiple events concurrently. You can create, manage, and track numerous events from a single dashboard, making it ideal for event planners, organizations, or venues that host various events.'
   },
   {
     id: 7,
     question: 'What\'s the maximum fee my ticket buyers will incur?',
-    answer: 'At EventJacket, our standard ticketing fee is 25 cents per ticket. Ensuring that even your higher-priced tickets remain affordable for your attendees. Please note, the 3% credit card processing fee that all ticket buyers incur is separate from the ticketing fee.'
+    answer: 'At CaseySpaulding, our standard ticketing fee is 25 cents per ticket. Ensuring that even your higher-priced tickets remain affordable for your attendees. Please note, the 3% credit card processing fee that all ticket buyers incur is separate from the ticketing fee.'
   }
 ];
 

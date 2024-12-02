@@ -4,12 +4,13 @@ import NewQRCodeGenerator from '@/components/NewQRCodeGenerator';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'FREE QR Code Generator - EventJacket',
+    title: 'FREE QR Code Generator - CaseySpaulding',
     description:
-        "Generate a free QR code for your event, business, or personal use. EventJacket's QR code generator is easy to use and free."
+        "Generate a free QR code for your event, business, or personal use. CaseySpaulding's QR code generator is easy to use and free."
 };
 
-export default function QRCode() {
+export default function QRCode ()
+{
     return (
         <div>
             <NavBar1 />

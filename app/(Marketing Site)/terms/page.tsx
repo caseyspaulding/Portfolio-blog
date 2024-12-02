@@ -4,18 +4,19 @@ import NavBar1 from '@/components/NavBarTW/NavBar1';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Terms of Service - EventJacket',
+    title: 'Terms of Service - CaseySpaulding',
     description:
-        'Read the Terms of Service for EventJacket, a cloud-based event management software solution.'
+        'Read the Terms of Service for CaseySpaulding, a cloud-based event management software solution.'
 };
 
-export default function PrivacyPolicy() {
+export default function PrivacyPolicy ()
+{
     return (
         <>
             <NavBar1 />
             <HeaderCentered
                 title="Terms of Service"
-                description='Welcome to EventJacket ("Service"). By accessing or using our Service, you agree to comply with and be bound by these Terms of Service ("Terms"). If you do not agree with these Terms, please do not use the Service.'
+                description='Welcome to CaseySpaulding ("Service"). By accessing or using our Service, you agree to comply with and be bound by these Terms of Service ("Terms"). If you do not agree with these Terms, please do not use the Service.'
             />
             <div className="mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="mx-auto mb-7 max-w-7xl bg-white p-6 text-gray-800 ">
@@ -113,7 +114,7 @@ export default function PrivacyPolicy() {
                     <h2 className="mb-4 text-xl font-bold">Contact Information</h2>
                     <p className="mb-6">
                         If you have any questions about these Terms, please contact us at
-                        admin@eventjacket.com
+                        admin@CaseySpaulding.com
                     </p>
 
                     <p className="mt-6">

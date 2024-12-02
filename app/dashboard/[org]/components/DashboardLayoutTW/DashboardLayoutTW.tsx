@@ -160,8 +160,8 @@ export default function DashboardLayoutTW ( { children }: DashboardLayoutProps )
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   const [ stripeConnectInstance, setStripeConnectInstance ] = useState<any>( null );
   const [ isCollapsed, setIsCollapsed ] = useState( true );
- 
-  
+
+
 
   const handleLogout = async () =>
   {
@@ -226,14 +226,14 @@ export default function DashboardLayoutTW ( { children }: DashboardLayoutProps )
                 </div>
                 <div className="flex-1 h-0 pt-5 pb-4 overflow-y-auto">
                   <div className="flex-shrink-0 flex items-center  px-4">
-                    <Link href="https://www.eventjacket.com">
+                    <Link href="https://www.CaseySpaulding.com">
                       <img
                         className="h-8 w-auto"
                         src="/images/Logo_Icon.webp"
-                        alt="EventJacket"
+                        alt="CaseySpaulding"
                       />
                     </Link>
-                    <Link href="https://www.eventjacket.com">
+                    <Link href="https://www.CaseySpaulding.com">
                       <span className="pl-2 font-medium text-gray-100">
                         { orgName }
                       </span>
@@ -311,14 +311,14 @@ export default function DashboardLayoutTW ( { children }: DashboardLayoutProps )
       <div className="hidden bg-gray-50 lg:flex lg:w-56 lg:flex-col lg:fixed lg:inset-y-0">
         <div className="flex flex-col  flex-grow bg-gradient-to-tr  from-blue-700 via-blue-600 to-blue-700 pt-5 pb-4 overflow-y-auto">
           <div className="flex items-center flex-shrink-0 px-4">
-            <Link href="https://www.eventjacket.com">
+            <Link href="https://www.CaseySpaulding.com">
               <img
                 className="h-8 w-auto"
                 src="/images/Logo_Icon.webp"
-                alt="EventJacket"
+                alt="CaseySpaulding"
               />
             </Link>
-            <Link href="https://www.eventjacket.com">
+            <Link href="https://www.CaseySpaulding.com">
               <span className="pl-2 font-normal text-gray-100">
                 { orgName }
               </span>

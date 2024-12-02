@@ -70,14 +70,14 @@ const solutions = [
 
 const mobile = [
 
- 
+
   {
     name: "Blog",
     description: "Read our latest articles and updates.",
     href: "/blog",
     icon: BookmarkSquareIcon,
   },
-  
+
 
   {
     name: "Free QR Code Generator",
@@ -100,8 +100,8 @@ const mobile = [
 
 ];
 const navigation = [
- 
- 
+
+
   { name: "Blog", href: "/blog" },
   { name: "Contact", href: "/contact" },
   { name: "About Me", href: "/about" },
@@ -180,10 +180,10 @@ export default function NavBar1 ()
             {/* Inner container limits width and adds gutters */ }
             <div className="max-w-7xl mx-auto px-4 flex items-center justify-between py-3 md:justify-start md:space-x-10 lg:px-3">
               <div className="flex justify-start lg:w-0 lg:flex-1">
-                
-                  <span className="text-zinc-100">Casey Spaulding</span>
-                  
-                
+
+                <span className="text-zinc-100">Casey Spaulding</span>
+
+
 
               </div>
               <div className="-my-2 -mr-2 md:hidden">
@@ -321,7 +321,7 @@ export default function NavBar1 ()
               <div className="px-5 pb-6 pt-5">
                 <div className="flex items-center justify-between">
                   <div>
-                    <img alt="EventJacket" height={ 40 } width={ 40 } src="/images/logo-full-white1.png" className="h-12 w-auto" />
+                    <img alt="CaseySpaulding" height={ 40 } width={ 40 } src="/images/logo-full-white1.png" className="h-12 w-auto" />
                   </div>
                   <div className="-mr-2">
                     <PopoverButton className="relative inline-flex items-center justify-center rounded-md bg-blue-700 p-2 text-white hover:bg-blue-600 hover:text-white focus:outline-none  ">

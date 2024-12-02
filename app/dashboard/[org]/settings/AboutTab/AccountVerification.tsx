@@ -56,7 +56,7 @@ export default function AccountVerificationTab ()
               className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
             >
               I am a legal or authorized representative of the nonprofit I would
-              like to verify on EventJacket
+              like to verify on CaseySpaulding
             </label>
           </div>
           <Button className="w-full sm:w-auto">

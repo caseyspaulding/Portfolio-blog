@@ -38,7 +38,7 @@ export async function sendTicketEmail (
 {
   console.log( `Sending ticket email to ${ buyer.email, buyer.firstName }` );
   const qrCodeDataURL = await generateQRCodeDataURL(
-    `https://eventjacket.com/verify-ticket/${ ticket.id }`
+    `https://CaseySpaulding.com/verify-ticket/${ ticket.id }`
   );
 
   // Parse FAQs from JSON string to an array
@@ -213,7 +213,7 @@ export async function sendTicketEmail (
     <div class="container">
       <!-- Header Section -->
       <div class="header">
-        <img src="https://www.eventjacket.com/images/logo-full.webp" class='logo' alt="EventJacket Logo">
+        <img src="https://www.CaseySpaulding.com/images/logo-full.webp" class='logo' alt="CaseySpaulding Logo">
 
 
       </div>
@@ -225,7 +225,7 @@ export async function sendTicketEmail (
           <h2 style='font-size: 36px;' class="first-name">${ buyer.firstName },</h2>
           <h2 style="font-size: 28px;">you've got <span
               style="background-color: #fe8522; color: #000; padding: 2px 5px;">Tickets!</span></h2>
-          <img src="https://www.eventjacket.com/images/ticketsemail.png" alt="Ticket Icon" class="icon"
+          <img src="https://www.CaseySpaulding.com/images/ticketsemail.png" alt="Ticket Icon" class="icon"
             style="max-width: 200px;">
         </div>
 
@@ -264,8 +264,8 @@ export async function sendTicketEmail (
           <img src="${ qrCodeDataURL }" alt="Your Ticket QR Code" style="max-width: 200px; height: auto;" />
         </div>
         <p>We look forward to seeing you at the event!</p>
-        <p>If you have any questions, feel free to contact us at <a href="mailto:support@eventjacket.com"
-            style="color: #fe8522; text-decoration: none;">support@eventjacket.com</a>.</p>
+        <p>If you have any questions, feel free to contact us at <a href="mailto:support@CaseySpaulding.com"
+            style="color: #fe8522; text-decoration: none;">support@CaseySpaulding.com</a>.</p>
       </div>
 
 
@@ -273,8 +273,8 @@ export async function sendTicketEmail (
       <!-- Footer Section -->
       <div class="footer">
 
-        <img src="https://www.eventjacket.com/images/logo-full.png" class='logo-footer' alt="EventJacket Logo">
-        <p>EventJacket, Kissimmee, FL. 34747</p>
+        <img src="https://www.CaseySpaulding.com/images/logo-full.png" class='logo-footer' alt="CaseySpaulding Logo">
+        <p>CaseySpaulding, Kissimmee, FL. 34747</p>
       </div>
     </div>
   </body>

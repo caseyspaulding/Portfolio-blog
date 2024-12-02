@@ -4,25 +4,26 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-    title: 'Forgot Password - EventJacket',
+    title: 'Forgot Password - CaseySpaulding',
     description:
         'Forgot your password? No worries! Just type in your email and we will send you a code to reset your password!',
 };
-export default function ForgotPasswordPage() {
+export default function ForgotPasswordPage ()
+{
     return (
         <div className="mx-auto flex flex-col items-center justify-center px-6 pt-8 md:h-screen">
             <Link
                 href="/"
                 className="mb-8 flex items-center justify-center text-2xl font-semibold dark:text-white lg:mb-10"
             >
-                <Image alt="" src="/images/logo.svg" width={43} height={44} className="mr-4 h-11" />
+                <Image alt="" src="/images/logo.svg" width={ 43 } height={ 44 } className="mr-4 h-11" />
                 <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
-                    EventJacket
+                    CaseySpaulding
                 </span>
             </Link>
             <Card
                 className="sm:max-w-screen-sm md:max-w-screen-sm"
-                theme={{ root: { children: 'w-full p-6 sm:p-8 md:p-16' } }}
+                theme={ { root: { children: 'w-full p-6 sm:p-8 md:p-16' } } }
             >
                 <h2 className="mb-3 text-2xl font-bold text-gray-900 dark:text-white lg:text-3xl">
                     Forgot your password?
@@ -58,7 +59,7 @@ export default function ForgotPasswordPage() {
                             size="lg"
                             color="blue"
                             type="submit"
-                            theme={{ inner: { base: 'px-5 py-3' } }}
+                            theme={ { inner: { base: 'px-5 py-3' } } }
                             className="w-full px-0 py-px sm:w-auto"
                         >
                             Reset password

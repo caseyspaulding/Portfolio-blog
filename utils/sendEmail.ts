@@ -18,7 +18,7 @@ export async function sendEmail (
 ): Promise<void>
 {
   const params: SendEmailCommandInput = {
-    Source: 'team@eventjacket.com', // Replace with your SES-verified email address
+    Source: 'team@CaseySpaulding.com', // Replace with your SES-verified email address
     Destination: {
       ToAddresses: [ to ], // Customer's email address
     },

@@ -85,8 +85,8 @@ export async function POST ( request: NextRequest )
       attachmentUrl = publicUrlData?.publicUrl;
     }
 
-    
-    
+
+
 
     // Save feedback to the database
     await db.insert( feedbackTable ).values( {
@@ -124,7 +124,7 @@ export async function POST ( request: NextRequest )
         : ''
       }
     `;
-    await sendEmail( 'team@eventjacket.com', emailSubject, emailBody );
+    await sendEmail( 'team@CaseySpaulding.com', emailSubject, emailBody );
 
     return NextResponse.json( { message: 'Feedback submitted successfully' }, { status: 200 } );
   } catch ( error )

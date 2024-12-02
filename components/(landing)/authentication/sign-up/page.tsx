@@ -12,7 +12,7 @@ export default function SignUpPage ()
             >
                 <Image alt="" src="/images/logo.svg" width={ 43 } height={ 44 } className="mr-4 h-11" />
                 <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
-                    EventJacket
+                    CaseySpaulding
                 </span>
             </Link>
             <Card

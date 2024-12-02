@@ -9,34 +9,34 @@ import React from 'react';
 
 
 export const metadata: Metadata = {
-    title: 'EventJacket - Simplified Event Management and Ticket Sales',
+    title: 'CaseySpaulding - Simplified Event Management and Ticket Sales',
     description:
-        'Boost ticket sales, simplify planning, and manage everything in one place with EventJacket. Whether your event is big or small, we’ve got you covered. Start for free today.',
-    keywords: 'event management, ticket sales, event planning, nonprofit events, EventJacket, event software',
+        'Boost ticket sales, simplify planning, and manage everything in one place with CaseySpaulding. Whether your event is big or small, we’ve got you covered. Start for free today.',
+    keywords: 'event management, ticket sales, event planning, nonprofit events, CaseySpaulding, event software',
     robots: 'index, follow',
     alternates: {
-        canonical: 'https://eventjacket.com/',
+        canonical: 'https://CaseySpaulding.com/',
     },
     openGraph: {
-        title: 'EventJacket - Simplified Event Management',
+        title: 'CaseySpaulding - Simplified Event Management',
         description:
-            'Take control of your event management with EventJacket. Manage vendors, volunteers, attendees, and more from one platform. Perfect for nonprofits and events of any size.',
-        url: 'https://eventjacket.com/',
+            'Take control of your event management with CaseySpaulding. Manage vendors, volunteers, attendees, and more from one platform. Perfect for nonprofits and events of any size.',
+        url: 'https://CaseySpaulding.com/',
         type: 'website',
         images: [
             {
-                url: 'https://eventjacket.com/images/og-image.png',
+                url: 'https://CaseySpaulding.com/images/og-image.png',
                 width: 1200,
                 height: 630,
-                alt: 'EventJacket - Simplified Event Management',
+                alt: 'CaseySpaulding - Simplified Event Management',
             },
         ],
     },
     twitter: {
         card: 'summary_large_image',
-        site: '@EventJacket',
-        title: 'EventJacket - Simplified Event Management and Ticket Sales',
-        description: 'Easily manage your event’s logistics with EventJacket, from ticket sales to volunteer coordination. Start today for free!',
+        site: '@CaseySpaulding',
+        title: 'CaseySpaulding - Simplified Event Management and Ticket Sales',
+        description: 'Easily manage your event’s logistics with CaseySpaulding, from ticket sales to volunteer coordination. Start today for free!',
     },
 };
 

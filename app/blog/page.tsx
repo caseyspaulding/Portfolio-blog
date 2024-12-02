@@ -10,9 +10,9 @@ import type { Metadata } from 'next';
 import { authors, blogPosts } from '@/db/schemas/schema';
 
 export const metadata: Metadata = {
-    title: 'Blog - EventJacket',
+    title: 'Blog - CaseySpaulding',
     description:
-        'Read the latest articles from our blog for tips to grow and organize stellar events with EventJacket.',
+        'Read the latest articles from our blog for tips to grow and organize stellar events with CaseySpaulding.',
 };
 
 export default async function BlogList ()
@@ -38,12 +38,12 @@ export default async function BlogList ()
     return (
         <>
             <NavBar1 />
-            
+
             {/* Add more introductory text here to improve text/HTML ratio */ }
             <section className=" py-8">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <h2 className="text-2xl font-bold text-gray-800 mb-4">
-                        Welcome to the EventJacket Blog
+                        Welcome to the CaseySpaulding Blog
                     </h2>
                     <p className="text-lg text-gray-600 mb-8">
                         Our blog is your go-to resource for the latest tips, tricks, and best practices for organizing successful events.

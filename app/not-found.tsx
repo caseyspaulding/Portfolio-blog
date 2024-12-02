@@ -37,11 +37,11 @@ export default function Example() {
     return (
         <div className="bg-white">
             <main className="mx-auto w-full max-w-7xl px-6 pb-8 pt-10 sm:pb-14 lg:px-2">
-                <Link href="https://www.eventjacket.com">
+                <Link href="https://www.caseyspaulding.com">
                     <Image
                         height={40}
                         width={40}
-                        alt="EventJacket logo"
+                        alt="Casey Spaulding logo"
                         src="/images/Logo_Icon.webp"
                         className="mx-auto h-10 w-auto sm:h-12"
                     />

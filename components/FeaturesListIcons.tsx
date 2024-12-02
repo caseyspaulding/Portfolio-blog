@@ -46,7 +46,7 @@ export default function TicketingFeatures ()
             All-in-one Ticketing Platform
           </p>
           <p className="mt-6 text-lg leading-8 text-gray-600">
-            EventJacket provides a comprehensive ticketing solution that empowers you to manage ticket sales, track attendees, and deliver an exceptional event experience.
+            CaseySpaulding provides a comprehensive ticketing solution that empowers you to manage ticket sales, track attendees, and deliver an exceptional event experience.
           </p>
         </div>
 

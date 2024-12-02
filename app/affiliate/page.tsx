@@ -4,17 +4,18 @@ import NavBar1 from '@/components/NavBarTW/NavBar1';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Affiliate Program - EventJacket',
-    description: 'Earn money by referring customers to EventJacket'
+    title: 'Affiliate Program - CaseySpaulding',
+    description: 'Earn money by referring customers to CaseySpaulding'
 };
 
-export default function AffiliatePage() {
+export default function AffiliatePage ()
+{
     return (
         <div className=''>
             <NavBar1 />
             <HeaderCentered
                 title="Affiliate Program"
-                description="Earn money by referring customers to EventJacket"
+                description="Earn money by referring customers to CaseySpaulding"
             />
 
             <div className=" mx-auto max-w-7xl px-4">
@@ -23,7 +24,7 @@ export default function AffiliatePage() {
                     <h2 className="text-2xl font-bold">How it works</h2>
                     <p className="mt-4">
                         You will receive a unique link that you can share with your audience. When
-                        someone signs up for EventJacket using your link, you will earn a commission
+                        someone signs up for CaseySpaulding using your link, you will earn a commission
                         on their subscription fees.
                     </p>
 
@@ -48,7 +49,7 @@ export default function AffiliatePage() {
                         </a>
 
                         <p className="mt-4">
-                            Already an affiliate?{' '}
+                            Already an affiliate?{ ' ' }
                             <a href="#" className="text-blue-500">
                                 Log in
                             </a>

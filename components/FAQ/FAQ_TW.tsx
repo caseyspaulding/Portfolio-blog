@@ -4,8 +4,8 @@ import { MinusSmallIcon, PlusSmallIcon } from '@heroicons/react/24/outline'
 const faqs = [
   {
     id: 1,
-    question: 'What is EventJacket?',
-    answer: 'EventJacket is a platform that allows event organizers to easily input event details and automatically generate a professional web page. This page enables seamless Online Ticket Sales and promotes the event—all in one place.'
+    question: 'What is CaseySpaulding?',
+    answer: 'CaseySpaulding is a platform that allows event organizers to easily input event details and automatically generate a professional web page. This page enables seamless Online Ticket Sales and promotes the event—all in one place.'
   },
   {
     id: 2,
@@ -14,8 +14,8 @@ const faqs = [
   },
   {
     id: 3,
-    question: 'Why choose EventJacket?',
-    answer: 'EventJacket offers a simple, cost effective solution for organizations or individuals, making it easy to manage ticket sales and more. With our user-friendly platform, you can create professional event pages, handle payments, and promote your event seamlessly—without needing multiple tools. Plus, we offer one-on-one support and assistance with setting up your event pages, ensuring you have everything you need to succeed. It’s designed to save you time, reduce hassle, and help your events thrive.'
+    question: 'Why choose CaseySpaulding?',
+    answer: 'CaseySpaulding offers a simple, cost effective solution for organizations or individuals, making it easy to manage ticket sales and more. With our user-friendly platform, you can create professional event pages, handle payments, and promote your event seamlessly—without needing multiple tools. Plus, we offer one-on-one support and assistance with setting up your event pages, ensuring you have everything you need to succeed. It’s designed to save you time, reduce hassle, and help your events thrive.'
   },
   {
     id: 4,
@@ -30,32 +30,32 @@ const faqs = [
   {
     id: 6,
     question: 'Can I customize the registration form for my event?',
-    answer: 'Yes, EventJacket allows you to create custom registration forms. You can add fields to collect specific information from attendees, such as dietary requirements, session preferences, or any other details relevant to your event.'
+    answer: 'Yes, CaseySpaulding allows you to create custom registration forms. You can add fields to collect specific information from attendees, such as dietary requirements, session preferences, or any other details relevant to your event.'
   },
   {
     id: 7,
-    question: 'How does the check-in process work with EventJacket?',
-    answer: 'EventJacket provides a streamlined check-in process using QR codes. Attendees receive a unique QR code with their ticket by email, which can be scanned using our app at the event entrance for quick and efficient check-in. Try it out for Free. No credit card required.'
+    question: 'How does the check-in process work with CaseySpaulding?',
+    answer: 'CaseySpaulding provides a streamlined check-in process using QR codes. Attendees receive a unique QR code with their ticket by email, which can be scanned using our app at the event entrance for quick and efficient check-in. Try it out for Free. No credit card required.'
   },
   {
     id: 8,
     question: 'How secure are my payments?',
-    answer: "EventJacket is powered by Stripe with Stripe Connect, an enterprise-level payment platform that has achieved PCI-DSS 3.2.1 Level 1 certification — the highest standard of data security recognized in the payment industry! This means your financial information and your attendees' payment details are kept exceptionally secure. Rest assured, you can trust us to protect your data."
+    answer: "CaseySpaulding is powered by Stripe with Stripe Connect, an enterprise-level payment platform that has achieved PCI-DSS 3.2.1 Level 1 certification — the highest standard of data security recognized in the payment industry! This means your financial information and your attendees' payment details are kept exceptionally secure. Rest assured, you can trust us to protect your data."
   },
   {
     id: 9,
-    question: 'Is it possible to manage multiple events simultaneously on EventJacket?',
-    answer: 'Yes, EventJacket is designed to handle multiple events concurrently. You can create, manage, and track numerous events from a single dashboard, making it ideal for event planners, organizations, or venues that host various events.'
+    question: 'Is it possible to manage multiple events simultaneously on CaseySpaulding?',
+    answer: 'Yes, CaseySpaulding is designed to handle multiple events concurrently. You can create, manage, and track numerous events from a single dashboard, making it ideal for event planners, organizations, or venues that host various events.'
   },
   {
     id: 10,
     question: 'What\'s the maximum fee my ticket buyers will incur?',
-    answer: 'At EventJacket, our standard ticketing fee is 25 cents per ticket. Ensuring that even your higher-priced tickets remain affordable for your attendees. Please note, the 3% credit card processing fee that all ticket buyers incur is separate from the ticketing fee.'
+    answer: 'At CaseySpaulding, our standard ticketing fee is 25 cents per ticket. Ensuring that even your higher-priced tickets remain affordable for your attendees. Please note, the 3% credit card processing fee that all ticket buyers incur is separate from the ticketing fee.'
   },
   {
     id: 11,
-    question: 'Is EventJacket legit?',
-    answer: 'Absolutely! Give us a call, checkout our about page and EventJacket is officially registered in the state of Florida. You can view the business registration here: https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResultDetail?inquirytype=EntityName&directionType=Initial&searchNameOrder=EVENTJACKET%20L240003822780&aggregateId=flal-l24000382278-a80f37fb-3daa-4424-9a27-e9b33f8bc4ca&searchTerm=Eventjacket&listNameOrder=EVENTJACKET%20L240003822780.'
+    question: 'Is CaseySpaulding legit?',
+    answer: 'Absolutely! Give us a call, checkout our about page and CaseySpaulding is officially registered in the state of Florida. You can view the business registration here: https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResultDetail?inquirytype=EntityName&directionType=Initial&searchNameOrder=CaseySpaulding%20L240003822780&aggregateId=flal-l24000382278-a80f37fb-3daa-4424-9a27-e9b33f8bc4ca&searchTerm=CaseySpaulding&listNameOrder=CaseySpaulding%20L240003822780.'
   },
 ];
 

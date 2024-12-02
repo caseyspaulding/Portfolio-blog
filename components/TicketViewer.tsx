@@ -39,7 +39,7 @@ const TicketDisplay: React.FC<TicketDisplayProps> = ( {
         eventDate,
         eventTime,
         price,
-        qrCodeText: `https://eventjacket.com/verify-ticket/${ ticketNumber }`,
+        qrCodeText: `https://CaseySpaulding.com/verify-ticket/${ ticketNumber }`,
         address,
         ticketNumber
       } );

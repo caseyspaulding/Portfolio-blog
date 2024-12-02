@@ -89,7 +89,7 @@ const RegisterOrganizationPage = () =>
       style={ { backgroundImage: 'url(/images/illustrations/background-3.jpg)' } }>
         <div className="bg-white p-8 rounded-3xl shadow-lg w-full max-w-md">
           <div className="mb-4 text-center">
-            <img src="/images/Logo_Icon.webp" alt="EventJacket" className="h-14 w-auto mx-auto" />
+            <img src="/images/Logo_Icon.webp" alt="CaseySpaulding" className="h-14 w-auto mx-auto" />
             <h2 className="mt-4 text-2xl font-semibold leading-7 text-gray-900">
               Organization Registration
             </h2>

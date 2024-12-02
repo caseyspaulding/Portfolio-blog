@@ -30,7 +30,7 @@ export async function generateMetadata ( { params }: { params: Promise<{ slug: s
         openGraph: {
             title: post.metaTitle || post.title,
             description: post.metaDescription || post.excerpt || post.content.slice( 0, 160 ),
-            url: `https://eventjacket.com/blog/${ resolvedParams.slug }`, // Update to your website URL
+            url: `https://CaseySpaulding.com/blog/${ resolvedParams.slug }`, // Update to your website URL
             images: post.featuredImage ? [ { url: post.featuredImage, alt: post.title } ] : [],
         },
         twitter: {

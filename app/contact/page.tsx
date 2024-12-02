@@ -5,9 +5,9 @@ import React from "react";
 
 
 export const metadata: Metadata = {
-  title: 'Contact Us - EventJacket',
+  title: 'Contact Us - CaseySpaulding',
   description:
-    'Get in touch with the EventJacket team. We’d love to hear from you! Send us a message using the form below, or email us directly at',
+    'Get in touch with the CaseySpaulding team. We’d love to hear from you! Send us a message using the form below, or email us directly at',
 };
 export default function Contact ()
 {
@@ -20,8 +20,8 @@ export default function Contact ()
             <div>
               <h1 className="text-3xl font-bold tracking-tight text-gray-900">Contact Us</h1>
               <p className="mt-4 leading-7 text-gray-600">
-                When you reach out to EventJacket, you’re not speaking to a support team—you’re speaking directly to me, the person who built the platform.Contact me directly if you have any questions or need help.{ ' ' }
-                <a href="mailto:team@eventjacket.com" className="font-semibold text-blue-600">  casey@eventjacket.com </a>
+                When you reach out to CaseySpaulding, you’re not speaking to a support team—you’re speaking directly to me, the person who built the platform.Contact me directly if you have any questions or need help.{ ' ' }
+                <a href="mailto:team@CaseySpaulding.com" className="font-semibold text-blue-600">  casey@CaseySpaulding.com </a>
                 <div className="mt-1">
                   <dt className="sr-only">Phone number</dt>
                   <dd>+1 (407) 326-3692</dd>
@@ -38,9 +38,9 @@ export default function Contact ()
             <div className="mt-12">
               <h3 className="text-base font-semibold leading-7 text-gray-900">Follow Us</h3>
               <div className="mt-4 flex space-x-4">
-                <a href="https://facebook.com/eventjacket" className="text-blue-600">Facebook</a>
-                <a href="https://twitter.com/eventjacket_" className="text-blue-600">X</a>
-                <a href="https://linkedin.com/company/eventjacket" className="text-blue-600">LinkedIn</a>
+                <a href="https://facebook.com/CaseySpaulding" className="text-blue-600">Facebook</a>
+                <a href="https://twitter.com/CaseySpaulding_" className="text-blue-600">X</a>
+                <a href="https://linkedin.com/company/CaseySpaulding" className="text-blue-600">LinkedIn</a>
               </div>
             </div>
             <div className="mt-12">
@@ -64,8 +64,8 @@ export default function Contact ()
                   <div>
                     <dt className="sr-only">Email</dt>
                     <dd>
-                      <a href="mailto:team@eventjacket.com" className="font-semibold text-blue-600">
-                        collaborate@eventjacket.com
+                      <a href="mailto:team@CaseySpaulding.com" className="font-semibold text-blue-600">
+                        collaborate@CaseySpaulding.com
                       </a>
                     </dd>
                   </div>
@@ -80,8 +80,8 @@ export default function Contact ()
                   <div>
                     <dt className="sr-only">Email</dt>
                     <dd>
-                      <a href="mailto:team@eventjacket.com" className="font-semibold text-blue-600">
-                        press@eventjacket.com
+                      <a href="mailto:team@CaseySpaulding.com" className="font-semibold text-blue-600">
+                        press@CaseySpaulding.com
                       </a>
                     </dd>
                   </div>
@@ -94,8 +94,8 @@ export default function Contact ()
                   <div>
                     <dt className="sr-only">Email</dt>
                     <dd>
-                      <a href="mailto:team@eventjacket.com" className="font-semibold text-blue-600">
-                        careers@eventjacket.com
+                      <a href="mailto:team@CaseySpaulding.com" className="font-semibold text-blue-600">
+                        careers@CaseySpaulding.com
                       </a>
                     </dd>
                   </div>

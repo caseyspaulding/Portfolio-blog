@@ -8,8 +8,8 @@ import { Metadata } from 'next';
 
 
 export const metadata: Metadata = {
-  title: 'About Casey Spaulding | EventJacket',
-  description: 'Learn more about Casey Spaulding, the founder of EventJacket, an event management software for non-profits.',
+  title: 'About Casey Spaulding | CaseySpaulding',
+  description: 'Learn more about Casey Spaulding, the founder of CaseySpaulding, an event management software for non-profits.',
 }
 const CaseyAuthorPage = () =>
 {
@@ -17,8 +17,8 @@ const CaseyAuthorPage = () =>
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Casey",
-    "url": "https://www.eventjacket.com/authors/casey-spaulding",
-    "image": "https://www.eventjacket.com/images/caseyandlaura.jpg", // Replace with your image URL
+    "url": "https://www.CaseySpaulding.com/authors/casey-spaulding",
+    "image": "https://www.CaseySpaulding.com/images/caseyandlaura.jpg", // Replace with your image URL
     "sameAs": [
       "https://www.linkedin.com/in/caseyspaulding/",
       "https://x.com/caseyspaulding_"
@@ -26,7 +26,7 @@ const CaseyAuthorPage = () =>
     "jobTitle": "Founder and Lead Developer",
     "worksFor": {
       "@type": "Organization",
-      "name": "EventJacket"
+      "name": "CaseySpaulding"
     }
   };
 
@@ -69,7 +69,7 @@ const CaseyAuthorPage = () =>
             />
             <h1 className="text-4xl font-bold mb-2 text-center">About Casey Spaulding</h1>
             <p className="text-lg text-gray-700 text-center mb-4">
-              Founder and Lead Developer at EventJacket
+              Founder and Lead Developer at CaseySpaulding
             </p>
             <div className="flex space-x-4 mb-8">
               <div className="flex space-x-6">
@@ -88,27 +88,27 @@ const CaseyAuthorPage = () =>
               </div>
             </div>
             <div className="max-w-2xl ">
-              
+
               <div className="bg-white p-8 rounded-lg shadow-lg max-w-4xl mx-auto">
-                
-                
 
 
-                
+
+
+
                 <p className="text-lg text-gray-700 mb-4">
-                  Hi, I'm <strong>Casey Spaulding</strong>, the founder of <strong>EventJacket</strong>, an affordable, all-in-one event management solution designed for nonprofits and community event planners. After serving 20 years in the Navy and earning degrees in both software engineering and business management, I’ve combined my passion for technology and leadership to create tools that simplify event management.
+                  Hi, I'm <strong>Casey Spaulding</strong>, the founder of <strong>CaseySpaulding</strong>, an affordable, all-in-one event management solution designed for nonprofits and community event planners. After serving 20 years in the Navy and earning degrees in both software engineering and business management, I’ve combined my passion for technology and leadership to create tools that simplify event management.
                 </p>
 
                 <p className="text-lg text-gray-700 mb-4">
-                  During my time in the Navy, I organized and managed a variety of events, including retirement ceremonies, holiday parties, and change of command ceremonies. Those experiences taught me how to manage teams, coordinate logistics, and ensure everything runs smoothly — all of which laid the foundation for EventJacket.
+                  During my time in the Navy, I organized and managed a variety of events, including retirement ceremonies, holiday parties, and change of command ceremonies. Those experiences taught me how to manage teams, coordinate logistics, and ensure everything runs smoothly — all of which laid the foundation for CaseySpaulding.
                 </p>
 
                 <p className="text-lg text-gray-700 mb-4">
-                  After leaving the Navy, I saw that many nonprofits and community event planners lacked an easy, affordable way to manage their events. That’s when I decided to create <strong>EventJacket</strong> — a platform that makes ticketing, volunteer coordination, vendor management, and CRM functions simple and accessible for organizations of all sizes.
+                  After leaving the Navy, I saw that many nonprofits and community event planners lacked an easy, affordable way to manage their events. That’s when I decided to create <strong>CaseySpaulding</strong> — a platform that makes ticketing, volunteer coordination, vendor management, and CRM functions simple and accessible for organizations of all sizes.
                 </p>
 
                 <p className="text-lg text-gray-700">
-                  EventJacket is my way of giving back and helping those who bring people together through events. My goal is to empower nonprofits and small organizations by giving them the tools they need to run successful events without the stress.
+                  CaseySpaulding is my way of giving back and helping those who bring people together through events. My goal is to empower nonprofits and small organizations by giving them the tools they need to run successful events without the stress.
                 </p>
               </div>
 

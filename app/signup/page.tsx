@@ -109,8 +109,8 @@ export default function Component ()
     return (
         <>
             <Head>
-                <title>Create Account - EventJacket</title>
-                <meta name="description" content="Create your EventJacket account to manage your events, sell tickets, and track attendees." />
+                <title>Create Account - CaseySpaulding</title>
+                <meta name="description" content="Create your CaseySpaulding account to manage your events, sell tickets, and track attendees." />
 
             </Head>
 
@@ -121,7 +121,7 @@ export default function Component ()
                     <div className="w-full max-w-md lg:w-96 bg-white p-6 rounded-3xl shadow-2xl">
                         <div className="mb-1">
                             <img
-                                alt="EventJacket Logo"
+                                alt="CaseySpaulding Logo"
                                 src="/images/logo-full.png"
                                 className="h-12 w-auto mx-auto"
                             />

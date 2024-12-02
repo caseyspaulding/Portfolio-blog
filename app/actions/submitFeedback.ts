@@ -53,5 +53,5 @@ export async function submitFeedback ( formData: FormData )
     <p>${ description }</p>
     ${ attachmentUrl ? `<p><strong>Attachment:</strong> <a href="${ attachmentUrl }">View Attachment</a></p>` : '' }
   `;
-  await sendEmail( 'team@eventjacket.com', emailSubject, emailBody );
+  await sendEmail( 'team@CaseySpaulding.com', emailSubject, emailBody );
 }

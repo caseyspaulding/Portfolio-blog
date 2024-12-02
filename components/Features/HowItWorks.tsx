@@ -1,18 +1,18 @@
 
 import React from 'react';
 
-import Link from 'next/link'; 
+import Link from 'next/link';
 
 const steps = [
   {
     number: 1,
     title: "Sign Up and Set Up Your Profile",
-    description: "Create your free EventJacket account and set up your organization's profile. Add essential details like your organization's name, logo, and contact information."
+    description: "Create your free CaseySpaulding account and set up your organization's profile. Add essential details like your organization's name, logo, and contact information."
   },
   {
     number: 2,
     title: "Create and Manage Your Events",
-    description: "Use EventJacket's intuitive tools to create events, manage ticket sales, and coordinate volunteers, vendors, and performers. Customize your event pages with ease."
+    description: "Use CaseySpaulding's intuitive tools to create events, manage ticket sales, and coordinate volunteers, vendors, and performers. Customize your event pages with ease."
   },
   {
     number: 3,
@@ -28,7 +28,7 @@ export default function HowItWorks ()
       <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-3xl font-bold leading-tight text-gray-900 sm:text-4xl lg:text-5xl">
-            How EventJacket Works
+            How CaseySpaulding Works
           </h2>
           <p className="mt-4 text-xl leading-relaxed text-gray-600">
             Here's a quick look at how we'll help you rock your next event, from planning to ticket sales and beyond.
@@ -37,7 +37,7 @@ export default function HowItWorks ()
 
         <div className="relative mt-12 lg:mt-20">
           <div className="absolute inset-x-0 hidden lg:block">
-         
+
           </div>
 
           <div className="relative grid grid-cols-1 gap-10 lg:grid-cols-3">
@@ -59,7 +59,7 @@ export default function HowItWorks ()
                   <p className="text-gray-600">
                     { step.description }
                   </p>
-                 
+
                 </div>
               </div>
             ) ) }

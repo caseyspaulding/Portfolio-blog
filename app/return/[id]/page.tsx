@@ -4,31 +4,32 @@ import Link from 'next/link';
 import Confetti from 'react-confetti';
 import { useWindowSize } from '@/hooks/useWindowSize';
 
-export default function ReturnUrlStripe() {
+export default function ReturnUrlStripe ()
+{
     const { width, height } = useWindowSize();
 
     return (
         <div
-            style={{
+            style={ {
                 position: 'relative',
                 minHeight: '100vh',
                 backgroundImage: "url('/images/happypeople.webp')",
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 backgroundRepeat: 'no-repeat'
-            }}
+            } }
         >
-            {width && height && (
+            { width && height && (
                 <Confetti
-                    width={width}
-                    height={height}
-                    recycle={false}
-                    numberOfPieces={200}
-                    style={{ position: 'absolute', top: 0, left: 0 }}
+                    width={ width }
+                    height={ height }
+                    recycle={ false }
+                    numberOfPieces={ 200 }
+                    style={ { position: 'absolute', top: 0, left: 0 } }
                 />
-            )}
+            ) }
             <div
-                style={{
+                style={ {
                     position: 'relative',
                     zIndex: 1,
                     minHeight: '100vh',
@@ -36,7 +37,7 @@ export default function ReturnUrlStripe() {
                     alignItems: 'center',
                     justifyContent: 'center',
                     backgroundColor: 'rgba(255, 255, 255, 0.7)' // Optional: adds a semi-transparent white overlay
-                }}
+                } }
             >
                 <div className="mx-auto max-w-sm">
                     <div className="rounded-lg bg-white p-6 shadow-lg">
@@ -44,7 +45,7 @@ export default function ReturnUrlStripe() {
                             Account Link Successful!
                         </h1>
                         <p className="mb-4 text-center text-gray-600">
-                            Congrats on linking your account with Stripe to EventJacket!
+                            Congrats on linking your account with Stripe to CaseySpaulding!
                         </p>
                         <p className="mb-4 text-center text-gray-600">
                             You can now start selling tickets and receiving funds to your back

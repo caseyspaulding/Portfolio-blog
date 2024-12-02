@@ -3,7 +3,7 @@ import Link from "next/link";
 
 
 export const metadata: Metadata = {
-  title: 'Thank You - EventJacket',
+  title: 'Thank You - CaseySpaulding',
   description:
     'Thank you for confirming your email! You are all set to start creating events!',
 };
@@ -15,9 +15,9 @@ export default function ThankYouPage ()
         <main className="flex w-full max-w-7xl flex-grow flex-col justify-center px-4 lg:px-8">
           <div className="flex flex-shrink-0 justify-center mb-8">
             <a href="#" className="inline-flex">
-              <span className="sr-only">EventJacket</span>
+              <span className="sr-only">CaseySpaulding</span>
               <img
-                alt="EventJacket Logo"
+                alt="CaseySpaulding Logo"
                 src="/images/Logo_Icon.webp"
                 className="h-16 w-auto"
               />

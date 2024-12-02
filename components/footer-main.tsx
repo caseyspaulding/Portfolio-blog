@@ -1,12 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 
-interface Section {
+interface Section
+{
   title: string;
   items: SectionItem[];
 }
 
-interface SectionItem {
+interface SectionItem
+{
   title: string;
   href: string;
   target?: React.HTMLAttributeAnchorTarget;
@@ -91,15 +93,16 @@ const SECTIONS: Section[] = [
   },
 ];
 
-export function FooterMain() {
+export function FooterMain ()
+{
   return (
     <footer className="bg-white py-12 dark:bg-gray-800 xl:py-24">
       <div className="container mx-auto px-4 lg:px-0">
         <div className="grid gap-12 xl:grid-cols-6 xl:gap-24">
           <Brand />
-          {SECTIONS.map((section) => (
-            <Section key={section.title} {...section} />
-          ))}
+          { SECTIONS.map( ( section ) => (
+            <Section key={ section.title } { ...section } />
+          ) ) }
         </div>
         <hr className="my-8 border-gray-200 dark:border-gray-700 lg:my-12" />
         <Copyright />
@@ -108,62 +111,66 @@ export function FooterMain() {
   );
 }
 
-function Brand() {
+function Brand ()
+{
   return (
     <div className="col-span-2">
       <Link href="/" className="mr-4 flex">
         <Image
-          width={32}
-          height={32}
+          width={ 32 }
+          height={ 32 }
           src="/images/logo.svg"
           className="mr-3 h-8"
           alt="Flowbite Logo"
         />
         <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
-          EventJacket
+          CaseySpaulding
         </span>
       </Link>
       <p className="mt-4 max-w-lg text-gray-500 dark:text-gray-400">
-      
+
       </p>
     </div>
   );
 }
 
-function Section({ title, items }: Section) {
+function Section ( { title, items }: Section )
+{
   return (
     <div>
       <h3 className="mb-6 text-sm font-semibold uppercase text-gray-600 dark:text-white">
-        {title}
+        { title }
       </h3>
       <ul>
-        {items.map((item) => (
-          <SectionItem key={`section-${title}-item-${item.title}`} {...item} />
-        ))}
+        { items.map( ( item ) => (
+          <SectionItem key={ `section-${ title }-item-${ item.title }` } { ...item } />
+        ) ) }
       </ul>
     </div>
   );
 }
 
-function SectionItem({ title, href, target = "_blank" }: SectionItem) {
+function SectionItem ( { title, href, target = "_blank" }: SectionItem )
+{
   return (
     <li className="mb-4">
       <a
-        href={href}
-        target={target}
+        href={ href }
+        target={ target }
         rel="noreferrer"
         className="font-normal text-gray-600 hover:underline dark:text-gray-400"
       >
-        {title}
+        { title }
       </a>
     </li>
   );
 }
 
-function Copyright() {
+function Copyright ()
+{
   return (
     <span className="block text-center text-gray-600 dark:text-gray-400">
-      © 2019-<span id="currentYear">{new Date().getFullYear()}</span>{" "}
+      © 2019-<span id="currentYear">{ new Date().getFullYear() }</span>{ " " }
       <a href="https://themesberg.com" target="_blank" rel="noreferrer">
         Themesberg
       </a>

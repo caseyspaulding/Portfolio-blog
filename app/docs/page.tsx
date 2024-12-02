@@ -4,14 +4,15 @@ import { CheckCircleIcon, InformationCircleIcon } from '@heroicons/react/20/soli
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Documentation - EventJacket',
+    title: 'Documentation - CaseySpaulding',
     description:
         "Welcome to the documentation! Below, you'll find everything you need to get started with our platform."
 };
-export default function docs() {
+export default function docs ()
+{
     return (
         <div>
-            <HeaderCentered title={'Documentation'} description={''} />
+            <HeaderCentered title={ 'Documentation' } description={ '' } />
 
             <div className="bg-white px-6 py-32 lg:px-8">
                 <div className="mx-auto max-w-3xl text-base leading-7 text-gray-700">
@@ -37,7 +38,7 @@ export default function docs() {
                                 <span>
                                     <strong className="font-semibold text-gray-900">
                                         Key Concept 1.
-                                    </strong>{' '}
+                                    </strong>{ ' ' }
                                     Brief description or placeholder for content.
                                 </span>
                             </li>
@@ -49,7 +50,7 @@ export default function docs() {
                                 <span>
                                     <strong className="font-semibold text-gray-900">
                                         Key Concept 2.
-                                    </strong>{' '}
+                                    </strong>{ ' ' }
                                     Brief description or placeholder for content.
                                 </span>
                             </li>
@@ -61,7 +62,7 @@ export default function docs() {
                                 <span>
                                     <strong className="font-semibold text-gray-900">
                                         Key Concept 3.
-                                    </strong>{' '}
+                                    </strong>{ ' ' }
                                     Brief description or placeholder for content.
                                 </span>
                             </li>
@@ -93,7 +94,7 @@ export default function docs() {
                                 <div className="text-sm leading-6">
                                     <strong className="font-semibold text-gray-900">
                                         Placeholder Name
-                                    </strong>{' '}
+                                    </strong>{ ' ' }
                                     – Placeholder Title
                                 </div>
                             </figcaption>

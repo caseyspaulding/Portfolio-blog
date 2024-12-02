@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://eventjacket.com
+Host: https://CaseySpaulding.com
 
 # Sitemaps
-Sitemap: https://eventjacket.com/sitemap.xml
+Sitemap: https://CaseySpaulding.com/sitemap.xml

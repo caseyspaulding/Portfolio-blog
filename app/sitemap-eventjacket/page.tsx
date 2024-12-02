@@ -6,8 +6,8 @@ import { Metadata } from 'next';
 
 
 export const metadata: Metadata = {
-  title: 'Site Map - EventJacket',
-  description: 'Find your way around EventJacket with our site map.',
+  title: 'Site Map - CaseySpaulding',
+  description: 'Find your way around CaseySpaulding with our site map.',
 }
 
 const Sitemap = () =>

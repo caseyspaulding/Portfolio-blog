@@ -7,14 +7,14 @@ import { Slider } from "@/components/ui/slider"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
-export function EventJacketCalculator ()
+export function CaseySpauldingCalculator ()
 {
   const [ ticketPrice, setTicketPrice ] = useState( 50 )
   const [ attendeesPerEvent, setAttendeesPerEvent ] = useState( 1000 )
   const [ eventsPerYear, setEventsPerYear ] = useState( 6 )
   const [ feesPaidBy, setFeesPaidBy ] = useState( 'organizer' )
 
-  const [ eventJacketFees, setEventJacketFees ] = useState( 0 )
+  const [ CaseySpauldingFees, setCaseySpauldingFees ] = useState( 0 )
   const [ eventbriteFees, setEventbriteFees ] = useState( 0 )
   const [ ticketLeapFees, setTicketLeapFees ] = useState( 0 )
   const [ showClixFees, setShowClixFees ] = useState( 0 )
@@ -24,9 +24,9 @@ export function EventJacketCalculator ()
   {
     const totalRevenue = ticketPrice * attendeesPerEvent * eventsPerYear
 
-    // EventJacket fees (25¢ per ticket + 2.9% + 30¢ for payment processing)
-    const eventJacket = ( 0.25 * attendeesPerEvent * eventsPerYear ) + ( 0.029 * totalRevenue ) + ( 0.30 * attendeesPerEvent * eventsPerYear )
-    setEventJacketFees( eventJacket )
+    // CaseySpaulding fees (25¢ per ticket + 2.9% + 30¢ for payment processing)
+    const CaseySpaulding = ( 0.25 * attendeesPerEvent * eventsPerYear ) + ( 0.029 * totalRevenue ) + ( 0.30 * attendeesPerEvent * eventsPerYear )
+    setCaseySpauldingFees( CaseySpaulding )
 
     // Eventbrite fees (3.7% + $1.79 per ticket + 2.9% payment processing)
     const eventbrite = ( 0.037 * totalRevenue ) + ( 1.79 * attendeesPerEvent * eventsPerYear ) + ( 0.029 * totalRevenue )
@@ -47,7 +47,7 @@ export function EventJacketCalculator ()
 
   const calculateSavings = ( platform: number ): string =>
   {
-    const savings = platform - eventJacketFees;
+    const savings = platform - CaseySpauldingFees;
     return savings > 0 ? savings.toFixed( 2 ) : '0.00';
   };
 
@@ -55,7 +55,7 @@ export function EventJacketCalculator ()
     <Card className="w-full max-w-4xl mx-auto mb-10">
       <CardHeader>
         <CardTitle className="text-3xl font-bold text-center">
-          Compare <span className="text-blue-500">EventJacket</span> with the rest.
+          Compare <span className="text-blue-500">CaseySpaulding</span> with the rest.
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-6">
@@ -63,7 +63,7 @@ export function EventJacketCalculator ()
           At just 25¢ per ticket + 2.9% + 30¢ payment processing (Stripe), calculate how much you'll save.
         </p>
         <p className="text-center text-lg font-semibold">
-          See how EventJacket compares to other popular ticketing platforms.
+          See how CaseySpaulding compares to other popular ticketing platforms.
         </p>
 
         <div className="space-y-4">
@@ -174,7 +174,7 @@ export function EventJacketCalculator ()
 
         <Card className="bg-gradient-to-tr from-yellow-100 to-yellow-300 text-blue-800 ">
           <CardContent className="p-6">
-            <h3 className="text-2xl font-bold text-center mb-4">Total savings with EventJacket</h3>
+            <h3 className="text-2xl font-bold text-center mb-4">Total savings with CaseySpaulding</h3>
             <p className="text-4xl font-bold text-center">
               ${ calculateSavings( Math.max( eventbriteFees, ticketLeapFees, showClixFees, ticketSpiceFees ) ) } - ${ calculateSavings( Math.min( eventbriteFees, ticketLeapFees, showClixFees, ticketSpiceFees ) ) } / year
             </p>
@@ -187,7 +187,7 @@ export function EventJacketCalculator ()
         </Card>
 
         <p className="text-sm text-center text-muted-foreground">
-          Calculator based on EventJacket's ticketing fees of 50¢ per paid ticket + 2.9% + 30¢ payment processing with Stripe.
+          Calculator based on CaseySpaulding's ticketing fees of 50¢ per paid ticket + 2.9% + 30¢ payment processing with Stripe.
         </p>
       </CardContent>
     </Card>

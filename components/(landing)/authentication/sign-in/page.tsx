@@ -2,16 +2,17 @@ import { Button, Card, Checkbox, Label, TextInput } from 'flowbite-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default function SignInPage() {
+export default function SignInPage ()
+{
     return (
         <div className="mx-auto flex flex-col items-center justify-center px-6 pt-8 md:h-screen">
             <Link
                 href="/"
                 className="mb-8 flex items-center justify-center text-2xl font-semibold dark:text-white lg:mb-10"
             >
-                <Image alt="" src="/images/logo.svg" width={43} height={44} className="mr-4 h-11" />
+                <Image alt="" src="/images/logo.svg" width={ 43 } height={ 44 } className="mr-4 h-11" />
                 <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
-                    EventJacket
+                    CaseySpaulding
                 </span>
             </Link>
             <Card
@@ -19,7 +20,7 @@ export default function SignInPage() {
                 imgAlt=""
                 imgSrc="/images/authentication/login.jpg"
                 className="w-full md:max-w-screen-lg"
-                theme={{
+                theme={ {
                     root: {
                         children: 'my-auto w-full gap-0 space-y-8 p-6 sm:p-8 lg:p-16'
                     },
@@ -28,7 +29,7 @@ export default function SignInPage() {
                             on: 'hidden w-2/3 rounded-l-lg md:w-96 md:p-0 lg:block'
                         }
                     }
-                }}
+                } }
             >
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white lg:text-3xl">
                     Sign in to platform
@@ -69,7 +70,7 @@ export default function SignInPage() {
                             size="lg"
                             color="blue"
                             type="submit"
-                            theme={{ inner: { base: 'px-5 py-3' } }}
+                            theme={ { inner: { base: 'px-5 py-3' } } }
                             className="w-full px-0 py-px sm:w-auto"
                         >
                             Login to your account
