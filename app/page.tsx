@@ -53,7 +53,7 @@ export default async function Index ()
 
 
             <NavBar1 />
-            <NavBarTW />
+
 
 
 

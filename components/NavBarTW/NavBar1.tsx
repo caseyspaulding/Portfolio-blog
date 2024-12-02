@@ -242,13 +242,7 @@ export default function NavBar1 ()
                     <a href="/login" className="whitespace-nowrap text-medium font-medium text-gray-100 hover:text-gray-200">
                       Sign in
                     </a>
-                    <Button
-                      as='a'
-                      href="/signup"
-                      className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-3xl px-4 py-2 text-medium font-medium text-white shadow-sm bg-blue-600 hover:bg-blue-600 "
-                    >
-                      Start Free
-                    </Button>
+
                   </>
                 ) : (
                   <Menu as="div" className="ml-3 relative bg-blue-700/90 backdrop-blur-lg">
