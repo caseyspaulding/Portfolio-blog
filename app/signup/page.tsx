@@ -109,19 +109,32 @@ export default function Component ()
     return (
         <>
             <Head>
-                <title>Create Account - CaseySpaulding</title>
-                <meta name="description" content="Create your CaseySpaulding account to manage your events, sell tickets, and track attendees." />
+                <title>Create Account - Casey Spaulding</title>
+                <meta name="description" content="Create your account " />
 
             </Head>
 
-            <div className="relative flex min-h-screen items-center justify-center bg-cover bg-center" style={ { backgroundImage: "url('/images/festival-4.png')" } }>
-                <div className="absolute inset-0 bg-gray-900 opacity-50"></div>
+            <div className="relative flex min-h-screen items-center justify-center">
+                {/* Video Background */ }
+                <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="absolute inset-0 w-full h-full object-cover"
+                >
+                    <source src="/videos/back.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+
+                {/* Overlay to darken the video */ }
+              
                 {/* Login Card */ }
                 <div className="relative z-10 flex flex-1 flex-col justify-center items-center px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
                     <div className="w-full max-w-md lg:w-96 bg-white p-6 rounded-3xl shadow-2xl">
                         <div className="mb-1">
                             <img
-                                alt="CaseySpaulding Logo"
+                                alt="EventJacket Logo"
                                 src="/images/logo-full.png"
                                 className="h-12 w-auto mx-auto"
                             />
