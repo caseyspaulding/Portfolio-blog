@@ -1,18 +1,11 @@
-import SvgBackgroundReversed from '@/components/Backgrounds/SquareSvgBackgroundReverse';
-import SlantedDividerSolid from '@/components/Divider/SlantedDividerSolidProps';
+
 import NavBar1 from '@/components/NavBarTW/NavBar1';
-import FeaturesGridWithIcons from '@/components/Features/FeaturesGridwithIcons';
-import FooterFull from '@/components/Footers/FooterFull';
+
 import NavBarTW from '@/components/NavBarTW/NavBarTW';
 import type { Metadata } from 'next';
-import { getEvents } from './actions/getEvents'; // Server action or server-side fetching function
-import HowItWorks from '@/components/Features/HowItWorks';
-import FAQ_TW from '@/components/FAQ/FAQ_TW';
 
-import { Button } from '@nextui-org/button';
 import React from 'react';
-import FreeServices from '@/components/free-service';
-import FreeServiceAccordion from '@/components/free-services-accordion';
+
 
 
 export const metadata: Metadata = {
@@ -53,25 +46,25 @@ export const metadata: Metadata = {
 export default async function Index ()
 {
     // Fetch data directly in the server component
-    const eventList = await getEvents(); // Ensure this fetches the latest data
+
 
     return (
         <>
 
-          
+
             <NavBar1 />
             <NavBarTW />
 
-           
-
-          
-        
-
-          
-           
 
 
-           
+
+
+
+
+
+
+
+
         </>
     );
 }
