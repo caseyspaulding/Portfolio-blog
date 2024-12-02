@@ -45,7 +45,7 @@ export const signIn = async ( formData: FormData ) =>
     if ( !profile || !profile.organization_name )
     {
         // If no organization, redirect to the events page
-        return redirect( '/events' );
+        return redirect( '/admin' );
     } else
     {
         // If organization exists, redirect to the dynamic dashboard route
