@@ -1,1 +1,0 @@
-ALTER TABLE "form_fields" ADD COLUMN "placeholder" text;

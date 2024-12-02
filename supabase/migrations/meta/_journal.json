@@ -5,15 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1730671097734,
-      "tag": "0000_exotic_sprite",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1731074052642,
-      "tag": "0001_mysterious_jubilee",
+      "when": 1733098163812,
+      "tag": "0000_acoustic_bedlam",
       "breakpoints": true
     }
   ]

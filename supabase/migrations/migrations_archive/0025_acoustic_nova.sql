@@ -1,1 +1,0 @@
-ALTER TABLE "form_response_details" ALTER COLUMN "field_value" SET DATA TYPE jsonb;

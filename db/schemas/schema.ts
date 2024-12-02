@@ -60,7 +60,7 @@ export const userProfiles = pgTable( 'user_profiles', {
     id: uuid( 'id' )
         .primaryKey()
         .default( sql`uuid_generate_v4()` ),
-    userId: uuid( 'user_id' ).notNull(), // Will reference auth.users table in Supabase
+    userId: uuid( 'user_id' ).notNull().unique(), // Will reference auth.users table in Supabase
     orgId: uuid( 'org_id' )
         .notNull()
         .references( () => organizations.id ),

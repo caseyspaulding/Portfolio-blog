@@ -1,1 +1,0 @@
-ALTER TABLE "org_customers" DROP COLUMN IF EXISTS "name";
