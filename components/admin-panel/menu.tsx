@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/tooltip";
 import { getMenuList } from "@/lib/menu-list";
 import { ScrollArea } from "../scroll-area";
-import { fetchClientSecret } from "@/app/dashboard/[org]/components/DashboardLayoutTW/fetchClientSecret";
+
 import { useUser } from "@/contexts/UserContext";
 import { signOut } from "@/app/actions/SignOut";
 
@@ -33,35 +33,18 @@ export function Menu({ isOpen }: MenuProps) {
   const pathname = usePathname();
   const menuList = getMenuList(pathname);
   const { user } = useUser(); // Add this line
-  const [stripeConnectInstance, setStripeConnectInstance] = useState<any>(null);
+  
 
-  // Add these functions
-  const initializeStripeConnect = async () => {
-    const clientSecret = await fetchClientSecret(user?.organizationId || '');
-    if (clientSecret) {
-      const instance = loadConnectAndInitialize({
-        publishableKey: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!,
-        fetchClientSecret: () => Promise.resolve(clientSecret),
-      });
-      setStripeConnectInstance(instance);
-    }
-  };
+  
 
-  useEffect(() => {
-    initializeStripeConnect();
-  }, []);
 
   const handleLogout = async () => {
-    try {
-      if (stripeConnectInstance) {
-        await stripeConnectInstance.logout();
-        console.log("Stripe Connect session destroyed.");
-      }
+   
       await signOut();
-      console.log("Signed out successfully from Supabase.");
-    } catch (error) {
-      console.error("Error during logout:", error);
-    }
+    
+    
+     
+    
   };
 
   return (

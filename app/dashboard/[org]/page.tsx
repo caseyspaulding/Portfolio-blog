@@ -7,7 +7,7 @@ import { eq, and } from 'drizzle-orm/expressions';
 import UserProfileHeaderDashboard from '@/components/Headers/UserProfileHeaderDashboard';
 import { BanknotesIcon, ChevronRightIcon, FolderIcon, HomeIcon } from '@heroicons/react/24/outline';
 import DashboardCardGrid from './components/DashboardGrid/DashboardGrid';
-import { fetchTicketSalesForOrg } from '@/app/actions/dashboardActions';
+
 import { Suspense } from 'react';
 import { sql } from 'drizzle-orm';
 import Link from 'next/link';
@@ -83,35 +83,15 @@ export default async function DashboardPage ( { params }: DashboardPageProps )
             notFound();
         }
 
-        const ticketSales = await fetchTicketSalesForOrg( dashboardData.organizationId );
-        const totalSales = ticketSales ? ticketSales.reduce( ( acc, sale ) => acc + sale.amount, 0 ) : 0;
-        const formattedTotalSales = `$${ ( totalSales / 100 ).toFixed( 2 ) }`; // Assuming amount is in cents
+     
+     
+        
 
         const events = await fetchEventsForOrg();
         const userName = dashboardData.userName || 'User';
         const totalMembers = dashboardData.totalMembers;
 
-        const cards = [
-            {
-                name: 'Tickets Sold',
-                icon: BanknotesIcon,
-                amount: formattedTotalSales,
-                href: `/dashboard/${ decodedOrgName }/banking/payments`,
-            },
-            {
-                name: 'Total Events',
-                icon: FolderIcon,
-                amount: events.length,
-                href: `/dashboard/${ decodedOrgName }/events`, // Dynamic link based on orgName
-            },
-            {
-                name: 'Members',
-                icon: HomeIcon,
-                amount: totalMembers.toString(),
-                href: `/dashboard/${ decodedOrgName }/team/members`,
-            },
-        ];
-
+      
         const breadcrumbs = [
             { name: 'Dashboard', href: '/' },
             { name: '', href: '' },
@@ -217,7 +197,7 @@ export default async function DashboardPage ( { params }: DashboardPageProps )
                 </div>
 
                 <div className="bg-white">
-                    <DashboardCardGrid cards={ cards } />
+                
                 </div>
             </div>
 

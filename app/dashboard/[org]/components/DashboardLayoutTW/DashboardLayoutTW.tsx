@@ -35,7 +35,7 @@ import Link from 'next/link';
 import { signOut } from '@/app/actions/SignOut';
 
 import { loadConnectAndInitialize } from '@stripe/connect-js';
-import { fetchClientSecret } from './fetchClientSecret';
+
 
 
 import { HiMailOpen, HiOutlineLibrary } from 'react-icons/hi';
@@ -160,26 +160,8 @@ export default function DashboardLayoutTW ( { children }: DashboardLayoutProps )
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   const [ stripeConnectInstance, setStripeConnectInstance ] = useState<any>( null );
   const [ isCollapsed, setIsCollapsed ] = useState( true );
-  // Initialize Stripe Connect
-  const initializeStripeConnect = async () =>
-  {
-    const clientSecret = await fetchClientSecret( user?.organizationId || '' ); // Fetch the client secret from your server-side
-    if ( clientSecret )
-    {
-      const instance = loadConnectAndInitialize( {
-        publishableKey: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || '',
-        fetchClientSecret: () => Promise.resolve( clientSecret ),
-      } );
-      setStripeConnectInstance( instance );
-    }
-  };
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
-  useEffect( () =>
-  {
-    initializeStripeConnect();
-  }, [] ); // This ensures the Stripe instance is initialized when the component mounts.
-  // Call Stripe logout before server-side logout
-
+ 
+  
 
   const handleLogout = async () =>
   {
