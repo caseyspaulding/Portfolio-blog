@@ -41,7 +41,7 @@ export default function AboutPage ()
                 </div>
                 <div className="relative h-96 rounded-lg overflow-hidden shadow-xl">
                     <Image
-                        src="/placeholder.svg?height=384&width=384"
+                        src="/images/avatars/family2.jpg"
                         alt="Casey Spaulding"
                         layout="fill"
                         objectFit="cover"
