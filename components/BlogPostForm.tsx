@@ -76,21 +76,10 @@ const BlogPostForm: React.FC = () =>
       setUser( user );
     };
 
-    const fetchAuthors = async () =>
-    {
-      const { data: authors, error } = await supabase.from( 'authors' ).select( 'id, name' );
 
-      if ( error )
-      {
-        toast.error( 'Error fetching authors' );
-      } else
-      {
-        setAuthorsList( authors || [] );
-      }
-    };
 
     checkUser();
-    fetchAuthors();
+
   }, [ router, supabase ] );
 
   const handleImageUpload = async ( file: File | null ) =>
@@ -323,25 +312,7 @@ const BlogPostForm: React.FC = () =>
           </div>
 
 
-          {/* Author Select Dropdown */ }
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Author</label>
-            <select
-              name="authorId"
-              value={ authorId }
-              onChange={ ( e ) => setAuthorId( e.target.value ) }
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md
-              shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-              required
-            >
-              <option value="">Select an author</option>
-              { authorsList.map( ( author ) => (
-                <option key={ author.id } value={ author.id }>
-                  { author.name }
-                </option>
-              ) ) }
-            </select>
-          </div>
+
 
           {/* Tags */ }
           <div>
