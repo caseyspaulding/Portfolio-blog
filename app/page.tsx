@@ -1,7 +1,8 @@
 
+import Hero from '@/components/Hero';
+import Navbar from '@/components/NavBar';
 import NavBar1 from '@/components/NavBarTW/NavBar1';
 
-import NavBarTW from '@/components/NavBarTW/NavBarTW';
 import type { Metadata } from 'next';
 
 import React from 'react';
@@ -9,18 +10,18 @@ import React from 'react';
 
 
 export const metadata: Metadata = {
-    title: 'CaseySpaulding - Simplified Event Management and Ticket Sales',
+    title: 'CaseySpaulding - Blog and portfolio',
     description:
-        'Boost ticket sales, simplify planning, and manage everything in one place with CaseySpaulding. Whether your event is big or small, we’ve got you covered. Start for free today.',
-    keywords: 'event management, ticket sales, event planning, nonprofit events, CaseySpaulding, event software',
+        'Personal blog and portfolio of Casey Spaulding, Full Stack Developer',
+    keywords: 'casey spaulding',
     robots: 'index, follow',
     alternates: {
         canonical: 'https://CaseySpaulding.com/',
     },
     openGraph: {
-        title: 'CaseySpaulding - Simplified Event Management',
+        title: 'CaseySpaulding - Blog and portfolio',
         description:
-            'Take control of your event management with CaseySpaulding. Manage vendors, volunteers, attendees, and more from one platform. Perfect for nonprofits and events of any size.',
+            'Personal blog and portfolio of Casey Spaulding, Full Stack Developer',
         url: 'https://CaseySpaulding.com/',
         type: 'website',
         images: [
@@ -35,8 +36,8 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         site: '@CaseySpaulding',
-        title: 'CaseySpaulding - Simplified Event Management and Ticket Sales',
-        description: 'Easily manage your event’s logistics with CaseySpaulding, from ticket sales to volunteer coordination. Start today for free!',
+        title: 'Casey Spaulding - Blog and portfolio',
+        description: 'Personal blog and portfolio of Casey Spaulding, Full Stack Developer.',
     },
 };
 
@@ -50,9 +51,11 @@ export default async function Index ()
 
     return (
         <>
-
-
-            <NavBar1 />
+            <Navbar />
+            <main>
+                <Hero />
+                {/* Other sections of your homepage */ }
+            </main>
 
 
 

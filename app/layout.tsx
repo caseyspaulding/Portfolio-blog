@@ -7,6 +7,13 @@ import { ThemeProvider } from "@/providers/theme-provider";
 import Script from 'next/script';
 import { Toaster } from "@/components/ui/toaster"
 import { Analytics } from "@vercel/analytics/react"
+import { Providers } from './providers'
+
+
+export const metadata = {
+    title: 'Casey Spaulding - Blog and Portfolio',
+    description: 'Personal blog and portfolio of Casey Spaulding, Full Stack Developer',
+}
 
 // Google Font Configuration
 const spaceGrotesk = Poppins( {
@@ -35,11 +42,11 @@ export default function RootLayout ( { children }: PropsWithChildren )
             gtag('config', 'G-M6F4XVZM25');
           `}
                 </Script>
-               
-                    <ClientProviders>
-                        { children }
-                    </ClientProviders>
-             
+
+                <ClientProviders>
+                    <Providers>{ children }</Providers>
+                </ClientProviders>
+
                 <Toaster />
             </body>
         </html>
