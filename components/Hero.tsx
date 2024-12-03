@@ -24,13 +24,13 @@ export default function Hero ()
               Passionate about creating elegant solutions to complex problems. I love learning and exploring new technologies.
             </p>
             <div className="flex justify-center md:justify-start space-x-4 mb-8">
-              <Link href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+              <Link href="https://github.com/caseyspaulding" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
                 <Github className="w-6 h-6 text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400" />
               </Link>
-              <Link href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+              <Link href="https://x.com/caseyspaulding_" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
                 <Twitter className="w-6 h-6 text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400" />
               </Link>
-              <Link href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <Link href="https://www.linkedin.com/in/caseyspaulding/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                 <Linkedin className="w-6 h-6 text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400" />
               </Link>
             </div>
@@ -43,8 +43,8 @@ export default function Hero ()
           <div className="md:w-1/2 flex justify-center md:justify-end">
             <div className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-96 lg:h-96">
               <Image
-                src="/placeholder.svg?height=384&width=384"
-                alt="Jane Doe"
+                src="/images/avatars/caseyProfilePic.jpg"
+                alt="Casey Spaulding"
                 layout="fill"
                 objectFit="cover"
                 className="rounded-full shadow-2xl"
