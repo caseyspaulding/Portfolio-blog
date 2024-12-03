@@ -17,6 +17,7 @@ export default function Contact ()
   return (
     <>
       <NavBar />
+      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24 lg:py-32">
       <div className="bg-background py-24 sm:py-32">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="space-y-16">
@@ -67,34 +68,11 @@ export default function Contact ()
               </div>
             </div>
            
-            <div className="mt-16">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Send us a message</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <form className="space-y-4">
-                    <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-muted-foreground">Name</label>
-                      <Input id="name" name="name" required />
-                    </div>
-                    <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-muted-foreground">Email</label>
-                      <Input id="email" name="email" type="email" required />
-                    </div>
-                    <div>
-                      <label htmlFor="message" className="block text-sm font-medium text-muted-foreground">Message</label>
-                      <Textarea id="message" name="message" rows={ 4 } required />
-                    </div>
-                    <Button type="submit">Send Message</Button>
-                  </form>
-                </CardContent>
-              </Card>
-            </div>
+            
           </div>
         </div>
       </div>
-    
+    </main>
     </>
   )
 }

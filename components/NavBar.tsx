@@ -80,10 +80,10 @@ export default function Navbar ()
         <div className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             <ul className="flex flex-col space-y-2">
-              <NavItem href="#about" text="About" />
-              <NavItem href="#projects" text="Projects" />
-              <NavItem href="#blog" text="Blog" />
-              <NavItem href="#contact" text="Contact" />
+              <NavItem href="/about" text="About" />
+              <NavItem href="/projects" text="Projects" />
+              <NavItem href="/blog" text="Blog" />
+              <NavItem href="/contact" text="Contact" />
             </ul>
             <Button
               variant="ghost"

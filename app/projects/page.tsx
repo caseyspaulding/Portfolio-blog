@@ -1,5 +1,6 @@
 // app/projects/page.tsx
 
+import NavBar from '@/components/NavBar';
 import ProjectCard from '@/components/ProjectCard';
 
 import React from 'react';
@@ -28,14 +29,18 @@ const projects: Project[] = [
 
 export default function ProjectsPage ()
 {
-  return (
+  return (<div>
+    <NavBar />
+    <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24 lg:py-32">
     <div className="container mx-auto px-6 py-12">
       <h1 className="text-4xl font-bold mb-8 text-center">My Projects</h1>
       <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-        { projects.map( ( project ) => (
+         { projects.map( ( project ) => (
           <ProjectCard key={ project.title } project={ project } />
-        ) ) }
+        ) ) } 
+        </div>
       </div>
-    </div>
-  );
+      </main>
+   </div>
+      );
 }
