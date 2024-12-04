@@ -57,7 +57,7 @@ export default async function Index ()
             <main>
                 <Hero />
                 {/* Other sections of your homepage */ }
-               <FooterTW/>
+            
             </main>
 
 

@@ -8,6 +8,7 @@ import Script from 'next/script';
 import { Toaster } from "@/components/ui/toaster"
 import { Analytics } from "@vercel/analytics/react"
 import { Providers } from './providers'
+import FooterTW from '@/components/Footers/FooterTW';
 
 
 export const metadata = {
@@ -50,6 +51,7 @@ export default function RootLayout ( { children }: PropsWithChildren )
                 </ClientProviders>
 
                 <Toaster />
+                <FooterTW />
             </body>
         </html>
     );
