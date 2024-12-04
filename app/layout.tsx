@@ -44,7 +44,9 @@ export default function RootLayout ( { children }: PropsWithChildren )
                 </Script>
 
                 <ClientProviders>
-                    <Providers>{ children }</Providers>
+                    <Providers>
+                        { children }
+                    </Providers>
                 </ClientProviders>
 
                 <Toaster />

@@ -7,6 +7,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { Button } from "@/components/ui/button"
 import Navbar from '@/components/NavBar';
 import NavBar from '@/components/NavBar';
+import PageBackground from '@/components/PageBackGround';
 
 export const metadata = {
     title: 'Blog - CaseySpaulding',
@@ -33,7 +34,8 @@ export default async function BlogList ()
         .orderBy( desc( blogPosts.createdAt ) )
         .limit( 9 );
 
-    return (<>
+    return ( <>
+        <PageBackground>
          <NavBar />
         <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24 lg:py-32">
             <h1 className="text-4xl font-bold text-center mb-12">Latest Blog Posts</h1>
@@ -84,6 +86,7 @@ export default async function BlogList ()
                 ) ) }
             </div>
         </main>
+    </PageBackground >
     </>
     );
 }

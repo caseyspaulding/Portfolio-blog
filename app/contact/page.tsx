@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 
 import NavBar from "@/components/NavBar"
+import PageBackground from "@/components/PageBackGround"
 
 export const metadata: Metadata = {
   title: "Contact Us - CaseySpaulding",
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
 export default function Contact ()
 {
   return (
-    <>
+    <><PageBackground >
       <NavBar />
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24 lg:py-32">
       <div className="bg-background py-24 sm:py-32">
@@ -26,12 +27,12 @@ export default function Contact ()
                 <h1 className="text-3xl font-bold tracking-tight">Contact</h1>
                 <p className="mt-4 text-muted-foreground">
                  Contact me directly if you have any questions.{ ' ' }
-                  <a href="mailto:casey@CaseySpaulding.com" className="font-semibold text-primary">
+                  <a href="mailto:casey.spaulding@gmail.com" className="font-semibold text-primary">
                     casey.spaulding@gmail.com
                   </a>
                 </p>
                 <div className="mt-4 text-muted-foreground">
-                  <div>Phone: +1 (407) 326-3692</div>
+                  
                   <div className="mt-2">
                     Address: 1101 Miranda Lane<br />
                     Kissimmee, FL. 34741
@@ -71,9 +72,11 @@ export default function Contact ()
             
           </div>
         </div>
-      </div>
+        </div>
+   
     </main>
-    </>
+    </PageBackground>
+      </>
   )
 }
 

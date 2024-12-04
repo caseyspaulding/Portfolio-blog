@@ -1,6 +1,7 @@
 // app/projects/page.tsx
 
 import NavBar from '@/components/NavBar';
+import PageBackground from '@/components/PageBackGround';
 import ProjectCard from '@/components/ProjectCard';
 
 import React from 'react';
@@ -29,7 +30,8 @@ const projects: Project[] = [
 
 export default function ProjectsPage ()
 {
-  return (<div>
+  return ( <div>
+    <PageBackground>
     <NavBar />
     <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24 lg:py-32">
     <div className="container mx-auto px-6 py-12">
@@ -41,6 +43,8 @@ export default function ProjectsPage ()
         </div>
       </div>
       </main>
-   </div>
+    </PageBackground>
+  </div>
+   
       );
 }
