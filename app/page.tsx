@@ -1,7 +1,9 @@
 
+import FooterTW from '@/components/Footers/FooterTW';
 import Hero from '@/components/Hero';
 import Navbar from '@/components/NavBar';
 import NavBar1 from '@/components/NavBarTW/NavBar1';
+import UserProfileMenu from '@/components/UserProfile';
 
 import type { Metadata } from 'next';
 
@@ -55,6 +57,7 @@ export default async function Index ()
             <main>
                 <Hero />
                 {/* Other sections of your homepage */ }
+               <FooterTW/>
             </main>
 
 

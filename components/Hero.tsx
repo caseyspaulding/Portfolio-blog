@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { Button } from "@/components/ui/button"
-import { Github, Twitter, Linkedin } from 'lucide-react'
+import { Github,  Linkedin } from 'lucide-react'
 
 export default function Hero ()
 {
@@ -24,24 +24,23 @@ export default function Hero ()
               Passionate about creating elegant solutions to complex problems. I love learning and exploring new technologies.
             </p>
             <div className="flex justify-center md:justify-start space-x-4 mb-8">
-              <Link href="https://github.com/caseyspaulding" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                <Github className="w-6 h-6 text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400" />
-              </Link>
-              <Link href="https://x.com/caseyspaulding_" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-                <Twitter className="w-6 h-6 text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400" />
-              </Link>
+              
               <Link href="https://www.linkedin.com/in/caseyspaulding/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                 <Linkedin className="w-6 h-6 text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400" />
               </Link>
+              <Link href="https://github.com/caseyspaulding" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <Github className="w-6 h-6 text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400" />
+              </Link>
+
             </div>
             <Button asChild>
-              <Link href="#contact">Get in Touch</Link>
+              <Link href="/contact">Get in Touch</Link>
             </Button>
           </div>
 
           {/* Right column for image */ }
           <div className="md:w-1/2 flex justify-center md:justify-end">
-            <div className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-96 lg:h-96">
+            <div className="relative w-56 h-56 sm:w-72 sm:h-72 lg:w-96 lg:h-96">
               <Image
                 src="/images/avatars/caseyProfilePic.jpg"
                 alt="Casey Spaulding"
