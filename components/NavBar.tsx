@@ -59,7 +59,7 @@ export default function Navbar ()
               <NavItem href="/blog" text="Blog" />
               <NavItem href="/contact" text="Contact" />
             </ul>
-          
+
             <Button
               variant="ghost"
               size="icon"
@@ -103,76 +103,6 @@ export default function Navbar ()
               <NavItem href="/blog" text="Blog" />
               <NavItem href="/contact" text="Contact" />
             </ul>
-            {/* User Profile or Sign in/Sign up */ }
-            <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
-              { !isAuthenticated ? (
-                <>
-                  <a href="/login" className="whitespace-nowrap text-medium font-medium text-gray-100 hover:text-gray-200">
-                    Sign in
-                  </a>
-
-                </>
-              ) : (
-                <Menu as="div" className="ml-3 relative bg-blue-700/90 backdrop-blur-lg">
-                  <div>
-                    <Menu.Button className="max-w-xs bg-blue-700 flex items-center text-sm rounded-full focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-blue-500">
-                      <span className="sr-only">Open user menu</span>
-                      <div className="flex items-center space-x-4">
-                        <img
-                          className="h-8 w-8 rounded-full"
-                          src={ user2?.user?.avatar || '/images/avatars/user_avatar_default.png' }
-                          alt="Profile image"
-                          height={ 32 }
-                          width={ 32 }
-                        />
-                        {/* Container to stack the orgName and email vertically */ }
-                        <div className="flex flex-col items-start">
-                          <p className="text-base font-medium text-gray-100">{ user?.orgName }</p>
-                          <p className="text-xs text-gray-100">{ user2.user?.name || user?.email }</p>
-                        </div>
-                      </div>
-                    </Menu.Button>
-                  </div>
-                  <Transition
-                    as={ React.Fragment }
-                    enter="transition ease-out duration-100"
-                    enterFrom="transform opacity-0 scale-95"
-                    enterTo="transform opacity-100 scale-100"
-                    leave="transition ease-in duration-75"
-                    leaveFrom="transform opacity-100 scale-100"
-                    leaveTo="transform opacity-0 scale-95"
-                  >
-                    <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-blue-700 ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      { userNavigation.map( ( item ) => (
-                        <Menu.Items key={ item.name }>
-                          { ( { active } ) =>
-                            item.name === 'Sign out' ? (
-                              <form onSubmit={ handleSignOut } method="post" className="w-full">
-                                <button
-                                  type="submit"
-                                  className={ `${ active ? 'bg-blue-600' : ''
-                                    } w-full text-left px-4 py-2 text-sm text-gray-100` }
-                                >
-                                  { item.name }
-                                </button>
-                              </form>
-                            ) : (
-                              <a
-                                href={ item.href }
-                                className={ `${ active ? 'bg-blue-600' : ''
-                                  } block w-full px-4 py-2 text-sm text-gray-100` }
-                              >
-                                { item.name }
-                              </a>
-                            )
-                          }
-                        </Menu.Items>
-                      ) ) }
-                    </Menu.Items>
-                  </Transition>
-                </Menu>
-              ) }
-            </div>
             <Button
               variant="ghost"
               size="sm"
