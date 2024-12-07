@@ -189,7 +189,6 @@ const BlogPostForm: React.FC = () =>
   {
     return <div>Loading...</div>;
   }
-
   return (
     <div className=" bg-gray-100 rounded-2xl p-5">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 p-5 py-12 bg-white rounded-2xl">
