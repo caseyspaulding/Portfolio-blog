@@ -31,21 +31,21 @@ const ProjectCard: React.FC<ProjectCardProps> = ( { project } ) =>
           rel="noopener noreferrer"
           className="text-blue-600 hover:text-blue-800"
         >
-         
-        
-      
-      
-      
-      <Image
-        src={ project.image }
-        alt={ project.title }
-        width={ 400 }
-        height={ 200 }
-        className="object-cover w-full h-48"
-        priority // Ensures preloading and consistency
-      />
-          </Link>
-       
+
+
+
+
+
+          <Image
+            src={ project.image }
+            alt={ project.title }
+            width={ 400 }
+            height={ 200 }
+            className="object-cover w-full h-48 rounded-lg"
+            priority // Ensures preloading and consistency
+          />
+        </Link>
+
       ) }
       <div className="p-6">
         <h3 className="text-2xl font-semibold mb-3">{ project.title }</h3>
@@ -83,7 +83,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ( { project } ) =>
           ) }
         </div>
       </div>
-   
+
     </div >
   );
 };

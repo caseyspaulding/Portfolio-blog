@@ -16,7 +16,7 @@ export default function Hero ()
       <div
         className={ `absolute inset-0 ${ theme === 'dark'
           ? 'bg-gradient-to-br from-black via-gray-900 to-blue-700'
-          : 'bg-gradient-to-br from-white via-gray-100 to-blue-50'
+          : 'bg-gradient-to-br from-white via-gray-50 to-blue-50'
           }` }
         aria-hidden="true"
       />
