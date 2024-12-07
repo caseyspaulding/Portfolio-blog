@@ -194,7 +194,7 @@ export default function LoginComponent ( { searchParams }: { searchParams: Promi
                     <div className="flex justify-center w-full">
                         <div
                             id="g_id_onload"
-                            data-client_id="820727006892-1j07b2899mm4c8esa9ciiug6gu34ticn.apps.googleusercontent.com"
+                            data-client_id="820727006892-egnouftfvr6jkpjqmrrp612irjqfjimr.apps.googleusercontent.com"
                             data-context="signup"
                             data-ux_mode="popup"
                             data-callback="handleSignInWithGoogle"
