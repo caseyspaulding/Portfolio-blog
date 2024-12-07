@@ -105,7 +105,7 @@ export const verifyAndRedirect = async ( tokenOrFormData: string | { formData: F
 
     if ( !profile )
     {
-        return { success: true, redirectTo: '/events' }; // Redirect to events if no org
+        return { success: true, redirectTo: '/blog' }; // Redirect to events if no org
     }
 
     // Redirect to the dynamic dashboard route
