@@ -123,7 +123,7 @@ gmp-map {
 }
 
 .scan-region-highlight-svg {
-  stroke: #0053df !important; /* Change stroke color to blue */
+  stroke: #00df53 !important; /* Change stroke color to blue */
 }
 
 .qr-scan-region.scanned {

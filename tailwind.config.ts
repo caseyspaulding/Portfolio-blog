@@ -18,29 +18,16 @@ export default {
 			},
 			keyframes: {
 				'bounce-once': {
-					'0%, 100%': {
-						transform: 'translateY(0)',
-						animationTimingFunction: 'cubic-bezier(0.8, 0, 1, 1)',
-					},
-					'50%': {
-						transform: 'translateY(-25%)',
-					},
+					'0%, 100%': { transform: 'translateY(0)', animationTimingFunction: 'cubic-bezier(0.8, 0, 1, 1)' },
+					'50%': { transform: 'translateY(-25%)' },
 				},
 				'accordion-down': {
-					from: {
-						height: '0',
-					},
-					to: {
-						height: 'var(--radix-accordion-content-height)',
-					},
+					from: { height: '0' },
+					to: { height: 'var(--radix-accordion-content-height)' },
 				},
 				'accordion-up': {
-					from: {
-						height: 'var(--radix-accordion-content-height)',
-					},
-					to: {
-						height: '0',
-					},
+					from: { height: 'var(--radix-accordion-content-height)' },
+					to: { height: '0' },
 				},
 			},
 			backgroundImage: {
@@ -69,9 +56,9 @@ export default {
 		},
 	},
 	plugins: [
-		nextui(),
-		require( 'tailwindcss-animate' ),
-		require( 'flowbite-typography' ),
+		nextui(), // NextUI plugin for Tailwind
+		require( 'tailwindcss-animate' ), // Custom animations
+		require( 'flowbite-typography' ), // Flowbite React plugin
 	],
-	darkMode: 'class',
+	darkMode: 'class', // Enable class-based dark mode
 } satisfies Config;
