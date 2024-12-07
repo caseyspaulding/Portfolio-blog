@@ -1,5 +1,5 @@
-import FooterFull from '@/components/Footers/FooterFull';
-import NavBar1 from '@/components/NavBarTW/NavBar1';
+
+import NavBar from '@/components/NavBar';
 import NewQRCodeGenerator from '@/components/NewQRCodeGenerator';
 import type { Metadata } from 'next';
 
@@ -13,9 +13,9 @@ export default function QRCode ()
 {
     return (
         <div>
-            <NavBar1 />
+          <NavBar />
             <NewQRCodeGenerator />
-            <FooterFull />
+           
         </div>
     );
 }

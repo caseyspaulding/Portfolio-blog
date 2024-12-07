@@ -3,18 +3,76 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useTheme } from 'next-themes';
-import { Moon, Sun, Menu, X } from 'lucide-react';
+import { Moon, Sun, Menu, X, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Menu as HeadlessMenu } from '@headlessui/react';
 
-const NavItem = ( { href, text }: { href: string; text: string } ) => (
-  <li>
-    <Link
-      href={ href }
-      className="text-black hover:text-green-600 dark:text-gray-200 dark:hover:text-green-400"
-    >
-      { text }
-    </Link>
-  </li>
+const NavItem = ( { href, text, dropdown = null }: { href: string; text: string; dropdown?: React.ReactNode } ) =>
+{
+  if ( dropdown )
+  {
+    return (
+      <li className="relative">
+        <HeadlessMenu>
+          <HeadlessMenu.Button className="flex items-center text-black hover:text-green-600 dark:text-gray-200 dark:hover:text-green-400">
+            { text }
+            <ChevronDown className="ml-1 h-4 w-4" />
+          </HeadlessMenu.Button>
+          { dropdown }
+        </HeadlessMenu>
+      </li>
+    );
+  }
+  return (
+    <li>
+      <Link
+        href={ href }
+        className="text-black hover:text-green-600 dark:text-gray-200 dark:hover:text-green-400"
+      >
+        { text }
+      </Link>
+    </li>
+  );
+};
+
+const FreeToolsDropdown = () => (
+  <HeadlessMenu.Items className="absolute right-0 mt-2 w-56 origin-top-right rounded-md bg-white dark:bg-black shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+    <div className="py-1">
+      <HeadlessMenu.Item>
+        { ( { active } ) => (
+          <Link
+            href="/tools/qrcode"
+            className={ `${ active ? 'bg-green-100 dark:bg-green-700 text-gray-900 dark:text-white' : 'text-gray-700 dark:text-gray-300'
+              } block px-4 py-2 text-sm` }
+          >
+            QR Code Generator
+          </Link>
+        ) }
+      </HeadlessMenu.Item>
+      <HeadlessMenu.Item>
+        { ( { active } ) => (
+          <Link
+            href="/tools/tool2"
+            className={ `${ active ? 'bg-green-100 dark:bg-green-700 text-gray-900 dark:text-white' : 'text-gray-700 dark:text-gray-300'
+              } block px-4 py-2 text-sm` }
+          >
+            Tool 2
+          </Link>
+        ) }
+      </HeadlessMenu.Item>
+      <HeadlessMenu.Item>
+        { ( { active } ) => (
+          <Link
+            href="/tools/tool3"
+            className={ `${ active ? 'bg-green-100 dark:bg-green-700 text-gray-900 dark:text-white' : 'text-gray-700 dark:text-gray-300'
+              } block px-4 py-2 text-sm` }
+          >
+            Tool 3
+          </Link>
+        ) }
+      </HeadlessMenu.Item>
+    </div>
+  </HeadlessMenu.Items>
 );
 
 export default function Navbar ()
@@ -25,7 +83,6 @@ export default function Navbar ()
 
   useEffect( () => setMounted( true ), [] );
 
-  // Toggle mobile menu
   const toggleMenu = () =>
   {
     setIsMenuOpen( ( prev ) => !prev );
@@ -44,10 +101,11 @@ export default function Navbar ()
           {/* Desktop menu */ }
           <div className="hidden md:flex items-center space-x-4">
             <ul className="flex space-x-4">
-              <NavItem href="/about" text="About" />
-              <NavItem href="/projects" text="Projects" />
               <NavItem href="/blog" text="Blog" />
+              <NavItem href="/projects" text="Projects" />
+              <NavItem href="#" text="Free Tools" dropdown={ <FreeToolsDropdown /> } />
               <NavItem href="/contact" text="Contact" />
+              <NavItem href="/about" text="About" />
             </ul>
 
             <Button
@@ -93,6 +151,15 @@ export default function Navbar ()
               <NavItem href="/projects" text="Projects" />
               <NavItem href="/blog" text="Blog" />
               <NavItem href="/contact" text="Contact" />
+              <li>
+                <HeadlessMenu>
+                  <HeadlessMenu.Button className="flex items-center text-black hover:text-green-600 dark:text-gray-200 dark:hover:text-green-400">
+                    Free Tools
+                    <ChevronDown className="ml-1 h-4 w-4" />
+                  </HeadlessMenu.Button>
+                  <FreeToolsDropdown />
+                </HeadlessMenu>
+              </li>
             </ul>
             <Button
               variant="ghost"
@@ -115,3 +182,4 @@ export default function Navbar ()
     </nav>
   );
 }
+
