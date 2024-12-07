@@ -56,7 +56,7 @@ export default function Component ()
 
         if ( result.success )
         {
-            router.push( result.redirectTo || '/choose-account-type' );
+            router.push( result.redirectTo || '/blog' );
         } else
         {
             toast.error( 'Error creating account.' );
