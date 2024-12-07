@@ -1,4 +1,4 @@
-import { fetchEventsForOrg } from './actions';
+
 import { notFound } from 'next/navigation';
 import { createClient } from '@/utils/supabase/server';
 import { db } from '../../../db';
@@ -87,7 +87,7 @@ export default async function DashboardPage ( { params }: DashboardPageProps )
      
         
 
-        const events = await fetchEventsForOrg();
+       
         const userName = dashboardData.userName || 'User';
         const totalMembers = dashboardData.totalMembers;
 
@@ -133,67 +133,7 @@ export default async function DashboardPage ( { params }: DashboardPageProps )
 
                 <div className="mb-8">
                     <h1 className="text-2xl font-bold mb-4">Your Events</h1>
-                    { events.length > 0 ? (
-                        <div className="overflow-x-auto -mx-4 sm:-mx-6 lg:-mx-8">
-                            <div className="inline-block min-w-full py-2 align-middle">
-                                <table className="min-w-full divide-y divide-gray-200">
-                                    <thead className="bg-gray-50">
-                                        <tr>
-                                            <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8">
-                                                Event Name
-                                            </th>
-                                            <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 hidden sm:table-cell">
-                                                Description
-                                            </th>
-                                            <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 hidden md:table-cell">
-                                                Start Date
-                                            </th>
-                                            <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 hidden lg:table-cell">
-                                                End Date
-                                            </th>
-                                            <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                                Status
-                                            </th>
-                                            <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-6 lg:pr-8">
-                                                <span className="sr-only">Actions</span>
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody className="divide-y divide-gray-200 bg-white">
-                                        { events.map( ( event ) => (
-                                            <tr key={ event.id }>
-                                                <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8">
-                                                    <Link href={ `/events/${ event.slug }` }>
-                                                        <span className="hover:underline">{ event.name }</span>
-                                                    </Link>
-                                                </td>
-                                                <td className="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">
-                                                    { event.description || 'No description available' }
-                                                </td>
-                                                <td className="hidden whitespace-nowrap px-3 py-4 text-sm text-gray-500 md:table-cell">
-                                                    { event.startDate ? new Date( event.startDate ).toLocaleDateString() : 'N/A' }
-                                                </td>
-                                                <td className="hidden whitespace-nowrap px-3 py-4 text-sm text-gray-500 lg:table-cell">
-                                                    { event.endDate ? new Date( event.endDate ).toLocaleDateString() : 'N/A' }
-                                                </td>
-                                                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{ event.status }</td>
-                                                <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8">
-                                                    <Link href={ `/events/${ event.slug }` }>
-                                                        <span className="text-indigo-600 hover:text-indigo-900">
-                                                            View<span className="hidden sm:inline"> Public Page</span>
-                                                            <span className="sr-only">, { event.name }</span>
-                                                        </span>
-                                                    </Link>
-                                                </td>
-                                            </tr>
-                                        ) ) }
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    ) : (
-                        <p className="text-gray-500">No events found for your organization.</p>
-                    ) }
+                   
                 </div>
 
                 <div className="bg-white">

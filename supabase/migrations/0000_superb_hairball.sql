@@ -27,99 +27,6 @@ CREATE TABLE IF NOT EXISTS "blog_posts" (
 	CONSTRAINT "blog_posts_slug_unique" UNIQUE("slug")
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "contacts" (
-	"id" uuid PRIMARY KEY DEFAULT uuid_generate_v4() NOT NULL,
-	"org_id" uuid NOT NULL,
-	"first_name" text NOT NULL,
-	"last_name" text NOT NULL,
-	"email" text NOT NULL,
-	"phone" text,
-	"address" text,
-	"city" text,
-	"state" text,
-	"country" text,
-	"zip_code" text,
-	"contact_type" text,
-	"company" text,
-	"position" text,
-	"notes" text,
-	"tags" text[],
-	"created_at" timestamp DEFAULT now() NOT NULL,
-	"updated_at" timestamp DEFAULT now() NOT NULL
-);
---> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "event_locations" (
-	"id" uuid PRIMARY KEY DEFAULT uuid_generate_v4() NOT NULL,
-	"event_id" uuid NOT NULL,
-	"name" text,
-	"address" text,
-	"city" text,
-	"state" text,
-	"country" text,
-	"zip_code" text,
-	"latitude" double precision,
-	"longitude" double precision,
-	"created_at" timestamp DEFAULT now(),
-	"updated_at" timestamp DEFAULT now()
-);
---> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "event_sections" (
-	"id" uuid PRIMARY KEY DEFAULT uuid_generate_v4() NOT NULL,
-	"org_id" uuid NOT NULL,
-	"event_id" uuid NOT NULL,
-	"title" text NOT NULL,
-	"content" text NOT NULL,
-	"created_at" timestamp DEFAULT now(),
-	"updated_at" timestamp DEFAULT now()
-);
---> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "event_tags" (
-	"event_id" uuid NOT NULL,
-	"tag_id" uuid NOT NULL,
-	"created_at" timestamp DEFAULT now()
-);
---> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "events" (
-	"id" uuid PRIMARY KEY DEFAULT uuid_generate_v4() NOT NULL,
-	"org_id" uuid NOT NULL,
-	"name" text NOT NULL,
-	"featured_image" varchar(255),
-	"slug" text NOT NULL,
-	"description" text,
-	"notes" text,
-	"start_date" date NOT NULL,
-	"end_date" date NOT NULL,
-	"event_start_time" time,
-	"event_end_time" time,
-	"venue" text,
-	"venue_description" text,
-	"venue_image" varchar(255),
-	"address" text,
-	"city" text,
-	"state" text,
-	"country" text,
-	"zip_code" text,
-	"latitude" numeric(9, 6),
-	"longitude" numeric(9, 6),
-	"schedule_details" text,
-	"banner_image" varchar(255),
-	"gallery_images" text[],
-	"video_links" text[],
-	"organizer_contact" varchar(255),
-	"max_attendees" integer,
-	"status" text DEFAULT 'draft' NOT NULL,
-	"refund_policy" text,
-	"timezone" varchar(50),
-	"tags" text[],
-	"highlights" text[],
-	"faqs" jsonb,
-	"age_restriction" text,
-	"parking_options" text,
-	"created_at" timestamp DEFAULT now(),
-	"updated_at" timestamp DEFAULT now(),
-	CONSTRAINT "events_slug_unique" UNIQUE("slug")
-);
---> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "feedback" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"subject" varchar(255) NOT NULL,
@@ -195,7 +102,6 @@ CREATE TABLE IF NOT EXISTS "org_invites" (
 CREATE TABLE IF NOT EXISTS "org_members" (
 	"id" uuid PRIMARY KEY DEFAULT uuid_generate_v4() NOT NULL,
 	"org_id" uuid NOT NULL,
-	"event_id" uuid,
 	"tags" jsonb,
 	"name" text NOT NULL,
 	"email" text NOT NULL,
@@ -284,48 +190,6 @@ EXCEPTION
 END $$;
 --> statement-breakpoint
 DO $$ BEGIN
- ALTER TABLE "contacts" ADD CONSTRAINT "contacts_org_id_organizations_id_fk" FOREIGN KEY ("org_id") REFERENCES "public"."organizations"("id") ON DELETE no action ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "event_locations" ADD CONSTRAINT "event_locations_event_id_events_id_fk" FOREIGN KEY ("event_id") REFERENCES "public"."events"("id") ON DELETE no action ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "event_sections" ADD CONSTRAINT "event_sections_org_id_organizations_id_fk" FOREIGN KEY ("org_id") REFERENCES "public"."organizations"("id") ON DELETE no action ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "event_sections" ADD CONSTRAINT "event_sections_event_id_events_id_fk" FOREIGN KEY ("event_id") REFERENCES "public"."events"("id") ON DELETE no action ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "event_tags" ADD CONSTRAINT "event_tags_event_id_events_id_fk" FOREIGN KEY ("event_id") REFERENCES "public"."events"("id") ON DELETE no action ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "event_tags" ADD CONSTRAINT "event_tags_tag_id_tags_id_fk" FOREIGN KEY ("tag_id") REFERENCES "public"."tags"("id") ON DELETE no action ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "events" ADD CONSTRAINT "events_org_id_organizations_id_fk" FOREIGN KEY ("org_id") REFERENCES "public"."organizations"("id") ON DELETE no action ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
  ALTER TABLE "form_fields" ADD CONSTRAINT "form_fields_form_id_forms_id_fk" FOREIGN KEY ("form_id") REFERENCES "public"."forms"("id") ON DELETE no action ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
@@ -386,16 +250,9 @@ EXCEPTION
 END $$;
 --> statement-breakpoint
 DO $$ BEGIN
- ALTER TABLE "org_members" ADD CONSTRAINT "org_members_event_id_events_id_fk" FOREIGN KEY ("event_id") REFERENCES "public"."events"("id") ON DELETE no action ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
  ALTER TABLE "user_profiles" ADD CONSTRAINT "user_profiles_org_id_organizations_id_fk" FOREIGN KEY ("org_id") REFERENCES "public"."organizations"("id") ON DELETE no action ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
 --> statement-breakpoint
-CREATE UNIQUE INDEX IF NOT EXISTS "contacts_unique_email_org" ON "contacts" USING btree ("email","org_id");--> statement-breakpoint
 CREATE UNIQUE INDEX IF NOT EXISTS "user_profiles_user_id_unique" ON "user_profiles" USING btree ("user_id");

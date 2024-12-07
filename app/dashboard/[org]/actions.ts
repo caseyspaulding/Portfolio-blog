@@ -1,7 +1,7 @@
 'use server';
 
 import { db } from '../../../db';
-import { events } from '@/db/schemas/schema';
+
 import { createClient } from '@/utils/supabase/server';
 import { eq } from 'drizzle-orm/expressions';
 
@@ -33,12 +33,4 @@ export const getUserAndOrgId = async () =>
     return { user, orgId: profile.org_id };
 };
 
-// Fetch events for the current organization
-export const fetchEventsForOrg = async () =>
-{
-    const { orgId } = await getUserAndOrgId();
 
-    const eventsData = await db.select().from( events ).where( eq( events.orgId, orgId ) );
-
-    return eventsData;
-};

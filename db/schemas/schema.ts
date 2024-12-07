@@ -262,18 +262,3 @@ export const authors = pgTable( 'authors', {
 
 
 
-
-/**
- * Email Campaigns Schema:
- *
- * Relationships Between Tables:
- * - The emailCampaigns table references audienceSegments to target specific segments.
- * - The emailRecipients table connects each campaign with its recipients, tracking interactions like opens and clicks.
- * - The emailTemplates table (if used) can be referenced by emailCampaigns to reuse content across multiple campaigns.
- *
- * How It Works:
- * - Email Campaign Creation: Users create campaigns by selecting a segment from the audienceSegments table and composing the email content.
- * - Audience Segmentation: Audience segments are defined based on various criteria (stored in JSON format) and are tied to specific organizations via the orgId.
- * - Recipient Tracking: The emailRecipients table tracks who received which emails and how they interacted with them, allowing you to analyze the effectiveness of your campaigns.
- * - Template Management (Optional): Users can save and reuse email templates for consistent branding and messaging.
- */

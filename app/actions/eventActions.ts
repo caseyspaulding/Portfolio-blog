@@ -1,70 +1,13 @@
 'use server';
 
 import { db } from '@/db';
-import { events, organizations, } from '@/db/schemas/schema';
+import {  organizations, } from '@/db/schemas/schema';
 import { createClient } from '@/utils/supabase/server';
 
 
 import { eq } from 'drizzle-orm/expressions';
 
 
-
-
-
-// Get an event by its slug for updating purposes
-export async function getEventBySlug ( eventSlug: string )
-{
-    const eventQuery = db
-        .select( {
-            id: events.id,
-            orgId: events.orgId,
-            name: events.name,
-            featuredImage: events.featuredImage,
-            slug: events.slug,
-            description: events.description,
-            notes: events.notes,
-            startDate: events.startDate,
-            endDate: events.endDate,
-            eventStartTime: events.eventStartTime,
-            eventEndTime: events.eventEndTime,
-            venue: events.venue,
-            venueDescription: events.venueDescription,
-            venueImage: events.venueImage,
-            address: events.address,
-            city: events.city,
-            state: events.state,
-            country: events.country,
-            zipCode: events.zipCode,
-            latitude: events.latitude,
-            longitude: events.longitude,
-            scheduleDetails: events.scheduleDetails,
-            bannerImage: events.bannerImage,
-            galleryImages: events.galleryImages,
-            videoLinks: events.videoLinks,
-            organizerContact: events.organizerContact,
-            maxAttendees: events.maxAttendees,
-            status: events.status,
-            refundPolicy: events.refundPolicy,
-            timezone: events.timezone,
-            tags: events.tags,
-            highlights: events.highlights,
-            faqs: events.faqs,
-            ageRestriction: events.ageRestriction,
-            parkingOptions: events.parkingOptions,
-            createdAt: events.createdAt,
-            updatedAt: events.updatedAt,
-        } )
-        .from( events )
-        .where( eq( events.slug, eventSlug ) );
-
-    const [ event ] = await eventQuery;
-
-    if ( !event )
-    {
-        throw new Error( 'Event not found' );
-    }
-}
-// Fetch agendaItems separately if needed
 
 
 // Utility function to get user and organization ID
