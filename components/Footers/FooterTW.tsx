@@ -36,7 +36,7 @@ export default function Footer ()
 {
   const currentYear = new Date().getFullYear(); // Get the current year
   return (
-    <footer className="bg-white dark:bg-black">
+    <footer className="bg-white dark:bg-black mb-12">
       <div className="mx-auto max-w-7xl overflow-hidden px-6 lg:px-8">
         {/* User Profile */ }
         <div className="mt-4 flex justify-center items-center">

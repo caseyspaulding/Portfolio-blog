@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation';
 import type { User } from '@supabase/supabase-js';
 import { Button } from '@nextui-org/button';
 import JoditEditor from 'jodit-react';
+import Error from '../app/dashboard/error';
 
 
 
@@ -82,11 +83,11 @@ const BlogPostForm: React.FC = () =>
 
   }, [ router, supabase ] );
 
-  const handleImageUpload = async ( file: File | null ) =>
+  const handleImageUpload = async ( file: File | null ): Promise<string | null> =>
   {
     if ( !file )
     {
-      console.error( 'No file selected' );
+      toast.error( 'No file selected' );
       return null;
     }
 
@@ -103,14 +104,18 @@ const BlogPostForm: React.FC = () =>
     if ( error )
     {
       console.error( 'Error uploading file:', error.message );
+      toast.error( `File upload failed: ${ error.message }` );
       return null;
     }
 
-    const { data: { publicUrl } } = supabase.storage
+    const { data: publicUrlData } = supabase
+      .storage
       .from( 'blogimages' )
       .getPublicUrl( `public/${ fileName }` );
 
-    return publicUrl || '';
+
+
+    return publicUrlData?.publicUrl || null;
   };
 
   // Handle uploading the blog post image and inserting it into the RichTextEditor
