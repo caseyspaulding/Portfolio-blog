@@ -1,51 +1,69 @@
 'use client';
 
-import React, { useEffect, useState, use } from 'react';
+import React, { useEffect, useState } from 'react';
 
-export default function RefreshStripe ( props: { params: Promise<{ id: string }> } )
+export default function RefreshStripe ( { params }: { params: Promise<{ id: string }> } )
 {
-    const params = use( props.params );
     const [ accountLinkCreatePending, setAccountLinkCreatePending ] = useState( false );
     const [ error, setError ] = useState( false );
     const [ accountId, setAccountId ] = useState<string | null>( null );
 
     useEffect( () =>
     {
+        let isMounted = true;
+
         async function fetchAccountLink ()
         {
-            const { id } = await params; // Await params here
-            setAccountId( id );
-
-            if ( id )
+            try
             {
-                setAccountLinkCreatePending( true );
-                fetch( '/api/stripe/create-account-link', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify( { account: id } )
-                } )
-                    .then( ( response ) => response.json() )
-                    .then( ( json ) =>
-                    {
-                        setAccountLinkCreatePending( false );
+                const { id } = await params; // Await the params promise
+                if ( !isMounted ) return; // Prevent state updates if component unmounted
+                setAccountId( id );
 
-                        const { url, error } = json;
-
-                        if ( url )
-                        {
-                            window.location.href = url;
-                        }
-
-                        if ( error )
-                        {
-                            setError( true );
-                        }
+                if ( id )
+                {
+                    setAccountLinkCreatePending( true );
+                    const response = await fetch( '/api/stripe/create-account-link', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify( { account: id } )
                     } );
+                    const json = await response.json();
+
+                    if ( !isMounted ) return;
+
+                    setAccountLinkCreatePending( false );
+
+                    const { url, error: stripeError } = json;
+
+                    if ( url )
+                    {
+                        window.location.href = url;
+                    }
+
+                    if ( stripeError )
+                    {
+                        setError( true );
+                    }
+                }
+            } catch ( err )
+            {
+                console.error( 'Error fetching account link:', err );
+                if ( isMounted )
+                {
+                    setError( true );
+                }
             }
         }
+
         fetchAccountLink();
+
+        return () =>
+        {
+            isMounted = false;
+        };
     }, [ params ] );
 
     return (

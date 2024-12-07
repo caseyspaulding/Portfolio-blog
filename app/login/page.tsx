@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, use } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Head from "next/head";
 import { verifyAndRedirect } from "./signin";
@@ -12,7 +12,6 @@ import Link from "next/link";
 import FooterTW from "@/components/Footers/FooterTW";
 import PageBackground from "@/components/PageBackGround";
 
-
 declare global
 {
     interface Window
@@ -21,21 +20,38 @@ declare global
     }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function LoginComponent ( props: { searchParams: Promise<any> } )
+type SearchParamsType = { message?: string };
+
+/**
+ * Accepting `searchParams` as a Promise. We'll use useEffect to resolve it.
+ */
+export default function LoginComponent ( { searchParams }: { searchParams: Promise<SearchParamsType> } )
 {
-    const searchParams = use( props.searchParams );
+    const [ resolvedParams, setResolvedParams ] = useState<SearchParamsType | null>( null );
+
+    // Resolve searchParams once the component mounts
+    useEffect( () =>
+    {
+        let isMounted = true;
+        searchParams.then( ( params ) =>
+        {
+            if ( isMounted ) setResolvedParams( params );
+        } );
+        return () =>
+        {
+            isMounted = false;
+        };
+    }, [ searchParams ] );
 
     const [ email, setEmail ] = useState( "" );
     const [ password, setPassword ] = useState( "" );
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [ isValid, setIsValid ] = useState( false );
     const [ isVisible, setIsVisible ] = useState( false );
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [ isLoading, setIsLoading ] = useState( false ); // Loading state
+    const [ errorMessage, setErrorMessage ] = useState( "" );
+
     const router = useRouter();
     const supabase = createClient(); // Initialize Supabase client
-    const [ errorMessage, setErrorMessage ] = useState( "" );
 
     const toggleVisibility = () => setIsVisible( !isVisible );
 
@@ -51,7 +67,9 @@ export default function LoginComponent ( props: { searchParams: Promise<any> } )
         {
             try
             {
-                const { data: { session } } = await supabase.auth.getSession();
+                const {
+                    data: { session },
+                } = await supabase.auth.getSession();
                 if ( session )
                 {
                     const { data: { user } } = await supabase.auth.getUser();
@@ -59,32 +77,31 @@ export default function LoginComponent ( props: { searchParams: Promise<any> } )
                     {
                         const userId = user.id;
                         const { data: org, error } = await supabase
-                            .from( 'organizations' )
-                            .select( 'id' )
-                            .eq( 'user_id', userId )
+                            .from( "organizations" )
+                            .select( "id" )
+                            .eq( "user_id", userId )
                             .single();
 
                         if ( error )
                         {
-                            console.error( 'Error fetching organization:', error );
-                            setErrorMessage( 'Error fetching organization. Please try again.' );
+                            console.error( "Error fetching organization:", error );
+                            setErrorMessage( "Error fetching organization. Please try again." );
                         } else if ( org )
                         {
-
-                            router.push( '/dashboard' ); // Only redirect after all checks are successful
+                            router.push( "/dashboard" ); // Only redirect after all checks are successful
                         } else
                         {
-                            setErrorMessage( 'You do not have an associated organization. Please contact support or create an organization.' );
+                            setErrorMessage( "You do not have an associated organization. Please contact support or create an organization." );
                         }
                     } else
                     {
-                        setErrorMessage( 'Unable to retrieve user information. Please try logging in again.' );
+                        setErrorMessage( "Unable to retrieve user information. Please try logging in again." );
                     }
                 }
             } catch ( error )
             {
-                console.error( 'Error during authentication check:', error );
-                setErrorMessage( 'An unexpected error occurred. Please try again.' );
+                console.error( "Error during authentication check:", error );
+                setErrorMessage( "An unexpected error occurred. Please try again." );
             }
         };
 
@@ -101,7 +118,7 @@ export default function LoginComponent ( props: { searchParams: Promise<any> } )
 
                 if ( result.success )
                 {
-                    console.log( 'Google Sign-In successful, redirecting to', result.redirectTo );
+                    console.log( "Google Sign-In successful, redirecting to", result.redirectTo );
                     router.push( result.redirectTo as string );
                 } else
                 {
@@ -110,12 +127,10 @@ export default function LoginComponent ( props: { searchParams: Promise<any> } )
                 }
             } catch ( error )
             {
-                console.error( 'Error during Google Sign-In:', error );
-                setErrorMessage( 'Google sign-in failed. Please try again.' );
+                console.error( "Error during Google Sign-In:", error );
+                setErrorMessage( "Google sign-in failed. Please try again." );
             }
         };
-
-
     }, [ supabase, router ] );
 
     const handleLogin = async ( e: React.FormEvent<HTMLFormElement> ) =>
@@ -134,12 +149,12 @@ export default function LoginComponent ( props: { searchParams: Promise<any> } )
                 router.push( result.redirectTo as string );
             } else
             {
-                setErrorMessage( result.message || 'Email/Password sign-in failed' );
+                setErrorMessage( result.message || "Email/Password sign-in failed" );
                 console.error( result.message );
             }
         } catch ( error )
         {
-            setErrorMessage( 'An unexpected error occurred during login.' );
+            setErrorMessage( "An unexpected error occurred during login." );
             console.error( error );
         } finally
         {
@@ -150,9 +165,8 @@ export default function LoginComponent ( props: { searchParams: Promise<any> } )
     return (
         <>
             <Head>
-                <title>Login </title>
+                <title>Login</title>
                 <meta name="description" content="Login to your Casey Spaulding account" />
-
             </Head>
             {/* Google Sign-In Script */ }
             <Script
@@ -161,30 +175,23 @@ export default function LoginComponent ( props: { searchParams: Promise<any> } )
                 defer
                 onLoad={ () =>
                 {
-                    console.log( 'Google Sign-In script loaded' );
+                    console.log( "Google Sign-In script loaded" );
                 } }
             />
-
-
 
             <div className="absolute inset-0 bg-gray-900 opacity-50"></div>
             {/* Login Card */ }
             <div className="relative z-10 flex flex-1 flex-col justify-center items-center px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
                 <div className="w-full max-w-md lg:w-96 bg-white p-6 rounded-3xl shadow-2xl">
                     <div className="mb-1">
-
                         <h1 className="mt-2 text-2xl font-bold leading-9 tracking-tight text-gray-900 text-center">Log In</h1>
-                        <h2 className="mt-2 text-2xl font-bold leading-9 tracking-tight text-gray-900 text-center">
-                            Welcome Back
-                        </h2>
+                        <h2 className="mt-2 text-2xl font-bold leading-9 tracking-tight text-gray-900 text-center">Welcome Back</h2>
                         <p className="mt-2 text-lg leading-6 text-gray-500 text-center">
                             Log in to your account to continue
                         </p>
                     </div>
 
-
-
-                    <div className='flex justify-center w-full'>
+                    <div className="flex justify-center w-full">
                         <div
                             id="g_id_onload"
                             data-client_id="820727006892-1j07b2899mm4c8esa9ciiug6gu34ticn.apps.googleusercontent.com"
@@ -195,8 +202,7 @@ export default function LoginComponent ( props: { searchParams: Promise<any> } )
                             data-itp_support="true"
                             data-use_fedcm_for_prompt="true"
                             className="flex justify-center"
-                        >
-                        </div>
+                        ></div>
                         <div
                             className="g_id_signin mt-4"
                             data-type="standard"
@@ -218,29 +224,23 @@ export default function LoginComponent ( props: { searchParams: Promise<any> } )
                     </div>
                     <form className="flex flex-col gap-3" onSubmit={ handleLogin }>
                         <Input
-
                             name="email"
                             placeholder="Enter your email"
                             type="email"
-
                             value={ email }
                             onChange={ ( e ) => setEmail( e.target.value ) }
                             required
                         />
                         <Input
-
-
                             name="password"
                             placeholder="Enter your password"
                             type={ isVisible ? "text" : "password" }
-
                             value={ password }
                             onChange={ ( e ) => setPassword( e.target.value ) }
                             required
                         />
                         <div className="flex items-center justify-between px-1 py-2">
-
-                            <Link className="text-default-500" href="/auth/reset-password" >
+                            <Link className="text-default-500" href="/auth/reset-password">
                                 Forgot password?
                             </Link>
                         </div>
@@ -250,13 +250,12 @@ export default function LoginComponent ( props: { searchParams: Promise<any> } )
                             isLoading={ isLoading }
                             spinnerDelay={ 1000 } // 1 second delay before hiding spinner
                             loadingMessage="Signing In..."
-
                         >
                             Log In
                         </MyButton>
-                        { searchParams?.message && (
+                        { resolvedParams?.message && (
                             <p className="mt-4 rounded border border-red-500 bg-red-100 p-4 text-center text-red-700">
-                                { searchParams.message }
+                                { resolvedParams.message }
                             </p>
                         ) }
                         { errorMessage && (
@@ -267,16 +266,12 @@ export default function LoginComponent ( props: { searchParams: Promise<any> } )
                     </form>
                     <p className="text-center text-sm mt-4 ">
                         Don't have an account?&nbsp;
-                        <Link href="/signup" >
+                        <Link href="/signup">
                             Create Account
                         </Link>
                     </p>
-
-                </div >
+                </div>
             </div>
-
-
-
         </>
     );
 }
