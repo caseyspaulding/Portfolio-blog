@@ -2,9 +2,7 @@
 import Hero from '@/components/Hero';
 import Navbar from '@/components/NavBar';
 
-
 import type { Metadata } from 'next';
-import { useTheme } from 'next-themes';
 
 import React from 'react';
 
@@ -54,7 +52,7 @@ export default async function Index ()
         <> 
             <Navbar />
             <main>
-                <Hero />
+                <Hero theme={ '' } />
                 {/* Other sections of your homepage */ }
 
             </main>

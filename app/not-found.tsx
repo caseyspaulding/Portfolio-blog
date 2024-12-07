@@ -1,11 +1,12 @@
 import FooterFull from '@/components/Footers/FooterFull';
 import { ChevronRightIcon } from '@heroicons/react/20/solid';
-import {
-    BookmarkSquareIcon,
-    BookOpenIcon,
+import
+    {
+        BookmarkSquareIcon,
+        BookOpenIcon,
 
-    RssIcon
-} from '@heroicons/react/24/solid';
+        RssIcon
+    } from '@heroicons/react/24/solid';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -33,16 +34,17 @@ const links = [
     }
 ];
 
-export default function Example() {
+export default function Example ()
+{
     return (
         <div className="bg-white">
             <main className="mx-auto w-full max-w-7xl px-6 pb-8 pt-10 sm:pb-14 lg:px-2">
                 <Link href="https://www.caseyspaulding.com">
                     <Image
-                        height={40}
-                        width={40}
+                        height={ 40 }
+                        width={ 40 }
                         alt="Casey Spaulding logo"
-                        src="/images/Logo_Icon.webp"
+                        src="/images/cs_logo1.png"
                         className="mx-auto h-10 w-auto sm:h-12"
                     />
                 </Link>
@@ -73,8 +75,8 @@ export default function Example() {
                         role="list"
                         className="-mt-6 divide-y divide-gray-900/5 border-b border-gray-900/5"
                     >
-                        {links.map((link, linkIdx) => (
-                            <li key={linkIdx} className="relative flex gap-x-6 py-6">
+                        { links.map( ( link, linkIdx ) => (
+                            <li key={ linkIdx } className="relative flex gap-x-6 py-6">
                                 <div className="flex h-10 w-10 flex-none items-center justify-center rounded-lg shadow-sm ring-1 ring-gray-900/10">
                                     <link.icon
                                         aria-hidden="true"
@@ -83,13 +85,13 @@ export default function Example() {
                                 </div>
                                 <div className="flex-auto">
                                     <h3 className="text-sm font-semibold leading-6 text-gray-900">
-                                        <a href={link.href}>
+                                        <a href={ link.href }>
                                             <span aria-hidden="true" className="absolute inset-0" />
-                                            {link.name}
+                                            { link.name }
                                         </a>
                                     </h3>
                                     <p className="mt-2 text-sm leading-6 text-gray-600">
-                                        {link.description}
+                                        { link.description }
                                     </p>
                                 </div>
                                 <div className="flex-none self-center">
@@ -99,9 +101,9 @@ export default function Example() {
                                     />
                                 </div>
                             </li>
-                        ))}
+                        ) ) }
                     </ul>
-                   
+
                 </div>
             </main>
             <FooterFull />

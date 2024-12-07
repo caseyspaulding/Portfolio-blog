@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Github, Linkedin } from 'lucide-react';
 import { useTheme } from 'next-themes';
 
-export default function Hero ()
+export default function Hero ( )
 {
   const { theme } = useTheme();
 
