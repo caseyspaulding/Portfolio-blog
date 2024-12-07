@@ -92,7 +92,7 @@ const UserProfileMenu = () =>
   ];
 
   return (
-    <div className="hidden items-center justify-center md:flex md:flex-1 lg:w-0">
+    <div className="items-center justify-center md:flex md:flex-1 lg:w-0">
       { !isAuthenticated ? (
         <Button asChild variant="link">
           <a href="/login" className="">

@@ -135,7 +135,7 @@ export default function Component ()
                         <div className="mb-1">
                             <img
                                 alt="EventJacket Logo"
-                                src="/images/logo-full.png"
+                                src="/images/cs_logo1.png"
                                 className="h-12 w-auto mx-auto"
                             />
                             <h1 className="mt-1 text-2xl font-bold leading-9 tracking-tight text-gray-900 text-center">
