@@ -128,7 +128,7 @@ export default function Component ()
                 </video>
 
                 {/* Overlay to darken the video */ }
-              
+
                 {/* Login Card */ }
                 <div className="relative z-10 flex flex-1 flex-col justify-center items-center px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
                     <div className="w-full max-w-md lg:w-96 bg-white p-6 rounded-3xl shadow-2xl">
@@ -149,7 +149,7 @@ export default function Component ()
                         <div className='flex justify-center w-full'>
                             <div
                                 id="g_id_onload"
-                                data-client_id="820727006892-egnouftfvr6jkpjqmrrp612irjqfjimr.apps.googleusercontent.com"
+                                data-client_id="820727006892-1j07b2899mm4c8esa9ciiug6gu34ticn.apps.googleusercontent.com"
                                 data-context="signup"
                                 data-ux_mode="popup"
                                 data-callback="handleSignInWithGoogle"
