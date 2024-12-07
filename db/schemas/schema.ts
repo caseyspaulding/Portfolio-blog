@@ -166,101 +166,6 @@ export const formResponseDetails = pgTable( 'form_response_details', {
 
 
 
-
-// Events Table
-export const events = pgTable( 'events', {
-    id: uuid( 'id' ).primaryKey().default( sql`uuid_generate_v4()` ),
-    orgId: uuid( 'org_id' ).notNull().references( () => organizations.id ),
-    name: text( 'name' ).notNull(),
-    featuredImage: varchar( 'featured_image', { length: 255 } ), // URL of the featured image
-    slug: text( 'slug' ).notNull().unique(), // Add a slug column for SEO-friendly URLs
-    description: text( 'description' ),
-    notes: text( 'notes' ),
-    startDate: date( 'start_date' ).notNull(),
-    endDate: date( 'end_date' ).notNull(),
-    eventStartTime: time( 'event_start_time' ), // New field for event start time
-    eventEndTime: time( 'event_end_time' ), // New field for event end time
-    venue: text( 'venue' ),
-    venueDescription: text( 'venue_description' ), // New column for venue description
-    venueImage: varchar( 'venue_image', { length: 255 } ), // New column for venue image URL
-    address: text( 'address' ),
-    city: text( 'city' ),
-    state: text( 'state' ),
-    country: text( 'country' ),
-    zipCode: text( 'zip_code' ),
-    latitude: numeric( 'latitude', { precision: 9, scale: 6 } ),
-    longitude: numeric( 'longitude', { precision: 9, scale: 6 } ),
-    scheduleDetails: text( 'schedule_details' ), // Details about the schedule, agenda, etc.
-    bannerImage: varchar( 'banner_image', { length: 255 } ), // URL of the banner image
-    galleryImages: text( 'gallery_images' ).array(), // Array of image URLs for gallery
-    videoLinks: text( 'video_links' ).array(), // Array of video URLs or embed codes
-    organizerContact: varchar( 'organizer_contact', { length: 255 } ), // Organizer's contact information
-    maxAttendees: integer( 'max_attendees' ),
-    status: text( 'status' ).notNull().default( 'draft' ), // e.g., 'draft', 'published', 'cancelled'
-    refundPolicy: text( 'refund_policy' ), // Text description of the refund policy
-    timezone: varchar( 'timezone', { length: 50 } ), // Timezone of the event
-    tags: text( 'tags' ).array(), // Correct way to define an array of strings (tags)
-    highlights: text( 'highlights' ).array(), // Array of highlights
-    faqs: jsonb( 'faqs' ), // Store FAQs as a JSONB object for flexibility
-    ageRestriction: text( 'age_restriction' ), // 'All ages allowed', 'There’s an age restriction', 'Parent or guardian needed'
-    parkingOptions: text( 'parking_options' ), // 'Free parking', 'Paid parking', 'No parking options'
-    createdAt: timestamp( 'created_at' ).default( sql`now()` ),
-    updatedAt: timestamp( 'updated_at' ).default( sql`now()` ),
-} );
-
-// Contact Table for CRM
-
-export const contacts = pgTable( 'contacts', {
-    id: uuid( 'id' )
-        .primaryKey()
-        .default( sql`uuid_generate_v4()` ),
-    orgId: uuid( 'org_id' )
-        .notNull()
-        .references( () => organizations.id ), // Reference to the organizations table
-    firstName: text( 'first_name' ).notNull(),
-    lastName: text( 'last_name' ).notNull(),
-    email: text( 'email' ).notNull(),
-    phone: text( 'phone' ),
-    address: text( 'address' ),
-    city: text( 'city' ),
-    state: text( 'state' ),
-    country: text( 'country' ),
-    zipCode: text( 'zip_code' ),
-    contactType: text( 'contact_type' ), // e.g., 'donor', 'volunteer', 'partner', 'attendee'
-    company: text( 'company' ), // If applicable
-    position: text( 'position' ), // Job title or role
-    notes: text( 'notes' ),
-    tags: text( 'tags' ).array(), // For categorizing contacts
-    createdAt: timestamp( 'created_at' ).defaultNow().notNull(),
-    updatedAt: timestamp( 'updated_at' ).defaultNow().notNull(),
-}, ( table ) =>
-{
-    return {
-        uniqueContact: uniqueIndex( 'contacts_unique_email_org' ).on( table.email, table.orgId ),
-    };
-} );
-
-
-
-// Event Locations Table
-export const eventLocations = pgTable( 'event_locations', {
-    id: uuid( 'id' ).primaryKey().default( sql`uuid_generate_v4()` ),
-    eventId: uuid( 'event_id' )
-        .notNull()
-        .references( () => events.id ), // Foreign key to events table
-    name: text( 'name' ), // Optional: Name of the venue or location
-    address: text( 'address' ), // Street address
-    city: text( 'city' ),
-    state: text( 'state' ),
-    country: text( 'country' ),
-    zipCode: text( 'zip_code' ),
-    latitude: doublePrecision( 'latitude' ), // Corrected type for latitude
-    longitude: doublePrecision( 'longitude' ), // Corrected type for longitude
-    createdAt: timestamp( 'created_at' ).default( sql`now()` ),
-    updatedAt: timestamp( 'updated_at' ).default( sql`now()` )
-} );
-
-
 // Tags Table
 export const tags = pgTable( 'tags', {
     id: uuid( 'id' ).primaryKey().default( sql`uuid_generate_v4()` ),
@@ -269,37 +174,8 @@ export const tags = pgTable( 'tags', {
     updatedAt: timestamp( 'updated_at' ).default( sql`now()` )
 } );
 
-// Event_Tags Table (Many-to-Many Relationship) - Junction Table
-export const eventTags = pgTable( 'event_tags', {
-    eventId: uuid( 'event_id' )
-        .notNull()
-        .references( () => events.id ), // Foreign key to events table
-    tagId: uuid( 'tag_id' )
-        .notNull()
-        .references( () => tags.id ), // Foreign key to tags table
-    createdAt: timestamp( 'created_at' ).default( sql`now()` ), // Timestamp for record creation
-}, ( eventTags ) => ( {
-    primaryKey: [ eventTags.eventId, eventTags.tagId ], // Composite primary key to ensure uniqueness
-} ) );
 
 
-
-// Event Page Sections Table
-export const eventSections = pgTable( 'event_sections', {
-    id: uuid( 'id' )
-        .primaryKey()
-        .default( sql`uuid_generate_v4()` ),
-    orgId: uuid( 'org_id' )
-        .notNull()
-        .references( () => organizations.id ), // Reference to the organization
-    eventId: uuid( 'event_id' )
-        .notNull()
-        .references( () => events.id ), // Reference to the event
-    title: text( 'title' ).notNull(), // Title of the section (e.g., 'Vendors', 'Performers')
-    content: text( 'content' ).notNull(), // The content of the section (HTML or text)
-    createdAt: timestamp( 'created_at' ).default( sql`now()` ),
-    updatedAt: timestamp( 'updated_at' ).default( sql`now()` )
-} );
 
 
 
@@ -312,8 +188,7 @@ export const orgMembers = pgTable( 'org_members', {
     orgId: uuid( 'org_id' )
         .notNull()
         .references( () => organizations.id ),
-    eventId: uuid( 'event_id' )
-        .references( () => events.id ),
+    
     tags: jsonb( 'tags' ),
     name: text( 'name' ).notNull(),
     email: text( 'email' ).notNull().unique(),
