@@ -33,8 +33,8 @@ export default function ProjectsPage ()
   return ( <div>
     <PageBackground>
     <NavBar />
-    <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24 lg:py-32">
-    <div className="container mx-auto px-6 py-12">
+    <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-24 lg:py-22">
+    <div className="container mx-auto px-6 ">
       <h1 className="text-4xl font-bold mb-8 text-center">My Projects</h1>
       <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
          { projects.map( ( project ) => (

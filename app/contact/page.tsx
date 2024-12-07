@@ -18,8 +18,8 @@ export default function Contact ()
   return (
     <><PageBackground >
       <NavBar />
-      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24 lg:py-32">
-      <div className="bg-background py-24 sm:py-32">
+      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-2 py-2 sm:py-2 lg:py-2">
+        <div className="bg-background py-24 sm:py-12 mt-16 p-5 rounded-lg dark:bg-slate-950 bg-white" >
         <div className="container mx-auto px-4 lg:px-8">
           <div className="space-y-16">
             <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-3">

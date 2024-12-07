@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+
 
 interface Project
 {
@@ -23,7 +23,19 @@ interface ProjectCardProps
 const ProjectCard: React.FC<ProjectCardProps> = ( { project } ) =>
 {
   return (
-   <div>
+    <div>
+      { project.liveDemo && (
+        <Link
+          href={ project.liveDemo }
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-600 hover:text-blue-800"
+        >
+         
+        
+      
+      
+      
       <Image
         src={ project.image }
         alt={ project.title }
@@ -32,9 +44,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ( { project } ) =>
         className="object-cover w-full h-48"
         priority // Ensures preloading and consistency
       />
+          </Link>
+       
+      ) }
       <div className="p-6">
         <h3 className="text-2xl font-semibold mb-3">{ project.title }</h3>
-        <p className="text-gray-700 mb-4">{ project.description }</p>
+        <p className="text-gray-700 dark:text-white mb-4">{ project.description }</p>
         <div className="flex flex-wrap mb-4">
           { project.technologies.map( ( tech ) => (
             <span
@@ -51,7 +66,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ( { project } ) =>
               href={ project.github }
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-600 hover:text-gray-800"
+              className="text-gray-600 hover:text-gray-800 dark:text-white"
             >
               GitHub Repository
             </Link>
@@ -61,7 +76,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ( { project } ) =>
               href={ project.liveDemo }
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-600 hover:text-blue-800"
+              className="text-blue-600 dark:text-blue-300 dark:hover:text-blue-200 hover:text-blue-100"
             >
               Live Demo
             </Link>

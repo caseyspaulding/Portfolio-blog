@@ -1,11 +1,10 @@
 
-import FooterTW from '@/components/Footers/FooterTW';
 import Hero from '@/components/Hero';
 import Navbar from '@/components/NavBar';
-import NavBar1 from '@/components/NavBarTW/NavBar1';
-import UserProfileMenu from '@/components/UserProfile';
+
 
 import type { Metadata } from 'next';
+import { useTheme } from 'next-themes';
 
 import React from 'react';
 
@@ -52,16 +51,16 @@ export default async function Index ()
 
 
     return (
-        <>
+        <> 
             <Navbar />
             <main>
                 <Hero />
                 {/* Other sections of your homepage */ }
-            
+
             </main>
 
 
-
+       
 
 
 
