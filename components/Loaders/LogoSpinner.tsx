@@ -10,10 +10,10 @@ const LogoSpinner: React.FC = () =>
       <div className={ styles.spinner }></div>
       <div className={ styles[ 'logo-container' ] }>
         <Image
-          src="/images/logo_Icon.png" // Replace with the path to your logo
+          src="/images/cs_logo1.png" //  logo
           alt="Logo"
-          width={ 50 }
-          height={ 50 }
+          width={ 100 }
+          height={ 100 }
         />
       </div>
     </div>
