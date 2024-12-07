@@ -15,8 +15,8 @@ export default function Hero ()
       {/* Background Gradient */ }
       <div
         className={ `absolute inset-0 ${ theme === 'dark'
-          ? 'bg-gradient-to-br from-black via-gray-900 to-blue-700'
-          : 'bg-gradient-to-br from-white via-gray-50 to-blue-50'
+          ? 'bg-gradient-to-br from-black via-gray-900 to-green-900'
+          : 'bg-gradient-to-br from-white via-gray-50 to-green-50'
           }` }
         aria-hidden="true"
       />
@@ -54,7 +54,7 @@ export default function Hero ()
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <Linkedin className="w-6 h-6" />
+                  <Linkedin className="w-10 h-10" />
                 </Link>
               </Button>
               <Button asChild variant="ghost" size="icon" aria-label="GitHub">
@@ -63,7 +63,7 @@ export default function Hero ()
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <Github className="w-6 h-6" />
+                  <Github className="w-12 h-12" />
                 </Link>
               </Button>
             </div>

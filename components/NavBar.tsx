@@ -1,48 +1,38 @@
-'use client'
-import { createClient } from "@/utils/supabase/client";
-import { useState, useEffect } from 'react'
-import Link from 'next/link'
-import { useTheme } from 'next-themes'
-import { Moon, Sun, Menu, X } from 'lucide-react'
-import { Button } from "@/components/ui/button"
-import { Transition } from '@headlessui/react'
-import { useUser } from '@/contexts/UserContext'
-import { User } from "@supabase/supabase-js";
-import React from "react";
-import UserProfileMenu from "./UserProfile";
+'use client';
 
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { useTheme } from 'next-themes';
+import { Moon, Sun, Menu, X } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 const NavItem = ( { href, text }: { href: string; text: string } ) => (
   <li>
-    <Link href={ href } className="text-gray-700 hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400">
+    <Link
+      href={ href }
+      className="text-black hover:text-green-600 dark:text-gray-200 dark:hover:text-green-400"
+    >
       { text }
     </Link>
   </li>
-)
+);
 
 export default function Navbar ()
 {
-  const [ mounted, setMounted ] = useState( false )
-  const { theme, setTheme } = useTheme()
-  const [ isMenuOpen, setIsMenuOpen ] = useState( false )
+  const [ mounted, setMounted ] = useState( false );
+  const { theme, setTheme } = useTheme();
+  const [ isMenuOpen, setIsMenuOpen ] = useState( false );
 
-  useEffect( () => setMounted( true ), [] )
+  useEffect( () => setMounted( true ), [] );
+
   // Toggle mobile menu
   const toggleMenu = () =>
   {
     setIsMenuOpen( ( prev ) => !prev );
   };
 
-
-  const userNavigation = [
-
-    { name: 'Sign out', href: '#' },
-  ];
-
-
-
   return (
-    <nav className="bg-white dark:bg-gray-900 shadow-md">
+    <nav className="sticky top-0 bg-white dark:bg-black dark:shadow-green-400 shadow-lg z-50">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
@@ -67,11 +57,12 @@ export default function Navbar ()
               className="ml-4"
               onClick={ () => setTheme( theme === 'dark' ? 'light' : 'dark' ) }
             >
-              { mounted && ( theme === 'dark' ? (
-                <Sun className="h-5 w-5" />
-              ) : (
-                <Moon className="h-5 w-5" />
-              ) ) }
+              { mounted &&
+                ( theme === 'dark' ? (
+                  <Sun className="h-5 w-5" />
+                ) : (
+                  <Moon className="h-5 w-5" />
+                ) ) }
             </Button>
           </div>
 
@@ -110,17 +101,17 @@ export default function Navbar ()
               className="mt-4"
               onClick={ () => setTheme( theme === 'dark' ? 'light' : 'dark' ) }
             >
-              { mounted && ( theme === 'dark' ? (
-                <Sun className="h-5 w-5 mr-2" />
-              ) : (
-                <Moon className="h-5 w-5 mr-2" />
-              ) ) }
+              { mounted &&
+                ( theme === 'dark' ? (
+                  <Sun className="h-5 w-5 mr-2" />
+                ) : (
+                  <Moon className="h-5 w-5 mr-2" />
+                ) ) }
               { theme === 'dark' ? 'Light Mode' : 'Dark Mode' }
             </Button>
           </div>
         </div>
       ) }
     </nav>
-  )
+  );
 }
-
