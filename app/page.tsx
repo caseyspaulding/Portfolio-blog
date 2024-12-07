@@ -1,73 +1,58 @@
+'use client';
 
 import Hero from '@/components/Hero';
 import Navbar from '@/components/NavBar';
+import Head from 'next/head';
+import { useTheme } from 'next-themes';
+import React, { useEffect, useState } from 'react';
 
-import type { Metadata } from 'next';
-
-import React from 'react';
-
-
-
-export const metadata: Metadata = {
-    title: 'CaseySpaulding - Blog and portfolio',
-    description:
-        'Personal blog and portfolio of Casey Spaulding, Full Stack Developer',
-    keywords: 'casey spaulding',
-    robots: 'index, follow',
-    alternates: {
-        canonical: 'https://CaseySpaulding.com/',
-    },
-    openGraph: {
-        title: 'CaseySpaulding - Blog and portfolio',
-        description:
-            'Personal blog and portfolio of Casey Spaulding, Full Stack Developer',
-        url: 'https://CaseySpaulding.com/',
-        type: 'website',
-        images: [
-            {
-                url: 'https://CaseySpaulding.com/images/og-image.png',
-                width: 1200,
-                height: 630,
-                alt: 'CaseySpaulding - Simplified Event Management',
-            },
-        ],
-    },
-    twitter: {
-        card: 'summary_large_image',
-        site: '@CaseySpaulding',
-        title: 'Casey Spaulding - Blog and portfolio',
-        description: 'Personal blog and portfolio of Casey Spaulding, Full Stack Developer.',
-    },
-};
-
-
-// Removed duplicate metadata declaration
-
-export default async function Index ()
+export default function Index ()
 {
-    // Fetch data directly in the server component
+    const { theme } = useTheme();
+    const [ mounted, setMounted ] = useState( false );
 
+    useEffect( () =>
+    {
+        setMounted( true );
+    }, [] );
+
+    if ( !mounted )
+    {
+        // Prevent rendering until hydration completes
+        return null;
+    }
 
     return (
-        <> 
+        <>
+            <Head>
+                <title>Casey Spaulding - Blog and Portfolio</title>
+                <meta
+                    name="description"
+                    content="Personal blog and portfolio of Casey Spaulding, Full Stack Developer"
+                />
+                <meta name="keywords" content="Casey Spaulding, Developer, Portfolio" />
+                <meta name="robots" content="index, follow" />
+                <link rel="canonical" href="https://caseyspaulding.com" />
+                {/* Open Graph tags */ }
+                <meta property="og:title" content="Casey Spaulding - Blog and Portfolio" />
+                <meta property="og:description" content="Full Stack Developer, AI Enthusiast" />
+                <meta property="og:url" content="https://caseyspaulding.com" />
+                <meta property="og:type" content="website" />
+                <meta
+                    property="og:image"
+                    content="https://caseyspaulding.com/images/og-image.png"
+                />
+                {/* Twitter meta tags */ }
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:site" content="@CaseySpaulding" />
+                <meta name="twitter:title" content="Casey Spaulding - Blog and Portfolio" />
+                <meta name="twitter:description" content="Full Stack Developer, AI Enthusiast" />
+            </Head>
             <Navbar />
             <main>
-                <Hero theme={ '' } />
+                <Hero theme={ theme || 'light' } />
                 {/* Other sections of your homepage */ }
-
             </main>
-
-
-       
-
-
-
-
-
-
-
-
-
         </>
     );
 }
