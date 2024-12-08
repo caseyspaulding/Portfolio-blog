@@ -5,6 +5,8 @@ import Head from 'next/head';
 import NavBar1 from '@/components/NavBarTW/NavBar1';
 import FooterFull from '@/components/Footers/FooterFull';
 import { Metadata } from 'next';
+import PageBackground from '@/components/PageBackGround';
+import P from 'react';
 
 
 export const metadata: Metadata = {
@@ -58,66 +60,59 @@ const CaseyAuthorPage = () =>
   return (
     <>
 
-      <NavBar1 />
-      <div className="bg-gray-100 min-h-screen">
-        <div className="container mx-auto px-4 py-12">
-          <div className="flex flex-col items-center">
-            <img
-              src="/images/caseyProfilePic.jpg" // Replace with your image path
-              alt="Casey"
-              className="w-40 h-40 rounded-full mb-6 object-cover"
-            />
-            <h1 className="text-4xl font-bold mb-2 text-center">About Casey Spaulding</h1>
-            <p className="text-lg text-gray-700 text-center mb-4">
-              Founder and Lead Developer at CaseySpaulding
-            </p>
-            <div className="flex space-x-4 mb-8">
-              <div className="flex space-x-6">
-                { navigation.social.map( ( item ) => (
-                  <a
-                    key={ item.name }
-                    href={ item.href }
-                    className="text-blue-700 hover:text-blue-300"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <span className="sr-only">{ item.name }</span>
-                    <item.icon aria-hidden="true" className="h-6 w-6" />
-                  </a>
-                ) ) }
+      <PageBackground>
+        <div className="min-h-screen text-gray-800 dark:text-gray-200">
+          <div className="container mx-auto px-4 py-12">
+            <div className="flex flex-col items-center">
+              <img
+                src="/images/caseyProfilePic.jpg" // Replace with your image path
+                alt="Casey"
+                className="w-40 h-40 rounded-full mb-6 object-cover shadow-md dark:shadow-gray-700"
+              />
+              <h1 className="text-4xl font-bold mb-2 text-center text-gray-900 dark:text-gray-100">
+                About Casey Spaulding
+              </h1>
+              <p className="text-lg text-gray-700 dark:text-gray-300 text-center mb-4">
+                Welcome to my blog and portfolio site!
+              </p>
+              <div className="flex space-x-4 mb-8">
+                <div className="flex space-x-6">
+                  { navigation.social.map( ( item ) => (
+                    <a
+                      key={ item.name }
+                      href={ item.href }
+                      className="text-blue-700 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <span className="sr-only">{ item.name }</span>
+                      <item.icon aria-hidden="true" className="h-6 w-6" />
+                    </a>
+                  ) ) }
+                </div>
               </div>
-            </div>
-            <div className="max-w-2xl ">
+              <div className="max-w-2xl">
+                <div className="bg-white dark:bg-black p-8 rounded-md shadow-md  max-w-4xl mx-auto">
+                  <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
+                    Hi, I'm <strong>Casey Spaulding</strong>, a experienced full-stack developer, software engineer, and AI enthusiast with a deep love for technology and problem-solving. 
+                  </p>
+                  <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
+                    After serving 20 years in the Navy and earning degrees in both software engineering and business management, I’ve dedicated my career to creating innovative solutions that empower individuals and organizations.
+                  </p>
 
-              <div className="bg-white p-8 rounded-lg shadow-lg max-w-4xl mx-auto">
+                  <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
+                    My journey in the Navy honed my leadership skills and taught me the importance of teamwork and resilience. Over the years, I’ve led teams, managed complex projects, and gained a unique perspective on how to turn ideas into reality. Those experiences have become the backbone of my career as a developer and creator.
+                  </p>
 
-
-
-
-
-                <p className="text-lg text-gray-700 mb-4">
-                  Hi, I'm <strong>Casey Spaulding</strong>, the founder of <strong>CaseySpaulding</strong>, an affordable, all-in-one event management solution designed for nonprofits and community event planners. After serving 20 years in the Navy and earning degrees in both software engineering and business management, I’ve combined my passion for technology and leadership to create tools that simplify event management.
-                </p>
-
-                <p className="text-lg text-gray-700 mb-4">
-                  During my time in the Navy, I organized and managed a variety of events, including retirement ceremonies, holiday parties, and change of command ceremonies. Those experiences taught me how to manage teams, coordinate logistics, and ensure everything runs smoothly — all of which laid the foundation for CaseySpaulding.
-                </p>
-
-                <p className="text-lg text-gray-700 mb-4">
-                  After leaving the Navy, I saw that many nonprofits and community event planners lacked an easy, affordable way to manage their events. That’s when I decided to create <strong>CaseySpaulding</strong> — a platform that makes ticketing, volunteer coordination, vendor management, and CRM functions simple and accessible for organizations of all sizes.
-                </p>
-
-                <p className="text-lg text-gray-700">
-                  CaseySpaulding is my way of giving back and helping those who bring people together through events. My goal is to empower nonprofits and small organizations by giving them the tools they need to run successful events without the stress.
-                </p>
+                  <p className="text-lg text-gray-700 dark:text-gray-300">
+                    Through my blog and portfolio, I share insights, projects, and lessons learned from my journey in technology and beyond. My mission is to inspire, educate, and support others as they navigate the exciting world of development and innovation. Thank you for visiting, and I look forward to connecting with you!
+                  </p>
+                </div>
               </div>
-
-              {/* Add more content about yourself, your background, and your mission */ }
             </div>
           </div>
         </div>
-      </div>
-      <FooterFull />
+      </PageBackground>
     </>
   );
 };

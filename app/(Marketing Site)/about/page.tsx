@@ -1,103 +1,120 @@
-import Image from 'next/image';
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import NavBar from '@/components/NavBar';
+
+
+import React, { SVGProps } from 'react';
+import Head from 'next/head';
+import NavBar1 from '@/components/NavBarTW/NavBar1';
+import FooterFull from '@/components/Footers/FooterFull';
+import { Metadata } from 'next';
 import PageBackground from '@/components/PageBackGround';
+import P from 'react';
 
-export const metadata = {
-    title: 'About - Casey Spaulding',
-    description: 'Learn more about Casey Spaulding, an experienced software engineer specializing in AI, ML, and full-stack development.',
-};
 
-export default function AboutPage ()
+export const metadata: Metadata = {
+    title: 'About Casey Spaulding | CaseySpaulding',
+    description: 'Learn more about Casey Spaulding, the founder of CaseySpaulding, an event management software for non-profits.',
+}
+const CaseyAuthorPage = () =>
 {
-    const skills = [
-        ".NET", "C#", "Python", "TypeScript", "React", "PostgreSQL", "SQL Server",
-        "AWS (S3, EC2, RDS)", "Entity Framework", "Dapper", "Angular", "Azure", "Machine Learning (PyTorch, TensorFlow)",
-    ];
+    const schemaData = {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Casey",
+        "url": "https://www.CaseySpaulding.com/authors/casey-spaulding",
+        "image": "https://www.CaseySpaulding.com/images/caseyandlaura.jpg", // Replace with your image URL
+        "sameAs": [
+            "https://www.linkedin.com/in/caseyspaulding/",
+            "https://x.com/caseyspaulding_"
+        ],
+        "jobTitle": "Founder and Lead Developer",
+        "worksFor": {
+            "@type": "Organization",
+            "name": "CaseySpaulding"
+        }
+    };
 
-    const experiences = [
-        { year: "2024", title: "Software Engineer", company: "Accenture Federal Services" },
-        { year: "2023", title: "Full Stack Developer (Subcontractor for USDA)", company: "Experis" },
-        { year: "2023", title: "Java Full Stack Developer (VETTEC Program)", company: "SkillStorm" },
-        { year: "2023", title: "Software Developer", company: "NovaCharge - EV Solutions" },
-        { year: "2019 - 2023", title: "Full Stack Developer (Freelance)", company: "BlueJackett Systems" },
-        { year: "2019 - 2021", title: "Cyber Patriot Coach & NJROTC Instructor", company: "San Diego Unified School District" },
-        { year: "1998 - 2019", title: "Talent Acquisition & Maintenance Technician", company: "US Navy" },
-    ];
+    const navigation = {
+        social: [
+            {
+                name: 'LinkedIn',
+                href: 'https://www.linkedin.com/in/caseyspaulding/',
+                icon: ( props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement> ) => (
+                    <svg fill="currentColor" x="0px" y="0px" width="24" height="24" viewBox="0 0 50 50">
+                        <path d="M 9 4 C 6.2504839 4 4 6.2504839 4 9 L 4 41 C 4 43.749516 6.2504839 46 9 46 L 41 46 C 43.749516 46 46 43.749516 46 41 L 46 9 C 46 6.2504839 43.749516 4 41 4 L 9 4 z M 9 6 L 41 6 C 42.668484 6 44 7.3315161 44 9 L 44 41 C 44 42.668484 42.668484 44 41 44 L 9 44 C 7.3315161 44 6 42.668484 6 41 L 6 9 C 6 7.3315161 7.3315161 6 9 6 z M 14 11.011719 C 12.904779 11.011719 11.919219 11.339079 11.189453 11.953125 C 10.459687 12.567171 10.011719 13.484511 10.011719 14.466797 C 10.011719 16.333977 11.631285 17.789609 13.691406 17.933594 A 0.98809878 0.98809878 0 0 0 13.695312 17.935547 A 0.98809878 0.98809878 0 0 0 14 17.988281 C 16.27301 17.988281 17.988281 16.396083 17.988281 14.466797 A 0.98809878 0.98809878 0 0 0 17.986328 14.414062 C 17.884577 12.513831 16.190443 11.011719 14 11.011719 z M 14 12.988281 C 15.392231 12.988281 15.94197 13.610038 16.001953 14.492188 C 15.989803 15.348434 15.460091 16.011719 14 16.011719 C 12.614594 16.011719 11.988281 15.302225 11.988281 14.466797 C 11.988281 14.049083 12.140703 13.734298 12.460938 13.464844 C 12.78117 13.19539 13.295221 12.988281 14 12.988281 z M 11 19 A 1.0001 1.0001 0 0 0 10 20 L 10 39 A 1.0001 1.0001 0 0 0 11 40 L 17 40 A 1.0001 1.0001 0 0 0 18 39 L 18 33.134766 L 18 20 A 1.0001 1.0001 0 0 0 17 19 L 11 19 z M 20 19 A 1.0001 1.0001 0 0 0 19 20 L 19 39 A 1.0001 1.0001 0 0 0 20 40 L 26 40 A 1.0001 1.0001 0 0 0 27 39 L 27 29 C 27 28.170333 27.226394 27.345035 27.625 26.804688 C 28.023606 26.264339 28.526466 25.940057 29.482422 25.957031 C 30.468166 25.973981 30.989999 26.311669 31.384766 26.841797 C 31.779532 27.371924 32 28.166667 32 29 L 32 39 A 1.0001 1.0001 0 0 0 33 40 L 39 40 A 1.0001 1.0001 0 0 0 40 39 L 40 28.261719 C 40 25.300181 39.122788 22.95433 37.619141 21.367188 C 36.115493 19.780044 34.024172 19 31.8125 19 C 29.710483 19 28.110853 19.704889 27 20.423828 L 27 20 A 1.0001 1.0001 0 0 0 26 19 L 20 19 z M 12 21 L 16 21 L 16 33.134766 L 16 38 L 12 38 L 12 21 z M 21 21 L 25 21 L 25 22.560547 A 1.0001 1.0001 0 0 0 26.798828 23.162109 C 26.798828 23.162109 28.369194 21 31.8125 21 C 33.565828 21 35.069366 21.582581 36.167969 22.742188 C 37.266572 23.901794 38 25.688257 38 28.261719 L 38 38 L 34 38 L 34 29 C 34 27.833333 33.720468 26.627107 32.990234 25.646484 C 32.260001 24.665862 31.031834 23.983076 29.517578 23.957031 C 27.995534 23.930001 26.747519 24.626988 26.015625 25.619141 C 25.283731 26.611293 25 27.829667 25 29 L 25 38 L 21 38 L 21 21 z"></path>
+                    </svg>
+                ),
+            },
+            {
+                name: 'X',
+                href: 'https://x.com/caseyspaulding_',
+                icon: ( props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement> ) => (
+                    <svg fill="currentColor" viewBox="0 0 24 24" { ...props }>
+                        <path d="M13.6823 10.6218L20.2391 3H18.6854L12.9921 9.61788L8.44486 3H3.2002L10.0765 13.0074L3.2002 21H4.75404L10.7663 14.0113L15.5685 21H20.8131L13.6819 10.6218H13.6823ZM11.5541 13.0956L10.8574 12.0991L5.31391 4.16971H7.70053L12.1742 10.5689L12.8709 11.5655L18.6861 19.8835H16.2995L11.5541 13.096V13.0956Z" />
+                    </svg>
+                ),
+            },
+        ],
+    };
+
+
 
     return (
         <>
+
             <PageBackground>
-           
-                <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24 lg:py-32 ">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16 p-5 rounded-lg dark:bg-slate-950 bg-white">
-                    <div>
-                        <h1 className="text-4xl font-bold mb-4">About Me</h1>
-                        <p className="text-xl mb-6">
-                            Hi, I'm Casey Spaulding, an experienced Software Engineer specializing in C#, Python, and TypeScript with a passion for cloud technologies, machine learning, and full-stack development.
-                        </p>
-                        <p className="mb-6">
-                            With over two decades of professional experience, I’ve transitioned from military service to leading innovative tech projects. My career includes a diverse range of roles in software engineering, education, and leadership, providing me with a unique blend of technical expertise and strategic insight.
-                        </p>
-                        <p>
-                            I’m currently diving deep into machine learning and natural language processing, building projects with frameworks like PyTorch, TensorFlow, and Hugging Face Transformers. Outside work, I enjoy hiking, exploring AI, and mentoring aspiring developers.
-                        </p>
-                    </div>
-                    <div className="relative h-96 rounded-lg overflow-hidden shadow-xl">
-                        <Image
-                            src="/images/avatars/family2.jpg"
-                            alt="Casey Spaulding"
-                            layout="fill"
-                            objectFit="cover"
-                            className="rounded-lg"
-                        />
+                <div className="min-h-screen text-gray-800 dark:text-gray-200">
+                    <div className="container mx-auto px-4 py-12">
+                        <div className="flex flex-col items-center">
+                            <img
+                                src="/images/caseyProfilePic.jpg" // Replace with your image path
+                                alt="Casey"
+                                className="w-40 h-40 rounded-full mb-6 object-cover shadow-md dark:shadow-gray-700"
+                            />
+                            <h1 className="text-4xl font-bold mb-2 text-center text-gray-900 dark:text-gray-100">
+                                About Casey Spaulding
+                            </h1>
+                            <p className="text-lg text-gray-700 dark:text-gray-300 text-center mb-4">
+                                Welcome to my blog and portfolio site!
+                            </p>
+                            <div className="flex space-x-4 mb-8">
+                                <div className="flex space-x-6">
+                                    { navigation.social.map( ( item ) => (
+                                        <a
+                                            key={ item.name }
+                                            href={ item.href }
+                                            className="text-blue-700 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            <span className="sr-only">{ item.name }</span>
+                                            <item.icon aria-hidden="true" className="h-6 w-6" />
+                                        </a>
+                                    ) ) }
+                                </div>
+                            </div>
+                            <div className="max-w-2xl">
+                                <div className="bg-white dark:bg-black p-8 rounded-md shadow-md  max-w-4xl mx-auto">
+                                    <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
+                                        Hi, I'm <strong>Casey Spaulding</strong>, a experienced full-stack developer, software engineer, and AI enthusiast with a deep love for technology and problem-solving.
+                                    </p>
+                                    <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
+                                        After serving 20 years in the Navy and earning degrees in both software engineering and business management, I’ve dedicated my career to creating innovative solutions that empower individuals and organizations.
+                                    </p>
+
+                                    <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
+                                        My journey in the Navy honed my leadership skills and taught me the importance of teamwork and resilience. Over the years, I’ve led teams, managed complex projects, and gained a unique perspective on how to turn ideas into reality. Those experiences have become the backbone of my career as a developer and creator.
+                                    </p>
+
+                                    <p className="text-lg text-gray-700 dark:text-gray-300">
+                                        Through my blog and portfolio, I share insights, projects, and lessons learned from my journey in technology and beyond. My mission is to inspire, educate, and support others as they navigate the exciting world of development and innovation. Thank you for visiting, and I look forward to connecting with you!
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                    <Card className="mb-16 p-5 rounded-lg dark:bg-slate-950 bg-white">
-                    <CardHeader>
-                        <CardTitle className="text-2xl">Skills & Technologies</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <div className="flex flex-wrap gap-2">
-                            { skills.map( ( skill ) => (
-                                <Badge key={ skill } variant="secondary">{ skill }</Badge>
-                            ) ) }
-                        </div>
-                    </CardContent>
-                </Card>
-
-                    <section className="mt-16 p-5 rounded-lg dark:bg-slate-950 bg-white">
-                    <h2 className="text-3xl font-bold mb-8">Experience Timeline</h2>
-                        <div className="space-y-8 ">
-                        { experiences.map( ( exp, index ) => (
-                            <Card key={ index }>
-                                <CardContent className="flex items-center p-6">
-                                    <div className="text-4xl font-bold text-blue-700 mr-6">{ exp.year }</div>
-                                    <div>
-                                        <h3 className="text-xl font-semibold">{ exp.title }</h3>
-                                        <p className="text-gray-600">{ exp.company }</p>
-                                    </div>
-                                </CardContent>
-                            </Card>
-                        ) ) }
-                    </div>
-                </section>
-
-                    <section className="mt-16 mt-16 p-5 rounded-lg dark:bg-slate-950 bg-white">
-                    <h2 className="text-3xl font-bold mb-8">Certifications & Recognitions</h2>
-                    <div className="space-y-4">
-                        <p className="text-lg">
-                            <strong>Certifications:</strong> Agile Software Design, Domain-Driven Design, C# Algorithms, Software Security & Vulnerabilities.
-                        </p>
-                        <p className="text-lg">
-                            <strong>Honors & Awards:</strong> Navy and Marine Corps Commendation Medal (3 awards), Navy and Marine Corps Achievement Medal.
-                        </p>
-                    </div>
-                </section>
-                </main>
             </PageBackground>
         </>
     );
-}
+};
+
+export default CaseyAuthorPage;
