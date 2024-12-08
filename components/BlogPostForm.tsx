@@ -36,8 +36,7 @@ const BlogPostForm: React.FC = () =>
   const [ title, setTitle ] = useState( '' );
   const [ content, setContent ] = useState( '' );
   const [ excerpt, setExcerpt ] = useState( '' );
-  const [ authorId, setAuthorId ] = useState( '' );
-  const [ authorsList, setAuthorsList ] = useState<Author[]>( [] );
+ 
   const [ tags, setTags ] = useState( '' );
   const [ slug, setSlug ] = useState( '' );
   const [ metaTitle, setMetaTitle ] = useState( '' );
@@ -76,21 +75,10 @@ const BlogPostForm: React.FC = () =>
       setUser( user );
     };
 
-    const fetchAuthors = async () =>
-    {
-      const { data: authors, error } = await supabase.from( 'authors' ).select( 'id, name' );
-
-      if ( error )
-      {
-        toast.error( 'Error fetching authors' );
-      } else
-      {
-        setAuthorsList( authors || [] );
-      }
-    };
+    
 
     checkUser();
-    fetchAuthors();
+   
   }, [ router, supabase ] );
 
   const handleImageUpload = async ( file: File | null ) =>
