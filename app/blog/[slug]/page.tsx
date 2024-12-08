@@ -5,6 +5,8 @@ import { getBlogPostBySlug, getAllBlogSlugs } from '@/app/actions/blogActions';
 import FooterFull from '@/components/Footers/FooterFull';
 import NavBar1 from '@/components/NavBarTW/NavBar1';
 import type { Metadata } from 'next';
+import NavBar from '@/components/NavBar';
+import PageBackground from '@/components/PageBackGround';
 
 export async function generateStaticParams ()
 {
@@ -76,26 +78,35 @@ export default async function BlogPost ( { params }: { params: Promise<{ slug: s
 
     return (
         <>
-            <NavBar1 />
-            <div className="font-space-grotesk">
+            <PageBackground>
+            <NavBar />
+            
+            <div className="font-space-grotesk  text-gray-800 dark:text-gray-100">
                 <article className="mx-auto max-w-7xl px-2 py-12 sm:px-4 lg:px-4">
                     <div className="relative mb-8 flex flex-col md:flex-row items-center md:items-stretch">
-                        <div className="md:w-2/3 flex flex-col justify-center p-4 bg-white rounded-tl-xl rounded-bl-xl">
+                        <div className="md:w-2/3 flex flex-col justify-center p-4 bg-white dark:bg-black rounded-tl-xl rounded-bl-xl">
                             <div className="flex flex-wrap gap-2 mb-4">
-                                { tags ? tags.map( ( tag: string, index: number ) => (
-                                    <span key={ index } className="inline-block bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">
-                                        { tag.trim() }
-                                    </span>
-                                ) ) : null }
+                                { tags
+                                    ? tags.map( ( tag: string, index: number ) => (
+                                        <span
+                                            key={ index }
+                                            className="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded"
+                                        >
+                                            { tag.trim() }
+                                        </span>
+                                    ) )
+                                    : null }
                             </div>
-                            <h1 className="text-4xl font-extrabold text-gray-800 mb-4 leading-tight">{ post.title }</h1>
-                            <p className="text-base text-gray-500 mb-4 leading-relaxed">
+                            <h1 className="text-4xl font-extrabold text-gray-800 dark:text-white mb-4 leading-tight">
+                                { post.title }
+                            </h1>
+                            <p className="text-base text-gray-500 dark:text-gray-400 mb-4 leading-relaxed">
                                 { new Date( post.createdAt ).toLocaleDateString() } • { readTime }
                             </p>
-                            <div className="flex items-center text-base text-gray-500 leading-relaxed">
+                            <div className="flex items-center text-base text-gray-500 dark:text-gray-400 leading-relaxed">
                                 { post.author?.avatarUrl && (
                                     <img
-                                        src='/images/caseyProfilePic.jpg'
+                                        src="/images/caseyProfilePic.jpg"
                                         alt={ post.author.name }
                                         className="w-8 h-8 rounded-full mr-2"
                                     />
@@ -103,7 +114,10 @@ export default async function BlogPost ( { params }: { params: Promise<{ slug: s
                                 <span>
                                     By{ ' ' }
                                     { post.author ? (
-                                        <a href={ `/authors/${ post.author.slug }` } className="text-blue-600 hover:underline">
+                                        <a
+                                            href={ `/authors/${ post.author.slug }` }
+                                            className="text-blue-600 dark:text-blue-400 hover:underline"
+                                        >
                                             { post.author.name }
                                         </a>
                                     ) : (
@@ -124,34 +138,27 @@ export default async function BlogPost ( { params }: { params: Promise<{ slug: s
                         ) }
                     </div>
 
-                    <div className="grid grid-cols-1 xl:grid-cols-4 gap-8 bg-white rounded-2xl p-4">
+                    <div className="grid grid-cols-1 xl:grid-cols-4 gap-8 bg-white dark:bg-black rounded-2xl p-4">
                         <div className="xl:col-span-3">
-                            <div className="prose prose-lg max-w-none leading-relaxed text-lg">
+                            <div className="prose prose-lg dark:prose-invert max-w-none leading-relaxed text-lg">
                                 { parse( sanitizedContent ) }
                             </div>
                         </div>
 
-                        <aside className="hidden xl:block xl:col-span-1 space-y-6 xl:space-y-10">
+                        {/*<aside className="hidden xl:block xl:col-span-1 space-y-6 xl:space-y-10">
                             <div className="sticky top-20 space-y-6">
-                                <div className="p-6  rounded-2xl shadow-md text-center">
-                                    <h3 className="text-lg font-bold text-blue-900 mb-2">Start Today!</h3>
-                                    <p className="text-base text-gray-700 mb-4 leading-relaxed">
-                                        No Credit Card Required.
-                                    </p>
-                                    <a
-                                        href="/signup"
-                                        className="inline-block px-4 py-2 text-white bg-blue-600 rounded-3xl hover:bg-blue-500"
-                                    >
-                                        Get Your Account
-                                    </a>
+                                <div className="p-6 rounded-2xl shadow-md text-center bg-gray-100 dark:bg-gray-700">
+                                    <h3 className="text-lg font-bold text-blue-900 dark:text-blue-200 mb-2">
+                                        Start Today!
+                                    </h3>
+                                    
                                 </div>
                             </div>
-                        </aside>
+                        </aside>*/}
                     </div>
                 </article>
-
-                <FooterFull />
             </div>
+            </PageBackground>
         </>
     );
 }
