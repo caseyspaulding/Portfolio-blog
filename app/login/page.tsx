@@ -76,23 +76,9 @@ export default function LoginComponent ( { searchParams }: { searchParams: Promi
                     if ( user )
                     {
                         const userId = user.id;
-                        const { data: org, error } = await supabase
-                            .from( "organizations" )
-                            .select( "id" )
-                            .eq( "user_id", userId )
-                            .single();
 
-                        if ( error )
-                        {
-                            console.error( "Error fetching organization:", error );
-                            setErrorMessage( "Error fetching organization. Please try again." );
-                        } else if ( org )
-                        {
-                            router.push( "/dashboard" ); // Only redirect after all checks are successful
-                        } else
-                        {
-                            setErrorMessage( "You do not have an associated organization. Please contact support or create an organization." );
-                        }
+
+
                     } else
                     {
                         setErrorMessage( "Unable to retrieve user information. Please try logging in again." );
