@@ -1,31 +1,19 @@
 import FooterFull from '@/components/Footers/FooterFull';
 import { ChevronRightIcon } from '@heroicons/react/20/solid';
 import
-    {
-        BookmarkSquareIcon,
-        BookOpenIcon,
+{
+    BookmarkSquareIcon,
+    BookOpenIcon,
 
-        RssIcon
-    } from '@heroicons/react/24/solid';
+    RssIcon
+} from '@heroicons/react/24/solid';
 
 import Image from 'next/image';
 import Link from 'next/link';
 
 
 const links = [
-    {
-        name: 'Documentation',
-        href: '/docs',
-        description: 'Learn how to integrate our tools with your app.',
-        icon: BookOpenIcon
-    },
 
-    {
-        name: 'Guides',
-        href: '/guides',
-        description: 'Installation guides that cover popular setups.',
-        icon: BookmarkSquareIcon
-    },
     {
         name: 'Blog',
         href: '/blog',
@@ -106,7 +94,7 @@ export default function Example ()
 
                 </div>
             </main>
-            <FooterFull />
+
         </div>
     );
 }

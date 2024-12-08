@@ -48,7 +48,7 @@ export default function Index ()
                 <meta name="twitter:title" content="Casey Spaulding - Blog and Portfolio" />
                 <meta name="twitter:description" content="Full Stack Developer, AI Enthusiast" />
             </Head>
-            <Navbar />
+           
             <main>
                 <Hero theme={ theme || 'light' } />
                 {/* Other sections of your homepage */ }

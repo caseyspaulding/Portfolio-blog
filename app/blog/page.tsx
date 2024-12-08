@@ -36,14 +36,14 @@ export default async function BlogList ()
 
     return ( <>
         <PageBackground>
-         <NavBar />
-            <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24 lg:py-32   text-gray-800 dark:text-gray-200">
+        
+            <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-14 lg:py-12   text-gray-800 dark:text-gray-200">
                 <h1 className="text-4xl font-bold text-center mb-12">Latest Blog Posts</h1>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     { posts.map( ( post ) => (
                         <Card
                             key={ post.id }
-                            className="flex flex-col overflow-hidden hover:shadow-lg transition-shadow duration-300 bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200"
+                            className="flex flex-col overflow-hidden hover:shadow-lg transition-shadow duration-300 bg-gray-100 dark:bg-black text-gray-800 dark:text-gray-200"
                         >
                             <Link href={ `/blog/${ post.slug }` } className="block">
                                 <div className="relative h-48 w-full">

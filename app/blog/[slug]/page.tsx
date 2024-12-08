@@ -79,7 +79,7 @@ export default async function BlogPost ( { params }: { params: Promise<{ slug: s
     return (
         <>
             <PageBackground>
-            <NavBar />
+           
             
             <div className="font-space-grotesk  text-gray-800 dark:text-gray-100">
                 <article className="mx-auto max-w-7xl px-2 py-12 sm:px-4 lg:px-4">

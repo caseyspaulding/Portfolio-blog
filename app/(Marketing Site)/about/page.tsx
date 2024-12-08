@@ -29,7 +29,7 @@ export default function AboutPage ()
     return (
         <>
             <PageBackground>
-            <NavBar />
+           
                 <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24 lg:py-32 ">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16 p-5 rounded-lg dark:bg-slate-950 bg-white">
                     <div>

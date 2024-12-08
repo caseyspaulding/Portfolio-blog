@@ -11,8 +11,8 @@ export default function PageBackground ( { children }: { children: React.ReactNo
       {/* Background Gradient */ }
       <div
         className={ `absolute inset-0 ${ theme === 'dark'
-            ? 'bg-gradient-to-br from-black via-gray-900 to-green-900'
-            : 'bg-gradient-to-br from-white via-gray-100 to-green-50'
+            ? 'bg-gradient-to-br from-black via-gray-950 to-green-950'
+            : 'bg-gradient-to-br from-white via-gray-100 to-zinc-100'
           }` }
         aria-hidden="true"
       />

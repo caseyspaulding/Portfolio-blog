@@ -6,6 +6,7 @@ import { Analytics } from '@vercel/analytics/react';
 import { Providers } from './providers';
 import FooterTW from '@/components/Footers/FooterTW';
 import Script from 'next/script';
+import NavBar from '@/components/NavBar';
 
 export const metadata = {
     title: 'Casey Spaulding - Blog and Portfolio',
@@ -23,6 +24,7 @@ export default function RootLayout ( { children }: PropsWithChildren )
     return (
         <html lang="en" className={ `${ poppins.className }` } suppressHydrationWarning>
             <body className="bg-background text-foreground">
+                <NavBar />
                 <Analytics />
                 <Script
                     strategy="afterInteractive"

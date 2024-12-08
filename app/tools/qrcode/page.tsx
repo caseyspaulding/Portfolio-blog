@@ -13,7 +13,7 @@ export default function QRCode ()
 {
     return (
         <div>
-          <NavBar />
+         
             <NewQRCodeGenerator />
            
         </div>
