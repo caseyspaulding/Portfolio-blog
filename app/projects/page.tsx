@@ -21,7 +21,7 @@ const projects: Project[] = [
     description:
       'A scalable ticketing application built with NextJs and Postgres, featuring QR code ticket generation, ticket scanner with multi-tenent support.',
     technologies: [ 'NextJs', 'Postgres', 'React', 'TypeScript' ],
-    image: '/images/projects/Eventjacket2.png',
+    image: '/images/eventjacket-ss.png',
     github: 'https://github.com/caseyspaulding/EventJacekt-TW',
     liveDemo: 'https://eventjacket.com',
   },
