@@ -24,24 +24,26 @@ export default function RootLayout ( { children }: PropsWithChildren )
     return (
         <html lang="en" className={ `${ poppins.className }` } suppressHydrationWarning>
             <body className="bg-background text-foreground">
-                <NavBar />
-                <Analytics />
-                <Script
-                    strategy="afterInteractive"
-                    src="https://www.googletagmanager.com/gtag/js?id=G-M6F4XVZM25"
-                />
-                <Script id="gtag-init" strategy="afterInteractive">
-                    { `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-M6F4XVZM25');
-          `}
-                </Script>
-                <ClientProviders>
-                    <Providers>{ children }</Providers>
-                </ClientProviders>
-                <FooterTW />
+                <Providers> {/* Wrap entire app with ThemeProvider */ }
+                    <NavBar /> {/* NavBar now wrapped in ThemeProvider */ }
+                    <Analytics />
+                    <Script
+                        strategy="afterInteractive"
+                        src="https://www.googletagmanager.com/gtag/js?id=G-M6F4XVZM25"
+                    />
+                    <Script id="gtag-init" strategy="afterInteractive">
+                        { `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-M6F4XVZM25');
+            `}
+                    </Script>
+                    <ClientProviders>
+                        { children }
+                    </ClientProviders>
+                    <FooterTW />
+                </Providers>
             </body>
         </html>
     );
