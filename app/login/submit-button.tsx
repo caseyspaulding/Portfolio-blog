@@ -23,7 +23,7 @@ const MyButton = forwardRef<HTMLButtonElement, ButtonProps>(
         const [ showSpinner, setShowSpinner ] = useState( isLoading );
 
         // Hook to manage ripple
-        const { ripples, onClick, onClear } = useRipple();
+        const { ripples, onClear } = useRipple();
 
         useEffect( () =>
         {

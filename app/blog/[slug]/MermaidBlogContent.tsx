@@ -20,8 +20,9 @@ export default function MermaidBlogContent ( { rawHtml }: { rawHtml: string } )
         'viewBox', 'fill', 'stroke', 'transform', // <— sometimes needed
         'd', 'dx', 'dy', 'x', 'y',
         'font-family', 'font-size', 'text-anchor', 'style',
-        'markerHeight', 'markerWidth', 'refX', 'refY',
+        'markerHeight', 'markerWidth', 'refX', 'refY', 'alignment-baseline', 'dominant-baseline', 'textLength', 'lengthAdjust',
       ],
+      securityLevel: 'loose',
     };
     const safeHtml = DOMPurify.sanitize( rawHtml, config );
     setHtml( safeHtml );

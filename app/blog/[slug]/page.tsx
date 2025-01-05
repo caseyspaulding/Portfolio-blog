@@ -1,11 +1,10 @@
 import React from 'react';
 import DOMPurify from 'isomorphic-dompurify';
-import parse from 'html-react-parser';
+
 import { getBlogPostBySlug, getAllBlogSlugs } from '@/app/actions/blogActions';
-import FooterFull from '@/components/Footers/FooterFull';
-import NavBar1 from '@/components/NavBarTW/NavBar1';
+
 import type { Metadata } from 'next';
-import NavBar from '@/components/NavBar';
+
 import PageBackground from '@/components/PageBackGround';
 import MermaidBlogContent from './MermaidBlogContent';
 
@@ -72,9 +71,9 @@ export default async function BlogPost ( { params }: { params: Promise<{ slug: s
             'viewBox', 'fill', 'stroke', 'transform', // <— sometimes needed
             'd', 'dx', 'dy', 'x', 'y',
             'font-family', 'font-size', 'text-anchor', 'style',
-            'markerHeight', 'markerWidth', 'refX', 'refY',
+            'markerHeight', 'markerWidth', 'refX', 'refY', 'alignment-baseline', 'dominant-baseline', 'textLength', 'lengthAdjust',
         ],
-        // securityLevel: 'loose',
+        securityLevel: 'loose',
     };
     const sanitizedContent = DOMPurify.sanitize( post.content, config );
     const readTime = calculateReadTime( post.content );
