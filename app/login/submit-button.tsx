@@ -1,11 +1,11 @@
 import { forwardRef, useEffect, useState } from "react";
-import { Spinner, Ripple, useRipple } from "@nextui-org/react";
+import { Spinner } from "@nextui-org/react";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>
 {
     isLoading?: boolean;
     loadingMessage?: string;
-    spinnerDelay?: number; // New prop to specify the delay duration in milliseconds
+    spinnerDelay?: number; // Delay in ms for hiding the spinner
 }
 
 const MyButton = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -22,39 +22,28 @@ const MyButton = forwardRef<HTMLButtonElement, ButtonProps>(
     {
         const [ showSpinner, setShowSpinner ] = useState( isLoading );
 
-        // Hook to manage ripple
-        const { ripples, onClear } = useRipple();
-
         useEffect( () =>
         {
             let timer: NodeJS.Timeout;
 
             if ( isLoading )
             {
-                setShowSpinner( true ); // Show spinner immediately when loading starts
+                // Show spinner immediately
+                setShowSpinner( true );
             } else if ( !isLoading && showSpinner )
             {
-                // Delay hiding spinner after loading is done
+                // Delay hiding spinner after loading ends
                 timer = setTimeout( () => setShowSpinner( false ), spinnerDelay );
             }
 
             return () =>
             {
-                if ( timer ) clearTimeout( timer ); // Clear timeout if the component is unmounted
+                if ( timer ) clearTimeout( timer );
             };
-        }, [ isLoading, spinnerDelay ] );
+        }, [ isLoading, showSpinner, spinnerDelay ] );
 
         return (
-            <button
-                ref={ ref }
-                { ...props }
-                className={ `relative overflow-hidden ${ props.className }` }
-                onClick={ ( event ) =>
-                {
-                    onClick( event ); // Trigger ripple on click
-                    if ( props.onClick ) props.onClick( event ); // Call any passed onClick handler
-                } }
-            >
+            <button ref={ ref } { ...props } className={ `relative ${ props.className }` }>
                 { showSpinner ? (
                     <>
                         <Spinner className="animate-spin mr-2" size="sm" />
@@ -63,8 +52,6 @@ const MyButton = forwardRef<HTMLButtonElement, ButtonProps>(
                 ) : (
                     children
                 ) }
-                {/* Ripple effect */ }
-                <Ripple ripples={ ripples } onClear={ onClear } />
             </button>
         );
     }
