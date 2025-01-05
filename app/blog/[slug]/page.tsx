@@ -7,6 +7,7 @@ import NavBar1 from '@/components/NavBarTW/NavBar1';
 import type { Metadata } from 'next';
 import NavBar from '@/components/NavBar';
 import PageBackground from '@/components/PageBackGround';
+import MermaidBlogContent from './MermaidBlogContent';
 
 export async function generateStaticParams ()
 {
@@ -62,8 +63,26 @@ export default async function BlogPost ( { params }: { params: Promise<{ slug: s
         return <div className="text-center text-xl text-red-600">Post not found</div>;
     }
 
-    // Sanitize the HTML content
-    const sanitizedContent = DOMPurify.sanitize( post.content );
+    // Example more-permissive config
+    const config = {
+        ADD_TAGS: [ 'svg', 'path', 'g', 'text', 'tspan' ],
+        ADD_ATTR: [
+            'viewBox',
+            'fill',
+            'stroke',
+            'd',
+            'dx',
+            'dy',
+            'x',
+            'y',
+            'font-family',
+            'font-size',
+            'text-anchor',
+            'style'
+        ],
+        // securityLevel: 'loose',
+    };
+    const sanitizedContent = DOMPurify.sanitize( post.content, config );
     const readTime = calculateReadTime( post.content );
     let tags;
     try
@@ -79,73 +98,73 @@ export default async function BlogPost ( { params }: { params: Promise<{ slug: s
     return (
         <>
             <PageBackground>
-           
-            
-            <div className="font-space-grotesk  text-gray-800 dark:text-gray-100">
-                <article className="mx-auto max-w-7xl px-2 py-12 sm:px-4 lg:px-4">
-                    <div className="relative mb-8 flex flex-col md:flex-row items-center md:items-stretch">
-                        <div className="md:w-2/3 flex flex-col justify-center p-4 bg-white dark:bg-black rounded-tl-xl rounded-bl-xl">
-                            <div className="flex flex-wrap gap-2 mb-4">
-                                { tags
-                                    ? tags.map( ( tag: string, index: number ) => (
-                                        <span
-                                            key={ index }
-                                            className="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded"
-                                        >
-                                            { tag.trim() }
-                                        </span>
-                                    ) )
-                                    : null }
-                            </div>
-                            <h1 className="text-4xl font-extrabold text-gray-800 dark:text-white mb-4 leading-tight">
-                                { post.title }
-                            </h1>
-                            <p className="text-base text-gray-500 dark:text-gray-400 mb-4 leading-relaxed">
-                                { new Date( post.createdAt ).toLocaleDateString() } • { readTime }
-                            </p>
-                            <div className="flex items-center text-base text-gray-500 dark:text-gray-400 leading-relaxed">
-                                { post.author?.avatarUrl && (
-                                    <img
-                                        src="/images/caseyProfilePic.jpg"
-                                        alt={ post.author.name }
-                                        className="w-8 h-8 rounded-full mr-2"
-                                    />
-                                ) }
-                                <span>
-                                    By{ ' ' }
-                                    { post.author ? (
-                                        <a
-                                            href={ `/authors/${ post.author.slug }` }
-                                            className="text-blue-600 dark:text-blue-400 hover:underline"
-                                        >
-                                            { post.author.name }
-                                        </a>
-                                    ) : (
-                                        'Unknown Author'
+
+
+                <div className="font-space-grotesk  text-gray-800 dark:text-gray-100">
+                    <article className="mx-auto max-w-7xl px-2 py-12 sm:px-4 lg:px-4">
+                        <div className="relative mb-8 flex flex-col md:flex-row items-center md:items-stretch">
+                            <div className="md:w-2/3 flex flex-col justify-center p-4 bg-white dark:bg-black rounded-tl-xl rounded-bl-xl">
+                                <div className="flex flex-wrap gap-2 mb-4">
+                                    { tags
+                                        ? tags.map( ( tag: string, index: number ) => (
+                                            <span
+                                                key={ index }
+                                                className="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded"
+                                            >
+                                                { tag.trim() }
+                                            </span>
+                                        ) )
+                                        : null }
+                                </div>
+                                <h1 className="text-4xl font-extrabold text-gray-800 dark:text-white mb-4 leading-tight">
+                                    { post.title }
+                                </h1>
+                                <p className="text-base text-gray-500 dark:text-gray-400 mb-4 leading-relaxed">
+                                    { new Date( post.createdAt ).toLocaleDateString() } • { readTime }
+                                </p>
+                                <div className="flex items-center text-base text-gray-500 dark:text-gray-400 leading-relaxed">
+                                    { post.author?.avatarUrl && (
+                                        <img
+                                            src="/images/caseyProfilePic.jpg"
+                                            alt={ post.author.name }
+                                            className="w-8 h-8 rounded-full mr-2"
+                                        />
                                     ) }
-                                </span>
+                                    <span>
+                                        By{ ' ' }
+                                        { post.author ? (
+                                            <a
+                                                href={ `/authors/${ post.author.slug }` }
+                                                className="text-blue-600 dark:text-blue-400 hover:underline"
+                                            >
+                                                { post.author.name }
+                                            </a>
+                                        ) : (
+                                            'Unknown Author'
+                                        ) }
+                                    </span>
+                                </div>
                             </div>
+
+                            { post.featuredImage && (
+                                <div className="w-full md:w-3/4 h-96 overflow-hidden">
+                                    <img
+                                        src={ post.featuredImage }
+                                        alt={ post.title }
+                                        className="w-full h-full object-cover rounded-xl md:rounded-tl-xl"
+                                    />
+                                </div>
+                            ) }
                         </div>
 
-                        { post.featuredImage && (
-                            <div className="w-full md:w-3/4 h-96 overflow-hidden">
-                                <img
-                                    src={ post.featuredImage }
-                                    alt={ post.title }
-                                    className="w-full h-full object-cover rounded-xl md:rounded-tl-xl"
-                                />
+                        <div className="grid grid-cols-1 xl:grid-cols-4 gap-8 bg-white dark:bg-black rounded-2xl p-4">
+                            <div className="xl:col-span-3">
+                                <div className="prose prose-lg dark:prose-invert max-w-none leading-relaxed text-lg">
+                                    <MermaidBlogContent rawHtml={ sanitizedContent } />
+                                </div>
                             </div>
-                        ) }
-                    </div>
 
-                    <div className="grid grid-cols-1 xl:grid-cols-4 gap-8 bg-white dark:bg-black rounded-2xl p-4">
-                        <div className="xl:col-span-3">
-                            <div className="prose prose-lg dark:prose-invert max-w-none leading-relaxed text-lg">
-                                { parse( sanitizedContent ) }
-                            </div>
-                        </div>
-
-                        {/*<aside className="hidden xl:block xl:col-span-1 space-y-6 xl:space-y-10">
+                            {/*<aside className="hidden xl:block xl:col-span-1 space-y-6 xl:space-y-10">
                             <div className="sticky top-20 space-y-6">
                                 <div className="p-6 rounded-2xl shadow-md text-center bg-gray-100 dark:bg-gray-700">
                                     <h3 className="text-lg font-bold text-blue-900 dark:text-blue-200 mb-2">
@@ -155,9 +174,9 @@ export default async function BlogPost ( { params }: { params: Promise<{ slug: s
                                 </div>
                             </div>
                         </aside>*/}
-                    </div>
-                </article>
-            </div>
+                        </div>
+                    </article>
+                </div>
             </PageBackground>
         </>
     );
