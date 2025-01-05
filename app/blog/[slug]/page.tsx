@@ -65,20 +65,14 @@ export default async function BlogPost ( { params }: { params: Promise<{ slug: s
 
     // Example more-permissive config
     const config = {
-        ADD_TAGS: [ 'svg', 'path', 'g', 'text', 'tspan' ],
+        ADD_TAGS: [
+            'svg', 'path', 'g', 'text', 'tspan', 'marker', 'polygon', 'rect'
+        ],
         ADD_ATTR: [
-            'viewBox',
-            'fill',
-            'stroke',
-            'd',
-            'dx',
-            'dy',
-            'x',
-            'y',
-            'font-family',
-            'font-size',
-            'text-anchor',
-            'style'
+            'viewBox', 'fill', 'stroke', 'transform', // <— sometimes needed
+            'd', 'dx', 'dy', 'x', 'y',
+            'font-family', 'font-size', 'text-anchor', 'style',
+            'markerHeight', 'markerWidth', 'refX', 'refY',
         ],
         // securityLevel: 'loose',
     };
