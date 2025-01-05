@@ -9,9 +9,20 @@ import { useRouter } from 'next/navigation';
 import type { User } from '@supabase/supabase-js';
 import { Button } from '@nextui-org/button';
 import JoditEditor from 'jodit-react';
+import mermaid from 'mermaid';
+import DiagramModal from './DiagramModal';
 
 
 
+interface DiagramData
+{
+  id: string;
+  type: 'mermaid';
+  content: string;
+  title: string;
+  createdAt: string;
+  updatedAt: string;
+}
 
 
 interface Author
@@ -36,7 +47,7 @@ const BlogPostForm: React.FC = () =>
   const [ title, setTitle ] = useState( '' );
   const [ content, setContent ] = useState( '' );
   const [ excerpt, setExcerpt ] = useState( '' );
- 
+
   const [ tags, setTags ] = useState( '' );
   const [ slug, setSlug ] = useState( '' );
   const [ metaTitle, setMetaTitle ] = useState( '' );
@@ -44,18 +55,69 @@ const BlogPostForm: React.FC = () =>
   const [ isPublished, setIsPublished ] = useState( false );
   const [ featuredImage, setFeaturedImage ] = useState<File | null>( null );
   const [ postImage, setPostImage ] = useState<File | null>( null ); // State for blog post image
-
-
-
+  const [ diagrams, setDiagrams ] = useState<DiagramData[]>( [] );
+  const [ showDiagramModal, setShowDiagramModal ] = useState( false );
+  const [ currentDiagram, setCurrentDiagram ] = useState( {
+    content: '',
+    title: ''
+  } );
+  // Initialize mermaid
+  useEffect( () =>
+  {
+    mermaid.initialize( {
+      startOnLoad: true,
+      theme: 'default',
+    } );
+  }, [] );
+  useEffect( () =>
+  {
+    console.log( 'Modal state:', showDiagramModal );
+  }, [ showDiagramModal ] );
   // Configuration for the editor
-  const config = useMemo(
+  interface JoditConfig
+  {
+    readonly: boolean;
+    placeholder: string;
+    buttons: Array<string | { name: string; icon: string; tooltip: string; exec: ( editor: any ) => boolean }>;
+    events: {
+      'insertDiagram.click': () => boolean;
+    };
+  }
+
+  const config: JoditConfig = useMemo(
     () => ( {
       readonly: false,
       placeholder: 'Start typing your blog post...',
+      buttons: [
+        'source', '|',
+        'bold', 'italic', 'underline', '|',
+        'ul', 'ol', '|',
+        'font', 'fontsize', 'brush', 'paragraph', '|',
+        'image', 'table', 'link', '|',
+        'left', 'center', 'right', 'justify', '|',
+        'undo', 'redo', '|',
+        'hr', 'eraser', 'fullsize', '|',
+        {
+          name: 'insertDiagram',
+          icon: '📊',
+          tooltip: 'Insert Mermaid Diagram',
+          exec: ( _editor ) =>
+          {
+            setShowDiagramModal( true );
+            return false;
+          }
+        }
+      ],
+      events: {
+        'insertDiagram.click': () =>
+        {
+          setShowDiagramModal( true );
+          return false;
+        }
+      }
     } ),
     []
   );
-
   const editor = useRef( null ); // Define the editor reference
 
 
@@ -75,11 +137,32 @@ const BlogPostForm: React.FC = () =>
       setUser( user );
     };
 
-    
+
 
     checkUser();
-   
+
   }, [ router, supabase ] );
+
+const extractDiagramsFromContent = (htmlContent: string): DiagramData[] => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(htmlContent, 'text/html');
+    const diagramElements = doc.querySelectorAll('.mermaid-diagram');
+
+    return Array.from(diagramElements).map(element => {
+        const id = element.getAttribute('data-diagram-id') || crypto.randomUUID();
+        const titleElement = element.querySelector('.diagram-title');
+        const mermaidElement = element.querySelector('.mermaid');
+
+        return {
+            id,
+            type: 'mermaid' as const,
+            title: titleElement?.textContent?.trim() || 'Untitled Diagram',
+            content: mermaidElement?.textContent?.trim() || '',
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString()
+        };
+    });
+};
 
   const handleImageUpload = async ( file: File | null ) =>
   {
@@ -134,6 +217,78 @@ const BlogPostForm: React.FC = () =>
     toast.success( 'Image uploaded and inserted into the content.' );
   };
 
+  // Enhanced diagram submission handler
+  const handleDiagramSubmit = ( diagramData: { title: string; content: string } ) =>
+  {
+    const now = new Date().toISOString();
+    const newDiagram: DiagramData = {
+      id: crypto.randomUUID(),
+      type: 'mermaid',
+      content: diagramData.content.trim(), // Ensure content is trimmed
+      title: diagramData.title,
+      createdAt: now,
+      updatedAt: now
+    };
+
+    // Validate diagram syntax before adding
+    try
+    {
+      mermaid.parse( diagramData.content );
+      setDiagrams( prev => [ ...prev, newDiagram ] );
+
+      // Insert enhanced placeholder with preview
+      const placeholderHtml = `
+     <div class="mermaid-diagram" data-diagram-id="${newDiagram.id }">
+    <div class="diagram-header">
+      <div class="diagram-title text-lg font-semibold mb-2">${ newDiagram.title }</div>
+      <div class="diagram-metadata text-sm text-gray-500">
+        Created: ${ new Date( newDiagram.createdAt ).toLocaleDateString() }
+      </div>
+    </div>
+    <pre class="mermaid">
+      ${ newDiagram.content}
+    </pre>
+  </div>
+    `;
+      setContent( prev => `${ prev }${ placeholderHtml }` );
+
+      // Re-initialize mermaid to render the new diagram
+      setTimeout( () =>
+      {
+        mermaid.init( undefined, document.querySelectorAll( '.mermaid' ) );
+      }, 0 );
+
+    } catch ( error )
+    {
+      toast.error( 'Invalid diagram syntax. Please check your Mermaid code.' );
+      console.error( 'Mermaid syntax error:', error );
+    }
+  };
+
+
+  const resetForm = () =>
+  {
+    setTitle( '' );
+    setContent( '' );
+    setExcerpt( '' );
+    setTags( '' );
+    setSlug( '' );
+    setMetaTitle( '' );
+    setMetaDescription( '' );
+    setIsPublished( false );
+    setDiagrams( [] );
+    setFeaturedImage( null );
+    setPostImage( null );
+
+    // Clear any existing mermaid diagrams
+    const existingDiagrams = document.querySelectorAll( '.mermaid' );
+    existingDiagrams.forEach( diagram =>
+    {
+      diagram.innerHTML = '';
+    } );
+  };
+
+
   const handleSubmit = async ( e: React.FormEvent ) =>
   {
     e.preventDefault();
@@ -144,43 +299,46 @@ const BlogPostForm: React.FC = () =>
       return;
     }
 
-    const imageUrl = await handleImageUpload( featuredImage );
-    if ( !imageUrl )
-    {
-      toast.error( 'Failed to upload the image.' );
-      return;
-    }
 
-    const formData = new FormData();
-    formData.append( 'title', title );
-    formData.append( 'content', content );
-    formData.append( 'excerpt', excerpt );
-    formData.append( 'authorId', '1' ); // Hardcode the author ID as 1
-    formData.append( 'tags', tags );
-    formData.append( 'slug', slug );
-    formData.append( 'metaTitle', metaTitle );
-    formData.append( 'metaDescription', metaDescription );
-    formData.append( 'isPublished', isPublished.toString() );
-    formData.append( 'featuredImage', imageUrl );
 
-    const response: CreateBlogPostResponse = await createBlogPost( formData );
+    try
+    {
+      // Extract diagrams before uploading image
+      const extractedDiagrams = extractDiagramsFromContent( content );
 
-    if ( response.success )
+      const imageUrl = await handleImageUpload( featuredImage );
+      if ( !imageUrl )
+      {
+        toast.error( 'Failed to upload the image.' );
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append( 'title', title );
+      formData.append( 'content', content );
+      formData.append( 'excerpt', excerpt );
+      formData.append( 'authorId', '1' ); // Hardcode the author ID as 1
+      formData.append( 'tags', tags );
+      formData.append( 'diagrams', JSON.stringify( extractedDiagrams ) );
+      formData.append( 'slug', slug );
+      formData.append( 'metaTitle', metaTitle );
+      formData.append( 'metaDescription', metaDescription );
+      formData.append( 'isPublished', isPublished.toString() );
+      formData.append( 'featuredImage', imageUrl );
+
+      const response: CreateBlogPostResponse = await createBlogPost( formData );
+      if ( response.success )
+      {
+        toast.success( response.message );
+        resetForm();
+      } else
+      {
+        toast.error( response.message );
+      }
+    } catch ( error )
     {
-      toast.success( response.message );
-      // Reset form fields
-      setTitle( '' );
-      setContent( '' );
-      setExcerpt( '' );
-      setTags( '' );
-      setSlug( '' );
-      setMetaTitle( '' );
-      setMetaDescription( '' );
-      setIsPublished( false );
-      setFeaturedImage( null );
-    } else
-    {
-      toast.error( response.message );
+      console.error( 'Error submitting blog post:', error );
+      toast.error( 'An error occurred while creating the blog post.' );
     }
   };
 
@@ -188,6 +346,8 @@ const BlogPostForm: React.FC = () =>
   {
     return <div>Loading...</div>;
   }
+
+
 
   return (
     <div className=" bg-gray-100 rounded-2xl p-5">
@@ -297,7 +457,20 @@ const BlogPostForm: React.FC = () =>
           </div>
 
           {/* Content */ }
-
+          { showDiagramModal && (
+            <DiagramModal
+              onClose={ () =>
+              {
+                console.log( 'Closing modal' );
+                setShowDiagramModal( false );
+              } }
+              onSubmit={ ( diagram ) =>
+              {
+                console.log( 'Submitting diagram:', diagram );
+                handleDiagramSubmit( diagram );
+              } }
+            />
+          ) }
           {/* Jodit Editor for Content */ }
           <div>
             <label className="block text-sm font-medium text-gray-700">Content</label>

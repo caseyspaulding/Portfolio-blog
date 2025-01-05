@@ -23,6 +23,7 @@ export default function RootLayout ( { children }: PropsWithChildren )
 {
     return (
         <html lang="en" className={ `${ poppins.className }` } suppressHydrationWarning>
+
             <body className="bg-background text-foreground">
                 <Providers> {/* Wrap entire app with ThemeProvider */ }
                     <NavBar /> {/* NavBar now wrapped in ThemeProvider */ }

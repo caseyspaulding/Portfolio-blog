@@ -188,7 +188,7 @@ export const orgMembers = pgTable( 'org_members', {
     orgId: uuid( 'org_id' )
         .notNull()
         .references( () => organizations.id ),
-    
+
     tags: jsonb( 'tags' ),
     name: text( 'name' ).notNull(),
     email: text( 'email' ).notNull().unique(),
@@ -229,7 +229,7 @@ export const orgInvites = pgTable( 'org_invites', {
     updatedAt: timestamp( 'updated_at' ).default( sql`now()` )
 } );
 
-//  Blog Table
+// Blog Posts Table with Diagrams
 export const blogPosts = pgTable( 'blog_posts', {
     id: serial( 'id' ).primaryKey(),
     slug: varchar( 'slug', { length: 255 } ).notNull().unique(),
@@ -238,7 +238,9 @@ export const blogPosts = pgTable( 'blog_posts', {
     excerpt: text( 'excerpt' ),
     authorId: serial( 'author_id' )
         .notNull()
-        .references( () => authors.id ), // Foreign key to authors table
+        .references( () => authors.id ),
+    // Add diagrams as JSONB array
+    diagrams: jsonb( 'diagrams' ).default( sql`'[]'` ),
     createdAt: timestamp( 'created_at' ).defaultNow().notNull(),
     updatedAt: timestamp( 'updated_at' ).defaultNow().notNull(),
     publishedAt: timestamp( 'published_at' ),
@@ -248,6 +250,22 @@ export const blogPosts = pgTable( 'blog_posts', {
     metaDescription: text( 'meta_description' ),
     isPublished: boolean( 'is_published' ).default( false ),
 } );
+
+// Type definition for diagrams
+export type BlogDiagram = {
+    id: string;
+    type: 'mermaid';
+    content: string;
+    title: string;
+    description?: string;
+    createdAt: Date;
+    updatedAt: Date;
+};
+
+// Type for the entire blog post
+export type BlogPost = typeof blogPosts.$inferSelect & {
+    diagrams: BlogDiagram[];
+};
 
 // Authors Table
 export const authors = pgTable( 'authors', {

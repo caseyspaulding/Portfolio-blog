@@ -2,9 +2,20 @@
 'use server';
 
 import { db } from '@/db';
-import { authors, blogPosts } from '@/db/schemas/schema';
+import { authors, BlogDiagram, blogPosts } from '@/db/schemas/schema';
 import { eq } from 'drizzle-orm';
 import { revalidatePath } from 'next/cache';
+
+export type BlogPostWithAuthor = BlogPost & {
+    author: {
+        id: number;
+        name: string;
+        slug: string;
+        bio: string | null;
+        avatarUrl: string | null;
+    } | null;
+    diagrams: BlogDiagram[];
+};
 
 interface Author
 {
@@ -95,28 +106,30 @@ export async function getAuthorBySlug ( slug: string ): Promise<Author | null>
     }
 }
 
-export async function getBlogPostBySlug ( slug: string )
+export async function getBlogPostBySlug ( slug: string ): Promise<BlogPostWithAuthor | null>
 {
     try
     {
-        // Decode the slug and replace %20 with hyphens
         const decodedSlug = decodeURIComponent( slug ).replace( /%20/g, '-' );
-        console.log( 'Fetching blog post with processed slug:', decodedSlug );
 
         const [ result ] = await db
             .select( {
                 post: {
                     id: blogPosts.id,
+                    slug: blogPosts.slug,  // Added missing field
                     title: blogPosts.title,
                     content: blogPosts.content,
                     excerpt: blogPosts.excerpt,
+                    authorId: blogPosts.authorId,  // Added missing field
                     createdAt: blogPosts.createdAt,
                     updatedAt: blogPosts.updatedAt,
+                    publishedAt: blogPosts.publishedAt,  // Added missing field
                     tags: blogPosts.tags,
                     metaTitle: blogPosts.metaTitle,
                     metaDescription: blogPosts.metaDescription,
                     featuredImage: blogPosts.featuredImage,
                     isPublished: blogPosts.isPublished,
+                    diagrams: blogPosts.diagrams,
                 },
                 author: {
                     id: authors.id,
@@ -132,16 +145,30 @@ export async function getBlogPostBySlug ( slug: string )
 
         if ( !result )
         {
-            console.log( 'Post not found' );
             return null;
         }
 
-        const post = {
+        // Parse diagrams from JSONB if they exist
+        let parsedDiagrams: BlogDiagram[] = [];
+        if ( result.post.diagrams )
+        {
+            try
+            {
+                parsedDiagrams = typeof result.post.diagrams === 'string'
+                    ? JSON.parse( result.post.diagrams )
+                    : result.post.diagrams;
+            } catch ( e )
+            {
+                console.error( 'Error parsing diagrams:', e );
+            }
+        }
+
+        const post: BlogPostWithAuthor = {
             ...result.post,
+            diagrams: parsedDiagrams,
             author: result.author,
         };
 
-        console.log( 'Fetched post:', post );
         return post;
     } catch ( error )
     {
@@ -199,7 +226,7 @@ export async function createBlogPost ( formData: FormData )
     const metaTitle = formData.get( 'metaTitle' ) as string;
     const metaDescription = formData.get( 'metaDescription' ) as string;
     const isPublished = formData.get( 'isPublished' ) === 'true';
-
+    const diagrams = JSON.parse( formData.get( 'diagrams' ) as string );
     if ( !slug )
     {
         slug = generateSlug( title );
@@ -221,6 +248,7 @@ export async function createBlogPost ( formData: FormData )
             excerpt,
             authorId, // Use authorId directly without needing a lookup
             tags,
+            diagrams, // Add diagrams to the insert
             slug,
             featuredImage,
             metaTitle,
