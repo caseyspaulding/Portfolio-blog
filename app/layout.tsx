@@ -7,6 +7,7 @@ import { Providers } from './providers';
 import FooterTW from '@/components/Footers/FooterTW';
 import Script from 'next/script';
 import NavBar from '@/components/NavBar';
+import ThemeProviders from './ThemeProvider';
 
 export const metadata = {
     title: 'Casey Spaulding - Blog and Portfolio',
@@ -26,6 +27,7 @@ export default function RootLayout ( { children }: PropsWithChildren )
 
             <body className="bg-background text-foreground">
                 <Providers> {/* Wrap entire app with ThemeProvider */ }
+                    <ThemeProviders>
                     <NavBar /> {/* NavBar now wrapped in ThemeProvider */ }
                     <Analytics />
                     <Script
@@ -43,7 +45,8 @@ export default function RootLayout ( { children }: PropsWithChildren )
                     <ClientProviders>
                         { children }
                     </ClientProviders>
-                    <FooterTW />
+                        <FooterTW />
+                    </ThemeProviders>
                 </Providers>
             </body>
         </html>

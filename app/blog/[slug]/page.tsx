@@ -105,7 +105,11 @@ export default async function BlogPost ( { params }: { params: Promise<{ slug: s
                                     { post.title }
                                 </h1>
                                 <p className="text-base text-gray-500 dark:text-gray-400 mb-4 leading-relaxed">
-                                    { new Date( post.createdAt ).toLocaleDateString() } • { readTime }
+                                    { new Date( post.createdAt ).toLocaleDateString( 'en-US', {
+                                        year: 'numeric',
+                                        month: 'long',
+                                        day: 'numeric',
+                                    } ) } • { readTime }
                                 </p>
                                 <div className="flex items-center text-base text-gray-500 dark:text-gray-400 leading-relaxed">
                                     { post.author?.avatarUrl && (

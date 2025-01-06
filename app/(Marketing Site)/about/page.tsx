@@ -1,12 +1,10 @@
 
 
 import React, { SVGProps } from 'react';
-import Head from 'next/head';
-import NavBar1 from '@/components/NavBarTW/NavBar1';
-import FooterFull from '@/components/Footers/FooterFull';
+
 import { Metadata } from 'next';
 import PageBackground from '@/components/PageBackGround';
-import P from 'react';
+
 
 
 export const metadata: Metadata = {

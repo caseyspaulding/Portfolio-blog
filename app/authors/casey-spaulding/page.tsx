@@ -94,7 +94,7 @@ const CaseyAuthorPage = () =>
               <div className="max-w-2xl">
                 <div className="bg-white dark:bg-black p-8 rounded-md shadow-md  max-w-4xl mx-auto">
                   <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
-                    Hi, I'm <strong>Casey Spaulding</strong>, a experienced full-stack developer, software engineer, and AI enthusiast with a deep love for technology and problem-solving. 
+                    Hi, I'm <strong>Casey Spaulding</strong>, a experienced full-stack developer, software engineer, and AI enthusiast with a deep love for technology and problem-solving.
                   </p>
                   <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
                     After serving 20 years in the Navy and earning degrees in both software engineering and business management, I’ve dedicated my career to creating innovative solutions that empower individuals and organizations.
