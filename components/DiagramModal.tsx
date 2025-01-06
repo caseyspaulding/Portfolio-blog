@@ -142,7 +142,20 @@ const DiagramModal: React.FC<DiagramModalProps> = ( { onClose, onSubmit, initial
     try
     {
       await mermaid.parse( diagram.content );
-      onSubmit( diagram );
+      const placeholderHtml = `
+      <div class="mermaid-diagram" data-diagram-id="${ crypto.randomUUID() }">
+        <div class="diagram-header">
+          <div class="diagram-title text-lg font-semibold mb-2">${ diagram.title }</div>
+        </div>
+        <pre class="mermaid">
+          ${ diagram.content }
+        </pre>
+      </div>
+    `;
+      onSubmit( {
+        title: diagram.title,
+        content: diagram.content
+      } );
       onClose();
       toast.success( 'Diagram inserted successfully!' );
     } catch ( error )
