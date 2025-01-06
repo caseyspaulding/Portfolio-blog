@@ -10,7 +10,7 @@ import PageBackground from "@/components/PageBackGround"
 export const metadata: Metadata = {
   title: "Contact Us - CaseySpaulding",
   description:
-    "Get in touch with the CaseySpaulding team. We'd love to hear from you! Send us a message using the form below, or email us directly at",
+    "Get in touch with the Casey. I would love to hear from you! Send me a email or contact me on LinkedIn.",
 }
 
 export default function Contact ()
@@ -27,8 +27,8 @@ export default function Contact ()
                   <h1 className="text-3xl font-bold tracking-tight">Contact</h1>
                   <p className="mt-4 text-muted-foreground">
                     Contact me directly if you have any questions.{ ' ' }
-                    <a href="mailto:casey.spaulding@gmail.com" className="font-semibold text-primary">
-                      casey.spaulding@gmail.com
+                    <a href="mailto:casey@cogstax.com" className="font-semibold text-primary">
+                      casey@cogstax.com
                     </a>
                   </p>
                   <div className="mt-4 text-muted-foreground">
@@ -47,7 +47,7 @@ export default function Contact ()
                       <a href="https://twitter.com/CaseySpaulding_">X</a>
                     </Button>
                     <Button variant="link" asChild>
-                      <a href="https://linkedin.com/company/CaseySpaulding">LinkedIn</a>
+                      <a href="https://www.linkedin.com/in/caseyspaulding/">LinkedIn</a>
                     </Button>
                   </div>
                 </div>
