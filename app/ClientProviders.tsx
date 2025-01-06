@@ -5,6 +5,7 @@ import React, { Suspense } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { AppProgressBar as ProgressBar } from 'next-nprogress-bar';
 import Script from 'next/script';
+import MermaidThemer from '@/components/MermaidTheme';
 
 
 // Lazy load non-essential components
@@ -23,24 +24,20 @@ export default function ClientProviders ( { children }: { children: React.ReactN
           window.mermaid?.initialize( {
             startOnLoad: true,
             securityLevel: 'loose',
-            theme: 'neutral',  // Using neutral theme as base
+            theme: 'dark',
             themeVariables: {
+              // Example: Increase the global font size
+              fontSize: '20px',
+
               // Ensure text is visible in both light and dark modes
-              primaryTextColor: '#000000',
-              secondaryTextColor: '#000000',
-              tertiaryTextColor: '#000000',
-              primaryColor: '#E3E8FF',
-              secondaryColor: '#F4F4F4',
-              nodeBorder: '#2563eb',
-              clusterBkg: '#F8F9FA',
-              titleColor: '#000000',
-              edgeLabelBackground: '#FFFFFF',
+
             }
           } )
         } }
       />
       <Toaster />
       <Suspense fallback={ <div>Loading...</div> }>
+        <MermaidThemer />
         <UserProvider initialUser={ null }>
           { children }
         </UserProvider>
