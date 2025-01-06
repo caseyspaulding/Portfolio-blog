@@ -1,12 +1,9 @@
 import React from 'react';
 import DOMPurify from 'isomorphic-dompurify';
-
 import { getBlogPostBySlug, getAllBlogSlugs } from '@/app/actions/blogActions';
-
 import type { Metadata } from 'next';
-
 import PageBackground from '@/components/PageBackGround';
-import MermaidBlogContent from './MermaidBlogContent';
+
 
 export async function generateStaticParams ()
 {
@@ -62,20 +59,15 @@ export default async function BlogPost ( { params }: { params: Promise<{ slug: s
         return <div className="text-center text-xl text-red-600">Post not found</div>;
     }
 
-    // Example more-permissive config
-    const config = {
-        ADD_TAGS: [
-            'svg', 'path', 'g', 'text', 'tspan', 'marker', 'polygon', 'rect'
-        ],
-        ADD_ATTR: [
-            'viewBox', 'fill', 'stroke', 'transform', // <— sometimes needed
-            'd', 'dx', 'dy', 'x', 'y',
-            'font-family', 'font-size', 'text-anchor', 'style',
-            'markerHeight', 'markerWidth', 'refX', 'refY', 'alignment-baseline', 'dominant-baseline', 'textLength', 'lengthAdjust',
-        ],
-        securityLevel: 'loose',
+    const looseConfig = {
+        USE_PROFILES: { html: true, svg: true },
+        ALLOW_UNKNOWN_PROTOCOLS: true,
+        ALLOWED_TAGS: false as unknown as string[],  // force TS to accept it
+        ALLOWED_ATTR: false as unknown as string[],
     };
-    const sanitizedContent = DOMPurify.sanitize( post.content, config );
+
+    const rawHtml = post.content;
+    const sanitized = DOMPurify.sanitize( rawHtml, looseConfig );
     const readTime = calculateReadTime( post.content );
     let tags;
     try
@@ -153,7 +145,7 @@ export default async function BlogPost ( { params }: { params: Promise<{ slug: s
                         <div className="grid grid-cols-1 xl:grid-cols-4 gap-8 bg-white dark:bg-black rounded-2xl p-4">
                             <div className="xl:col-span-3">
                                 <div className="prose prose-lg dark:prose-invert max-w-none leading-relaxed text-lg">
-                                    <MermaidBlogContent rawHtml={ sanitizedContent } />
+                                    <div dangerouslySetInnerHTML={ { __html: rawHtml } } />
                                 </div>
                             </div>
 
