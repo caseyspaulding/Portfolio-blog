@@ -49,28 +49,8 @@ const FreeToolsDropdown = () => (
           </Link>
         ) }
       </HeadlessMenu.Item>
-      <HeadlessMenu.Item>
-        { ( { active } ) => (
-          <Link
-            href="/tools/tool2"
-            className={ `${ active ? 'bg-green-100 dark:bg-green-700 text-gray-900 dark:text-white' : 'text-gray-700 dark:text-gray-300'
-              } block px-4 py-2 text-sm` }
-          >
-            Tool 2
-          </Link>
-        ) }
-      </HeadlessMenu.Item>
-      <HeadlessMenu.Item>
-        { ( { active } ) => (
-          <Link
-            href="/tools/tool3"
-            className={ `${ active ? 'bg-green-100 dark:bg-green-700 text-gray-900 dark:text-white' : 'text-gray-700 dark:text-gray-300'
-              } block px-4 py-2 text-sm` }
-          >
-            Tool 3
-          </Link>
-        ) }
-      </HeadlessMenu.Item>
+
+
     </div>
   </HeadlessMenu.Items>
 );
