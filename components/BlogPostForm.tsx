@@ -11,7 +11,25 @@ import { Button } from '@nextui-org/button';
 import JoditEditor from 'jodit-react';
 import mermaid from 'mermaid';
 import DiagramModal from './DiagramModal';
-
+import 'prismjs';
+import 'prismjs/themes/prism-tomorrow.css';
+import 'prismjs/components/prism-javascript';
+import 'prismjs/components/prism-typescript';
+import 'prismjs/components/prism-jsx';
+import 'prismjs/components/prism-tsx';
+import 'prismjs/components/prism-css';
+import 'prismjs/components/prism-python';
+import 'prismjs/components/prism-java';
+import 'prismjs/components/prism-c';
+import 'prismjs/components/prism-cpp';
+import 'prismjs/components/prism-csharp';
+import 'prismjs/components/prism-rust';
+import 'prismjs/components/prism-go';
+import 'prismjs/components/prism-bash';
+import 'prismjs/components/prism-sql';
+import 'prismjs/components/prism-json';
+import 'prismjs/components/prism-yaml';
+import 'prismjs/components/prism-markdown';
 
 
 interface DiagramData
@@ -41,42 +59,68 @@ const BlogPostForm: React.FC = () =>
 {
   const router = useRouter();
   const supabase = createClient();
-  const [ user, setUser ] = useState<User | null>( null );
+  const editor = useRef( null );
 
   // State variables
+  const [ user, setUser ] = useState<User | null>( null );
   const [ title, setTitle ] = useState( '' );
   const [ content, setContent ] = useState( '' );
   const [ excerpt, setExcerpt ] = useState( '' );
-
   const [ tags, setTags ] = useState( '' );
   const [ slug, setSlug ] = useState( '' );
   const [ metaTitle, setMetaTitle ] = useState( '' );
   const [ metaDescription, setMetaDescription ] = useState( '' );
   const [ isPublished, setIsPublished ] = useState( false );
   const [ featuredImage, setFeaturedImage ] = useState<File | null>( null );
-  const [ postImage, setPostImage ] = useState<File | null>( null ); // State for blog post image
+  const [ postImage, setPostImage ] = useState<File | null>( null );
   const [ diagrams, setDiagrams ] = useState<DiagramData[]>( [] );
   const [ showDiagramModal, setShowDiagramModal ] = useState( false );
   const [ currentDiagram, setCurrentDiagram ] = useState( {
     content: '',
     title: ''
   } );
+  // Initialize Prism.js when content changes
+  useEffect( () =>
+  {
+    if ( typeof window !== 'undefined' )
+    {
+      ( window as any ).Prism.highlightAll();
+    }
+  }, [ content ] );
+
   // Initialize mermaid
   useEffect( () =>
   {
     mermaid.initialize( {
       startOnLoad: true,
       theme: 'default',
-      securityLevel: 'loose',  // optional but common
+      securityLevel: 'loose',
       themeVariables: {
-        fontSize: '30px',      // or bigger
+        fontSize: '30px',
         fontFamily: 'Arial',
         lineColor: 'gray',
-      }   // or other font
+      }
     } );
   }, [] );
 
-  
+  // Check user authentication
+  useEffect( () =>
+  {
+    const checkUser = async () =>
+    {
+      const { data: { user } } = await supabase.auth.getUser();
+      if ( user?.email !== 'casey.spaulding@gmail.com' )
+      {
+        toast.error( 'You do not have access to this page.' );
+        router.push( '/' );
+        return;
+      }
+      setUser( user );
+    };
+    checkUser();
+  }, [ router, supabase ] );
+
+
   useEffect( () =>
   {
 
@@ -114,6 +158,21 @@ const BlogPostForm: React.FC = () =>
             setShowDiagramModal( true );
             return false;
           }
+        },
+        {
+          name: 'insertCode',
+          icon: '⌨️',
+          tooltip: 'Insert Code Block',
+          exec: ( editor ) =>
+          {
+            const language = prompt( 'Enter programming language (e.g., javascript, python, typescript):' );
+            if ( language )
+            {
+              const code = `<pre><code class="language-${ language }">\n// Your code here\n</code></pre>`;
+              editor.selection.insertHTML( code );
+            }
+            return false;
+          }
         }
       ],
       events: {
@@ -121,35 +180,40 @@ const BlogPostForm: React.FC = () =>
         {
           setShowDiagramModal( true );
           return false;
+        },
+        'change': () =>
+        {
+          // Initialize Prism.js highlighting on change
+          if ( typeof window !== 'undefined' )
+          {
+            setTimeout( () =>
+            {
+              ( window as any ).Prism.highlightAll();
+            }, 0 );
+          }
         }
+      },
+      // Add custom CSS for code blocks
+      css: `
+      .jodit-wysiwyg pre {
+        background: #1e1e1e;
+        border-radius: 4px;
+        padding: 15px;
+        margin: 15px 0;
+        overflow-x: auto;
       }
+      .jodit-wysiwyg code {
+        font-family: 'Monaco', 'Consolas', 'Courier New', monospace;
+        font-size: 14px;
+        line-height: 1.4;
+        color: #d4d4d4;
+      }
+    `
     } ),
     []
   );
-  const editor = useRef( null ); // Define the editor reference
 
 
-  useEffect( () =>
-  {
-    const checkUser = async () =>
-    {
-      const { data: { user } } = await supabase.auth.getUser();
-
-      if ( user?.email !== 'casey.spaulding@gmail.com' )
-      {
-        toast.error( 'You do not have access to this page.' );
-        router.push( '/' );
-        return;
-      }
-
-      setUser( user );
-    };
-
-
-
-    checkUser();
-
-  }, [ router, supabase ] );
 
   const extractDiagramsFromContent = ( htmlContent: string ): DiagramData[] =>
   {
@@ -359,9 +423,10 @@ const BlogPostForm: React.FC = () =>
 
 
 
+
   return (
     <div className=" bg-gray-100 rounded-2xl p-5">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 p-5 py-12 bg-white rounded-2xl">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 p-5 py-12 bg-white rounded-2xl">
         <h1 className="text-3xl font-bold text-gray-800 mb-8">Create New Blog Post</h1>
         <form onSubmit={ handleSubmit } className="space-y-6">
           {/* Post Title */ }
