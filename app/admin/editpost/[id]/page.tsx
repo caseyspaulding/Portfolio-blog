@@ -9,7 +9,49 @@ import toast from 'react-hot-toast';
 import { Button } from 'flowbite-react';
 import LogoSpinner from '@/components/Loaders/LogoSpinner';
 import dynamic from 'next/dynamic';
+import 'prismjs';
+import 'prismjs/themes/prism-tomorrow.css';
+import 'prismjs/components/prism-javascript';
+import 'prismjs/components/prism-typescript';
+import 'prismjs/components/prism-jsx';
+import 'prismjs/components/prism-tsx';
+import 'prismjs/components/prism-css';
+import 'prismjs/components/prism-python';
+import 'prismjs/components/prism-java';
+import 'prismjs/components/prism-c';
+import 'prismjs/components/prism-cpp';
+import 'prismjs/components/prism-csharp';
+import 'prismjs/components/prism-rust';
+import 'prismjs/components/prism-go';
+import 'prismjs/components/prism-bash';
+import 'prismjs/components/prism-sql';
+import 'prismjs/components/prism-json';
+import 'prismjs/components/prism-yaml';
+import 'prismjs/components/prism-markdown';
+import mermaid from 'mermaid';
+import DiagramModal from '@/components/DiagramModal';
 
+interface DiagramData
+{
+    id: string;
+    type: string;
+    content: string;
+    title: string;
+    createdAt: string;
+    updatedAt: string;
+}
+
+
+
+interface JoditConfig
+{
+    readonly: boolean;
+    placeholder: string;
+    buttons: Array<string | { name: string; icon: string; tooltip: string; exec: ( editor: any ) => boolean }>;
+    events: {
+        'insertDiagram.click': () => boolean;
+    };
+}
 // Dynamically import JoditEditor with SSR disabled
 const JoditEditor = dynamic( () => import( 'jodit-react' ), {
     ssr: false,
@@ -43,7 +85,9 @@ export default function EditPostPage ()
     const router = useRouter();
     const { id } = useParams();
     const idAsNumber = Number( id );
+    const editor = useRef( null );
 
+    // Group all useState declarations
     const [ authorsList, setAuthorsList ] = useState<Author[]>( [] );
     const [ title, setTitle ] = useState( '' );
     const [ content, setContent ] = useState( '' );
@@ -57,7 +101,32 @@ export default function EditPostPage ()
     const [ featuredImage, setFeaturedImage ] = useState<File | null>( null );
     const [ featuredImageURL, setFeaturedImageURL ] = useState( '' );
     const [ loading, setLoading ] = useState( true );
+    const [ showDiagramModal, setShowDiagramModal ] = useState( false );
+    const [ diagrams, setDiagrams ] = useState<DiagramData[]>( [] );
 
+    useEffect( () =>
+    {
+        if ( typeof window !== 'undefined' )
+        {
+            ( window as any ).Prism.highlightAll();
+        }
+    }, [ content ] );
+
+    // Add Mermaid initialization effect
+    useEffect( () =>
+    {
+        mermaid.initialize( {
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            themeVariables: {
+                fontSize: '30px',
+                fontFamily: 'Arial',
+                lineColor: 'gray',
+            }
+        } );
+    }, [] );
+    // Fetch post data useEffect
     useEffect( () =>
     {
         const fetchPost = async () =>
@@ -82,7 +151,6 @@ export default function EditPostPage ()
                 setContent( post.content );
                 setExcerpt( post.excerpt ?? '' );
                 setSlug( post.slug );
-                // Add these lines
                 setFeaturedImageURL( post.featuredImage ?? '' );
                 setTags( post.tags ? post.tags.split( ',' ).map( ( tag: string ) => tag.trim() ) : [] );
                 setIsPublished( post.isPublished ?? false );
@@ -93,32 +161,173 @@ export default function EditPostPage ()
         };
 
         fetchPost();
-    }, [ id, router ] );
+    }, [ id, router, idAsNumber ] );
 
+    // Editor configuration
+    interface JoditButton
+    {
+        name: string;
+        icon: string;
+        tooltip: string;
+        exec: ( editor: any ) => boolean;
+    }
 
-    // Add this state update to show the uploaded image preview
+    interface JoditEvents
+    {
+        'insertDiagram.click': () => boolean;
+        'change': () => void;
+    }
+
+    interface JoditConfig
+    {
+        readonly: boolean;
+        placeholder: string;
+        buttons: Array<string | JoditButton>;
+        events: JoditEvents;
+        css: string;
+    }
+
+    const config: JoditConfig = useMemo(
+        () => ( {
+            readonly: false,
+            placeholder: 'Start typing your blog post...',
+            buttons: [
+                'source', '|',
+                'bold', 'italic', 'underline', '|',
+                'ul', 'ol', '|',
+                'font', 'fontsize', 'brush', 'paragraph', '|',
+                'image', 'table', 'link', '|',
+                'left', 'center', 'right', 'justify', '|',
+                'undo', 'redo', '|',
+                'hr', 'eraser', 'fullsize', '|',
+                {
+                    name: 'insertDiagram',
+                    icon: '📊',
+                    tooltip: 'Insert Mermaid Diagram',
+                    exec: ( _editor ) =>
+                    {
+                        setShowDiagramModal( true );
+                        return false;
+                    }
+                },
+                {
+                    name: 'insertCode',
+                    icon: '⌨️',
+                    tooltip: 'Insert Code Block',
+                    exec: ( editor ) =>
+                    {
+                        const language = prompt( 'Enter programming language (e.g., javascript, python, typescript):' );
+                        if ( language )
+                        {
+                            const code = `<pre><code class="language-${ language }">\n// Your code here\n</code></pre>`;
+                            editor.selection.insertHTML( code );
+                        }
+                        return false;
+                    }
+                }
+            ],
+            events: {
+                'insertDiagram.click': () =>
+                {
+                    setShowDiagramModal( true );
+                    return false;
+                },
+                'change': () =>
+                {
+                    // Initialize Prism.js highlighting on change
+                    if ( typeof window !== 'undefined' )
+                    {
+                        setTimeout( () =>
+                        {
+                            ( window as any ).Prism.highlightAll();
+                        }, 0 );
+                    }
+                }
+            },
+            // Add custom CSS for code blocks
+            css: `
+      .jodit-wysiwyg pre {
+        background: #1e1e1e;
+        border-radius: 4px;
+        padding: 15px;
+        margin: 15px 0;
+        overflow-x: auto;
+      }
+      .jodit-wysiwyg code {
+        font-family: 'Monaco', 'Consolas', 'Courier New', monospace;
+        font-size: 14px;
+        line-height: 1.4;
+        color: #d4d4d4;
+      }
+    `
+        } ),
+        []
+    );
+    // Handler functions
+    const handleDiagramSubmit = ( diagramData: { title: string; content: string } ) =>
+    {
+        const now = new Date().toISOString();
+        const newDiagram: DiagramData = {
+            id: crypto.randomUUID(),
+            type: 'mermaid',
+            content: diagramData.content.trim(),
+            title: diagramData.title,
+            createdAt: now,
+            updatedAt: now
+        };
+
+        try
+        {
+            mermaid.parse( diagramData.content );
+            setDiagrams( prev => [ ...prev, newDiagram ] );
+
+            const placeholderHtml = `
+     <div class="mermaid-diagram" data-diagram-id="${ newDiagram.id }">
+      <div class="diagram-header">
+        <div class="diagram-title text-lg font-semibold mb-2">${ newDiagram.title }</div>
+        <div class="diagram-metadata text-sm text-gray-500">
+          Created: ${ new Date( newDiagram.createdAt ).toLocaleDateString() }
+        </div>
+      </div>
+      <pre class="mermaid">
+        ${ newDiagram.content }
+      </pre>
+    </div>
+    `;
+            setContent( prev => `${ prev }${ placeholderHtml }` );
+
+            setTimeout( () =>
+            {
+                mermaid.init( undefined, document.querySelectorAll( '.mermaid' ) );
+            }, 0 );
+
+        } catch ( error )
+        {
+            toast.error( 'Invalid diagram syntax. Please check your Mermaid code.' );
+            console.error( 'Mermaid syntax error:', error );
+        }
+    };
+
     const handleImageChange = ( e: React.ChangeEvent<HTMLInputElement> ) =>
     {
         const file = e.target.files?.[ 0 ];
         if ( file )
         {
             setFeaturedImage( file );
-            // Create a temporary URL for preview
             const tempUrl = URL.createObjectURL( file );
             setFeaturedImageURL( tempUrl );
         }
-    }
+    };
 
     const handleUpdate = async ( e: React.FormEvent ) =>
     {
         e.preventDefault();
-        setLoading( true );  // Add loading state while updating
+        setLoading( true );
 
         try
         {
-            let imageURL = featuredImageURL;  // Keep existing image URL by default
+            let imageURL = featuredImageURL;
 
-            // Only upload if there's a new image file
             if ( featuredImage )
             {
                 const supabase = createClient();
@@ -168,17 +377,7 @@ export default function EditPostPage ()
         }
     };
 
-    // Configuration for the editor
-    const config = useMemo(
-        () => ( {
-            readonly: false,
-            placeholder: 'Start typing your blog post...',
-        } ),
-        []
-    );
-
-    const editor = useRef( null ); // Define the editor reference
-
+    // Loading state check (after all hooks)
     if ( loading )
     {
         return (
@@ -188,9 +387,10 @@ export default function EditPostPage ()
         );
     }
 
+
     return (
         <div className="bg-gray-100 rounded-2xl p-5">
-            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 p-5 py-12 bg-white rounded-2xl">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 p-5 py-12 bg-white rounded-2xl">
                 <h1 className="mb-8 text-3xl font-bold text-gray-800">Edit Blog Post</h1>
                 <form onSubmit={ handleUpdate } className="space-y-6">
                     {/* Post Title */ }
@@ -300,16 +500,21 @@ export default function EditPostPage ()
                         />
                     </div>
 
-                    {/* Jodit Editor for Content */ }
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700">Content</label>
-                        <JoditEditor
-                            ref={ editor }
-                            value={ content }
-                            config={ config }
-                            onBlur={ ( newContent ) => setContent( newContent ) }
+                    {/* Content */ }
+                    { showDiagramModal && (
+                        <DiagramModal
+                            onClose={ () =>
+                            {
+                                console.log( 'Closing modal' );
+                                setShowDiagramModal( false );
+                            } }
+                            onSubmit={ ( diagram ) =>
+                            {
+                                console.log( 'Submitting diagram:', diagram );
+                                handleDiagramSubmit( diagram );
+                            } }
                         />
-                    </div>
+                    ) }
 
                     {/* Author Select Dropdown */ }
                     <div>
