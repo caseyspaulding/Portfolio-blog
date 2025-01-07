@@ -81,65 +81,90 @@ export default function EditPostPage ()
                 setTitle( post.title );
                 setContent( post.content );
                 setExcerpt( post.excerpt ?? '' );
-
-
-
                 setSlug( post.slug );
-
+                // Add these lines
+                setFeaturedImageURL( post.featuredImage ?? '' );
+                setTags( post.tags ? post.tags.split( ',' ).map( ( tag: string ) => tag.trim() ) : [] );
+                setIsPublished( post.isPublished ?? false );
+                setMetaTitle( post.metaTitle ?? '' );
+                setMetaDescription( post.metaDescription ?? '' );
                 setLoading( false );
             }
         };
 
-
-
         fetchPost();
-
     }, [ id, router ] );
+
+
+    // Add this state update to show the uploaded image preview
+    const handleImageChange = ( e: React.ChangeEvent<HTMLInputElement> ) =>
+    {
+        const file = e.target.files?.[ 0 ];
+        if ( file )
+        {
+            setFeaturedImage( file );
+            // Create a temporary URL for preview
+            const tempUrl = URL.createObjectURL( file );
+            setFeaturedImageURL( tempUrl );
+        }
+    }
 
     const handleUpdate = async ( e: React.FormEvent ) =>
     {
         e.preventDefault();
+        setLoading( true );  // Add loading state while updating
 
-        let imageURL = featuredImageURL;
-
-        // Handle image upload
-        if ( featuredImage )
+        try
         {
-            const supabase = createClient();
-            const { data, error } = await supabase.storage
-                .from( 'blogimages' )
-                .upload( `images/${ Date.now() }-${ featuredImage.name }`, featuredImage );
+            let imageURL = featuredImageURL;  // Keep existing image URL by default
 
-            if ( error )
+            // Only upload if there's a new image file
+            if ( featuredImage )
             {
-                toast.error( 'Error uploading image' );
-                return;
+                const supabase = createClient();
+                const { data, error } = await supabase.storage
+                    .from( 'blogimages' )
+                    .upload( `images/${ Date.now() }-${ featuredImage.name }`, featuredImage );
+
+                if ( error )
+                {
+                    toast.error( 'Error uploading image' );
+                    setLoading( false );
+                    return;
+                }
+
+                imageURL = `${ process.env.NEXT_PUBLIC_SUPABASE_URL }/storage/v1/object/public/blogimages/${ data.path }`;
             }
 
-            imageURL = `${ process.env.NEXT_PUBLIC_SUPABASE_URL }/storage/v1/object/public/blogimages/${ data.path }`;
-        }
+            const formData = new FormData();
+            formData.append( 'title', title );
+            formData.append( 'content', content );
+            formData.append( 'excerpt', excerpt || '' );
+            formData.append( 'authorId', authorId?.toString() || '1' );
+            formData.append( 'tags', tags.join( ',' ) );
+            formData.append( 'slug', slug );
+            formData.append( 'metaTitle', metaTitle );
+            formData.append( 'metaDescription', metaDescription );
+            formData.append( 'isPublished', isPublished.toString() );
+            formData.append( 'featuredImage', imageURL );
 
-        const formData = new FormData();
-        formData.append( 'title', title );
-        formData.append( 'content', content );
-        formData.append( 'excerpt', excerpt || '' );
-        formData.append( 'authorId', authorId?.toString() || '1' ); // Ensure authorId is a string
-        formData.append( 'tags', JSON.stringify( tags ) ); // No need to split and trim since tags are stored as an array
-        formData.append( 'slug', slug );
-        formData.append( 'metaTitle', metaTitle );
-        formData.append( 'metaDescription', metaDescription );
-        formData.append( 'isPublished', isPublished.toString() );
-        formData.append( 'featuredImage', imageURL );
+            const response = await updateBlogPost( idAsNumber, formData );
 
-        const response = await updateBlogPost( idAsNumber, formData );
-
-        if ( response.success )
+            if ( response.success )
+            {
+                toast.success( 'Post updated successfully!' );
+                router.push( '/admin/dashboard' );
+            } else
+            {
+                toast.error( 'Error updating post' );
+            }
+        } catch ( error )
         {
-            toast.success( 'Post updated successfully!' );
-            router.push( '/admin/dashboard' );
-        } else
+            console.error( 'Error updating post:', error );
+            toast.error( 'An error occurred while updating the post' );
+        } finally
         {
-            toast.error( 'Error updating post' );
+            setLoading( false );
         }
     };
 
@@ -225,11 +250,29 @@ export default function EditPostPage ()
                         <label className="block text-sm font-medium text-gray-700">Featured Image</label>
                         <input
                             type="file"
-                            onChange={ ( e ) => setFeaturedImage( e.target.files?.[ 0 ] || null ) }
+                            onChange={ handleImageChange }
+                            accept="image/*"
                             className="mt-1 block w-full text-gray-500"
                         />
                         { featuredImageURL && (
-                            <img src={ featuredImageURL } alt="Featured" className="mt-2 h-48 w-full object-cover" />
+                            <div className="mt-2">
+                                <img
+                                    src={ featuredImageURL }
+                                    alt="Featured"
+                                    className="mt-2 h-48 w-full object-cover rounded-lg"
+                                />
+                                <button
+                                    type="button"
+                                    onClick={ () =>
+                                    {
+                                        setFeaturedImageURL( '' );
+                                        setFeaturedImage( null );
+                                    } }
+                                    className="mt-2 text-red-600 text-sm hover:text-red-800"
+                                >
+                                    Remove Image
+                                </button>
+                            </div>
                         ) }
                     </div>
 

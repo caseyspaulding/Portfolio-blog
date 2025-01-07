@@ -296,7 +296,7 @@ export async function updateBlogPost ( id: number, formData: FormData )
     const title = formData.get( 'title' ) as string;
     const content = formData.get( 'content' ) as string;
     const excerpt = ( formData.get( 'excerpt' ) as string ) || '';
-    const tags = ( formData.get( 'tags' ) as string )?.split( ',' ).map( tag => tag.trim() ).join( ',' ) || '';
+    const tags = formData.get( 'tags' ) as string || '';  // Don't split here, it's already in the correct format
     let slug = formData.get( 'slug' ) as string;
     const featuredImage = formData.get( 'featuredImage' ) as string;
     const metaTitle = formData.get( 'metaTitle' ) as string;
@@ -308,21 +308,18 @@ export async function updateBlogPost ( id: number, formData: FormData )
         slug = generateSlug( title );
     }
 
-    console.log( tags );
-
     try
     {
-        // Update the blog post directly with hardcoded authorId
         await db
             .update( blogPosts )
             .set( {
                 title,
                 content,
                 excerpt,
-                authorId: 1, // Hardcoded author ID
-                tags,
+                authorId: 1,
+                tags,  // Use tags directly
                 slug,
-                featuredImage,
+                featuredImage,  // This will now preserve the existing image URL if no new image was uploaded
                 metaTitle,
                 metaDescription,
                 isPublished,
@@ -337,7 +334,6 @@ export async function updateBlogPost ( id: number, formData: FormData )
         return { success: false, message: 'Failed to update the blog post. Please try again.' };
     }
 }
-
 
 
 export async function deletePost ( postId: number )
