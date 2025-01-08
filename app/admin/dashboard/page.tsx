@@ -5,7 +5,12 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import type { User } from '@supabase/supabase-js';
 import Link from 'next/link';
-import { Button, Modal } from 'flowbite-react';
+
+import { Card, CardContent } from '@/components/ui/card';
+import { Pencil, Trash2 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
+import { AlertDialogContent } from '@radix-ui/react-alert-dialog';
 
 type BlogPost = {
     id: number;
@@ -13,7 +18,7 @@ type BlogPost = {
     title: string;
     content: string;
     excerpt: string | null;
-    author: string; // Ensure `author` is set correctly in your mapping
+    author: string;
     createdAt: string;
     updatedAt: string;
     publishedAt?: string;
@@ -24,7 +29,7 @@ const AdminDashboard = () =>
 {
     const [ posts, setPosts ] = useState<BlogPost[]>( [] );
     const [ user, setUser ] = useState<User | null>( null );
-    const [ showModal, setShowModal ] = useState( false );
+    const [ showDeleteDialog, setShowDeleteDialog ] = useState( false );
     const [ postToDelete, setPostToDelete ] = useState<BlogPost | null>( null );
     const router = useRouter();
 
@@ -39,13 +44,12 @@ const AdminDashboard = () =>
 
             if ( user?.email !== 'casey.spaulding@gmail.com' )
             {
-                router.push( '/login' ); // redirect to login if not admin
+                router.push( '/login' );
                 return;
             }
 
             setUser( user );
 
-            // Fetch blog posts and map them to the expected format
             const { data: posts, error } = await supabase.from( 'blog_posts' ).select( '*' );
             if ( error )
             {
@@ -59,7 +63,7 @@ const AdminDashboard = () =>
                 title: post.title,
                 content: post.content,
                 excerpt: post.excerpt || '',
-                author: String(post.author_id) || 'Unknown', // Map `author_id` to string or default to a placeholder if needed
+                author: String( post.author_id ) || 'Unknown',
                 createdAt: post.created_at,
                 updatedAt: post.updated_at,
                 publishedAt: post.published_at || undefined,
@@ -85,7 +89,7 @@ const AdminDashboard = () =>
             } else
             {
                 setPosts( posts.filter( ( post ) => post.id !== postToDelete.id ) );
-                setShowModal( false );
+                setShowDeleteDialog( false );
                 setPostToDelete( null );
             }
         }
@@ -95,78 +99,84 @@ const AdminDashboard = () =>
     {
         return (
             <div className="flex h-screen items-center justify-center">
-                <div className="text-center text-lg text-gray-600">Loading...</div>
+                <div className="text-lg text-muted-foreground">Loading...</div>
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-gray-100 py-8">
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <h1 className="mb-8 text-3xl font-bold text-gray-900">Admin Dashboard</h1>
+        <div className="min-h-screen bg-background py-8">
+            <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+                <h1 className="mb-8 text-3xl font-bold text-foreground">Blog Dashboard</h1>
 
                 <div className="mb-6 flex justify-end">
                     <Link href="/admin/createpost">
-                        <Button className="bg-blue-600 text-white hover:bg-blue-700">
+                        <Button>
                             Create New Post
                         </Button>
                     </Link>
                 </div>
 
-                <div className="overflow-hidden bg-white shadow sm:rounded-lg">
-                    <ul className="divide-y divide-gray-200">
-                        { posts.map( ( post ) => (
-                            <li key={ post.id } className="px-6 py-4 hover:bg-gray-50">
-                                <div className="flex items-center justify-between">
-                                    <div>
-                                        <h2 className="text-lg font-medium text-gray-900">
-                                            { post.title }
-                                        </h2>
-                                        <p className="text-sm text-gray-500">{ post.excerpt }</p>
-                                    </div>
-                                    <div className="flex space-x-4">
-                                        <Link href={ `/admin/editpost/${ post.id }` }>
+                <Card>
+                    <CardContent className="p-0">
+                        <ul className="divide-y divide-border">
+                            { posts.map( ( post ) => (
+                                <li key={ post.id } className="p-4 transition-colors hover:bg-muted/50">
+                                    <div className="flex items-center justify-between">
+                                        <div>
+                                            <h2 className="text-lg font-medium text-foreground">
+                                                { post.title }
+                                            </h2>
+                                            <p className="text-sm text-muted-foreground">{ post.excerpt }</p>
+                                        </div>
+                                        <div className="flex space-x-2">
+                                            <Link href={ `/admin/editpost/${ post.id }` }>
+                                                <Button variant="outline" size="sm">
+                                                    <Pencil className="mr-2 h-4 w-4" />
+                                                    Edit
+                                                </Button>
+                                            </Link>
                                             <Button
-                                                color="gray"
-                                                className="text-blue-600 hover:text-blue-900"
+                                                variant="outline"
+                                                size="sm"
+                                                onClick={ () =>
+                                                {
+                                                    setPostToDelete( post );
+                                                    setShowDeleteDialog( true );
+                                                } }
+                                                className="text-destructive hover:bg-destructive/90 hover:text-destructive-foreground"
                                             >
-                                                Edit
+                                                <Trash2 className="mr-2 h-4 w-4" />
+                                                Delete
                                             </Button>
-                                        </Link>
-                                        <Button
-                                            color="gray"
-                                            className="text-red-600 hover:text-red-900"
-                                            onClick={ () =>
-                                            {
-                                                setPostToDelete( post );
-                                                setShowModal( true );
-                                            } }
-                                        >
-                                            Delete
-                                        </Button>
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
-                        ) ) }
-                    </ul>
-                </div>
+                                </li>
+                            ) ) }
+                        </ul>
+                    </CardContent>
+                </Card>
 
-                <Modal show={ showModal } onClose={ () => setShowModal( false ) }>
-                    <Modal.Header>Confirm Deletion</Modal.Header>
-                    <Modal.Body>
-                        <p>
-                            Are you sure you want to delete this post? This action cannot be undone.
-                        </p>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button color="gray" onClick={ () => setShowModal( false ) }>
-                            Cancel
-                        </Button>
-                        <Button color="red" onClick={ handleDelete }>
-                            Delete
-                        </Button>
-                    </Modal.Footer>
-                </Modal>
+                <AlertDialog open={ showDeleteDialog } onOpenChange={ setShowDeleteDialog }>
+                    <AlertDialogContent>
+                        <AlertDialogHeader>
+                            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                            <AlertDialogDescription>
+                                This action cannot be undone. This will permanently delete the post
+                                from the database.
+                            </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                            <AlertDialogCancel>Cancel</AlertDialogCancel>
+                            <AlertDialogAction
+                                onClick={ handleDelete }
+                                className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                            >
+                                Delete
+                            </AlertDialogAction>
+                        </AlertDialogFooter>
+                    </AlertDialogContent>
+                </AlertDialog>
             </div>
         </div>
     );

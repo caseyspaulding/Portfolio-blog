@@ -30,6 +30,13 @@ import 'prismjs/components/prism-yaml';
 import 'prismjs/components/prism-markdown';
 import mermaid from 'mermaid';
 import DiagramModal from '@/components/DiagramModal';
+import { CardContent } from '@/components/ui/card';
+
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Card } from '@/components/card';
+import { Label } from '@/components/ui/label';
 
 interface DiagramData
 {
@@ -176,6 +183,7 @@ export default function EditPostPage ()
     {
         'insertDiagram.click': () => boolean;
         'change': () => void;
+        [key: string]: any;
     }
 
     interface JoditConfig
@@ -389,173 +397,178 @@ export default function EditPostPage ()
 
 
     return (
-        <div className="bg-gray-100 rounded-2xl p-5">
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 p-5 py-12 bg-white rounded-2xl">
-                <h1 className="mb-8 text-3xl font-bold text-gray-800">Edit Blog Post</h1>
-                <form onSubmit={ handleUpdate } className="space-y-6">
-                    {/* Post Title */ }
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700">Post Title</label>
-                        <input
-                            name="title"
-                            type="text"
-                            value={ title }
-                            onChange={ ( e ) => setTitle( e.target.value ) }
-                            placeholder="Post Title"
-                            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
-                            required
-                        />
-                    </div>
+        <div className="min-h-screen bg-background p-8">
+            <Card className="mx-auto max-w-6xl">
+                <CardContent className="p-6">
+                    <h1 className="mb-8 text-3xl font-bold text-foreground">Edit Blog Post</h1>
+                    <form onSubmit={ handleUpdate } className="space-y-6">
+                        {/* Post Title */ }
+                        <div className="space-y-2">
+                            <Label htmlFor="title">Post Title</Label>
+                            <Input
+                                id="title"
+                                name="title"
+                                value={ title }
+                                onChange={ ( e ) => setTitle( e.target.value ) }
+                                placeholder="Post Title"
+                                required
+                            />
+                        </div>
 
-                    {/* URL Slug */ }
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700">URL Slug</label>
-                        <input
-                            name="slug"
-                            type="text"
-                            value={ slug }
-                            onChange={ ( e ) => setSlug( e.target.value ) }
-                            placeholder="URL Slug"
-                            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
-                        />
-                    </div>
+                        {/* URL Slug */ }
+                        <div className="space-y-2">
+                            <Label htmlFor="slug">URL Slug</Label>
+                            <Input
+                                id="slug"
+                                name="slug"
+                                value={ slug }
+                                onChange={ ( e ) => setSlug( e.target.value ) }
+                                placeholder="URL Slug"
+                            />
+                        </div>
 
-                    {/* Meta Title */ }
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700">Meta Title</label>
-                        <input
-                            name="metaTitle"
-                            type="text"
-                            value={ metaTitle }
-                            onChange={ ( e ) => setMetaTitle( e.target.value ) }
-                            placeholder="Meta Title"
-                            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
-                        />
-                    </div>
-
-                    {/* Meta Description */ }
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700">Meta Description</label>
-                        <textarea
-                            name="metaDescription"
-                            value={ metaDescription }
-                            onChange={ ( e ) => setMetaDescription( e.target.value ) }
-                            placeholder="Meta Description"
-                            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
-                        />
-                    </div>
-
-                    {/* Featured Image */ }
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700">Featured Image</label>
-                        <input
-                            type="file"
-                            onChange={ handleImageChange }
-                            accept="image/*"
-                            className="mt-1 block w-full text-gray-500"
-                        />
-                        { featuredImageURL && (
-                            <div className="mt-2">
-                                <img
-                                    src={ featuredImageURL }
-                                    alt="Featured"
-                                    className="mt-2 h-48 w-full object-cover rounded-lg"
-                                />
-                                <button
-                                    type="button"
-                                    onClick={ () =>
-                                    {
-                                        setFeaturedImageURL( '' );
-                                        setFeaturedImage( null );
+                        {/* Content Editor */ }
+                        <div className="space-y-2">
+                            <Label htmlFor="content">Content</Label>
+                            <div className="rounded-md border border-input">
+                                <JoditEditor
+                                    ref={ editor }
+                                    value={ content }
+                                    config={ {
+                                        ...config,
+                                        theme: 'dark',
+                                        style: {
+                                            background: 'var(--background)',
+                                            color: 'var(--foreground)'
+                                        },
+                                        colors: {
+                                            background: ['var(--background)'],
+                                            border: ['var(--border)'],
+                                            buttons: ['var(--primary)'],
+                                            icons: ['var(--foreground)'],
+                                            panel: ['var(--card)'],
+                                            text: ['var(--foreground)'],
+                                            textPanels: ['var(--foreground)']
+                                        }
                                     } }
-                                    className="mt-2 text-red-600 text-sm hover:text-red-800"
-                                >
-                                    Remove Image
-                                </button>
+                                    onBlur={ ( newContent ) => setContent( newContent ) }
+                                />
                             </div>
-                        ) }
-                    </div>
+                        </div>
 
-                    {/* Published Checkbox */ }
-                    <div className="flex items-center">
-                        <input
-                            name="isPublished"
-                            type="checkbox"
-                            checked={ isPublished }
-                            onChange={ ( e ) => setIsPublished( e.target.checked ) }
-                            className="h-4 w-4 text-blue-600 border-gray-300 rounded"
-                        />
-                        <label className="ml-2 block text-sm text-gray-700">Published</label>
-                    </div>
+                        {/* Meta Title */ }
+                        <div className="space-y-2">
+                            <Label htmlFor="metaTitle">Meta Title</Label>
+                            <Input
+                                id="metaTitle"
+                                name="metaTitle"
+                                value={ metaTitle }
+                                onChange={ ( e ) => setMetaTitle( e.target.value ) }
+                                placeholder="Meta Title"
+                            />
+                        </div>
 
-                    {/* Excerpt */ }
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700">Excerpt</label>
-                        <textarea
-                            name="excerpt"
-                            value={ excerpt }
-                            onChange={ ( e ) => setExcerpt( e.target.value ) }
-                            placeholder="Excerpt"
-                            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
-                        />
-                    </div>
+                        {/* Meta Description */ }
+                        <div className="space-y-2">
+                            <Label htmlFor="metaDescription">Meta Description</Label>
+                            <Textarea
+                                id="metaDescription"
+                                name="metaDescription"
+                                value={ metaDescription }
+                                onChange={ ( e ) => setMetaDescription( e.target.value ) }
+                                placeholder="Meta Description"
+                            />
+                        </div>
 
-                    {/* Content */ }
-                    { showDiagramModal && (
-                        <DiagramModal
-                            onClose={ () =>
-                            {
-                                console.log( 'Closing modal' );
-                                setShowDiagramModal( false );
-                            } }
-                            onSubmit={ ( diagram ) =>
-                            {
-                                console.log( 'Submitting diagram:', diagram );
-                                handleDiagramSubmit( diagram );
-                            } }
-                        />
-                    ) }
+                        {/* Featured Image */ }
+                        <div className="space-y-2">
+                            <Label htmlFor="featuredImage">Featured Image</Label>
+                            <Input
+                                id="featuredImage"
+                                type="file"
+                                onChange={ handleImageChange }
+                                accept="image/*"
+                                className="cursor-pointer"
+                            />
+                            { featuredImageURL && (
+                                <div className="mt-2">
+                                    <img
+                                        src={ featuredImageURL }
+                                        alt="Featured"
+                                        className="mt-2 h-48 w-full rounded-lg object-cover"
+                                    />
+                                    <Button
+                                        type="button"
+                                        
+                                        onClick={ () =>
+                                        {
+                                            setFeaturedImageURL( '' );
+                                            setFeaturedImage( null );
+                                        } }
+                                        className="mt-2"
+                                    >
+                                        Remove Image
+                                    </Button>
+                                </div>
+                            ) }
+                        </div>
 
-                    {/* Author Select Dropdown */ }
-                    <div>
-                        {/*<label className="block text-sm font-medium text-gray-700">Author</label>
-                        <select
-                            name="authorId"
-                            value={ authorId || '1' }
-                            onChange={ ( e ) => setAuthorId( Number( e.target.value ) ) }
-                            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 bg-white shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
-                            required
+                        {/* Published Checkbox */ }
+                        <div className="flex items-center space-x-2">
+                            <Checkbox
+                                id="isPublished"
+                                checked={ isPublished }
+                                onCheckedChange={ ( checked ) =>
+                                    setIsPublished( checked as boolean )
+                                }
+                            />
+                            <Label htmlFor="isPublished">Published</Label>
+                        </div>
+
+                        {/* Excerpt */ }
+                        <div className="space-y-2">
+                            <Label htmlFor="excerpt">Excerpt</Label>
+                            <Textarea
+                                id="excerpt"
+                                name="excerpt"
+                                value={ excerpt }
+                                onChange={ ( e ) => setExcerpt( e.target.value ) }
+                                placeholder="Excerpt"
+                            />
+                        </div>
+
+                        {/* Tags */ }
+                        <div className="space-y-2">
+                            <Label htmlFor="tags">Tags (comma-separated)</Label>
+                            <Input
+                                id="tags"
+                                name="tags"
+                                value={ tags.join( ', ' ) }
+                                onChange={ ( e ) =>
+                                    setTags( e.target.value.split( ',' ).map( ( tag ) => tag.trim() ) )
+                                }
+                                placeholder="Tags (comma-separated)"
+                            />
+                        </div>
+
+                        {/* Submit Button */ }
+                        <Button
+                            type="submit"
+                            className="w-full"
+                            disabled={ loading }
                         >
-                            <option value="">Select an author</option>
-                            { authorsList.map( ( author ) => (
-                                <option key={ author.id } value={ author.id }>
-                                    { author.name }
-                                </option>
-                            ) ) }
-                        </select>*/}
-                    </div>
-
-                    {/* Tags */ }
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700">Tags (comma-separated)</label>
-                        <input
-                            name="tags"
-                            type="text"
-                            value={ tags.join( ', ' ) }
-                            onChange={ ( e ) => setTags( e.target.value.split( ',' ).map( ( tag ) => tag.trim() ) ) }
-                            placeholder="Tags (comma-separated)"
-                            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
-                        />
-                    </div>
-
-                    {/* Submit Button */ }
-                    <div>
-                        <Button type="submit" className="w-full bg-blue-600 text-white hover:bg-blue-700">
-                            Update Post
+                            { loading ? 'Updating...' : 'Update Post' }
                         </Button>
-                    </div>
-                </form>
-            </div>
+                    </form>
+                </CardContent>
+            </Card>
+
+            { showDiagramModal && (
+                <DiagramModal
+                    onClose={ () => setShowDiagramModal( false ) }
+                    onSubmit={ handleDiagramSubmit }
+                />
+            ) }
         </div>
     );
 }

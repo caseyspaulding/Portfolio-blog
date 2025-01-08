@@ -30,6 +30,11 @@ import 'prismjs/components/prism-sql';
 import 'prismjs/components/prism-json';
 import 'prismjs/components/prism-yaml';
 import 'prismjs/components/prism-markdown';
+import { Card, CardContent } from './ui/card';
+import { Label } from './ui/label';
+import { Checkbox } from './ui/checkbox';
+import { Input } from './ui/input';
+import { Textarea } from './ui/textarea';
 
 
 interface DiagramData
@@ -425,182 +430,189 @@ const BlogPostForm: React.FC = () =>
 
 
   return (
-    <div className=" bg-gray-100 rounded-2xl p-5">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 p-5 py-12 bg-white rounded-2xl">
-        <h1 className="text-3xl font-bold text-gray-800 mb-8">Create New Blog Post</h1>
-        <form onSubmit={ handleSubmit } className="space-y-6">
-          {/* Post Title */ }
-          <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Post Title
-            </label>
-            <input
-              name="title"
-              type="text"
-              value={ title }
-              onChange={ ( e ) => setTitle( e.target.value ) }
-              placeholder="Post Title"
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md
-              shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-              required
-            />
-          </div>
+    <div className="min-h-screen bg-background p-6">
+      <Card className="mx-auto max-w-6xl">
+        <CardContent className="p-6">
+          <h1 className="text-3xl font-bold text-foreground mb-8">Create New Blog Post</h1>
+          <form onSubmit={ handleSubmit } className="space-y-6">
+            {/* Post Title */ }
+            <div className="space-y-2">
+              <Label htmlFor="title">Post Title</Label>
+              <Input
+                id="title"
+                name="title"
+                value={ title }
+                onChange={ ( e ) => setTitle( e.target.value ) }
+                placeholder="Post Title"
+                required
+              />
+            </div>
 
-          {/* Featured Image */ }
-          <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Featured Image
-            </label>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={ ( e ) => setFeaturedImage( e.target.files?.[ 0 ] || null ) }
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md
-              shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-            />
-          </div>
+            {/* Featured Image */ }
+            <div className="space-y-2">
+              <Label htmlFor="featuredImage">Featured Image</Label>
+              <Input
+                id="featuredImage"
+                type="file"
+                accept="image/*"
+                onChange={ ( e ) => setFeaturedImage( e.target.files?.[ 0 ] || null ) }
+                className="cursor-pointer"
+              />
+            </div>
 
-          {/* Blog Post Image Input */ }
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Blog Post Image</label>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={ ( e ) => setPostImage( e.target.files?.[ 0 ] || null ) }
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md
-              shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-            />
-            <Button onClick={ handleBlogPostImageUpload } className="mt-2 bg-blue-600 text-white">
-              Upload and Insert Image
-            </Button>
-          </div>
+            {/* Blog Post Image */ }
+            <div className="space-y-2">
+              <Label htmlFor="postImage">Blog Post Image</Label>
+              <Input
+                id="postImage"
+                type="file"
+                accept="image/*"
+                onChange={ ( e ) => setPostImage( e.target.files?.[ 0 ] || null ) }
+                className="cursor-pointer"
+              />
+              <Button
+                onClick={ handleBlogPostImageUpload }
+                variant="solid"
+                className="mt-2"
+              >
+                Upload and Insert Image
+              </Button>
+            </div>
 
-          {/* URL Slug */ }
-          <div>
-            <label className="block text-sm font-medium text-gray-700">
-              URL Slug
-            </label>
-            <input
-              name="slug"
-              type="text"
-              value={ slug }
-              onChange={ ( e ) => setSlug( e.target.value ) }
-              placeholder="URL Slug"
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md
-              shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-            />
-          </div>
+            {/* URL Slug */ }
+            <div className="space-y-2">
+              <Label htmlFor="slug">URL Slug</Label>
+              <Input
+                id="slug"
+                name="slug"
+                value={ slug }
+                onChange={ ( e ) => setSlug( e.target.value ) }
+                placeholder="URL Slug"
+              />
+            </div>
 
-          {/* Meta Title */ }
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Meta Title</label>
-            <input
-              name="metaTitle"
-              type="text"
-              value={ metaTitle }
-              onChange={ ( e ) => setMetaTitle( e.target.value ) }
-              placeholder="Meta Title"
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md
-              shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-            />
-          </div>
+            {/* Meta Title */ }
+            <div className="space-y-2">
+              <Label htmlFor="metaTitle">Meta Title</Label>
+              <Input
+                id="metaTitle"
+                name="metaTitle"
+                value={ metaTitle }
+                onChange={ ( e ) => setMetaTitle( e.target.value ) }
+                placeholder="Meta Title"
+              />
+            </div>
 
-          {/* Meta Description */ }
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Meta Description</label>
-            <textarea
-              name="metaDescription"
-              value={ metaDescription }
-              onChange={ ( e ) => setMetaDescription( e.target.value ) }
-              placeholder="Meta Description"
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md
-              shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-            />
-          </div>
+            {/* Meta Description */ }
+            <div className="space-y-2">
+              <Label htmlFor="metaDescription">Meta Description</Label>
+              <Textarea
+                id="metaDescription"
+                name="metaDescription"
+                value={ metaDescription }
+                onChange={ ( e ) => setMetaDescription( e.target.value ) }
+                placeholder="Meta Description"
+                className="min-h-[100px]"
+              />
+            </div>
 
-          {/* Excerpt */ }
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Excerpt</label>
-            <textarea
-              name="excerpt"
-              value={ excerpt }
-              onChange={ ( e ) => setExcerpt( e.target.value ) }
-              placeholder="Excerpt"
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md
-              shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-            />
-          </div>
+            {/* Excerpt */ }
+            <div className="space-y-2">
+              <Label htmlFor="excerpt">Excerpt</Label>
+              <Textarea
+                id="excerpt"
+                name="excerpt"
+                value={ excerpt }
+                onChange={ ( e ) => setExcerpt( e.target.value ) }
+                placeholder="Excerpt"
+                className="min-h-[100px]"
+              />
+            </div>
 
-          {/* Content */ }
-          { showDiagramModal && (
-            <DiagramModal
-              onClose={ () =>
-              {
-                console.log( 'Closing modal' );
-                setShowDiagramModal( false );
-              } }
-              onSubmit={ ( diagram ) =>
-              {
-                console.log( 'Submitting diagram:', diagram );
-                handleDiagramSubmit( diagram );
-              } }
-            />
-          ) }
-          {/* Jodit Editor for Content */ }
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Content</label>
-            <JoditEditor
-              ref={ editor }
-              value={ content } // The editor's current content
-              config={ config } // Editor configuration
-              onBlur={ ( newContent ) => setContent( newContent ) } // Use this to update the content
-              onChange={ ( newContent ) => setContent( newContent ) } // Optional: Update the content as the user types
-            />
-          </div>
+            {/* Content */ }
+            { showDiagramModal && (
+              <DiagramModal
+                onClose={ () =>
+                {
+                  console.log( 'Closing modal' );
+                  setShowDiagramModal( false );
+                } }
+                onSubmit={ ( diagram ) =>
+                {
+                  console.log( 'Submitting diagram:', diagram );
+                  handleDiagramSubmit( diagram );
+                } }
+              />
+            ) }
 
+            {/* Jodit Editor */ }
+            <div className="space-y-2">
+              <Label htmlFor="content">Content</Label>
+              <div className="rounded-md border border-input">
+                <JoditEditor
+                  ref={ editor }
+                  value={ content }
+                  config={ {
+                    ...config,
+                    theme: 'dark',
+                    style: {
+                      background: 'var(--background)',
+                      color: 'var(--foreground)'
+                    },
+                    colors: {
+                      background: [ 'var(--background)' ],
+                      border: [ 'var(--border)' ],
+                      buttons: [ 'var(--primary)' ],
+                      icons: [ 'var(--foreground)' ],
+                      panel: [ 'var(--card)' ],
+                      text: [ 'var(--foreground)' ],
+                      textPanels: [ 'var(--foreground)' ]
+                    }
+                  } }
+                  onBlur={ ( newContent ) => setContent( newContent ) }
+                  onChange={ ( newContent ) => setContent( newContent ) }
+                />
+              </div>
+            </div>
 
-          {/* Author is hardcoded, so the dropdown is removed */ }
-          <input type="hidden" name="authorId" value="1" />
+            <input type="hidden" name="authorId" value="1" />
 
-          {/* Tags */ }
-          <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Tags (comma-separated)
-            </label>
-            <input
-              name="tags"
-              type="text"
-              value={ tags }
-              onChange={ ( e ) => setTags( e.target.value ) }
-              placeholder="Tags (comma-separated)"
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md
-              shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-            />
-          </div>
+            {/* Tags */ }
+            <div className="space-y-2">
+              <Label htmlFor="tags">Tags (comma-separated)</Label>
+              <Input
+                id="tags"
+                name="tags"
+                value={ tags }
+                onChange={ ( e ) => setTags( e.target.value ) }
+                placeholder="Tags (comma-separated)"
+              />
+            </div>
 
-          {/* Published Checkbox */ }
-          <div className="flex items-center">
-            <input
-              name="isPublished"
-              type="checkbox"
-              checked={ isPublished }
-              onChange={ ( e ) => setIsPublished( e.target.checked ) }
-              className="h-4 w-4 text-blue-600 border-gray-300 rounded"
-            />
-            <label className="ml-2 block text-sm text-gray-700">Published</label>
-          </div>
+            {/* Published Checkbox */ }
+            <div className="flex items-center space-x-2">
+              <Checkbox
+                id="isPublished"
+                checked={ isPublished }
+                onCheckedChange={ ( checked ) =>
+                  setIsPublished( checked as boolean )
+                }
+              />
+              <Label
+                htmlFor="isPublished"
+                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              >
+                Published
+              </Label>
+            </div>
 
-          {/* Submit Button */ }
-          <div>
-            <Button
-              type="submit"
-              className="w-full bg-blue-600 text-white hover:bg-blue-700"
-            >
+            {/* Submit Button */ }
+            <Button type="submit" className="w-full">
               Create Post
             </Button>
-          </div>
-        </form>
-      </div>
+          </form>
+        </CardContent>
+      </Card>
     </div>
   );
 };
