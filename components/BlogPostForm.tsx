@@ -554,19 +554,19 @@ const BlogPostForm: React.FC = () =>
                   value={ content }
                   config={ {
                     ...config,
-                    theme: 'dark',
+                    theme: 'default',
                     style: {
-                      background: 'var(--background)',
-                      color: 'var(--foreground)'
+                      background: '#ffffff',
+                      color: '#000000'
                     },
                     colors: {
-                      background: [ 'var(--background)' ],
-                      border: [ 'var(--border)' ],
-                      buttons: [ 'var(--primary)' ],
-                      icons: [ 'var(--foreground)' ],
-                      panel: [ 'var(--card)' ],
-                      text: [ 'var(--foreground)' ],
-                      textPanels: [ 'var(--foreground)' ]
+                      background: [ '#ffffff' ],
+                      border: [ '#d1d5db' ],
+                      buttons: [ '#000000' ],
+                      icons: [ '#000000' ],
+                      panel: [ '#ffffff' ],
+                      text: [ '#000000' ],
+                      textPanels: [ '#000000' ]
                     }
                   } }
                   onBlur={ ( newContent ) => setContent( newContent ) }

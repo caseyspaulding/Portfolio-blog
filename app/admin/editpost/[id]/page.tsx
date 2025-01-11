@@ -183,7 +183,7 @@ export default function EditPostPage ()
     {
         'insertDiagram.click': () => boolean;
         'change': () => void;
-        [key: string]: any;
+        [ key: string ]: any;
     }
 
     interface JoditConfig
@@ -442,13 +442,13 @@ export default function EditPostPage ()
                                             color: 'var(--foreground)'
                                         },
                                         colors: {
-                                            background: ['var(--background)'],
-                                            border: ['var(--border)'],
-                                            buttons: ['var(--primary)'],
-                                            icons: ['var(--foreground)'],
-                                            panel: ['var(--card)'],
-                                            text: ['var(--foreground)'],
-                                            textPanels: ['var(--foreground)']
+                                            background: [ 'var(--background)' ],
+                                            border: [ 'var(--border)' ],
+                                            buttons: [ 'var(--primary)' ],
+                                            icons: [ 'var(--foreground)' ],
+                                            panel: [ 'var(--card)' ],
+                                            text: [ 'var(--foreground)' ],
+                                            textPanels: [ 'var(--foreground)' ]
                                         }
                                     } }
                                     onBlur={ ( newContent ) => setContent( newContent ) }
@@ -499,13 +499,13 @@ export default function EditPostPage ()
                                     />
                                     <Button
                                         type="button"
-                                        
+
                                         onClick={ () =>
                                         {
                                             setFeaturedImageURL( '' );
                                             setFeaturedImage( null );
                                         } }
-                                        className="mt-2"
+                                        className="mt-2 text-cyan-700"
                                     >
                                         Remove Image
                                     </Button>
@@ -554,7 +554,7 @@ export default function EditPostPage ()
                         {/* Submit Button */ }
                         <Button
                             type="submit"
-                            className="w-full"
+                            className="w-full text-xl bg-primary text-primary-foreground hover:bg-primary/90 "
                             disabled={ loading }
                         >
                             { loading ? 'Updating...' : 'Update Post' }
