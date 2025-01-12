@@ -1,5 +1,4 @@
 // app/projects/page.tsx
-import NavBar from '@/components/NavBar';
 import PageBackground from '@/components/PageBackGround';
 import ProjectCard from '@/components/ProjectCard';
 import React from 'react';
