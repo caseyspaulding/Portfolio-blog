@@ -1,10 +1,10 @@
 'use client';
 
 import PageBackground from '@/components/PageBackGround';
-import { BlogCard } from '@/components/BlogCard';
+import { BlogCard, BlogPost } from '@/components/BlogCard';
 import { useEffect, useState, useTransition } from 'react';
 import { getFilteredBlogPosts } from '@/app/actions/blogActions';
-import type { BlogPost, Category, DifficultyLevel } from '@/db/schemas/schema';
+import type {Category, DifficultyLevel } from '@/db/schemas/schema';
 import
     {
         Select,
@@ -60,7 +60,10 @@ export default function BlogList ()
 
             if ( response.success )
             {
-                setPosts( response.data as BlogPost[] );
+                setPosts( (response.data as any[]).map(post => ({
+                    ...post,
+                    author: post.author || null
+                })) as BlogPost[]);
             } else
             {
                 console.error( 'Client - Failed to fetch filtered posts:', response.error );

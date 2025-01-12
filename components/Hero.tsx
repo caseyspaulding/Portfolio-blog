@@ -13,7 +13,7 @@ export default function Hero ( { theme }: { theme: string } )
         {/* Background Gradient */ }
         <div
           className={ `absolute inset-0 ${ theme === 'dark'
-              ? 'bg-gradient-to-br from-black via-gray-900 to-green-900'
+              ? 'bg-gradient-to-br from-black via-gray-900 to-green-800'
               : 'bg-gradient-to-br from-white via-gray-50 to-green-50'
             }` }
           aria-hidden="true"
