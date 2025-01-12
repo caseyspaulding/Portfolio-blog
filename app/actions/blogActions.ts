@@ -79,8 +79,7 @@ export async function getBlogPostBySlug ( slug: string ): Promise<BlogPostWithAu
                     updatedAt: blogPosts.updatedAt,
                     publishedAt: blogPosts.publishedAt,
                     tags: blogPosts.tags,
-                    categories: blogPosts.categories,
-                    technologies: blogPosts.technologies,
+                  
                     readingTime: blogPosts.readingTime,
                     difficultyLevel: blogPosts.difficultyLevel,
                     metaTitle: blogPosts.metaTitle,
@@ -140,8 +139,7 @@ export async function getAllBlogPosts ()
                     diagrams: blogPosts.diagrams,
                     readingTime: blogPosts.readingTime,
                     difficultyLevel: blogPosts.difficultyLevel,
-                    categories: blogPosts.categories,
-                    technologies: blogPosts.technologies,
+                    
                     createdAt: blogPosts.createdAt,
                     updatedAt: blogPosts.updatedAt,
                     publishedAt: blogPosts.publishedAt,
@@ -163,14 +161,7 @@ export async function getAllBlogPosts ()
             diagrams: Array.isArray( result.post.diagrams )
                 ? result.post.diagrams
                 : [],
-            // Ensure categories is always an array
-            categories: Array.isArray( result.post.categories )
-                ? result.post.categories
-                : [],
-            // Ensure technologies is always an array
-            technologies: Array.isArray( result.post.technologies )
-                ? result.post.technologies
-                : [],
+           
             // Add the author information
 
         } ) )
