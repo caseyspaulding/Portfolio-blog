@@ -37,7 +37,7 @@ type FilterParams = {
 
 export async function getFilteredBlogPosts ( filters: FilterParams )
 {
-    console.log( 'Server Action - Received filters:', filters );
+   
 
     try
     {
@@ -273,7 +273,7 @@ export async function createBlogPost ( formData: FormData )
         {
             return { success: false, message: 'A post with this slug already exists.' };
         }
-        console.log( 'Categories being inserted into DB:', categories );
+      
 
         // Insert new blog post
         await db.insert( blogPosts ).values( {

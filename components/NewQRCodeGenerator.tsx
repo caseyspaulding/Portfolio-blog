@@ -46,7 +46,7 @@ export default function NewQRCodeGenerator ()
     <>
       <div className='mx-auto max-w-7xl px-6 pb-2 sm:pt-14 lg:px-8 lg:pt-1'>
         <div className='app mt-10 flex justify-center items-center '>
-          <h1 className="text-4xl font-extrabold text-center bg-gradient-to-r from-blue-500 via-purple-500 to-blue-500 bg-clip-text text-transparent">
+          <h1 className="text-4xl font-extrabold text-center bg-gradient-to-r from-green-500 via-sky-500 to-green-500 bg-clip-text text-transparent">
             Free QR Code Generator
           </h1>
         </div>
@@ -55,7 +55,7 @@ export default function NewQRCodeGenerator ()
 
 
             <div className="w-full flex justify-center p-4">
-              <div className="w-full md:w-3/4 lg:w-1/2 flex flex-col items-center border border-blue-600 rounded-3xl bg-gradient-to-r from-blue-600 to-purple-600 p-4">
+              <div className="w-full md:w-3/4 lg:w-1/2 flex flex-col items-center border border-green-600 rounded-3xl bg-gradient-to-r from-green-600 to-sky-600 p-4">
                 <QRCode
                   ref={ ref as MutableRefObject<QRCode> }
                   logoOnLoad={ ( e ) => console.log( 'logo loaded', e ) }
@@ -94,7 +94,7 @@ export default function NewQRCodeGenerator ()
                 <Button
                   type="button"
                   onClick={ handleDownload }
-                  className="mt-5 px-4 py-2  bg-yellow-300 text-blue-700 font-semibold rounded-3xl  hover:bg-yellow-400 "
+                  className="mt-5 px-4 py-2  bg-yellow-300 text-green-700 font-semibold rounded-3xl  hover:bg-yellow-400 "
                 >
                   Download QR Code
                 </Button>
@@ -232,7 +232,7 @@ export default function NewQRCodeGenerator ()
 
 
             <div className='w-full  p-4'>
-              <h2 className='text-2xl font-extrabold text-center bg-gradient-to-r from-blue-500 via-purple-500 to-blue-500 bg-clip-text text-transparent'>Add Your Logo</h2>
+              <h2 className='text-2xl font-extrabold text-center bg-gradient-to-r from-green-500 via-sky-500 to-green-500 bg-clip-text text-transparent'>Add Your Logo</h2>
               <div className='flex flex-col space-y-4'>
                 <ImageUploadField
                   name="logoImage"  // This remains fixed for your app logic

@@ -51,12 +51,12 @@ export default function BlogList ()
     {
         try
         {
-            console.log( 'Client - Fetching posts with filters:', { category, difficulty } );
+           
             const response = await getFilteredBlogPosts( {
                 category,
                 difficultyLevel: difficulty
             } );
-            console.log( 'Client - Received response:', response );
+           
 
             if ( response.success )
             {
