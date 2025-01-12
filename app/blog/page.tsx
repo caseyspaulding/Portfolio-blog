@@ -71,8 +71,8 @@ export default function BlogList ()
                     Technical Articles & System Design
                 </h1>
                 <p className="text-xl text-gray-600 dark:text-gray-400 mb-8">
-                    Deep dive into software architecture, system design patterns, and engineering best practices.
-                    Featuring interactive diagrams and practical examples.
+                    Dive into software architecture, system design patterns, and engineering best practices.
+
                 </p>
                 <div className="flex flex-wrap justify-center gap-3 text-md text-gray-900 dark:text-gray-200">
                     <span className="flex items-center">📊 Interactive Diagrams</span>
