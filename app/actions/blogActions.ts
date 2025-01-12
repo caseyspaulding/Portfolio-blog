@@ -26,62 +26,67 @@ interface Author
     avatarUrl?: string | null;
 }
 
-interface BlogPost
+
+import type { BlogPost, Category, DifficultyLevel } from '@/db/schemas/schema';
+
+type FilterParams = {
+    category?: Category | 'all';
+    difficultyLevel?: DifficultyLevel | 'all';
+};
+
+export async function getFilteredBlogPosts ( filters: FilterParams )
 {
-    id: number;
-    title: string;
-    slug: string;
-    content: string;
-    excerpt?: string | null;
-    authorId: number;
-    tags?: string | null;
-    featuredImage?: string | null;
-    metaTitle?: string | null;
-    metaDescription?: string | null;
-    isPublished: boolean | null;
-    createdAt: Date;
-    updatedAt: Date;
-}
-export async function getPostsByAuthorId ( authorId: number ): Promise<BlogPost[]>
-{
+    console.log( 'Server Action - Received filters:', filters );
+
     try
     {
-        const posts = await db
-            .select( {
-                id: blogPosts.id,
-                title: blogPosts.title,
-                slug: blogPosts.slug,
-                content: blogPosts.content,
-                excerpt: blogPosts.excerpt,
-                authorId: blogPosts.authorId,
-                tags: blogPosts.tags,
-                featuredImage: blogPosts.featuredImage,
-                metaTitle: blogPosts.metaTitle,
-                metaDescription: blogPosts.metaDescription,
-                isPublished: blogPosts.isPublished,
-                createdAt: blogPosts.createdAt,
-                updatedAt: blogPosts.updatedAt,
-            } )
-            .from( blogPosts )
-            .where( eq( blogPosts.authorId, authorId ) );
+        const response = await getAllBlogPosts();
+        console.log( 'Server Action - getAllBlogPosts response:', response );
 
-        // Map database fields to interface fields if necessary
-        const formattedPosts = posts.map( ( post ) => ( {
-            ...post,
-            metaTitle: post.metaTitle,
-            metaDescription: post.metaDescription,
-            featuredImage: post.featuredImage,
-            // Ensure any transformations if needed
-        } ) );
+        if ( !response.success )
+        {
+            console.error( 'Server Action - Failed to fetch posts:', response );
+            return { success: false, error: 'Failed to fetch posts' };
+        }
 
-        return formattedPosts;
+        let filtered = response.data as BlogPost[];
+        console.log( 'Server Action - Initial posts count:', filtered.length );
 
+        // Apply filters on the server
+        if ( filters.category && filters.category !== 'all' )
+        {
+            filtered = filtered.filter( post =>
+                post.categories?.includes( filters.category as Category )
+            );
+            console.log( `Server Action - After category filter (${ filters.category }):`, filtered.length );
+        }
+
+        if ( filters.difficultyLevel && filters.difficultyLevel !== 'all' )
+        {
+            filtered = filtered.filter( post =>
+                post.difficultyLevel === filters.difficultyLevel
+            );
+            console.log( `Server Action - After difficulty filter (${ filters.difficultyLevel }):`, filtered.length );
+        }
+
+        console.log( 'Server Action - Final filtered posts:', filtered );
+
+        return {
+            success: true,
+            data: filtered
+        };
     } catch ( error )
     {
-        console.error( 'Error fetching posts by author ID:', error );
-        return [];
+        console.error( 'Server Action - Error in getFilteredBlogPosts:', error );
+        return {
+            success: false,
+            error: 'Failed to fetch and filter posts'
+        };
     }
 }
+
+
+
 
 export async function getAuthorBySlug ( slug: string ): Promise<Author | null>
 {
@@ -176,6 +181,8 @@ export async function getBlogPostBySlug ( slug: string ): Promise<BlogPostWithAu
         return null;
     }
 }
+
+
 export async function getAllBlogPosts ()
 {
     try
@@ -187,30 +194,56 @@ export async function getAllBlogPosts ()
                     slug: blogPosts.slug,
                     title: blogPosts.title,
                     excerpt: blogPosts.excerpt,
+                    content: blogPosts.content,
+                    diagrams: blogPosts.diagrams,
+                    readingTime: blogPosts.readingTime,
+                    difficultyLevel: blogPosts.difficultyLevel,
+                    categories: blogPosts.categories,
+                    technologies: blogPosts.technologies,
                     createdAt: blogPosts.createdAt,
                     updatedAt: blogPosts.updatedAt,
+                    publishedAt: blogPosts.publishedAt,
+                    tags: blogPosts.tags,
                     featuredImage: blogPosts.featuredImage,
+                    metaTitle: blogPosts.metaTitle,
+                    metaDescription: blogPosts.metaDescription,
                     isPublished: blogPosts.isPublished,
                 },
-                author: {
-                    id: authors.id,
-                    name: authors.name,
-                    slug: authors.slug,
-                },
+
             } )
             .from( blogPosts )
-            .leftJoin( authors, eq( blogPosts.authorId, authors.id ) );
+            .where( eq( blogPosts.isPublished, true ) ); // Only get published posts
 
+        // Transform the results to match the BlogPost type
         const posts = results.map( ( result ) => ( {
             ...result.post,
-            author: result.author,
-        } ) );
+            // Ensure diagrams is always an array
+            diagrams: Array.isArray( result.post.diagrams )
+                ? result.post.diagrams
+                : [],
+            // Ensure categories is always an array
+            categories: Array.isArray( result.post.categories )
+                ? result.post.categories
+                : [],
+            // Ensure technologies is always an array
+            technologies: Array.isArray( result.post.technologies )
+                ? result.post.technologies
+                : [],
+            // Add the author information
+           
+        } ) )
 
-        return { success: true, data: posts };
+        return {
+            success: true,
+            data: posts
+        };
     } catch ( error )
     {
         console.error( 'Error fetching blog posts:', error );
-        return { success: false, data: [] };
+        return {
+            success: false,
+            data: []
+        };
     }
 }
 

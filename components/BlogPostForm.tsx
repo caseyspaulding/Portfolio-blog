@@ -35,7 +35,13 @@ import { Label } from './ui/label';
 import { Checkbox } from './ui/checkbox';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
-
+import { CATEGORIES, TECHNOLOGIES, DIFFICULTY_LEVELS, parseMetadataFromTags } from '@/constants/blogConstants';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "@/components/ui/command";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Badge } from "@/components/ui/badge";
+import { Check, ChevronsUpDown } from "lucide-react";
+import { cn } from '@/cn';
 
 interface DiagramData
 {
@@ -84,6 +90,12 @@ const BlogPostForm: React.FC = () =>
     content: '',
     title: ''
   } );
+  const [ selectedCategories, setSelectedCategories ] = useState<string[]>( [] );
+  const [ selectedTechnologies, setSelectedTechnologies ] = useState<string[]>( [] );
+  const [ difficultyLevel, setDifficultyLevel ] = useState<string>( 'Beginner' );
+  const [ openCategories, setOpenCategories ] = useState( false );
+  const [ openTechnologies, setOpenTechnologies ] = useState( false );
+
   // Initialize Prism.js when content changes
   useEffect( () =>
   {
@@ -141,10 +153,12 @@ const BlogPostForm: React.FC = () =>
     };
   }
 
-  const config: JoditConfig = useMemo(
+  const config = useMemo(
     () => ( {
       readonly: false,
       placeholder: 'Start typing your blog post...',
+      height: 500, // Add a fixed height to prevent resizing issues
+      enableDragAndDropFileToEditor: true,
       buttons: [
         'source', '|',
         'bold', 'italic', 'underline', '|',
@@ -158,7 +172,7 @@ const BlogPostForm: React.FC = () =>
           name: 'insertDiagram',
           icon: '📊',
           tooltip: 'Insert Mermaid Diagram',
-          exec: ( _editor ) =>
+          exec: ( _editor: any ) =>
           {
             setShowDiagramModal( true );
             return false;
@@ -181,14 +195,8 @@ const BlogPostForm: React.FC = () =>
         }
       ],
       events: {
-        'insertDiagram.click': () =>
-        {
-          setShowDiagramModal( true );
-          return false;
-        },
         'change': () =>
         {
-          // Initialize Prism.js highlighting on change
           if ( typeof window !== 'undefined' )
           {
             setTimeout( () =>
@@ -198,25 +206,122 @@ const BlogPostForm: React.FC = () =>
           }
         }
       },
-      // Add custom CSS for code blocks
+      askBeforePasteHTML: false, // Add this to prevent paste interruptions
+      defaultMode: 1,
+      removeButtons: [ 'about' ],
+      showXPathInStatusbar: false,
+      spellcheck: true,
+      editorCssClass: 'prose max-w-none', // If you're using Tailwind's typography plugin
+      style: {
+        background: '#ffffff',
+        color: '#000000',
+      },
+      colors: {
+        background: [ '#ffffff' ],
+        border: [ '#d1d5db' ],
+        buttons: [ '#000000' ],
+        icons: [ '#000000' ],
+        panel: [ '#ffffff' ],
+        text: [ '#000000' ],
+        textPanels: [ '#000000' ]
+      },
+      // Add custom CSS
       css: `
+      .jodit-workplace {
+        background-color: #ffffff !important;
+      }
+      .jodit-wysiwyg {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+      }
+      .jodit-toolbar__box {
+        background-color: #ffffff !important;
+        border-bottom: 1px solid #d1d5db !important;
+      }
+      .jodit-toolbar-button {
+        color: #000000 !important;
+      }
+      .jodit-toolbar-button:hover {
+        background-color: #f3f4f6 !important;
+      }
+      .jodit-toolbar-button__icon {
+        fill: #000000 !important;
+      }
+      .jodit-status-bar {
+        background-color: #ffffff !important;
+        border-top: 1px solid #d1d5db !important;
+        color: #000000 !important;
+      }
       .jodit-wysiwyg pre {
-        background: #1e1e1e;
-        border-radius: 4px;
-        padding: 15px;
-        margin: 15px 0;
-        overflow-x: auto;
+        background: #1e1e1e !important;
+        border-radius: 4px !important;
+        padding: 15px !important;
+        margin: 15px 0 !important;
+        overflow-x: auto !important;
       }
       .jodit-wysiwyg code {
-        font-family: 'Monaco', 'Consolas', 'Courier New', monospace;
-        font-size: 14px;
-        line-height: 1.4;
-        color: #d4d4d4;
+        font-family: 'Monaco', 'Consolas', 'Courier New', monospace !important;
+        font-size: 14px !important;
+        line-height: 1.4 !important;
+        color: #d4d4d4 !important;
+      }
+      .jodit-container {
+        border-color: #d1d5db !important;
+      }
+      .jodit-container:not(.jodit_inline) {
+        border: 1px solid #d1d5db !important;
+        border-radius: 0.375rem !important;
+      }
+      .jodit-placeholder {
+        color: #6b7280 !important;
+      }
+      .jodit-wysiwyg table {
+        border-collapse: collapse !important;
+        width: 100% !important;
+      }
+      .jodit-wysiwyg table td,
+      .jodit-wysiwyg table th {
+        border: 1px solid #d1d5db !important;
+        padding: 8px !important;
+      }
+      .jodit-toolbar-button.jodit-toolbar-button_size_middle {
+        background-color: transparent !important;
+      }
+      .jodit-toolbar-button.jodit-toolbar-button_size_middle:hover {
+        background-color: #f3f4f6 !important;
+      }
+      .jodit .jodit-workplace + .jodit-status-bar:not(:empty) {
+        border-top: 1px solid #d1d5db !important;
+        background-color: #ffffff !important;
+      }
+      .jodit-dialog__header {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+      }
+      .jodit-dialog__content {
+        background-color: #ffffff !important;
+      }
+      .jodit-form__group {
+        background-color: #ffffff !important;
+      }
+      .jodit-input {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+        border: 1px solid #d1d5db !important;
+      }
+      .jodit-button {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+        border: 1px solid #d1d5db !important;
+      }
+      .jodit-button:hover {
+        background-color: #f3f4f6 !important;
       }
     `
     } ),
     []
   );
+
 
 
 
@@ -378,26 +483,31 @@ const BlogPostForm: React.FC = () =>
       return;
     }
 
-
-
     try
     {
       // Extract diagrams before uploading image
       const extractedDiagrams = extractDiagramsFromContent( content );
-
       const imageUrl = await handleImageUpload( featuredImage );
+
       if ( !imageUrl )
       {
         toast.error( 'Failed to upload the image.' );
         return;
       }
+      // Combine all metadata into tags
+      const metadataTags = [
+        ...selectedCategories,
+        ...selectedTechnologies,
+        difficultyLevel,
+        ...tags.split( ',' ).map( t => t.trim() ).filter( t => t )
+      ].join( ', ' );
 
       const formData = new FormData();
       formData.append( 'title', title );
       formData.append( 'content', content );
       formData.append( 'excerpt', excerpt );
       formData.append( 'authorId', '1' ); // Hardcode the author ID as 1
-      formData.append( 'tags', tags );
+      formData.append( 'tags', metadataTags );
       formData.append( 'diagrams', JSON.stringify( extractedDiagrams ) );
       formData.append( 'slug', slug );
       formData.append( 'metaTitle', metaTitle );
@@ -515,7 +625,161 @@ const BlogPostForm: React.FC = () =>
                 className="min-h-[100px]"
               />
             </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Difficulty Level */ }
+              <div className="space-y-2">
+                <Label htmlFor="difficultyLevel">Difficulty Level</Label>
+                <Select
+                  value={ difficultyLevel }
+                  onValueChange={ setDifficultyLevel }
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select difficulty" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    { DIFFICULTY_LEVELS.map( ( level ) => (
+                      <SelectItem key={ level } value={ level }>
+                        { level }
+                      </SelectItem>
+                    ) ) }
+                  </SelectContent>
+                </Select>
+              </div>
 
+              {/* Categories */ }
+              <div className="space-y-2">
+                <Label>Categories</Label>
+                <Popover open={ openCategories } onOpenChange={ setOpenCategories }>
+                  <PopoverTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      role="combobox"
+                      aria-expanded={ openCategories }
+                      className="w-full justify-between"
+                    >
+                      { selectedCategories.length > 0
+                        ? `${ selectedCategories.length } selected`
+                        : "Select categories..." }
+                      <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-full p-0">
+                    <Command>
+                      <CommandInput placeholder="Search categories..." />
+                      <CommandEmpty>No category found.</CommandEmpty>
+                      <CommandGroup>
+                        { CATEGORIES.map( ( category ) => (
+                          <CommandItem
+                            key={ category }
+                            onSelect={ () =>
+                            {
+                              setSelectedCategories( ( prev ) =>
+                                prev.includes( category )
+                                  ? prev.filter( ( item ) => item !== category )
+                                  : [ ...prev, category ]
+                              )
+                            } }
+                          >
+                            <Check
+                              className={ cn(
+                                "mr-2 h-4 w-4",
+                                selectedCategories.includes( category )
+                                  ? "opacity-100"
+                                  : "opacity-0"
+                              ) }
+                            />
+                            { category }
+                          </CommandItem>
+                        ) ) }
+                      </CommandGroup>
+                    </Command>
+                  </PopoverContent>
+                </Popover>
+                { selectedCategories.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mt-2">
+                    { selectedCategories.map( ( category ) => (
+                      <Badge
+                        key={ category }
+                        variant="secondary"
+                        className="cursor-pointer"
+                        onClick={ () => setSelectedCategories( prev =>
+                          prev.filter( c => c !== category )
+                        ) }
+                      >
+                        { category } ×
+                      </Badge>
+                    ) ) }
+                  </div>
+                ) }
+              </div>
+
+              {/* Technologies */ }
+              <div className="space-y-2">
+                <Label>Technologies</Label>
+                <Popover open={ openTechnologies } onOpenChange={ setOpenTechnologies }>
+                  <PopoverTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      role="combobox"
+                      aria-expanded={ openTechnologies }
+                      className="w-full justify-between"
+                    >
+                      { selectedTechnologies.length > 0
+                        ? `${ selectedTechnologies.length } selected`
+                        : "Select technologies..." }
+                      <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-full p-0">
+                    <Command>
+                      <CommandInput placeholder="Search technologies..." />
+                      <CommandEmpty>No technology found.</CommandEmpty>
+                      <CommandGroup>
+                        { TECHNOLOGIES.map( ( tech ) => (
+                          <CommandItem
+                            key={ tech }
+                            onSelect={ () =>
+                            {
+                              setSelectedTechnologies( ( prev ) =>
+                                prev.includes( tech )
+                                  ? prev.filter( ( item ) => item !== tech )
+                                  : [ ...prev, tech ]
+                              )
+                            } }
+                          >
+                            <Check
+                              className={ cn(
+                                "mr-2 h-4 w-4",
+                                selectedTechnologies.includes( tech )
+                                  ? "opacity-100"
+                                  : "opacity-0"
+                              ) }
+                            />
+                            { tech }
+                          </CommandItem>
+                        ) ) }
+                      </CommandGroup>
+                    </Command>
+                  </PopoverContent>
+                </Popover>
+                { selectedTechnologies.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mt-2">
+                    { selectedTechnologies.map( ( tech ) => (
+                      <Badge
+                        key={ tech }
+                        variant="outline"
+                        className="cursor-pointer"
+                        onClick={ () => setSelectedTechnologies( prev =>
+                          prev.filter( t => t !== tech )
+                        ) }
+                      >
+                        { tech } ×
+                      </Badge>
+                    ) ) }
+                  </div>
+                ) }
+              </div>
+            </div>
             {/* Excerpt */ }
             <div className="space-y-2">
               <Label htmlFor="excerpt">Excerpt</Label>
@@ -552,25 +816,17 @@ const BlogPostForm: React.FC = () =>
                 <JoditEditor
                   ref={ editor }
                   value={ content }
-                  config={ {
-                    ...config,
-                    theme: 'default',
-                    style: {
-                      background: '#ffffff',
-                      color: '#000000'
-                    },
-                    colors: {
-                      background: [ '#ffffff' ],
-                      border: [ '#d1d5db' ],
-                      buttons: [ '#000000' ],
-                      icons: [ '#000000' ],
-                      panel: [ '#ffffff' ],
-                      text: [ '#000000' ],
-                      textPanels: [ '#000000' ]
+                  config={ config }
+                  
+                  onBlur={ ( newContent ) =>
+                  {
+                    if ( newContent !== content )
+                    {
+                      setContent( newContent );
                     }
                   } }
-                  onBlur={ ( newContent ) => setContent( newContent ) }
-                  onChange={ ( newContent ) => setContent( newContent ) }
+                // Remove the onChange handler as it can interfere with typing
+                // The onBlur handler will save content when the editor loses focus
                 />
               </div>
             </div>

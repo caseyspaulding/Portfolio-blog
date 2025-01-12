@@ -94,7 +94,7 @@ export default async function BlogPost ( { params }: { params: Promise<{ slug: s
                                         ? tags.map( ( tag: string, index: number ) => (
                                             <span
                                                 key={ index }
-                                                className="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded"
+                                                className="inline-block bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded"
                                             >
                                                 { tag.trim() }
                                             </span>
@@ -124,7 +124,7 @@ export default async function BlogPost ( { params }: { params: Promise<{ slug: s
                                         { post.author ? (
                                             <a
                                                 href={ `/authors/${ post.author.slug }` }
-                                                className="text-blue-600 dark:text-blue-400 hover:underline"
+                                                className="text-green-600 dark:text-green-400 hover:underline"
                                             >
                                                 { post.author.name }
                                             </a>

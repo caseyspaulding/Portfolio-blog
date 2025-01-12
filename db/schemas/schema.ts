@@ -229,27 +229,7 @@ export const orgInvites = pgTable( 'org_invites', {
     updatedAt: timestamp( 'updated_at' ).default( sql`now()` )
 } );
 
-// Blog Posts Table with Diagrams
-export const blogPosts = pgTable( 'blog_posts', {
-    id: serial( 'id' ).primaryKey(),
-    slug: varchar( 'slug', { length: 255 } ).notNull().unique(),
-    title: text( 'title' ).notNull(),
-    content: text( 'content' ).notNull(),
-    excerpt: text( 'excerpt' ),
-    authorId: serial( 'author_id' )
-        .notNull()
-        .references( () => authors.id ),
-    // Add diagrams as JSONB array
-    diagrams: jsonb( 'diagrams' ).default( sql`'[]'` ),
-    createdAt: timestamp( 'created_at' ).defaultNow().notNull(),
-    updatedAt: timestamp( 'updated_at' ).defaultNow().notNull(),
-    publishedAt: timestamp( 'published_at' ),
-    tags: text( 'tags' ),
-    featuredImage: varchar( 'featured_image', { length: 255 } ),
-    metaTitle: varchar( 'meta_title', { length: 255 } ),
-    metaDescription: text( 'meta_description' ),
-    isPublished: boolean( 'is_published' ).default( false ),
-} );
+
 
 // Type definition for diagrams
 export type BlogDiagram = {
@@ -262,10 +242,68 @@ export type BlogDiagram = {
     updatedAt: Date;
 };
 
-// Type for the entire blog post
+
+// Enums (can be implemented as check constraints in Postgres)
+export const DIFFICULTY_LEVELS = [ 'Beginner', 'Intermediate', 'Advanced' ] as const;
+export type DifficultyLevel = typeof DIFFICULTY_LEVELS[ number ];
+
+export const CATEGORIES = [
+    'Software Engineering',
+    'System Design',
+    'AI/ML',
+    'Cloud Computing',
+    'DevOps',
+    'Frontend',
+    'Backend',
+    'Data Science',
+    'Security',
+    'Best Practices'
+] as const;
+export type Category = typeof CATEGORIES[ number ];
+
+// Blog Posts Table with Enhanced Fields
+export const blogPosts = pgTable( 'blog_posts', {
+    id: serial( 'id' ).primaryKey(),
+    slug: varchar( 'slug', { length: 255 } ).notNull().unique(),
+    title: text( 'title' ).notNull(),
+    content: text( 'content' ).notNull(),
+    excerpt: text( 'excerpt' ),
+    authorId: serial( 'author_id' )
+        .notNull()
+        .references( () => authors.id ),
+    diagrams: jsonb( 'diagrams' ).default( sql`'[]'` ),
+
+    // New fields
+    readingTime: integer( 'reading_time' ), // in minutes
+    difficultyLevel: varchar( 'difficulty_level', { length: 50 } )
+        .$type<DifficultyLevel>(), // Use your DIFFICULTY_LEVEL type
+    categories: jsonb( 'categories' ).$type<Category[]>(), // JSON array of categories
+    technologies: jsonb( 'technologies' ).$type<string[]>(), // JSON array of technologies
+
+    // Existing fields
+    createdAt: timestamp( 'created_at' ).defaultNow().notNull(),
+    updatedAt: timestamp( 'updated_at' ).defaultNow().notNull(),
+    publishedAt: timestamp( 'published_at' ),
+    tags: text( 'tags' ),
+    featuredImage: varchar( 'featured_image', { length: 255 } ),
+    metaTitle: varchar( 'meta_title', { length: 255 } ),
+    metaDescription: text( 'meta_description' ),
+    isPublished: boolean( 'is_published' ).default( false ),
+} );
+
+// Enhanced BlogPost type
 export type BlogPost = typeof blogPosts.$inferSelect & {
     diagrams: BlogDiagram[];
+    categories: Category[];
+    technologies: string[];
+    author?: {
+        name: string;
+        slug: string;
+        bio: string | null;
+        avatarUrl: string | null;
+    };
 };
+
 
 // Authors Table
 export const authors = pgTable( 'authors', {

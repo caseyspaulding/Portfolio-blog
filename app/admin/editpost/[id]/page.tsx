@@ -1,42 +1,48 @@
+
 'use client';
 
-import { useState, useEffect, useRef, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
-
 import { updateBlogPost } from '@/app/actions/blogActions';
 import { createClient } from '@/utils/supabase/client';
 import toast from 'react-hot-toast';
-import { Button } from 'flowbite-react';
+import { Button } from '@/components/ui/button';
 import LogoSpinner from '@/components/Loaders/LogoSpinner';
-import dynamic from 'next/dynamic';
-import 'prismjs';
-import 'prismjs/themes/prism-tomorrow.css';
-import 'prismjs/components/prism-javascript';
-import 'prismjs/components/prism-typescript';
-import 'prismjs/components/prism-jsx';
-import 'prismjs/components/prism-tsx';
-import 'prismjs/components/prism-css';
-import 'prismjs/components/prism-python';
-import 'prismjs/components/prism-java';
-import 'prismjs/components/prism-c';
-import 'prismjs/components/prism-cpp';
-import 'prismjs/components/prism-csharp';
-import 'prismjs/components/prism-rust';
-import 'prismjs/components/prism-go';
-import 'prismjs/components/prism-bash';
-import 'prismjs/components/prism-sql';
-import 'prismjs/components/prism-json';
-import 'prismjs/components/prism-yaml';
-import 'prismjs/components/prism-markdown';
-import mermaid from 'mermaid';
-import DiagramModal from '@/components/DiagramModal';
 import { CardContent } from '@/components/ui/card';
-
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Checkbox } from '@/components/ui/checkbox';
 import { Card } from '@/components/card';
-import { Label } from '@/components/ui/label';
+import DiagramModal from '@/components/DiagramModal';
+import mermaid from 'mermaid';
+import { PostMetadata } from '@/components/PostMetaData';
+import { PostEditor } from '@/components/PostEditor';
+
+
+interface DiagramData
+{
+    id: string;
+    type: string;
+    content: string;
+    title: string;
+    createdAt: string;
+    updatedAt: string;
+}
+
+// Import the types from your schema
+const DIFFICULTY_LEVELS = [ 'Beginner', 'Intermediate', 'Advanced' ] as const;
+type DifficultyLevel = typeof DIFFICULTY_LEVELS[ number ];
+
+const CATEGORIES = [
+    'Software Engineering',
+    'System Design',
+    'AI/ML',
+    'Cloud Computing',
+    'DevOps',
+    'Frontend',
+    'Backend',
+    'Data Science',
+    'Security',
+    'Best Practices'
+] as const;
+type Category = typeof CATEGORIES[ number ];
 
 interface DiagramData
 {
@@ -49,53 +55,13 @@ interface DiagramData
 }
 
 
-
-interface JoditConfig
-{
-    readonly: boolean;
-    placeholder: string;
-    buttons: Array<string | { name: string; icon: string; tooltip: string; exec: ( editor: any ) => boolean }>;
-    events: {
-        'insertDiagram.click': () => boolean;
-    };
-}
-// Dynamically import JoditEditor with SSR disabled
-const JoditEditor = dynamic( () => import( 'jodit-react' ), {
-    ssr: false,
-} );
-
-interface Author
-{
-    id: number;
-    name: string;
-}
-
-interface BlogPost
-{
-    id: number;
-    title: string;
-    slug: string;
-    content: string;
-    excerpt?: string | null;
-    authorId: number;
-    tags?: string[] | null;
-    featuredImage?: string | null;
-    metaTitle?: string | null;
-    metaDescription?: string | null;
-    isPublished: boolean | null;
-    createdAt: Date;
-    updatedAt: Date;
-}
-
 export default function EditPostPage ()
 {
     const router = useRouter();
     const { id } = useParams();
     const idAsNumber = Number( id );
-    const editor = useRef( null );
 
-    // Group all useState declarations
-    const [ authorsList, setAuthorsList ] = useState<Author[]>( [] );
+    // State declarations
     const [ title, setTitle ] = useState( '' );
     const [ content, setContent ] = useState( '' );
     const [ excerpt, setExcerpt ] = useState<string>( '' );
@@ -111,29 +77,11 @@ export default function EditPostPage ()
     const [ showDiagramModal, setShowDiagramModal ] = useState( false );
     const [ diagrams, setDiagrams ] = useState<DiagramData[]>( [] );
 
-    useEffect( () =>
-    {
-        if ( typeof window !== 'undefined' )
-        {
-            ( window as any ).Prism.highlightAll();
-        }
-    }, [ content ] );
+    const [ difficultyLevel, setDifficultyLevel ] = useState<DifficultyLevel | ''>( '' );
+    const [ categories, setCategories ] = useState<Category[]>( [] );
+    const [ technologies, setTechnologies ] = useState<string[]>( [] );
+    const [ readingTime, setReadingTime ] = useState( 5 );
 
-    // Add Mermaid initialization effect
-    useEffect( () =>
-    {
-        mermaid.initialize( {
-            startOnLoad: true,
-            theme: 'default',
-            securityLevel: 'loose',
-            themeVariables: {
-                fontSize: '30px',
-                fontFamily: 'Arial',
-                lineColor: 'gray',
-            }
-        } );
-    }, [] );
-    // Fetch post data useEffect
     useEffect( () =>
     {
         const fetchPost = async () =>
@@ -163,6 +111,10 @@ export default function EditPostPage ()
                 setIsPublished( post.isPublished ?? false );
                 setMetaTitle( post.metaTitle ?? '' );
                 setMetaDescription( post.metaDescription ?? '' );
+                setDifficultyLevel( post.difficultyLevel ?? '' );
+                setCategories( typeof post.categories === 'string' ? JSON.parse( post.categories ) : post.categories ?? [] );
+                setTechnologies( post.technologies ?? [] );
+                setReadingTime( post.readingTime ?? 5 );
                 setLoading( false );
             }
         };
@@ -170,108 +122,7 @@ export default function EditPostPage ()
         fetchPost();
     }, [ id, router, idAsNumber ] );
 
-    // Editor configuration
-    interface JoditButton
-    {
-        name: string;
-        icon: string;
-        tooltip: string;
-        exec: ( editor: any ) => boolean;
-    }
 
-    interface JoditEvents
-    {
-        'insertDiagram.click': () => boolean;
-        'change': () => void;
-        [ key: string ]: any;
-    }
-
-    interface JoditConfig
-    {
-        readonly: boolean;
-        placeholder: string;
-        buttons: Array<string | JoditButton>;
-        events: JoditEvents;
-        css: string;
-    }
-
-    const config: JoditConfig = useMemo(
-        () => ( {
-            readonly: false,
-            placeholder: 'Start typing your blog post...',
-            buttons: [
-                'source', '|',
-                'bold', 'italic', 'underline', '|',
-                'ul', 'ol', '|',
-                'font', 'fontsize', 'brush', 'paragraph', '|',
-                'image', 'table', 'link', '|',
-                'left', 'center', 'right', 'justify', '|',
-                'undo', 'redo', '|',
-                'hr', 'eraser', 'fullsize', '|',
-                {
-                    name: 'insertDiagram',
-                    icon: '📊',
-                    tooltip: 'Insert Mermaid Diagram',
-                    exec: ( _editor ) =>
-                    {
-                        setShowDiagramModal( true );
-                        return false;
-                    }
-                },
-                {
-                    name: 'insertCode',
-                    icon: '⌨️',
-                    tooltip: 'Insert Code Block',
-                    exec: ( editor ) =>
-                    {
-                        const language = prompt( 'Enter programming language (e.g., javascript, python, typescript):' );
-                        if ( language )
-                        {
-                            const code = `<pre><code class="language-${ language }">\n// Your code here\n</code></pre>`;
-                            editor.selection.insertHTML( code );
-                        }
-                        return false;
-                    }
-                }
-            ],
-            events: {
-                'insertDiagram.click': () =>
-                {
-                    setShowDiagramModal( true );
-                    return false;
-                },
-                'change': () =>
-                {
-                    // Initialize Prism.js highlighting on change
-                    if ( typeof window !== 'undefined' )
-                    {
-                        setTimeout( () =>
-                        {
-                            ( window as any ).Prism.highlightAll();
-                        }, 0 );
-                    }
-                }
-            },
-            // Add custom CSS for code blocks
-            css: `
-      .jodit-wysiwyg pre {
-        background: #1e1e1e;
-        border-radius: 4px;
-        padding: 15px;
-        margin: 15px 0;
-        overflow-x: auto;
-      }
-      .jodit-wysiwyg code {
-        font-family: 'Monaco', 'Consolas', 'Courier New', monospace;
-        font-size: 14px;
-        line-height: 1.4;
-        color: #d4d4d4;
-      }
-    `
-        } ),
-        []
-    );
-    // Handler functions
     const handleDiagramSubmit = ( diagramData: { title: string; content: string } ) =>
     {
         const now = new Date().toISOString();
@@ -290,18 +141,18 @@ export default function EditPostPage ()
             setDiagrams( prev => [ ...prev, newDiagram ] );
 
             const placeholderHtml = `
-     <div class="mermaid-diagram" data-diagram-id="${ newDiagram.id }">
-      <div class="diagram-header">
-        <div class="diagram-title text-lg font-semibold mb-2">${ newDiagram.title }</div>
-        <div class="diagram-metadata text-sm text-gray-500">
-          Created: ${ new Date( newDiagram.createdAt ).toLocaleDateString() }
-        </div>
-      </div>
-      <pre class="mermaid">
-        ${ newDiagram.content }
-      </pre>
-    </div>
-    `;
+                <div class="mermaid-diagram" data-diagram-id="${ newDiagram.id }">
+                    <div class="diagram-header">
+                        <div class="diagram-title text-lg font-semibold mb-2">${ newDiagram.title }</div>
+                        <div class="diagram-metadata text-sm text-gray-500">
+                            Created: ${ new Date( newDiagram.createdAt ).toLocaleDateString() }
+                        </div>
+                    </div>
+                    <pre class="mermaid">
+                        ${ newDiagram.content }
+                    </pre>
+                </div>
+            `;
             setContent( prev => `${ prev }${ placeholderHtml }` );
 
             setTimeout( () =>
@@ -315,18 +166,6 @@ export default function EditPostPage ()
             console.error( 'Mermaid syntax error:', error );
         }
     };
-
-    const handleImageChange = ( e: React.ChangeEvent<HTMLInputElement> ) =>
-    {
-        const file = e.target.files?.[ 0 ];
-        if ( file )
-        {
-            setFeaturedImage( file );
-            const tempUrl = URL.createObjectURL( file );
-            setFeaturedImageURL( tempUrl );
-        }
-    };
-
     const handleUpdate = async ( e: React.FormEvent ) =>
     {
         e.preventDefault();
@@ -364,6 +203,11 @@ export default function EditPostPage ()
             formData.append( 'metaDescription', metaDescription );
             formData.append( 'isPublished', isPublished.toString() );
             formData.append( 'featuredImage', imageURL );
+            formData.append( 'difficultyLevel', difficultyLevel );
+            formData.append( 'categories', JSON.stringify( categories ) );
+            formData.append( 'technologies', JSON.stringify( technologies ) );
+            formData.append( 'readingTime', readingTime.toString() );
+            formData.append( 'diagrams', JSON.stringify( diagrams ) );
 
             const response = await updateBlogPost( idAsNumber, formData );
 
@@ -385,7 +229,7 @@ export default function EditPostPage ()
         }
     };
 
-    // Loading state check (after all hooks)
+
     if ( loading )
     {
         return (
@@ -395,166 +239,51 @@ export default function EditPostPage ()
         );
     }
 
-
     return (
         <div className="min-h-screen bg-background p-8">
             <Card className="mx-auto max-w-6xl">
                 <CardContent className="p-6">
                     <h1 className="mb-8 text-3xl font-bold text-foreground">Edit Blog Post</h1>
                     <form onSubmit={ handleUpdate } className="space-y-6">
-                        {/* Post Title */ }
-                        <div className="space-y-2">
-                            <Label htmlFor="title">Post Title</Label>
-                            <Input
-                                id="title"
-                                name="title"
-                                value={ title }
-                                onChange={ ( e ) => setTitle( e.target.value ) }
-                                placeholder="Post Title"
-                                required
-                            />
-                        </div>
+                        <PostMetadata
+                            title={ title }
+                            setTitle={ setTitle }
+                            slug={ slug }
+                            setSlug={ setSlug }
+                            metaTitle={ metaTitle }
+                            setMetaTitle={ setMetaTitle }
+                            metaDescription={ metaDescription }
+                            setMetaDescription={ setMetaDescription }
+                            featuredImage={ featuredImage }
+                            setFeaturedImage={ setFeaturedImage }
+                            featuredImageURL={ featuredImageURL }
+                            setFeaturedImageURL={ setFeaturedImageURL }
+                            isPublished={ isPublished }
+                            setIsPublished={ setIsPublished }
+                            excerpt={ excerpt }
+                            setExcerpt={ setExcerpt }
+                            tags={ tags }
+                            setTags={ setTags }
+                            difficultyLevel={ difficultyLevel }
+                            setDifficultyLevel={ setDifficultyLevel }
+                            categories={ categories }
+                            setCategories={ setCategories }
+                            technologies={ technologies }
+                            setTechnologies={ setTechnologies }
+                            readingTime={ readingTime }
+                            setReadingTime={ setReadingTime }
+                        />
 
-                        {/* URL Slug */ }
-                        <div className="space-y-2">
-                            <Label htmlFor="slug">URL Slug</Label>
-                            <Input
-                                id="slug"
-                                name="slug"
-                                value={ slug }
-                                onChange={ ( e ) => setSlug( e.target.value ) }
-                                placeholder="URL Slug"
-                            />
-                        </div>
 
-                        {/* Content Editor */ }
-                        <div className="space-y-2">
-                            <Label htmlFor="content">Content</Label>
-                            <div className="rounded-md border border-input">
-                                <JoditEditor
-                                    ref={ editor }
-                                    value={ content }
-                                    config={ {
-                                        ...config,
-                                        theme: 'dark',
-                                        style: {
-                                            background: 'var(--background)',
-                                            color: 'var(--foreground)'
-                                        },
-                                        colors: {
-                                            background: [ 'var(--background)' ],
-                                            border: [ 'var(--border)' ],
-                                            buttons: [ 'var(--primary)' ],
-                                            icons: [ 'var(--foreground)' ],
-                                            panel: [ 'var(--card)' ],
-                                            text: [ 'var(--foreground)' ],
-                                            textPanels: [ 'var(--foreground)' ]
-                                        }
-                                    } }
-                                    onBlur={ ( newContent ) => setContent( newContent ) }
-                                />
-                            </div>
-                        </div>
+                        <PostEditor
+                            content={ content }
+                            setContent={ setContent }
+                            setShowDiagramModal={ setShowDiagramModal }
+                        />
 
-                        {/* Meta Title */ }
-                        <div className="space-y-2">
-                            <Label htmlFor="metaTitle">Meta Title</Label>
-                            <Input
-                                id="metaTitle"
-                                name="metaTitle"
-                                value={ metaTitle }
-                                onChange={ ( e ) => setMetaTitle( e.target.value ) }
-                                placeholder="Meta Title"
-                            />
-                        </div>
-
-                        {/* Meta Description */ }
-                        <div className="space-y-2">
-                            <Label htmlFor="metaDescription">Meta Description</Label>
-                            <Textarea
-                                id="metaDescription"
-                                name="metaDescription"
-                                value={ metaDescription }
-                                onChange={ ( e ) => setMetaDescription( e.target.value ) }
-                                placeholder="Meta Description"
-                            />
-                        </div>
-
-                        {/* Featured Image */ }
-                        <div className="space-y-2">
-                            <Label htmlFor="featuredImage">Featured Image</Label>
-                            <Input
-                                id="featuredImage"
-                                type="file"
-                                onChange={ handleImageChange }
-                                accept="image/*"
-                                className="cursor-pointer"
-                            />
-                            { featuredImageURL && (
-                                <div className="mt-2">
-                                    <img
-                                        src={ featuredImageURL }
-                                        alt="Featured"
-                                        className="mt-2 h-48 w-full rounded-lg object-cover"
-                                    />
-                                    <Button
-                                        type="button"
-
-                                        onClick={ () =>
-                                        {
-                                            setFeaturedImageURL( '' );
-                                            setFeaturedImage( null );
-                                        } }
-                                        className="mt-2 text-cyan-700"
-                                    >
-                                        Remove Image
-                                    </Button>
-                                </div>
-                            ) }
-                        </div>
-
-                        {/* Published Checkbox */ }
-                        <div className="flex items-center space-x-2">
-                            <Checkbox
-                                id="isPublished"
-                                checked={ isPublished }
-                                onCheckedChange={ ( checked ) =>
-                                    setIsPublished( checked as boolean )
-                                }
-                            />
-                            <Label htmlFor="isPublished">Published</Label>
-                        </div>
-
-                        {/* Excerpt */ }
-                        <div className="space-y-2">
-                            <Label htmlFor="excerpt">Excerpt</Label>
-                            <Textarea
-                                id="excerpt"
-                                name="excerpt"
-                                value={ excerpt }
-                                onChange={ ( e ) => setExcerpt( e.target.value ) }
-                                placeholder="Excerpt"
-                            />
-                        </div>
-
-                        {/* Tags */ }
-                        <div className="space-y-2">
-                            <Label htmlFor="tags">Tags (comma-separated)</Label>
-                            <Input
-                                id="tags"
-                                name="tags"
-                                value={ tags.join( ', ' ) }
-                                onChange={ ( e ) =>
-                                    setTags( e.target.value.split( ',' ).map( ( tag ) => tag.trim() ) )
-                                }
-                                placeholder="Tags (comma-separated)"
-                            />
-                        </div>
-
-                        {/* Submit Button */ }
                         <Button
                             type="submit"
-                            className="w-full text-xl bg-primary text-primary-foreground hover:bg-primary/90 "
+                            className="w-full text-xl bg-primary text-primary-foreground hover:bg-primary/90"
                             disabled={ loading }
                         >
                             { loading ? 'Updating...' : 'Update Post' }
