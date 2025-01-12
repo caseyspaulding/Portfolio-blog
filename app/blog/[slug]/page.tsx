@@ -24,18 +24,18 @@ export async function generateMetadata ( { params }: { params: Promise<{ slug: s
     }
 
     return {
-        title: post.metaTitle || post.title,
-        description: post.metaDescription || post.excerpt || post.content.slice( 0, 160 ),
+        title: post.title,
+        description: post.excerpt || post.content.slice( 0, 160 ),
         openGraph: {
-            title: post.metaTitle || post.title,
-            description: post.metaDescription || post.excerpt || post.content.slice( 0, 160 ),
+            title: post.title,
+            description: post.excerpt || post.content.slice( 0, 160 ),
             url: `https://CaseySpaulding.com/blog/${ resolvedParams.slug }`, // Update to your website URL
             images: post.featuredImage ? [ { url: post.featuredImage, alt: post.title } ] : [],
         },
         twitter: {
             card: 'summary_large_image',
-            title: post.metaTitle || post.title,
-            description: post.metaDescription || post.excerpt || post.content.slice( 0, 160 ),
+            title: post.title,
+            description: post.excerpt || post.content.slice( 0, 160 ),
             images: post.featuredImage ? [ { url: post.featuredImage, alt: post.title } ] : [],
         },
     };
@@ -72,13 +72,15 @@ export default async function BlogPost ( { params }: { params: Promise<{ slug: s
     let tags;
     try
     {
-        tags = post.tags ? JSON.parse( post.tags ) : [];
+        // Parse JSON if possible, then split the tags on commas
+        tags = post.tags
+            ? JSON.parse( post.tags ).flatMap( ( tag: string ) => tag.split( ',' ).map( ( t ) => t.trim() ) )
+            : [];
     } catch ( error )
     {
-        // If JSON.parse fails, it’s likely just a plain string
-        tags = [ post.tags ];
+        // If JSON.parse fails, split the plain string on commas
+        tags = post.tags ? post.tags.split( ',' ).map( ( t ) => t.trim() ) : [];
     }
-
 
     return (
         <>
@@ -90,13 +92,13 @@ export default async function BlogPost ( { params }: { params: Promise<{ slug: s
                         <div className="relative mb-8 flex flex-col md:flex-row items-center md:items-stretch">
                             <div className="md:w-2/3 flex flex-col justify-center p-4 bg-white dark:bg-black rounded-tl-xl rounded-bl-xl">
                                 <div className="flex flex-wrap gap-2 mb-4">
-                                    { tags
+                                    { tags.length > 0
                                         ? tags.map( ( tag: string, index: number ) => (
                                             <span
                                                 key={ index }
                                                 className="inline-block bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded"
                                             >
-                                                { tag.trim() }
+                                                { tag }
                                             </span>
                                         ) )
                                         : null }

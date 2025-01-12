@@ -1,8 +1,9 @@
 // app/actions/blogActions.ts
 'use server';
 
+import { BlogPost } from '@/components/BlogCard';
 import { db } from '@/db';
-import { authors, BlogDiagram, blogPosts } from '@/db/schemas/schema';
+import { authors, BlogDiagram, blogPosts, Category, DifficultyLevel } from '@/db/schemas/schema';
 import { eq } from 'drizzle-orm';
 import { revalidatePath } from 'next/cache';
 
@@ -27,7 +28,7 @@ interface Author
 }
 
 
-import type { BlogPost, Category, DifficultyLevel } from '@/db/schemas/schema';
+
 
 type FilterParams = {
     category?: Category | 'all';
@@ -49,7 +50,7 @@ export async function getFilteredBlogPosts ( filters: FilterParams )
             return { success: false, error: 'Failed to fetch posts' };
         }
 
-        let filtered = response.data as BlogPost[];
+        let filtered = response.data
         console.log( 'Server Action - Initial posts count:', filtered.length );
 
         // Apply filters on the server
@@ -121,15 +122,19 @@ export async function getBlogPostBySlug ( slug: string ): Promise<BlogPostWithAu
             .select( {
                 post: {
                     id: blogPosts.id,
-                    slug: blogPosts.slug,  // Added missing field
+                    slug: blogPosts.slug,
                     title: blogPosts.title,
                     content: blogPosts.content,
                     excerpt: blogPosts.excerpt,
-                    authorId: blogPosts.authorId,  // Added missing field
+                    authorId: blogPosts.authorId,
                     createdAt: blogPosts.createdAt,
                     updatedAt: blogPosts.updatedAt,
-                    publishedAt: blogPosts.publishedAt,  // Added missing field
+                    publishedAt: blogPosts.publishedAt,
                     tags: blogPosts.tags,
+                    categories: blogPosts.categories,
+                    technologies: blogPosts.technologies,
+                    readingTime: blogPosts.readingTime,
+                    difficultyLevel: blogPosts.difficultyLevel,
                     metaTitle: blogPosts.metaTitle,
                     metaDescription: blogPosts.metaDescription,
                     featuredImage: blogPosts.featuredImage,
@@ -153,25 +158,14 @@ export async function getBlogPostBySlug ( slug: string ): Promise<BlogPostWithAu
             return null;
         }
 
-        // Parse diagrams from JSONB if they exist
-        let parsedDiagrams: BlogDiagram[] = [];
-        if ( result.post.diagrams )
-        {
-            try
-            {
-                parsedDiagrams = typeof result.post.diagrams === 'string'
-                    ? JSON.parse( result.post.diagrams )
-                    : result.post.diagrams;
-            } catch ( e )
-            {
-                console.error( 'Error parsing diagrams:', e );
-            }
-        }
+        const parsedDiagrams = Array.isArray( result.post.diagrams )
+            ? result.post.diagrams
+            : [];
 
         const post: BlogPostWithAuthor = {
             ...result.post,
             diagrams: parsedDiagrams,
-            author: result.author,
+            author: result.author, // Allow `null` to propagate
         };
 
         return post;
@@ -230,7 +224,7 @@ export async function getAllBlogPosts ()
                 ? result.post.technologies
                 : [],
             // Add the author information
-           
+
         } ) )
 
         return {
@@ -252,14 +246,22 @@ export async function createBlogPost ( formData: FormData )
     const title = formData.get( 'title' ) as string;
     const content = formData.get( 'content' ) as string;
     const excerpt = ( formData.get( 'excerpt' ) as string ) || '';
-    const authorId = 1; // Assuming 1 is your hardcoded author ID
+    const authorId = 1;
     const tags = ( formData.get( 'tags' ) as string )?.split( ',' ).map( tag => tag.trim() ).join( ',' ) || '';
     let slug = formData.get( 'slug' ) as string;
     const featuredImage = formData.get( 'featuredImage' ) as string;
     const metaTitle = formData.get( 'metaTitle' ) as string;
     const metaDescription = formData.get( 'metaDescription' ) as string;
     const isPublished = formData.get( 'isPublished' ) === 'true';
-    const diagrams = JSON.parse( formData.get( 'diagrams' ) as string );
+    const diagrams = JSON.parse( formData.get( 'diagrams' ) as string || '[]' );
+    const readingTime = parseInt( formData.get( 'readingTime' ) as string, 10 ) || null;
+    const difficultyLevel = formData.get( 'difficultyLevel' ) as DifficultyLevel || null;
+    const categories = JSON.parse( formData.get( 'categories' ) as string || '[]' );
+    console.log( 'Parsed categories:', categories );
+    const technologies = JSON.parse( formData.get( 'technologies' ) as string || '[]' );
+
+    const publishedAt = isPublished ? new Date() : null;    // Set publishedAt if post is published
+
     if ( !slug )
     {
         slug = generateSlug( title );
@@ -267,33 +269,37 @@ export async function createBlogPost ( formData: FormData )
 
     try
     {
-        // Check if the post with the same slug already exists
+        // Check for slug conflict
         const existingPosts = await db.select().from( blogPosts ).where( eq( blogPosts.slug, slug ) );
         if ( existingPosts.length > 0 )
         {
             return { success: false, message: 'A post with this slug already exists.' };
         }
+        console.log( 'Categories being inserted into DB:', categories );
 
-        // Insert the new blog post into the database
+        // Insert new blog post
         await db.insert( blogPosts ).values( {
             title,
             content,
             excerpt,
-            authorId, // Use authorId directly without needing a lookup
+            authorId,
             tags,
-            diagrams, // Add diagrams to the insert
+            diagrams,
             slug,
             featuredImage,
             metaTitle,
             metaDescription,
             isPublished,
+            readingTime,
+            difficultyLevel,
+            publishedAt,
+            categories,
+            technologies,
             createdAt: new Date(),
             updatedAt: new Date(),
         } );
 
-        // Revalidate the blog path to update the page
         revalidatePath( '/blog' );
-
         return { success: true, message: 'Post created successfully!' };
     } catch ( error )
     {

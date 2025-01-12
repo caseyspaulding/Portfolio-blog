@@ -43,6 +43,32 @@ import { Badge } from "@/components/ui/badge";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { cn } from '@/cn';
 
+
+const categoryOptions = [
+  'Web Development',
+  'Mobile Development',
+  'DevOps',
+  'Data Science',
+  'Machine Learning',
+  'Cybersecurity'
+];
+
+const technologyOptions = [
+  'React',
+  'Node.js',
+  'Python',
+  'TypeScript',
+  'Docker',
+  'AWS'
+];
+
+const difficultyOptions = [
+  'Beginner',
+  'Intermediate',
+  'Advanced',
+  'Expert'
+];
+
 interface DiagramData
 {
   id: string;
@@ -86,6 +112,8 @@ const BlogPostForm: React.FC = () =>
   const [ postImage, setPostImage ] = useState<File | null>( null );
   const [ diagrams, setDiagrams ] = useState<DiagramData[]>( [] );
   const [ showDiagramModal, setShowDiagramModal ] = useState( false );
+  const [ categories, setCategories ] = useState<string[]>( [] );
+  const [ technologies, setTechnologies ] = useState<string[]>( [] );
   const [ currentDiagram, setCurrentDiagram ] = useState( {
     content: '',
     title: ''
@@ -96,6 +124,13 @@ const BlogPostForm: React.FC = () =>
   const [ openCategories, setOpenCategories ] = useState( false );
   const [ openTechnologies, setOpenTechnologies ] = useState( false );
 
+
+  const calculateReadingTime = ( text: string ): number =>
+  {
+    const wordsPerMinute = 200; // Average reading speed
+    const textLength = text.trim().split( /\s+/ ).length;
+    return Math.ceil( textLength / wordsPerMinute );
+  };
   // Initialize Prism.js when content changes
   useEffect( () =>
   {
@@ -446,6 +481,7 @@ const BlogPostForm: React.FC = () =>
     {
       toast.error( 'Invalid diagram syntax. Please check your Mermaid code.' );
       console.error( 'Mermaid syntax error:', error );
+      return;
     }
   };
 
@@ -501,7 +537,7 @@ const BlogPostForm: React.FC = () =>
         difficultyLevel,
         ...tags.split( ',' ).map( t => t.trim() ).filter( t => t )
       ].join( ', ' );
-
+      const readingTime = calculateReadingTime( content );
       const formData = new FormData();
       formData.append( 'title', title );
       formData.append( 'content', content );
@@ -513,7 +549,13 @@ const BlogPostForm: React.FC = () =>
       formData.append( 'metaTitle', metaTitle );
       formData.append( 'metaDescription', metaDescription );
       formData.append( 'isPublished', isPublished.toString() );
+      formData.append( 'categories', JSON.stringify( categories ) );
+      console.log( 'CATAGORIES data:', categories );
+      formData.append( 'technologies', JSON.stringify( technologies ) );
+      formData.append( 'difficultyLevel', difficultyLevel );
+      formData.append( 'readingTime', readingTime.toString() );
       formData.append( 'featuredImage', imageUrl );
+      formData.append( 'publishedAt', new Date().toISOString() );
 
       const response: CreateBlogPostResponse = await createBlogPost( formData );
       if ( response.success )
@@ -663,7 +705,7 @@ const BlogPostForm: React.FC = () =>
                       <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                     </Button>
                   </PopoverTrigger>
-                  <PopoverContent className="w-full p-0">
+                  <PopoverContent className="w-full bg-white p-0">
                     <Command>
                       <CommandInput placeholder="Search categories..." />
                       <CommandEmpty>No category found.</CommandEmpty>
@@ -673,11 +715,12 @@ const BlogPostForm: React.FC = () =>
                             key={ category }
                             onSelect={ () =>
                             {
-                              setSelectedCategories( ( prev ) =>
-                                prev.includes( category )
-                                  ? prev.filter( ( item ) => item !== category )
-                                  : [ ...prev, category ]
-                              )
+                              // Update selectedCategories and call setCategories to persist
+                              const updatedCategories = selectedCategories.includes( category )
+                                ? selectedCategories.filter( ( item ) => item !== category )
+                                : [ ...selectedCategories, category ];
+                              setSelectedCategories( updatedCategories );
+                              setCategories( updatedCategories ); // Ensure persistence in the database
                             } }
                           >
                             <Check
@@ -700,11 +743,16 @@ const BlogPostForm: React.FC = () =>
                     { selectedCategories.map( ( category ) => (
                       <Badge
                         key={ category }
-                        variant="secondary"
+                        variant="default"
                         className="cursor-pointer"
-                        onClick={ () => setSelectedCategories( prev =>
-                          prev.filter( c => c !== category )
-                        ) }
+                        onClick={ () =>
+                        {
+                          const updatedCategories = selectedCategories.filter(
+                            ( c ) => c !== category
+                          );
+                          setSelectedCategories( updatedCategories );
+                          setCategories( updatedCategories ); // Ensure persistence in the database
+                        } }
                       >
                         { category } ×
                       </Badge>
@@ -713,16 +761,17 @@ const BlogPostForm: React.FC = () =>
                 ) }
               </div>
 
+
               {/* Technologies */ }
               <div className="space-y-2">
                 <Label>Technologies</Label>
                 <Popover open={ openTechnologies } onOpenChange={ setOpenTechnologies }>
                   <PopoverTrigger asChild>
                     <Button
-                      variant="ghost"
+                      variant='bordered'
                       role="combobox"
                       aria-expanded={ openTechnologies }
-                      className="w-full justify-between"
+                      className="w-full justify-between "
                     >
                       { selectedTechnologies.length > 0
                         ? `${ selectedTechnologies.length } selected`
@@ -730,7 +779,7 @@ const BlogPostForm: React.FC = () =>
                       <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                     </Button>
                   </PopoverTrigger>
-                  <PopoverContent className="w-full p-0">
+                  <PopoverContent className="w-full bg-white p-0">
                     <Command>
                       <CommandInput placeholder="Search technologies..." />
                       <CommandEmpty>No technology found.</CommandEmpty>
@@ -740,18 +789,19 @@ const BlogPostForm: React.FC = () =>
                             key={ tech }
                             onSelect={ () =>
                             {
-                              setSelectedTechnologies( ( prev ) =>
-                                prev.includes( tech )
-                                  ? prev.filter( ( item ) => item !== tech )
-                                  : [ ...prev, tech ]
-                              )
+                              // Update selectedTechnologies and call setTechnologies to persist
+                              const updatedTechnologies = selectedTechnologies.includes( tech )
+                                ? selectedTechnologies.filter( ( item ) => item !== tech )
+                                : [ ...selectedTechnologies, tech ];
+                              setSelectedTechnologies( updatedTechnologies );
+                              setTechnologies( updatedTechnologies ); // Ensure persistence in the database
                             } }
                           >
                             <Check
                               className={ cn(
                                 "mr-2 h-4 w-4",
                                 selectedTechnologies.includes( tech )
-                                  ? "opacity-100"
+                                  ? "opacity-50"
                                   : "opacity-0"
                               ) }
                             />
@@ -767,11 +817,16 @@ const BlogPostForm: React.FC = () =>
                     { selectedTechnologies.map( ( tech ) => (
                       <Badge
                         key={ tech }
-                        variant="outline"
+                        variant="default"
                         className="cursor-pointer"
-                        onClick={ () => setSelectedTechnologies( prev =>
-                          prev.filter( t => t !== tech )
-                        ) }
+                        onClick={ () =>
+                        {
+                          const updatedTechnologies = selectedTechnologies.filter(
+                            ( t ) => t !== tech
+                          );
+                          setSelectedTechnologies( updatedTechnologies );
+                          setTechnologies( updatedTechnologies ); // Ensure persistence in the database
+                        } }
                       >
                         { tech } ×
                       </Badge>
@@ -779,6 +834,7 @@ const BlogPostForm: React.FC = () =>
                   </div>
                 ) }
               </div>
+
             </div>
             {/* Excerpt */ }
             <div className="space-y-2">
@@ -817,7 +873,7 @@ const BlogPostForm: React.FC = () =>
                   ref={ editor }
                   value={ content }
                   config={ config }
-                  
+
                   onBlur={ ( newContent ) =>
                   {
                     if ( newContent !== content )
@@ -863,7 +919,7 @@ const BlogPostForm: React.FC = () =>
             </div>
 
             {/* Submit Button */ }
-            <Button type="submit" className="w-full">
+            <Button type="submit" className="w-full bg-green-400">
               Create Post
             </Button>
           </form>

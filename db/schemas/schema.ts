@@ -163,9 +163,6 @@ export const formResponseDetails = pgTable( 'form_response_details', {
 } );
 
 
-
-
-
 // Tags Table
 export const tags = pgTable( 'tags', {
     id: uuid( 'id' ).primaryKey().default( sql`uuid_generate_v4()` ),
@@ -173,11 +170,6 @@ export const tags = pgTable( 'tags', {
     createdAt: timestamp( 'created_at' ).default( sql`now()` ),
     updatedAt: timestamp( 'updated_at' ).default( sql`now()` )
 } );
-
-
-
-
-
 
 
 // Org Members Table
@@ -275,10 +267,10 @@ export const blogPosts = pgTable( 'blog_posts', {
 
     // New fields
     readingTime: integer( 'reading_time' ), // in minutes
-    difficultyLevel: varchar( 'difficulty_level', { length: 50 } )
-        .$type<DifficultyLevel>(), // Use your DIFFICULTY_LEVEL type
-    categories: jsonb( 'categories' ).$type<Category[]>(), // JSON array of categories
-    technologies: jsonb( 'technologies' ).$type<string[]>(), // JSON array of technologies
+    difficultyLevel: varchar( 'difficulty_level', { length: 50 } ),
+
+    categories: jsonb( 'categories' ),
+    technologies: jsonb( 'technologies' ),
 
     // Existing fields
     createdAt: timestamp( 'created_at' ).defaultNow().notNull(),
@@ -291,18 +283,6 @@ export const blogPosts = pgTable( 'blog_posts', {
     isPublished: boolean( 'is_published' ).default( false ),
 } );
 
-// Enhanced BlogPost type
-export type BlogPost = typeof blogPosts.$inferSelect & {
-    diagrams: BlogDiagram[];
-    categories: Category[];
-    technologies: string[];
-    author?: {
-        name: string;
-        slug: string;
-        bio: string | null;
-        avatarUrl: string | null;
-    };
-};
 
 
 // Authors Table
