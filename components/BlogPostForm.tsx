@@ -43,32 +43,6 @@ import { Badge } from "@/components/ui/badge";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { cn } from '@/cn';
 
-
-const categoryOptions = [
-  'Web Development',
-  'Mobile Development',
-  'DevOps',
-  'Data Science',
-  'Machine Learning',
-  'Cybersecurity'
-];
-
-const technologyOptions = [
-  'React',
-  'Node.js',
-  'Python',
-  'TypeScript',
-  'Docker',
-  'AWS'
-];
-
-const difficultyOptions = [
-  'Beginner',
-  'Intermediate',
-  'Advanced',
-  'Expert'
-];
-
 interface DiagramData
 {
   id: string;
@@ -359,7 +333,6 @@ const BlogPostForm: React.FC = () =>
 
 
 
-
   const extractDiagramsFromContent = ( htmlContent: string ): DiagramData[] =>
   {
     const parser = new DOMParser();
@@ -550,7 +523,6 @@ const BlogPostForm: React.FC = () =>
       formData.append( 'metaDescription', metaDescription );
       formData.append( 'isPublished', isPublished.toString() );
       formData.append( 'categories', JSON.stringify( categories ) );
-      console.log( 'CATAGORIES data:', categories );
       formData.append( 'technologies', JSON.stringify( technologies ) );
       formData.append( 'difficultyLevel', difficultyLevel );
       formData.append( 'readingTime', readingTime.toString() );

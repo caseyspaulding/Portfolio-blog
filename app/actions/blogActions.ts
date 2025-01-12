@@ -257,9 +257,7 @@ export async function createBlogPost ( formData: FormData )
     const readingTime = parseInt( formData.get( 'readingTime' ) as string, 10 ) || null;
     const difficultyLevel = formData.get( 'difficultyLevel' ) as DifficultyLevel || null;
     const categories = JSON.parse( formData.get( 'categories' ) as string || '[]' );
-    console.log( 'Parsed categories:', categories );
     const technologies = JSON.parse( formData.get( 'technologies' ) as string || '[]' );
-
     const publishedAt = isPublished ? new Date() : null;    // Set publishedAt if post is published
 
     if ( !slug )
