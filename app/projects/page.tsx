@@ -44,7 +44,7 @@ Features:
     Features:
       - Custom content management dashboard
       - Next.js 14 with TypeScript for type safety
-      - Specialized Jodit WYSIWYG editor
+      - Custom Jodit WYSIWYG editor
       - Code syntax highlighting
       - Mermaid diagram support
       - PostgreSQL with Drizzle ORM`,
@@ -56,7 +56,7 @@ Features:
       "/images/screenshots/casey-blog-diagrams.jpg"
     ],
     github: 'https://github.com/caseyspaulding',
-    liveDemo: 'https://caseyspaulding.com',
+    liveDemo: 'https://www.caseyspaulding.com',
   },
 ];
 
