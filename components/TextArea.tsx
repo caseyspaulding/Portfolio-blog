@@ -31,7 +31,7 @@ export const TextArea = ( {
 		<div className="flex flex-col mb-4">
 			{/* Label */ }
 			{ !hideLabel && (
-				<label htmlFor={ name } className="mb-2 text-gray-700 font-medium">
+				<label htmlFor={ name } className="mb-2 text-gray-900 font-bold">
 					{ label || name }
 				</label>
 			) }
@@ -47,7 +47,7 @@ export const TextArea = ( {
 				defaultValue={ defaultValue }
 				value={ value }
 				placeholder={ placeholder }
-				className="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-700 bg-gray-100 resize-none" // Tailwind styles
+				className="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-400 text-gray-900 bg-gray-100 resize-none" // Tailwind styles
 			/>
 		</div>
 	);

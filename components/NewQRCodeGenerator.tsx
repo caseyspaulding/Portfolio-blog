@@ -94,7 +94,7 @@ export default function NewQRCodeGenerator ()
                 <Button
                   type="button"
                   onClick={ handleDownload }
-                  className="mt-5 px-4 py-2  bg-yellow-300 text-green-700 font-semibold rounded-3xl  hover:bg-yellow-400 "
+                  className="mt-5 px-4 py-2  bg-green-300 text-green-700 font-semibold rounded-3xl  hover:bg-green-400 "
                 >
                   Download QR Code
                 </Button>
