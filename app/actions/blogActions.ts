@@ -42,7 +42,8 @@ export async function getFilteredBlogPosts ( filters: FilterParams )
     try
     {
         const response = await getAllBlogPosts();
-        console.log( 'Server Action - getAllBlogPosts response:', response );
+      
+        
 
         if ( !response.success )
         {
@@ -51,7 +52,7 @@ export async function getFilteredBlogPosts ( filters: FilterParams )
         }
 
         let filtered = response.data
-        console.log( 'Server Action - Initial posts count:', filtered.length );
+      
 
         // Apply filters on the server
         if ( filters.category && filters.category !== 'all' )
@@ -67,7 +68,7 @@ export async function getFilteredBlogPosts ( filters: FilterParams )
             filtered = filtered.filter( post =>
                 post.difficultyLevel === filters.difficultyLevel
             );
-            console.log( `Server Action - After difficulty filter (${ filters.difficultyLevel }):`, filtered.length );
+         
         }
 
         console.log( 'Server Action - Final filtered posts:', filtered );

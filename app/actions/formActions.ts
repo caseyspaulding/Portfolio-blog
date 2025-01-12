@@ -141,7 +141,7 @@ export async function saveFormAction ( input: SaveFormInput )
 
 export async function getActiveForms ( orgId: string )
 {
-  
+
 
   try
   {
@@ -168,7 +168,7 @@ export async function getActiveForms ( orgId: string )
 
 export async function getDraftForms ( orgId: string )
 {
-  
+
 
   try
   {
@@ -193,7 +193,7 @@ export async function getDraftForms ( orgId: string )
 
 export async function getArchivedForms ( orgId: string )
 {
- 
+
 
   try
   {
@@ -237,7 +237,7 @@ export async function getOrganizationById ( orgId: string ): Promise<string | nu
 
 export async function submitForm ( formData: FormData, formId: string, orgId: string )
 {
-  
+
   const responses: { [ key: string ]: any } = {};
 
   for ( const [ key, value ] of formData.entries() )
@@ -293,7 +293,7 @@ export async function submitForm ( formData: FormData, formId: string, orgId: st
 
 export async function publishForm ( formId: string, orgId: string )
 {
-  
+
 
   try
   {
@@ -342,7 +342,7 @@ export async function getForms ( organizationId: string )
 
 export async function deleteForm ( formId: string, orgId: string )
 {
- 
+
 
   try
   {
@@ -368,7 +368,7 @@ export async function deleteForm ( formId: string, orgId: string )
 
 export async function archiveForm ( formId: string, orgId: string )
 {
- 
+
 
   try
   {
