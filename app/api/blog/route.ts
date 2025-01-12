@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { db } from '@/db';
-
+import { NextApiRequest, NextApiResponse } from 'next';
+import { getFilteredBlogPosts } from '@/app/actions/blogActions';
 import { eq } from 'drizzle-orm';
 import { authors, blogPosts } from '@/db/schemas/schema';
 
@@ -76,4 +77,27 @@ export async function GET ()
         .orderBy( blogPosts.createdAt );
 
     return NextResponse.json( posts );
+}
+
+
+export default async function handler ( req: NextApiRequest, res: NextApiResponse )
+{
+    if ( req.method === 'POST' )
+    {
+        const { category, difficultyLevel } = req.body;
+
+        const result = await getFilteredBlogPosts( { category, difficultyLevel } );
+
+        if ( result.success )
+        {
+            res.status( 200 ).json( result );
+        } else
+        {
+            res.status( 500 ).json( { error: result.error } );
+        }
+    } else
+    {
+        res.setHeader( 'Allow', [ 'POST' ] );
+        res.status( 405 ).end( `Method ${ req.method } Not Allowed` );
+    }
 }

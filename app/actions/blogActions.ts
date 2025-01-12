@@ -4,7 +4,7 @@
 import { BlogPost } from '@/components/BlogCard';
 import { db } from '@/db';
 import { authors, BlogDiagram, blogPosts, Category, DifficultyLevel } from '@/db/schemas/schema';
-import { eq } from 'drizzle-orm';
+import { eq, sql } from 'drizzle-orm';
 import { revalidatePath } from 'next/cache';
 
 export type BlogPostWithAuthor = BlogPost & {
@@ -34,59 +34,6 @@ type FilterParams = {
     category?: Category | 'all';
     difficultyLevel?: DifficultyLevel | 'all';
 };
-
-export async function getFilteredBlogPosts ( filters: FilterParams )
-{
-   
-
-    try
-    {
-        const response = await getAllBlogPosts();
-      
-        
-
-        if ( !response.success )
-        {
-            console.error( 'Server Action - Failed to fetch posts:', response );
-            return { success: false, error: 'Failed to fetch posts' };
-        }
-
-        let filtered = response.data
-      
-
-        // Apply filters on the server
-        if ( filters.category && filters.category !== 'all' )
-        {
-            filtered = filtered.filter( post =>
-                post.categories?.includes( filters.category as Category )
-            );
-            console.log( `Server Action - After category filter (${ filters.category }):`, filtered.length );
-        }
-
-        if ( filters.difficultyLevel && filters.difficultyLevel !== 'all' )
-        {
-            filtered = filtered.filter( post =>
-                post.difficultyLevel === filters.difficultyLevel
-            );
-         
-        }
-
-        console.log( 'Server Action - Final filtered posts:', filtered );
-
-        return {
-            success: true,
-            data: filtered
-        };
-    } catch ( error )
-    {
-        console.error( 'Server Action - Error in getFilteredBlogPosts:', error );
-        return {
-            success: false,
-            error: 'Failed to fetch and filter posts'
-        };
-    }
-}
-
 
 
 
@@ -384,5 +331,61 @@ export async function deletePost ( postId: number )
     {
         console.error( 'Error deleting post:', error );
         return { success: false, error };
+    }
+}
+
+
+interface FilterOptions
+{
+    category: string | 'all';
+    difficultyLevel: string | 'all';
+}
+
+export async function getFilteredBlogPosts ( filters: FilterOptions )
+{
+    const { category, difficultyLevel } = filters;
+
+    try
+    {
+        // Build the query dynamically
+        const query = db
+            .select()
+            .from( blogPosts )
+            .where( ( conditions ) =>
+            {
+                const filters = [];
+
+                // Filter by category if not 'all'
+                if ( category !== 'all' )
+                {
+                    filters.push(
+                        sql`JSONB_CONTAINS(${ blogPosts.categories }, ${ JSON.stringify( [ category ] ) })`
+                    );
+                }
+
+                // Filter by difficulty if not 'all'
+                if ( difficultyLevel !== 'all' )
+                {
+                    filters.push( sql`${ blogPosts.difficultyLevel } = ${ difficultyLevel }` );
+                }
+
+                // Combine filters with AND
+                return filters.length > 0 ? sql`${sql.join(filters, ' AND ')}` : undefined;
+            } )
+            .orderBy( sql`${ blogPosts.createdAt } DESC` ); // Order by latest posts
+
+        const results = await query.execute();
+
+        return {
+            success: true,
+            data: results,
+        };
+    } catch ( error )
+    {
+        console.error( 'Server - Error fetching filtered posts:', error );
+        return {
+            success: false,
+            error: (error as Error).message,
+        };
     }
 }
