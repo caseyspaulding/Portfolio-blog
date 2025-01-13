@@ -1,5 +1,5 @@
 import type { PropsWithChildren } from 'react';
-import { Poppins } from 'next/font/google';
+import { Rubik } from 'next/font/google';
 import './globals.css';
 import ClientProviders from './ClientProviders';
 import { Analytics } from '@vercel/analytics/react';
@@ -14,8 +14,8 @@ export const metadata = {
     description: 'Personal blog and portfolio of Casey Spaulding, Full Stack Developer',
 };
 
-const poppins = Poppins( {
-    weight: [ '400' ],
+const poppins = Rubik( {
+    weight: [ '400', '500', '700', '800', '900' ],
     subsets: [ 'latin' ],
     display: 'swap',
 } );
@@ -28,23 +28,23 @@ export default function RootLayout ( { children }: PropsWithChildren )
             <body className="bg-background text-foreground">
                 <Providers> {/* Wrap entire app with ThemeProvider */ }
                     <ThemeProviders>
-                    <NavBar /> {/* NavBar now wrapped in ThemeProvider */ }
-                    <Analytics />
-                    <Script
-                        strategy="afterInteractive"
-                        src="https://www.googletagmanager.com/gtag/js?id=G-M6F4XVZM25"
-                    />
-                    <Script id="gtag-init" strategy="afterInteractive">
-                        { `
+                        <NavBar /> {/* NavBar now wrapped in ThemeProvider */ }
+                        <Analytics />
+                        <Script
+                            strategy="afterInteractive"
+                            src="https://www.googletagmanager.com/gtag/js?id=G-M6F4XVZM25"
+                        />
+                        <Script id="gtag-init" strategy="afterInteractive">
+                            { `
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
               gtag('config', 'G-M6F4XVZM25');
             `}
-                    </Script>
-                    <ClientProviders>
-                        { children }
-                    </ClientProviders>
+                        </Script>
+                        <ClientProviders>
+                            { children }
+                        </ClientProviders>
                         <FooterTW />
                     </ThemeProviders>
                 </Providers>
