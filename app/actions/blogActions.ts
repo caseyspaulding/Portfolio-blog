@@ -4,7 +4,7 @@
 import { BlogPost } from '@/components/BlogCard';
 import { db } from '@/db';
 import { authors, BlogDiagram, blogPosts, Category, DifficultyLevel } from '@/db/schemas/schema';
-import { eq, sql } from 'drizzle-orm';
+import { eq, sql, desc } from 'drizzle-orm';
 import { revalidatePath } from 'next/cache';
 
 export type BlogPostWithAuthor = BlogPost & {
@@ -123,7 +123,6 @@ export async function getBlogPostBySlug ( slug: string ): Promise<BlogPostWithAu
     }
 }
 
-
 export async function getAllBlogPosts ()
 {
     try
@@ -139,7 +138,6 @@ export async function getAllBlogPosts ()
                     diagrams: blogPosts.diagrams,
                     readingTime: blogPosts.readingTime,
                     difficultyLevel: blogPosts.difficultyLevel,
-                    
                     createdAt: blogPosts.createdAt,
                     updatedAt: blogPosts.updatedAt,
                     publishedAt: blogPosts.publishedAt,
@@ -149,10 +147,10 @@ export async function getAllBlogPosts ()
                     metaDescription: blogPosts.metaDescription,
                     isPublished: blogPosts.isPublished,
                 },
-
             } )
             .from( blogPosts )
-            .where( eq( blogPosts.isPublished, true ) ); // Only get published posts
+            .where( eq( blogPosts.isPublished, true ) ) // Only get published posts
+            .orderBy( desc( blogPosts.publishedAt ) ); // Correctly use desc for sorting
 
         // Transform the results to match the BlogPost type
         const posts = results.map( ( result ) => ( {
@@ -161,21 +159,18 @@ export async function getAllBlogPosts ()
             diagrams: Array.isArray( result.post.diagrams )
                 ? result.post.diagrams
                 : [],
-           
-            // Add the author information
-
-        } ) )
+        } ) );
 
         return {
             success: true,
-            data: posts
+            data: posts,
         };
     } catch ( error )
     {
         console.error( 'Error fetching blog posts:', error );
         return {
             success: false,
-            data: []
+            data: [],
         };
     }
 }

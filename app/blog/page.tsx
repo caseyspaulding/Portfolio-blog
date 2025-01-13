@@ -40,11 +40,14 @@ export default function BlogList ()
 
                 if ( result.success )
                 {
-                    // Transform the data to match the BlogPost type by adding the required author property
-                    const transformedPosts = result.data.map( post => ( {
-                        ...post,
-                        author: null, // or provide a default author object if needed
-                    } ) ) as BlogPost[];
+                    // Transform the data and sort in ascending order, then reverse for descending
+                    const transformedPosts = result.data
+                        .map( ( post ) => ( {
+                            ...post,
+                            author: null, // or provide a default author object if needed
+                        } ) )
+                        .sort( ( a, b ) => new Date( a.publishedAt ?? 0 ).getTime() - new Date( b.publishedAt ?? 0 ).getTime() ) // Sort ascending
+                        .reverse(); // Reverse to descending
 
                     setPosts( transformedPosts );
                 } else
@@ -88,17 +91,12 @@ export default function BlogList ()
                 ) : error ? (
                     <div className="text-center py-12">
                         <h3 className="text-xl font-semibold mb-2 text-red-600 dark:text-red-400">Error Loading Posts</h3>
-                        <p className="text-gray-600 dark:text-gray-400">
-                            { error }
-                        </p>
+                        <p className="text-gray-600 dark:text-gray-400">{ error }</p>
                     </div>
                 ) : posts.length > 0 ? (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         { posts.map( ( post ) => (
-                            <BlogCard
-                                key={ post.id }
-                                post={ post }
-                            />
+                            <BlogCard key={ post.id } post={ post } />
                         ) ) }
                     </div>
                 ) : (
