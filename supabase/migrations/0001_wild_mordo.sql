@@ -1,0 +1,1 @@
+ALTER TABLE "blog_posts" ALTER COLUMN "categories" SET DATA TYPE varchar(255)[];

@@ -269,7 +269,7 @@ export const blogPosts = pgTable( 'blog_posts', {
     readingTime: integer( 'reading_time' ), // in minutes
     difficultyLevel: varchar( 'difficulty_level', { length: 50 } ),
 
-    categories: jsonb( 'categories' ),
+    categories: varchar( "categories", { length: 255 } ).array(),
     technologies: jsonb( 'technologies' ),
 
     // Existing fields

@@ -1,1 +1,0 @@
-ALTER TABLE "blog_posts" ADD COLUMN "diagrams" jsonb DEFAULT '[]';

@@ -1,6 +1,6 @@
 {
-  "id": "4ba9c4c5-dc2c-4a6f-990a-bc5cb263c442",
-  "prevId": "33228109-d368-438f-8f6c-cbc6635948a4",
+  "id": "0be1b0fa-ca8d-4519-98f2-b81b98bd4426",
+  "prevId": "60f00026-39ff-4d2a-9763-32c4a57f1d78",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -115,6 +115,30 @@
           "primaryKey": false,
           "notNull": false,
           "default": "'[]'"
+        },
+        "reading_time": {
+          "name": "reading_time",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "difficulty_level": {
+          "name": "difficulty_level",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "categories": {
+          "name": "categories",
+          "type": "varchar(255)[]",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "technologies": {
+          "name": "technologies",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
         },
         "created_at": {
           "name": "created_at",

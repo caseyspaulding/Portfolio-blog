@@ -79,7 +79,7 @@ export async function getBlogPostBySlug ( slug: string ): Promise<BlogPostWithAu
                     updatedAt: blogPosts.updatedAt,
                     publishedAt: blogPosts.publishedAt,
                     tags: blogPosts.tags,
-                  
+
                     readingTime: blogPosts.readingTime,
                     difficultyLevel: blogPosts.difficultyLevel,
                     metaTitle: blogPosts.metaTitle,
@@ -207,7 +207,7 @@ export async function createBlogPost ( formData: FormData )
         {
             return { success: false, message: 'A post with this slug already exists.' };
         }
-      
+
 
         // Insert new blog post
         await db.insert( blogPosts ).values( {
@@ -356,7 +356,7 @@ export async function getFilteredBlogPosts ( filters: FilterOptions )
                 }
 
                 // Combine filters with AND
-                return filters.length > 0 ? sql`${sql.join(filters, ' AND ')}` : undefined;
+                return filters.length > 0 ? sql`${ sql.join( filters, ' AND ' ) }` : undefined;
             } )
             .orderBy( sql`${ blogPosts.createdAt } DESC` ); // Order by latest posts
 
@@ -371,7 +371,7 @@ export async function getFilteredBlogPosts ( filters: FilterOptions )
         console.error( 'Server - Error fetching filtered posts:', error );
         return {
             success: false,
-            error: (error as Error).message,
+            error: ( error as Error ).message,
         };
     }
 }
