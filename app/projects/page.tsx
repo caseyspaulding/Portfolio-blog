@@ -16,6 +16,33 @@ interface Project
 
 const projects: Project[] = [
   {
+    title: 'CashCRM - Real Estate Investment Platform',
+    description: `A comprehensive CRM system designed for real estate investors and wholesalers.
+    
+Features:
+- Lead management with detailed property analysis
+- Email automation and campaign management
+- Kanban board for deal pipeline visualization
+- Calendar scheduling and task management
+- Multi-tenant organization support
+- Document management with cloud storage
+- Financial analysis and deal tracking
+- Team collaboration tools
+- Mobile-responsive interface`,
+    technologies: [ 'Next.js 14', 'TypeScript', 'PostgreSQL', 'Drizzle ORM', 'AWS', 'Supabase', 'Shadcn UI' ],
+    image: '/images/screenshots/Cash-CRM-dash.png', // Update with actual image path
+    screenshots: [
+      "/images/screenshots/Cash-CRM-dash3.png",
+      "/images/screenshots/Cash-CRM-contact-1.png",
+      "/images/screenshots/Cash-CRM-upload-leads.png",
+      "/images/screenshots/Cash-CRM-upload-leads2.png",
+      "/images/screenshots/Cash-CRM-upload-leads3.png",
+      "/images/screenshots/Cash-CRM-contact-history.png",
+    ], // Update with actual screenshot paths
+    github: 'https://github.com/caseyspaulding/cash-crm',
+    liveDemo: 'https://cash-crm.com',
+  },
+  {
     title: 'Event Ticketing Application',
     description: `A scalable ticketing application built with NextJs and Postgres.
 
@@ -33,6 +60,7 @@ Features:
       "/images/screenshots/ej-checkout.jpg",
       "/images/screenshots/scan-tickets.jpg",
       "/images/screenshots/ej-payouts.jpg",
+
     ],
     github: 'https://github.com/caseyspaulding/EventJacekt-TW',
     liveDemo: 'https://eventjacket.com',

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Github, ExternalLink, ChevronRight, ChevronLeft } from 'lucide-react';
+import { Github, ExternalLink, ChevronRight, ChevronLeft, X, Maximize } from 'lucide-react';
 
 interface ProjectProps
 {
@@ -19,16 +19,37 @@ interface ProjectProps
 const ProjectCard = ( { project }: ProjectProps ) =>
 {
   const [ currentImageIndex, setCurrentImageIndex ] = useState( 0 );
+  const [ isFullScreen, setIsFullScreen ] = useState( false );
+
   const images = [ project.image, ...project.screenshots ];
 
-  const nextImage = () =>
+  const nextImage = ( e?: React.MouseEvent ) =>
   {
+    // Prevent click from also toggling modal if we’re in full screen
+    if ( e ) e.stopPropagation();
     setCurrentImageIndex( ( prev ) => ( prev + 1 ) % images.length );
   };
 
-  const prevImage = () =>
+  const prevImage = ( e?: React.MouseEvent ) =>
   {
+    if ( e ) e.stopPropagation();
     setCurrentImageIndex( ( prev ) => ( prev - 1 + images.length ) % images.length );
+  };
+
+  const openFullScreen = ( e: React.MouseEvent ) =>
+  {
+    // Prevent "click through" if you need it
+    e.stopPropagation();
+    setIsFullScreen( true );
+  };
+
+  const closeFullScreen = ( e?: React.MouseEvent ) =>
+  {
+    // Close only if wrapper or X button is clicked
+    if ( !e || e.target === e.currentTarget )
+    {
+      setIsFullScreen( false );
+    }
   };
 
   return (
@@ -39,7 +60,7 @@ const ProjectCard = ( { project }: ProjectProps ) =>
           <img
             src={ images[ currentImageIndex ] }
             alt={ `${ project.title } screenshot ${ currentImageIndex + 1 }` }
-            className="object-cover w-full h-full"
+            className="object-cover"
           />
 
           {/* Navigation Arrows */ }
@@ -64,6 +85,17 @@ const ProjectCard = ( { project }: ProjectProps ) =>
           <div className="absolute bottom-4 right-4 bg-green/50 text-black px-3 py-1 rounded-full text-sm">
             { currentImageIndex + 1 } / { images.length }
           </div>
+        </div>
+
+        {/* Full Screen Button */ }
+        <div className="mt-4 text-center">
+          <button
+            onClick={ openFullScreen }
+            className="flex items-center gap-2 mx-auto px-4 py-2 rounded-lg bg-green-500 hover:bg-green-700 transition-colors"
+          >
+            <Maximize className="w-5 h-5" />
+            Full Screen
+          </button>
         </div>
       </div>
 
@@ -117,6 +149,53 @@ const ProjectCard = ( { project }: ProjectProps ) =>
           ) }
         </div>
       </div>
+
+      {/* Fullscreen Overlay */ }
+      { isFullScreen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80"
+          onClick={ closeFullScreen }
+        >
+          <div className="relative flex flex-col items-center">
+            {/* Close Button */ }
+            <button
+              className="absolute top-4 right-4 p-2 rounded-full bg-black text-white hover:bg-gray-800 transition-colors"
+              onClick={ () => setIsFullScreen( false ) }
+              aria-label="Close full screen"
+            >
+              <X className="w-6 h-6" />
+            </button>
+
+            {/* Fullscreen Image */ }
+            <img
+              src={ images[ currentImageIndex ] }
+              alt="Fullscreen"
+              className="max-h-[90vh] max-w-[90vw] object-contain"
+            />
+
+            {/* Navigation Arrows (in fullscreen) */ }
+            <button
+              onClick={ prevImage }
+              className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black text-white hover:bg-gray-700 transition-colors"
+              aria-label="Previous image"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+            <button
+              onClick={ nextImage }
+              className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black text-white hover:bg-gray-700 transition-colors"
+              aria-label="Next image"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
+
+            {/* Image Counter in fullscreen */ }
+            <div className="absolute bottom-4 right-4 bg-black bg-opacity-60 text-white px-3 py-1 rounded-full text-sm">
+              { currentImageIndex + 1 } / { images.length }
+            </div>
+          </div>
+        </div>
+      ) }
     </div>
   );
 };
