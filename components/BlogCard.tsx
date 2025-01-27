@@ -80,11 +80,7 @@ export function BlogCard ( { post }: BlogCardProps )
       <CardHeader className="space-y-4">
         <div className="flex items-center justify-between text-sm text-gray-600 dark:text-gray-400">
           <div className="flex items-center space-x-3">
-            { metadata?.difficultyLevel && (
-              <Badge variant="outline" className={ getDifficultyColor( metadata.difficultyLevel ) }>
-                { metadata.difficultyLevel }
-              </Badge>
-            ) }
+
             <div className="flex items-center">
               <Clock className="w-4 h-4 mr-1" />
               { readingTime } min read
