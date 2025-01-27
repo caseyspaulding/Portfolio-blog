@@ -30,9 +30,9 @@ Features:
 - Team collaboration tools
 - Mobile-responsive interface`,
     technologies: [ 'Next.js 14', 'TypeScript', 'PostgreSQL', 'Drizzle ORM', 'AWS', 'Supabase', 'Shadcn UI' ],
-    image: '/images/screenshots/Cash-CRM-dash.png', // Update with actual image path
+    image: '/images/screenshots/Cash-CRM-Dash.png', // Update with actual image path
     screenshots: [
-      "/images/screenshots/Cash-CRM-dash3.png",
+      "/images/screenshots/Cash-CRM-dash2.png",
       "/images/screenshots/Cash-CRM-contact-1.png",
       "/images/screenshots/Cash-CRM-upload-leads.png",
       "/images/screenshots/Cash-CRM-upload-leads2.png",
