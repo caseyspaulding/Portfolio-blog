@@ -71,7 +71,7 @@ export default function BlogList ()
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-14 lg:py-12">
             <header className="max-w-3xl mx-auto text-center mb-16">
                 <h1 className="text-4xl font-bold mb-6 text-gray-800 dark:text-gray-100">
-                    Insights on Technical Articles & System Design
+                    Insights in Tech & System Design
                 </h1>
                 <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">
                     Explore lessons learned from hands-on experience. Discover insights into software architecture, design patterns, and engineering best practices.
