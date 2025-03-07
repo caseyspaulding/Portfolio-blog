@@ -17,7 +17,7 @@ export default function Contact ()
 {
   return (
     <><PageBackground >
-     
+
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-2 py-2 sm:py-2 lg:py-2">
         <div className="bg-background py-24 sm:py-12 mt-16 p-5 mb-14 rounded-lg dark:bg-slate-950 bg-white" >
           <div className="container mx-auto px-4 lg:px-8 mb-8">
@@ -27,8 +27,8 @@ export default function Contact ()
                   <h1 className="text-3xl font-bold tracking-tight">Contact</h1>
                   <p className="mt-4 text-muted-foreground">
                     Contact me directly if you have any questions.{ ' ' }
-                    <a href="mailto:casey@cogstax.com" className="font-semibold text-primary">
-                      casey@cogstax.com
+                    <a href="mailto:casey@REIstacks.com" className="font-semibold text-primary">
+                      casey@REIstacks.com
                     </a>
                   </p>
                   <div className="mt-4 text-muted-foreground">
