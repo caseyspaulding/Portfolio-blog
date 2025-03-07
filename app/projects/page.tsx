@@ -16,7 +16,7 @@ interface Project
 
 const projects: Project[] = [
   {
-    title: 'CashCRM - Real Estate Investment Platform',
+    title: 'REIstacks - Real Estate Investment Platform',
     description: `A comprehensive CRM system designed for real estate investors and wholesalers.
     
 Features:
@@ -39,8 +39,8 @@ Features:
       "/images/screenshots/Cash-CRM-upload-leads3.png",
       "/images/screenshots/Cash-CRM-contact-history.png",
     ], // Update with actual screenshot paths
-    github: 'https://github.com/caseyspaulding/cash-crm',
-    liveDemo: 'https://cash-crm.com',
+
+    liveDemo: 'https://reistacks.com',
   },
   {
     title: 'Event Ticketing Application',
