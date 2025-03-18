@@ -43,15 +43,7 @@ const CaseyAuthorPage = () =>
           </svg>
         ),
       },
-      {
-        name: 'X',
-        href: 'https://x.com/caseyspaulding_',
-        icon: ( props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement> ) => (
-          <svg fill="currentColor" viewBox="0 0 24 24" { ...props }>
-            <path d="M13.6823 10.6218L20.2391 3H18.6854L12.9921 9.61788L8.44486 3H3.2002L10.0765 13.0074L3.2002 21H4.75404L10.7663 14.0113L15.5685 21H20.8131L13.6819 10.6218H13.6823ZM11.5541 13.0956L10.8574 12.0991L5.31391 4.16971H7.70053L12.1742 10.5689L12.8709 11.5655L18.6861 19.8835H16.2995L11.5541 13.096V13.0956Z" />
-          </svg>
-        ),
-      },
+
     ],
   };
 
@@ -59,60 +51,60 @@ const CaseyAuthorPage = () =>
 
   return (
     <>
-     
+
       <div className="min-h-screen text-gray-800 dark:text-gray-200">
-        
-          <div className="container mx-auto px-4 py-12">
-            <div className="flex flex-col items-center">
-              <img
-                src="/images/caseyProfilePic.jpg" // Replace with your image path
-                alt="Casey"
-                className="w-40 h-40 rounded-full mb-6 object-cover shadow-md dark:shadow-gray-700"
-              />
-              <h1 className="text-4xl font-bold mb-2 text-center text-gray-900 dark:text-gray-100">
-                About Casey Spaulding
-              </h1>
-              <p className="text-lg text-gray-700 dark:text-gray-300 text-center mb-4">
-                Welcome to my blog and portfolio site!
-              </p>
-              <div className="flex space-x-4 mb-8">
-                <div className="flex space-x-6">
-                  { navigation.social.map( ( item ) => (
-                    <a
-                      key={ item.name }
-                      href={ item.href }
-                      className="text-blue-700 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <span className="sr-only">{ item.name }</span>
-                      <item.icon aria-hidden="true" className="h-6 w-6" />
-                    </a>
-                  ) ) }
-                </div>
+
+        <div className="container mx-auto px-4 py-12">
+          <div className="flex flex-col items-center">
+            <img
+              src="/images/caseyProfilePic.jpg" // Replace with your image path
+              alt="Casey"
+              className="w-40 h-40 rounded-full mb-6 object-cover shadow-md dark:shadow-gray-700"
+            />
+            <h1 className="text-4xl font-bold mb-2 text-center text-gray-900 dark:text-gray-100">
+              About Casey Spaulding
+            </h1>
+            <p className="text-lg text-gray-700 dark:text-gray-300 text-center mb-4">
+              Welcome to my blog and portfolio site!
+            </p>
+            <div className="flex space-x-4 mb-8">
+              <div className="flex space-x-6">
+                { navigation.social.map( ( item ) => (
+                  <a
+                    key={ item.name }
+                    href={ item.href }
+                    className="text-blue-700 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <span className="sr-only">{ item.name }</span>
+                    <item.icon aria-hidden="true" className="h-6 w-6" />
+                  </a>
+                ) ) }
               </div>
-              <div className="max-w-2xl">
-                <div className="bg-white dark:bg-black p-8 rounded-md shadow-md  max-w-4xl mx-auto">
-                  <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
-                    Hi, I'm <strong>Casey Spaulding</strong>, a experienced full-stack developer, software engineer, and AI enthusiast with a deep love for technology and problem-solving.
-                  </p>
-                  <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
-                    After serving 20 years in the Navy and earning degrees in both software engineering and business management, I’ve dedicated my career to creating innovative solutions that empower individuals and organizations.
-                  </p>
+            </div>
+            <div className="max-w-2xl">
+              <div className="bg-white dark:bg-black p-8 rounded-md shadow-md  max-w-4xl mx-auto">
+                <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
+                  Hi, I'm <strong>Casey Spaulding</strong>, a experienced full-stack developer, software engineer, and AI enthusiast with a deep love for technology and problem-solving.
+                </p>
+                <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
+                  After serving 20 years in the Navy and earning degrees in both software engineering and business management, I’ve dedicated my career to creating innovative solutions that empower individuals and organizations.
+                </p>
 
-                  <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
-                    My journey in the Navy honed my leadership skills and taught me the importance of teamwork and resilience. Over the years, I’ve led teams, managed complex projects, and gained a unique perspective on how to turn ideas into reality. Those experiences have become the backbone of my career as a developer and creator.
-                  </p>
+                <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
+                  My journey in the Navy honed my leadership skills and taught me the importance of teamwork and resilience. Over the years, I’ve led teams, managed complex projects, and gained a unique perspective on how to turn ideas into reality. Those experiences have become the backbone of my career as a developer and creator.
+                </p>
 
-                  <p className="text-lg text-gray-700 dark:text-gray-300">
-                    Through my blog and portfolio, I share insights, projects, and lessons learned from my journey in technology and beyond. My mission is to inspire, educate, and support others as they navigate the exciting world of development and innovation. Thank you for visiting, and I look forward to connecting with you!
-                  </p>
-                </div>
+                <p className="text-lg text-gray-700 dark:text-gray-300">
+                  Through my blog and portfolio, I share insights, projects, and lessons learned from my journey in technology and beyond. My mission is to inspire, educate, and support others as they navigate the exciting world of development and innovation. Thank you for visiting, and I look forward to connecting with you!
+                </p>
               </div>
             </div>
           </div>
         </div>
-      
+      </div>
+
     </>
   );
 };
