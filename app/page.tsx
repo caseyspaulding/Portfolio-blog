@@ -25,12 +25,12 @@ export default function Index ()
     return (
         <>
             <Head>
-                <title>Casey Spaulding - Blog and Portfolio</title>
+                <title>Casey Spaulding - Blog and Portfolio - </title>
                 <meta
                     name="description"
                     content="Personal blog and portfolio of Casey Spaulding, .NET Full Stack Developer"
                 />
-                <meta name="keywords" content="Casey Spaulding, .NET Fulll Stack Developer, Portfolio" />
+                <meta name="keywords" content="Casey Spaulding, .NET Full Stack Developer, Portfolio" />
                 <meta name="robots" content="index, follow" />
                 <link rel="canonical" href="https://caseyspaulding.com" />
                 {/* Open Graph tags */ }

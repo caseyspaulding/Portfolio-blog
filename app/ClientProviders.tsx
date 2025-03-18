@@ -24,7 +24,7 @@ export default function ClientProviders ( { children }: { children: React.ReactN
           window.mermaid?.initialize( {
             startOnLoad: true,
             securityLevel: 'loose',
-            theme: 'dark',
+            theme: 'light',
             themeVariables: {
               // Example: Increase the global font size
               fontSize: '20px',
@@ -44,7 +44,7 @@ export default function ClientProviders ( { children }: { children: React.ReactN
       </Suspense>
       <ProgressBar
         height="3px"
-        color="#22c55e"
+        color="#155ce9"
         options={ { showSpinner: false } }
         shallowRouting
       />
