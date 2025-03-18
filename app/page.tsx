@@ -28,14 +28,14 @@ export default function Index ()
                 <title>Casey Spaulding - Blog and Portfolio</title>
                 <meta
                     name="description"
-                    content="Personal blog and portfolio of Casey Spaulding, Full Stack Developer"
+                    content="Personal blog and portfolio of Casey Spaulding, .NET Full Stack Developer"
                 />
-                <meta name="keywords" content="Casey Spaulding, Developer, Portfolio" />
+                <meta name="keywords" content="Casey Spaulding, .NET Fulll Stack Developer, Portfolio" />
                 <meta name="robots" content="index, follow" />
                 <link rel="canonical" href="https://caseyspaulding.com" />
                 {/* Open Graph tags */ }
                 <meta property="og:title" content="Casey Spaulding - Blog and Portfolio" />
-                <meta property="og:description" content="Full Stack Developer, AI Enthusiast" />
+                <meta property="og:description" content="Full Stack Developer" />
                 <meta property="og:url" content="https://caseyspaulding.com" />
                 <meta property="og:type" content="website" />
                 <meta
@@ -45,10 +45,10 @@ export default function Index ()
                 {/* Twitter meta tags */ }
                 <meta name="twitter:card" content="summary_large_image" />
                 <meta name="twitter:site" content="@CaseySpaulding" />
-                <meta name="twitter:title" content="Casey Spaulding - Blog and Portfolio" />
-                <meta name="twitter:description" content="Full Stack Developer, AI Enthusiast" />
+                <meta name="twitter:title" content="Casey Spaulding - .NET Full Stack Developer - Blog and Portfolio" />
+                <meta name="twitter:description" content=".NET Full Stack Developer" />
             </Head>
-           
+
             <main>
                 <Hero theme={ theme || 'light' } />
                 {/* Other sections of your homepage */ }

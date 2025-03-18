@@ -11,7 +11,7 @@ import ThemeProviders from './ThemeProvider';
 
 export const metadata = {
     title: 'Casey Spaulding - Blog and Portfolio',
-    description: 'Personal blog and portfolio of Casey Spaulding, Full Stack Developer',
+    description: 'Personal blog and portfolio of Casey Spaulding, .NET Full Stack Developer',
 };
 
 const poppins = Rubik( {

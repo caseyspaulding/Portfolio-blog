@@ -38,11 +38,11 @@ export default function Hero ( { theme }: { theme: string } )
                 Casey Spaulding
               </h1>
               <p className="text-xl text-gray-700 dark:text-gray-300 mb-6">
-                Software Engineer | AI Enthusiast | Lifelong Learner
+                .NET Full Stack Developer | Lifelong Learner
               </p>
               <p className="text-lg text-gray-600 dark:text-gray-200 mb-8 max-w-lg mx-auto md:mx-0">
-                I specialize in full-stack development, cloud technologies, and artificial intelligence.
-                Currently exploring machine learning frameworks and building innovative solutions that drive impact.
+                I specialize in .NET full-stack development, cloud technologies, and artificial intelligence.
+                Currently exploring machine learning frameworks.
               </p>
               <div className="flex justify-center md:justify-start space-x-4 mb-8">
                 {/* Social Links */ }
