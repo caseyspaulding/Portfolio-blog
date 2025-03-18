@@ -63,7 +63,7 @@ const FreeToolsDropdown = ( { onNavigate }: { onNavigate?: () => void } ) => (
           <Link
             href="/tools/qrcode"
             className={ `${ active
-              ? 'bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900 dark:to-indigo-900 text-blue-600 dark:text-blue-400'
+              ? 'bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900 dark:to-indigo-900 text-blue-200 dark:text-blue-400'
               : 'text-gray-700 dark:text-gray-300'
               } block px-4 py-3 text-sm transition-colors duration-150` }
             onClick={ onNavigate }
@@ -73,20 +73,7 @@ const FreeToolsDropdown = ( { onNavigate }: { onNavigate?: () => void } ) => (
         ) }
       </HeadlessMenu.Item>
       {/* Add more tool links here */ }
-      <HeadlessMenu.Item>
-        { ( { active } ) => (
-          <Link
-            href="/tools/calculator"
-            className={ `${ active
-              ? 'bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900 dark:to-indigo-900 text-blue-600 dark:text-blue-400'
-              : 'text-gray-700 dark:text-gray-300'
-              } block px-4 py-3 text-sm transition-colors duration-150` }
-            onClick={ onNavigate }
-          >
-            Calculator
-          </Link>
-        ) }
-      </HeadlessMenu.Item>
+
     </div>
   </HeadlessMenu.Items>
 );
@@ -250,7 +237,7 @@ export default function Navbar ()
                     <div className="py-2 space-y-2">
                       <Link
                         href="/tools/qrcode"
-                        className="block text-gray-700 hover:text-white dark:text-gray-300 dark:hover:text-blue-400"
+                        className="block text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400"
                         onClick={ closeMenu }
                       >
                         QR Code Generator
