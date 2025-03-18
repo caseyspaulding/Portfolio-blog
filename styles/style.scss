@@ -49,7 +49,7 @@ $black-color: #0d1028;
 $white-color: #ffffff;
 $yellow-color: #efa506;
 $paragraph-color: #707070;
-$green-light-color: #8dc63f;
+$blue-light-color: #8dc63f;
 $gradient-color: linear-gradient(to bottom,rgba(0,0,0,0) 80%,$main-color 80%);
 $transition: .5s;
 $font-size: 15px;
@@ -861,7 +861,7 @@ Main Banner CSS
 }
 .countdown-area {
     padding: 50px 0;
-    background: $green-light-color;
+    background: $blue-light-color;
 
     .event-countdown {
         position: relative;
@@ -1482,7 +1482,7 @@ Speakers CSS
             color: $main-color;
 
             &:hover, &:focus {
-                color: $green-light-color;
+                color: $blue-light-color;
             }
         }
         span {
@@ -1846,7 +1846,7 @@ Schedule CSS
                 background-color: $sub-main-color;
             }
             &:nth-child(3) {
-                background-color: $green-light-color;
+                background-color: $blue-light-color;
             }
             &:nth-child(4) {
                 background-color: $yellow-color;
@@ -2167,7 +2167,7 @@ Schedule CSS
         }
         &:nth-child(4) {
             .schedule-date {
-                background: $green-light-color;
+                background: $blue-light-color;
             }
         }
         &:nth-child(5) {
@@ -2182,7 +2182,7 @@ Schedule CSS
         }
         &:nth-child(7) {
             .schedule-date {
-                background: $green-light-color;
+                background: $blue-light-color;
             }
         }
     }
@@ -2222,7 +2222,7 @@ Schedule CSS
         &:nth-child(4) {
             .single-schedule-item {
                 .schedule-date {
-                    background-color: $green-light-color;
+                    background-color: $blue-light-color;
                 }
             }
         }
@@ -2243,7 +2243,7 @@ Schedule CSS
         &:nth-child(7) {
             .single-schedule-item {
                 .schedule-date {
-                    background-color: $green-light-color;
+                    background-color: $blue-light-color;
                 }
             }
         }
@@ -2510,7 +2510,7 @@ FunFacts CSS
     &:nth-child(4) {
         .single-funfact, .funFact {
             h3 {
-                color: $green-light-color;
+                color: $blue-light-color;
             }
         }
     }
@@ -2711,25 +2711,25 @@ Pricing CSS
     &:nth-child(3) {
         .pricing-table-box {
             .pricingTable-header {
-                background: $green-light-color;
+                background: $blue-light-color;
             }
             .btn-primary {
                 &::before, &::after {
-                    background: $green-light-color;
+                    background: $blue-light-color;
                 }
             }
         }
         .pricing-plan {
             h3 {
-                background: $green-light-color;
+                background: $blue-light-color;
 
                 span {
-                    color: $green-light-color;
+                    color: $blue-light-color;
                 }
             }
             .btn-primary {
                 &::before, &::after {
-                    background: $green-light-color;
+                    background: $blue-light-color;
                 }
             }
         }
@@ -2758,7 +2758,7 @@ Partner CSS
         }
         &.gold-sponsor {
             h3 {
-                color: $green-light-color;
+                color: $blue-light-color;
             }
         }
     }
@@ -2855,7 +2855,7 @@ Blog CSS
         padding: 25px;
 
         .date {
-            color: $green-light-color;
+            color: $blue-light-color;
             display: block;
             text-transform: uppercase;
             font: {
@@ -2906,7 +2906,7 @@ Blog CSS
                 top: 70px;
     
                 a {
-                    background: $green-light-color;
+                    background: $blue-light-color;
                     color: $white-color;
                 }
             }
@@ -3009,7 +3009,7 @@ Blog CSS
             top: 40px;
 
             a {
-                background: $green-light-color;
+                background: $blue-light-color;
                 color: $white-color;
             }
         }
@@ -3404,7 +3404,7 @@ Signup CSS
         }
         b {
             font-weight: unset;
-            color: $green-light-color;
+            color: $blue-light-color;
         }
     }
     h3 {

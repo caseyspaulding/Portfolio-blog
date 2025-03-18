@@ -30,7 +30,7 @@ export default function ChatOptions ( { closeChat }: ChatOptionsProps )
         Live Chat
       </button>
       <button
-        className="w-full py-2 px-4 bg-green-500 text-white rounded-md"
+        className="w-full py-2 px-4 bg-blue-500 text-white rounded-md"
         onClick={ () => setChatType( 'ai' ) }
       >
         AI Chat

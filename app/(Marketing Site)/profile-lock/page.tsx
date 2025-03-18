@@ -24,11 +24,11 @@ export default function ProfileLockPage() {
                         alt=""
                         width={32}
                         height={32}
-                        src="/images/users/bonnie-green.png"
+                        src="/images/users/bonnie-blue.png"
                         className="h-8 w-8 rounded-full"
                     />
                     <h2 className="mb-3 text-2xl font-bold text-gray-900 dark:text-white lg:text-3xl">
-                        Bonnie Green
+                        Bonnie blue
                     </h2>
                 </div>
                 <p className="text-base font-normal text-gray-500 dark:text-gray-400">

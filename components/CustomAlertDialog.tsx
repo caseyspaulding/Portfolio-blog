@@ -13,7 +13,7 @@ import
   } from '@/components/ui/alert-dialog'
 
 const alertTypeStyles = {
-  success: 'text-green-600',
+  success: 'text-blue-600',
   error: 'text-red-600',
   warning: 'text-orange-500',
   info: 'text-blue-600'

@@ -10,7 +10,7 @@ export default function SignUpSuccess ()
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <div className="flex justify-center mb-4">
-            <CheckCircle className="w-16 h-16 text-green-500" />
+            <CheckCircle className="w-16 h-16 text-blue-500" />
           </div>
           <CardTitle className="text-2xl font-bold">Sign Up Successful!</CardTitle>
         </CardHeader>

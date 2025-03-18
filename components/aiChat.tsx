@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
-interface AIChatProps {
+interface AIChatProps
+{
   closeChat: () => void;
 }
 
@@ -33,7 +34,7 @@ export default function AIChat ( { closeChat }: AIChatProps )
       <h2 className="text-lg font-bold mb-4">AI Chat</h2>
       <div className="space-y-4">
         { messages.map( ( msg, idx ) => (
-          <p key={ idx } className={ msg.sender === 'ai' ? 'text-green-600' : '' }>
+          <p key={ idx } className={ msg.sender === 'ai' ? 'text-blue-600' : '' }>
             { msg.content }
           </p>
         ) ) }

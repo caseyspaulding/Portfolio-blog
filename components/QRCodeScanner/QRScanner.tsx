@@ -155,7 +155,7 @@ export default function QrCodeScanner ( { qrCodeSuccessCallback, onError }: QrCo
         style={ { paddingBottom: '100%' } }
       >
         { !isScanning && (
-          <div className="absolute inset-0 flex items-center justify-center bg-green-500 text-white z-0">
+          <div className="absolute inset-0 flex items-center justify-center bg-blue-500 text-white z-0">
             {/* Lowered z-index */ }
             <div className="text-center mb-4">
               <img src="/images/QRCODE.jpg" alt="Scanning Placeholder" className="" />
@@ -190,7 +190,7 @@ export default function QrCodeScanner ( { qrCodeSuccessCallback, onError }: QrCo
           </select>
           <Button
             onClick={ handleToggleScan }
-            className={ `px-4 py-2 w-full rounded-3xl ${ isScanning ? 'bg-red-500 hover:bg-red-600' : 'bg-green-500 hover:bg-green-600'
+            className={ `px-4 py-2 w-full rounded-3xl ${ isScanning ? 'bg-red-500 hover:bg-red-600' : 'bg-blue-500 hover:bg-blue-600'
               } text-white text-xl` }
           >
             { isScanning ? 'Stop Scanning' : 'Start Scanning' }

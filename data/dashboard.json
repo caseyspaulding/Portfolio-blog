@@ -93,8 +93,8 @@
             "spent": 320
         },
         {
-            "name": "Bonnie Green",
-            "avatar": "/images/users/bonnie-green.png",
+            "name": "Bonnie blue",
+            "avatar": "/images/users/bonnie-blue.png",
             "email": "email@flowbite.com",
             "spent": 3467
         },
@@ -155,7 +155,7 @@
     },
     "transactions": [
         {
-            "transaction": "Payment from Bonnie Green",
+            "transaction": "Payment from Bonnie blue",
             "date": "Apr 23, 2021",
             "amount": 2300,
             "status": "Completed"
@@ -209,7 +209,7 @@
             "status": "In progress"
         },
         {
-            "transaction": "Payment from Bonnie Green",
+            "transaction": "Payment from Bonnie blue",
             "date": "Mar 23, 2021",
             "amount": 560,
             "status": "Completed"

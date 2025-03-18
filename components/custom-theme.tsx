@@ -36,15 +36,15 @@ export function CustomTheme({ children }: PropsWithChildren) {
               color: {
                 info: "bg-blue-50 hover:bg-blue-100 focus:ring-blue-400 dark:bg-blue-900 dark:text-blue-300 dark:hover:bg-blue-800 dark:hover:text-blue-200",
                 gray: "bg-gray-50 text-gray-500 hover:bg-gray-200 focus:ring-gray-400 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white",
-                green:
+                blue:
                   "bg-gray-50 text-gray-500 hover:bg-gray-200 focus:ring-gray-400 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white",
               },
             },
             color: {
               info: "border-blue-500 bg-blue-50 text-blue-700 dark:bg-blue-900 dark:text-blue-800",
               gray: "border-gray-500 bg-gray-50 text-gray-700 dark:bg-gray-700 dark:text-gray-300",
-              green:
-                "border-gray-600 bg-green-50 text-green-700 dark:bg-gray-700 dark:text-gray-300",
+              blue:
+                "border-gray-600 bg-blue-50 text-blue-700 dark:bg-gray-700 dark:text-gray-300",
             },
           },
           badge: {

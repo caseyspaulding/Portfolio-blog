@@ -42,7 +42,7 @@ export function BlogCard ( { post }: BlogCardProps )
   {
     switch ( level?.toLowerCase() )
     {
-      case 'beginner': return 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400';
+      case 'beginner': return 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400';
       case 'intermediate': return 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400';
       case 'advanced': return 'bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-400';
       default: return '';
@@ -86,7 +86,7 @@ export function BlogCard ( { post }: BlogCardProps )
               { readingTime } min read
             </div>
             { hasDiagrams && (
-              <div className="flex items-center text-green-600 dark:text-green-400">
+              <div className="flex items-center text-blue-600 dark:text-blue-400">
                 <FileCode className="w-4 h-4 mr-1" />
                 { post.diagrams.length } diagram{ post.diagrams.length !== 1 ? 's' : '' }
               </div>
@@ -103,7 +103,7 @@ export function BlogCard ( { post }: BlogCardProps )
 
         <Link
           href={ `/blog/${ post.slug }` }
-          className="block group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors duration-300"
+          className="block group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300"
         >
           <h2 className="text-xl font-bold leading-tight line-clamp-2">
             { post.title }
@@ -146,7 +146,7 @@ export function BlogCard ( { post }: BlogCardProps )
             <div>
               <Link
                 href={ `/authors/${ post.author.slug }` }
-                className="text-sm font-medium hover:text-green-600 dark:hover:text-green-400"
+                className="text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400"
               >
                 { post.author.name }
               </Link>
@@ -161,11 +161,11 @@ export function BlogCard ( { post }: BlogCardProps )
         <Button
           asChild
           variant="ghost"
-          className="w-full group-hover:bg-green-50 dark:group-hover:bg-green-950/30"
+          className="w-full group-hover:bg-blue-50 dark:group-hover:bg-blue-950/30"
         >
           <Link
             href={ `/blog/${ post.slug }` }
-            className="flex items-center justify-center space-x-2 text-green-600 dark:text-green-400"
+            className="flex items-center justify-center space-x-2 text-blue-600 dark:text-blue-400"
           >
             <span>Read Full Article</span>
             <svg

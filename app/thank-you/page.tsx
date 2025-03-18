@@ -28,7 +28,7 @@ export default function ThankYouPage ()
               <div className="flex flex-col rounded-2xl items-center p-8 space-y-6 bg-white">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="text-green-500 w-24 h-24 sm:w-28 sm:h-28"
+                  className="text-blue-500 w-24 h-24 sm:w-28 sm:h-28"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"

@@ -82,7 +82,7 @@ const ProjectCard = ( { project }: ProjectProps ) =>
           </div>
 
           {/* Image Counter */ }
-          <div className="absolute bottom-4 right-4 bg-green/50 text-black px-3 py-1 rounded-full text-sm">
+          <div className="absolute bottom-4 right-4 bg-blue/50 text-black px-3 py-1 rounded-full text-sm">
             { currentImageIndex + 1 } / { images.length }
           </div>
         </div>
@@ -91,7 +91,7 @@ const ProjectCard = ( { project }: ProjectProps ) =>
         <div className="mt-4 text-center">
           <button
             onClick={ openFullScreen }
-            className="flex items-center gap-2 mx-auto px-4 py-2 rounded-lg bg-green-500 hover:bg-green-700 transition-colors"
+            className="flex items-center gap-2 mx-auto px-4 py-2 rounded-lg bg-blue-500 hover:bg-blue-700 transition-colors"
           >
             <Maximize className="w-5 h-5" />
             Full Screen
@@ -114,7 +114,7 @@ const ProjectCard = ( { project }: ProjectProps ) =>
               { project.technologies.map( ( tech ) => (
                 <span
                   key={ tech }
-                  className="px-3 py-1 bg-green-500/10 text-green-600 rounded-full text-sm"
+                  className="px-3 py-1 bg-blue-500/10 text-blue-600 rounded-full text-sm"
                 >
                   { tech }
                 </span>
@@ -130,7 +130,7 @@ const ProjectCard = ( { project }: ProjectProps ) =>
               href={ project.github }
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-2 bg-green-500 hover:bg-gray-700 rounded-lg transition-colors"
+              className="flex items-center gap-2 px-4 py-2 bg-blue-500 hover:bg-gray-700 rounded-lg transition-colors"
             >
               <Github className="w-5 h-5" />
               View Code
@@ -141,7 +141,7 @@ const ProjectCard = ( { project }: ProjectProps ) =>
               href={ project.liveDemo }
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-2 bg-green-500 hover:bg-green-700 rounded-lg transition-colors"
+              className="flex items-center gap-2 px-4 py-2 bg-blue-500 hover:bg-blue-700 rounded-lg transition-colors"
             >
               <ExternalLink className="w-5 h-5" />
               Live Demo

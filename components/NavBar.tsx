@@ -24,7 +24,7 @@ const NavItem = ( {
     return (
       <li className="relative">
         <HeadlessMenu>
-          <HeadlessMenu.Button className="flex items-center text-black hover:text-green-600 dark:text-gray-200 dark:hover:text-green-400">
+          <HeadlessMenu.Button className="flex items-center text-black hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400">
             { text }
             <ChevronDown className="ml-1 h-4 w-4" />
           </HeadlessMenu.Button>
@@ -37,7 +37,7 @@ const NavItem = ( {
     <li>
       <Link
         href={ href }
-        className="text-black hover:text-green-600 dark:text-gray-200 dark:hover:text-green-400"
+        className="text-black hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400"
         onClick={ onNavigate }
       >
         { text }
@@ -53,7 +53,7 @@ const FreeToolsDropdown = ( { onNavigate }: { onNavigate?: () => void } ) => (
         { ( { active } ) => (
           <Link
             href="/tools/qrcode"
-            className={ `${ active ? 'bg-green-100 dark:bg-green-700 text-gray-900 dark:text-white' : 'text-gray-700 dark:text-gray-300'
+            className={ `${ active ? 'bg-blue-100 dark:bg-blue-700 text-gray-900 dark:text-white' : 'text-gray-700 dark:text-gray-300'
               } block px-4 py-2 text-sm` }
             onClick={ onNavigate }
           >
@@ -84,7 +84,7 @@ export default function Navbar ()
   };
 
   return (
-    <nav className="sticky top-0 bg-white dark:bg-black dark:shadow-green-400 shadow-lg z-50">
+    <nav className="sticky top-0 bg-white dark:bg-black dark:shadow-blue-400 shadow-lg z-50">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
@@ -148,7 +148,7 @@ export default function Navbar ()
               <NavItem href="/contact" text="Contact" onNavigate={ closeMenu } />
               <li>
                 <HeadlessMenu>
-                  <HeadlessMenu.Button className="flex items-center text-black hover:text-green-600 dark:text-gray-200 dark:hover:text-green-400">
+                  <HeadlessMenu.Button className="flex items-center text-black hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400">
                     Free Tools
                     <ChevronDown className="ml-1 h-4 w-4" />
                   </HeadlessMenu.Button>

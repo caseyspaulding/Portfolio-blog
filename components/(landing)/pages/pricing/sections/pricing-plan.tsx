@@ -202,7 +202,7 @@ function PricingCardBenefit({ icon: Icon, title, disabled }: PricingCardBenefit)
         <li className={twMerge('flex space-x-3', disabled && 'line-through decoration-gray-500')}>
             <Icon
                 className={twMerge(
-                    'h-5 w-5 shrink-0 text-green-400',
+                    'h-5 w-5 shrink-0 text-blue-400',
                     disabled && 'text-gray-400 dark:text-gray-500'
                 )}
             />

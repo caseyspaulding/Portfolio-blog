@@ -76,7 +76,7 @@ const UserProfileHeaderDashboard: React.FC<UserProfileHeaderProps> = ( {
                   <dd className="mt-3 flex items-center text-sm font-medium capitalize text-gray-500 sm:mr-6 sm:mt-0">
                     <CheckCircleIcon
                       aria-hidden="true"
-                      className="mr-1.5 h-5 w-5 flex-shrink-0 text-green-500"
+                      className="mr-1.5 h-5 w-5 flex-shrink-0 text-blue-500"
                     />
                     { accountStatus }
                   </dd>

@@ -79,9 +79,9 @@ function VerificationStep ( { step, title, value, completed }: {
   return (
     <Card>
       <CardHeader className="flex flex-row items-center space-x-2">
-        <div className={ `w-8 h-8 rounded-full flex items-center justify-center ${ completed ? 'bg-green-100' : 'bg-blue-100' }` }>
+        <div className={ `w-8 h-8 rounded-full flex items-center justify-center ${ completed ? 'bg-blue-100' : 'bg-blue-100' }` }>
           { completed ? (
-            <Check className="h-4 w-4 text-green-600" />
+            <Check className="h-4 w-4 text-blue-600" />
           ) : (
             <span className="text-blue-600 font-semibold">{ step }</span>
           ) }

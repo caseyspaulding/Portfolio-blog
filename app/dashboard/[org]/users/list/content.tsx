@@ -136,7 +136,7 @@ const AddUserModal: FC = function () {
                         <div className="flex flex-col gap-2">
                             <Label htmlFor="lastName">Last Name</Label>
                             <div>
-                                <TextInput id="lastName" name="lastName" placeholder="Green" />
+                                <TextInput id="lastName" name="lastName" placeholder="blue" />
                             </div>
                         </div>
                         <div className="flex flex-col gap-2">
@@ -249,7 +249,7 @@ const AllUsersTable: FC<UsersListPageData> = function ({ usersList }) {
                                 <div
                                     className={twMerge(
                                         'mr-2 h-2.5 w-2.5 rounded-full',
-                                        user.status === 'Active' ? 'bg-green-400' : 'bg-red-500'
+                                        user.status === 'Active' ? 'bg-blue-400' : 'bg-red-500'
                                     )}
                                 />
                                 {user.status}
@@ -292,7 +292,7 @@ const EditUserModal: FC = function () {
                         <div className="flex flex-col gap-2">
                             <Label htmlFor="lastName">Last Name</Label>
                             <div>
-                                <TextInput id="lastName" name="lastName" placeholder="Green" />
+                                <TextInput id="lastName" name="lastName" placeholder="blue" />
                             </div>
                         </div>
                         <div className="flex flex-col gap-2">

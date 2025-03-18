@@ -891,7 +891,7 @@ const BlogPostForm: React.FC = () =>
             </div>
 
             {/* Submit Button */ }
-            <Button type="submit" className="w-full bg-green-400">
+            <Button type="submit" className="w-full bg-blue-400">
               Create Post
             </Button>
           </form>

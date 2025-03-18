@@ -37,7 +37,7 @@ export function Benefits() {
                                     </td>
                                     <td className="p-4">
                                         <svg
-                                            className="ml-auto h-5 w-5 text-green-400"
+                                            className="ml-auto h-5 w-5 text-blue-400"
                                             fill="currentColor"
                                             viewBox="0 0 20 20"
                                             xmlns="http://www.w3.org/2000/svg"
@@ -51,7 +51,7 @@ export function Benefits() {
                                     </td>
                                     <td className="p-4">
                                         <svg
-                                            className="ml-auto h-5 w-5 text-green-400"
+                                            className="ml-auto h-5 w-5 text-blue-400"
                                             fill="currentColor"
                                             viewBox="0 0 20 20"
                                             xmlns="http://www.w3.org/2000/svg"
@@ -65,7 +65,7 @@ export function Benefits() {
                                     </td>
                                     <td className="rounded-r-lg p-4">
                                         <svg
-                                            className="ml-auto h-5 w-5 text-green-400"
+                                            className="ml-auto h-5 w-5 text-blue-400"
                                             fill="currentColor"
                                             viewBox="0 0 20 20"
                                             xmlns="http://www.w3.org/2000/svg"
@@ -84,7 +84,7 @@ export function Benefits() {
                                     </td>
                                     <td className="p-4">
                                         <svg
-                                            className="ml-auto h-5 w-5 text-green-400"
+                                            className="ml-auto h-5 w-5 text-blue-400"
                                             fill="currentColor"
                                             viewBox="0 0 20 20"
                                             xmlns="http://www.w3.org/2000/svg"
@@ -98,7 +98,7 @@ export function Benefits() {
                                     </td>
                                     <td className="p-4">
                                         <svg
-                                            className="ml-auto h-5 w-5 text-green-400"
+                                            className="ml-auto h-5 w-5 text-blue-400"
                                             fill="currentColor"
                                             viewBox="0 0 20 20"
                                             xmlns="http://www.w3.org/2000/svg"
@@ -112,7 +112,7 @@ export function Benefits() {
                                     </td>
                                     <td className="rounded-r-lg p-4">
                                         <svg
-                                            className="ml-auto h-5 w-5 text-green-400"
+                                            className="ml-auto h-5 w-5 text-blue-400"
                                             fill="currentColor"
                                             viewBox="0 0 20 20"
                                             xmlns="http://www.w3.org/2000/svg"
@@ -131,7 +131,7 @@ export function Benefits() {
                                     </td>
                                     <td className="p-4">
                                         <svg
-                                            className="ml-auto h-5 w-5 text-green-400"
+                                            className="ml-auto h-5 w-5 text-blue-400"
                                             fill="currentColor"
                                             viewBox="0 0 20 20"
                                             xmlns="http://www.w3.org/2000/svg"
@@ -145,7 +145,7 @@ export function Benefits() {
                                     </td>
                                     <td className="p-4">
                                         <svg
-                                            className="ml-auto h-5 w-5 text-green-400"
+                                            className="ml-auto h-5 w-5 text-blue-400"
                                             fill="currentColor"
                                             viewBox="0 0 20 20"
                                             xmlns="http://www.w3.org/2000/svg"
@@ -159,7 +159,7 @@ export function Benefits() {
                                     </td>
                                     <td className="rounded-r-lg p-4">
                                         <svg
-                                            className="ml-auto h-5 w-5 text-green-400"
+                                            className="ml-auto h-5 w-5 text-blue-400"
                                             fill="currentColor"
                                             viewBox="0 0 20 20"
                                             xmlns="http://www.w3.org/2000/svg"
@@ -192,7 +192,7 @@ export function Benefits() {
                                     </td>
                                     <td className="p-4">
                                         <svg
-                                            className="ml-auto h-5 w-5 text-green-400"
+                                            className="ml-auto h-5 w-5 text-blue-400"
                                             fill="currentColor"
                                             viewBox="0 0 20 20"
                                             xmlns="http://www.w3.org/2000/svg"
@@ -206,7 +206,7 @@ export function Benefits() {
                                     </td>
                                     <td className="rounded-r-lg p-4">
                                         <svg
-                                            className="ml-auto h-5 w-5 text-green-400"
+                                            className="ml-auto h-5 w-5 text-blue-400"
                                             fill="currentColor"
                                             viewBox="0 0 20 20"
                                             xmlns="http://www.w3.org/2000/svg"
@@ -239,7 +239,7 @@ export function Benefits() {
                                     </td>
                                     <td className="p-4">
                                         <svg
-                                            className="ml-auto h-5 w-5 text-green-400"
+                                            className="ml-auto h-5 w-5 text-blue-400"
                                             fill="currentColor"
                                             viewBox="0 0 20 20"
                                             xmlns="http://www.w3.org/2000/svg"
@@ -253,7 +253,7 @@ export function Benefits() {
                                     </td>
                                     <td className="rounded-r-lg p-4">
                                         <svg
-                                            className="ml-auto h-5 w-5 text-green-400"
+                                            className="ml-auto h-5 w-5 text-blue-400"
                                             fill="currentColor"
                                             viewBox="0 0 20 20"
                                             xmlns="http://www.w3.org/2000/svg"
@@ -286,7 +286,7 @@ export function Benefits() {
                                     </td>
                                     <td className="p-4">
                                         <svg
-                                            className="ml-auto h-5 w-5 text-green-400"
+                                            className="ml-auto h-5 w-5 text-blue-400"
                                             fill="currentColor"
                                             viewBox="0 0 20 20"
                                             xmlns="http://www.w3.org/2000/svg"
@@ -300,7 +300,7 @@ export function Benefits() {
                                     </td>
                                     <td className="rounded-r-lg p-4">
                                         <svg
-                                            className="ml-auto h-5 w-5 text-green-400"
+                                            className="ml-auto h-5 w-5 text-blue-400"
                                             fill="currentColor"
                                             viewBox="0 0 20 20"
                                             xmlns="http://www.w3.org/2000/svg"
@@ -347,7 +347,7 @@ export function Benefits() {
                                     </td>
                                     <td className="rounded-r-lg p-4">
                                         <svg
-                                            className="ml-auto h-5 w-5 text-green-400"
+                                            className="ml-auto h-5 w-5 text-blue-400"
                                             fill="currentColor"
                                             viewBox="0 0 20 20"
                                             xmlns="http://www.w3.org/2000/svg"
@@ -448,7 +448,7 @@ export function Benefits() {
                                     </td>
                                     <td className="rounded-r-lg p-4">
                                         <svg
-                                            className="ml-auto h-5 w-5 text-green-400"
+                                            className="ml-auto h-5 w-5 text-blue-400"
                                             fill="currentColor"
                                             viewBox="0 0 20 20"
                                             xmlns="http://www.w3.org/2000/svg"
@@ -495,7 +495,7 @@ export function Benefits() {
                                     </td>
                                     <td className="rounded-r-lg p-4">
                                         <svg
-                                            className="ml-auto h-5 w-5 text-green-400"
+                                            className="ml-auto h-5 w-5 text-blue-400"
                                             fill="currentColor"
                                             viewBox="0 0 20 20"
                                             xmlns="http://www.w3.org/2000/svg"
@@ -542,7 +542,7 @@ export function Benefits() {
                                     </td>
                                     <td className="rounded-r-lg p-4">
                                         <svg
-                                            className="ml-auto h-5 w-5 text-green-400"
+                                            className="ml-auto h-5 w-5 text-blue-400"
                                             fill="currentColor"
                                             viewBox="0 0 20 20"
                                             xmlns="http://www.w3.org/2000/svg"

@@ -191,7 +191,7 @@ export default function MembersPage ()
                         className="w-full border border-gray-300 rounded-lg p-2"
                       />
                       { feedback && (
-                        <p className={ feedback.success ? 'text-green-500' : 'text-red-500' }>
+                        <p className={ feedback.success ? 'text-blue-500' : 'text-red-500' }>
                           { feedback.message }
                         </p>
                       ) }

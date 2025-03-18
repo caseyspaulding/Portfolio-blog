@@ -21,7 +21,7 @@ export default function LandingPage ()
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="flex items-center space-x-2 bg-green-100 p-2 rounded-md">
+          <div className="flex items-center space-x-2 bg-blue-100 p-2 rounded-md">
             <Input
               value=""
               readOnly
