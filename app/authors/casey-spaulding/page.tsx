@@ -22,8 +22,8 @@ const CaseyAuthorPage = () =>
     "url": "https://www.CaseySpaulding.com/authors/casey-spaulding",
     "image": "https://www.CaseySpaulding.com/images/caseyandlaura.jpg", // Replace with your image URL
     "sameAs": [
-      "https://www.linkedin.com/in/caseyspaulding/",
-      "https://x.com/caseyspaulding_"
+      "https://www.linkedin.com/in/caseyspaulding/"
+     
     ],
     "jobTitle": "Founder and Lead Developer",
     "worksFor": {

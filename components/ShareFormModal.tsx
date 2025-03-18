@@ -89,13 +89,7 @@ export default function ShareFormModal ( { form, orgId }: ShareFormModalProps )
         shareUrl
       ) }&quote=${ encodeURIComponent( 'Please fill out this form' ) }`,
     },
-    {
-      name: 'X',
-      icon: faXTwitter,
-      url: `https://x.com/intent/tweet?text=${ encodeURIComponent(
-        `Please fill out this form: ${ shareUrl }`
-      ) }`,
-    },
+   
   ];
 
   return (

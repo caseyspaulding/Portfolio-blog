@@ -52,7 +52,7 @@ export default function ShareModal ( { eventName }: ShareModalProps )
       ) }&app_id=2283279935382121`,
     },
     { name: 'Facebook', icon: faFacebook, url: `https://www.facebook.com/sharer/sharer.php?u=${ encodeURIComponent( currentUrl ) }&quote=${ encodeURIComponent( `Join me at ${ eventName }` ) }` },
-    { name: 'X', icon: faXTwitter, url: `https://x.com/intent/tweet?text=${ encodeURIComponent( `Join me at ${ eventName }: ${ currentUrl }` ) }` },
+ 
   ];
 
   return (

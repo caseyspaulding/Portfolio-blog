@@ -24,11 +24,7 @@ const navigation = {
       href: "https://www.facebook.com/CaseySpaulding",
       icon: Facebook,
     },
-    {
-      name: "X",
-      href: "https://x.com/CaseySpaulding_",
-      icon: Twitter, // For X (formerly Twitter)
-    },
+
   ],
 };
 
