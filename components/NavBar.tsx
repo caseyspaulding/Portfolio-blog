@@ -27,8 +27,8 @@ const NavItem = ( {
       <li className="relative">
         <HeadlessMenu>
           <HeadlessMenu.Button className={ `flex items-center font-medium transition-colors duration-200 ${ active
-              ? 'text-blue-600 dark:text-blue-400'
-              : 'text-gray-700 hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400'
+            ? 'text-blue-600 dark:text-blue-400'
+            : 'text-gray-700 hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400'
             }` }>
             { text }
             <ChevronDown className="ml-1 h-4 w-4" />
@@ -44,8 +44,8 @@ const NavItem = ( {
       <Link
         href={ href }
         className={ `font-medium transition-colors duration-200 ${ active
-            ? 'text-blue-600 dark:text-blue-400'
-            : 'text-gray-700 hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400'
+          ? 'text-blue-600 dark:text-blue-400'
+          : 'text-gray-700 hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400'
           }` }
         onClick={ onNavigate }
       >
@@ -63,8 +63,8 @@ const FreeToolsDropdown = ( { onNavigate }: { onNavigate?: () => void } ) => (
           <Link
             href="/tools/qrcode"
             className={ `${ active
-                ? 'bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900 dark:to-indigo-900 text-blue-600 dark:text-blue-400'
-                : 'text-gray-700 dark:text-gray-300'
+              ? 'bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900 dark:to-indigo-900 text-blue-600 dark:text-blue-400'
+              : 'text-gray-700 dark:text-gray-300'
               } block px-4 py-3 text-sm transition-colors duration-150` }
             onClick={ onNavigate }
           >
@@ -78,8 +78,8 @@ const FreeToolsDropdown = ( { onNavigate }: { onNavigate?: () => void } ) => (
           <Link
             href="/tools/calculator"
             className={ `${ active
-                ? 'bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900 dark:to-indigo-900 text-blue-600 dark:text-blue-400'
-                : 'text-gray-700 dark:text-gray-300'
+              ? 'bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900 dark:to-indigo-900 text-blue-600 dark:text-blue-400'
+              : 'text-gray-700 dark:text-gray-300'
               } block px-4 py-3 text-sm transition-colors duration-150` }
             onClick={ onNavigate }
           >
@@ -145,8 +145,8 @@ export default function Navbar ()
   return (
     <nav
       className={ `sticky top-0 z-50 transition-all duration-300 ${ scrolled
-          ? 'bg-white/95 backdrop-blur-sm dark:bg-gray-900/95 shadow-lg'
-          : 'bg-white dark:bg-gray-900'
+        ? 'bg-white/95 backdrop-blur-sm dark:bg-gray-900/95 shadow-lg'
+        : 'bg-white dark:bg-gray-900'
         }` }
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -240,8 +240,8 @@ export default function Navbar ()
               <li>
                 <HeadlessMenu as="div" className="relative">
                   <HeadlessMenu.Button className={ `flex items-center font-medium transition-colors duration-200 ${ isActive( '/tools' )
-                      ? 'text-blue-600 dark:text-blue-400'
-                      : 'text-gray-700 hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400'
+                    ? 'text-blue-600 dark:text-blue-400'
+                    : 'text-gray-700 hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400'
                     }` }>
                     Free Tools
                     <ChevronDown className="ml-1 h-4 w-4" />
@@ -250,18 +250,12 @@ export default function Navbar ()
                     <div className="py-2 space-y-2">
                       <Link
                         href="/tools/qrcode"
-                        className="block text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400"
+                        className="block text-gray-700 hover:text-white dark:text-gray-300 dark:hover:text-blue-400"
                         onClick={ closeMenu }
                       >
                         QR Code Generator
                       </Link>
-                      <Link
-                        href="/tools/calculator"
-                        className="block text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400"
-                        onClick={ closeMenu }
-                      >
-                        Calculator
-                      </Link>
+
                     </div>
                   </div>
                 </HeadlessMenu>
