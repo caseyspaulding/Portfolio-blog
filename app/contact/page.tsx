@@ -1,10 +1,7 @@
 import { Metadata } from "next"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { Textarea } from "@/components/ui/textarea"
 
-import NavBar from "@/components/NavBar"
+import { Button } from "@/components/ui/button"
+
 import PageBackground from "@/components/PageBackGround"
 
 export const metadata: Metadata = {
@@ -27,8 +24,8 @@ export default function Contact ()
                   <h1 className="text-3xl font-bold tracking-tight">Contact</h1>
                   <p className="mt-4 text-muted-foreground">
                     Contact me directly if you have any questions.{ ' ' }
-                    <a href="mailto:casey@REIstacks.com" className="font-semibold text-primary">
-                      casey@REIstacks.com
+                    <a href="mailto:casey.spaulding@me.com" className="font-semibold text-primary">
+                      casey.spaulding@me.com
                     </a>
                   </p>
                   <div className="mt-4 text-muted-foreground">
@@ -43,9 +40,7 @@ export default function Contact ()
                   <h3 className="text-lg font-semibold">Follow </h3>
                   <div className="mt-4 flex space-x-4">
 
-                    <Button variant="link" asChild>
-                      <a href="https://twitter.com/CaseySpaulding_">X</a>
-                    </Button>
+
                     <Button variant="link" asChild>
                       <a href="https://www.linkedin.com/in/caseyspaulding/">LinkedIn</a>
                     </Button>
