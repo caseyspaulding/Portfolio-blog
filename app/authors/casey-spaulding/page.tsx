@@ -88,17 +88,7 @@ const CaseyAuthorPage = () =>
                 <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
                   Hi, I'm <strong>Casey Spaulding</strong>, a experienced full-stack developer, software engineer, and AI enthusiast with a deep love for technology and problem-solving.
                 </p>
-                <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
-                  After serving 20 years in the Navy and earning degrees in both software engineering and business management, I’ve dedicated my career to creating innovative solutions that empower individuals and organizations.
-                </p>
 
-                <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
-                  My journey in the Navy honed my leadership skills and taught me the importance of teamwork and resilience. Over the years, I’ve led teams, managed complex projects, and gained a unique perspective on how to turn ideas into reality. Those experiences have become the backbone of my career as a developer and creator.
-                </p>
-
-                <p className="text-lg text-gray-700 dark:text-gray-300">
-                  Through my blog and portfolio, I share insights, projects, and lessons learned from my journey in technology and beyond. My mission is to inspire, educate, and support others as they navigate the exciting world of development and innovation. Thank you for visiting, and I look forward to connecting with you!
-                </p>
               </div>
             </div>
           </div>
