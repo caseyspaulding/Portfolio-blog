@@ -153,9 +153,9 @@ export default function Hero ( { theme }: { theme: string } )
                   <span className="text-xs font-medium">Online</span>
                 </div>
 
-                <div className="absolute -left-6 bottom-12 bg-white dark:bg-gray-800 rounded-full py-2 px-3 shadow-lg">
-                  <span className="text-xs font-medium">5+ Years Experience</span>
-                </div>
+                {/*<div className="absolute -left-6 bottom-12 bg-white dark:bg-gray-800 rounded-full py-2 px-3 shadow-lg">
+                  <span className="text-xs font-medium">Builder</span>
+                </div>*/}
               </div>
             </div>
           </div>
