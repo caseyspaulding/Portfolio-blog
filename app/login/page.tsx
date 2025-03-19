@@ -173,7 +173,7 @@ export default function LoginComponent ( { searchParams }: { searchParams: Promi
                         <h1 className="mt-2 text-2xl font-bold leading-9 tracking-tight text-gray-900 text-center">Welcome To </h1>
                         <h2 className="mt-2 text-2xl font-bold leading-9 tracking-tight text-gray-900 text-center">My Login Page</h2>
                         <p className="mt-2 text-lg leading-6 text-gray-500 text-center">
-                            I login here to make blog posts and manage my website.
+                            I login here to make blog posts and manage my website. You can login but you won't be able to do anything.
                         </p>
                     </div>
 
