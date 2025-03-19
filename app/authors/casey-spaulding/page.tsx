@@ -58,12 +58,12 @@ const CaseyAuthorPage = () =>
 
   // Added skills list for the skills section
   const skills = [
-    { name: '.NET Core & Framework', level: 90 },
-    { name: 'C#', level: 95 },
-    { name: 'Azure Cloud Services', level: 85 },
+    { name: '.NET & .NET Framework', level: 100 },
+    { name: 'C#', level: 100 },
+    { name: 'Azure Cloud Services', level: 100 },
     { name: 'SQL Server', level: 80 },
     { name: 'Angular', level: 75 },
-    { name: 'RESTful APIs', level: 85 },
+    { name: 'RESTful APIs', level: 100 },
   ];
 
   return (
@@ -76,16 +76,13 @@ const CaseyAuthorPage = () =>
         />
       </Head>
 
-      {/* Navigation Bar - Uncomment if you want to include it */ }
-      {/* <NavBar1 /> */ }
-
-      <div className="container mx-auto px-4 py-16">
+      <div className="container mx-auto px-4 py-20">
         <div className="flex flex-col items-center">
           {/* Profile Section */ }
           <div className="w-full max-w-6xl mx-auto">
             <div className="relative mb-20">
               {/* Banner Background */ }
-              <div className="h-64 w-full bg-gradient-to-r from-blue-600 to-indigo-700 rounded-xl shadow-lg"></div>
+              <div className="h-24 w-full bg-gradient-to-r from-blue-600 to-indigo-700 rounded-xl shadow-lg"></div>
 
               {/* Profile picture overlapping the banner */ }
               <div className="absolute left-1/2 transform -translate-x-1/2 -bottom-16">
@@ -156,14 +153,9 @@ const CaseyAuthorPage = () =>
                         <div key={ skill.name }>
                           <div className="flex justify-between mb-1">
                             <span className="text-gray-700 dark:text-gray-300">{ skill.name }</span>
-                            <span className="text-gray-500 dark:text-gray-400">{ skill.level }%</span>
+
                           </div>
-                          <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                            <div
-                              className="bg-gradient-to-r from-blue-600 to-indigo-700 h-2 rounded-full"
-                              style={ { width: `${ skill.level }%` } }
-                            ></div>
-                          </div>
+
                         </div>
                       ) ) }
                     </div>
