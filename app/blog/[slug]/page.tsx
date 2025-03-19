@@ -8,6 +8,13 @@ import hljs from 'highlight.js';
 import 'highlight.js/styles/github.css'; // Choose the syntax highlighting theme you want
 import BlogContent from './BlogContent';
 
+
+// Configure marked with KaTeX and mermaid support
+marked.use( markedKatex( {
+    throwOnError: false,
+    output: 'html'
+} ) );
+
 // Configure marked to use highlight.js
 marked.setOptions( {
     renderer: new marked.Renderer(),

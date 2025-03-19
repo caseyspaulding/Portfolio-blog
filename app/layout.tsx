@@ -8,6 +8,7 @@ import FooterTW from '@/components/Footers/FooterTW';
 import Script from 'next/script';
 import NavBar from '@/components/NavBar';
 import ThemeProviders from './ThemeProvider';
+import 'katex/dist/katex.min.css';
 
 export const metadata = {
     title: 'Casey Spaulding - Blog and Portfolio',

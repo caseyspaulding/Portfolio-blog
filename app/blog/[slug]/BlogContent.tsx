@@ -1,15 +1,14 @@
-// In your BlogContent.tsx client component
 'use client';
-import { useEffect } from 'react';
-import { marked } from 'marked';
-import { markedKatex } from 'marked-katex-extension';
-import katex from 'katex';
-import 'katex/dist/katex.min.css';
+
+import { useEffect, useRef } from 'react';
+import mermaid from 'mermaid';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/github.css';
 
 export default function BlogContent ( { htmlContent }: { htmlContent: string } )
 {
+  const contentRef = useRef<HTMLDivElement>( null );
+
   useEffect( () =>
   {
     // Initialize mermaid
@@ -30,7 +29,6 @@ export default function BlogContent ( { htmlContent }: { htmlContent: string } )
         console.error( 'Mermaid initialization error:', error );
       }
     }
-
 
     // Handle code highlighting
     document.querySelectorAll( 'pre code' ).forEach( ( block ) =>
