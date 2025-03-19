@@ -53,12 +53,25 @@ export default {
 					foreground: 'hsl(var(--secondary-foreground))',
 				},
 			},
+			typography: {
+				DEFAULT: {
+					css: {
+						maxWidth: '100%',
+						'code::before': { content: '""' },
+						'code::after': { content: '""' }
+					},
+				},
+			},
+			fontFamily: {
+				'space-grotesk': [ 'Space Grotesk', 'sans-serif' ],
+			},
 		},
 	},
 	plugins: [
 		nextui(), // NextUI plugin for Tailwind
 		require( 'tailwindcss-animate' ), // Custom animations
 		require( 'flowbite-typography' ), // Flowbite React plugin
+		require( '@tailwindcss/typography' ), // Add typography plugin for markdown
 	],
 	darkMode: 'class', // Enable class-based dark mode
 } satisfies Config;

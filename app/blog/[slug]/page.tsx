@@ -1,13 +1,13 @@
 
-
 import { getBlogPostBySlug, getAllBlogSlugs } from '@/app/actions/blogActions';
 import type { Metadata } from 'next';
 import PageBackground from '@/components/PageBackGround';
-import { marked } from 'marked';
-import hljs from 'highlight.js';
-import 'highlight.js/styles/github.css'; // Choose the syntax highlighting theme you want
+import 'highlight.js/styles/github.css';
 import BlogContent from './BlogContent';
-
+import { marked } from 'marked';
+import markedKatex from "marked-katex-extension"
+import hljs from 'highlight.js';
+import 'highlight.js/styles/github.css';
 
 // Configure marked with KaTeX and mermaid support
 marked.use( markedKatex( {
@@ -15,32 +15,41 @@ marked.use( markedKatex( {
     output: 'html'
 } ) );
 
-// Configure marked to use highlight.js
-marked.setOptions( {
-    renderer: new marked.Renderer(),
-    gfm: true,
-    breaks: true,
-    highlight: function ( code, lang )
-    {
-        if ( lang === 'mermaid' )
-        {
-            return `<div class="mermaid">${ code }</div>`;
-        }
+// Create a custom renderer
+const renderer = new marked.Renderer();
 
-        // For other languages, use highlight.js
-        if ( lang && hljs.getLanguage( lang ) )
-        {
-            try
-            {
-                return hljs.highlight( code, { language: lang } ).value;
-            } catch ( err )
-            {
-                console.error( err );
-            }
-        }
-        return hljs.highlightAuto( code ).value;
+// Override the code renderer with the correct signature
+renderer.code = function ( { text, lang, escaped }: { text: string; lang?: string; escaped?: boolean } )
+{
+    if ( lang === 'mermaid' )
+    {
+        return `<div class="mermaid">${ text }</div>`;
     }
+
+    // For other languages, use highlight.js
+    if ( lang && hljs.getLanguage( lang ) )
+    {
+        try
+        {
+            const highlightedCode = hljs.highlight( text, { language: lang } ).value;
+            return `<pre><code class="hljs language-${ lang }">${ highlightedCode }</code></pre>`;
+        } catch ( err )
+        {
+            console.error( err );
+        }
+    }
+
+    // Fallback to auto-highlighting
+    return `<pre><code class="hljs">${ hljs.highlightAuto( text ).value }</code></pre>`;
+};
+
+// Configure marked with the custom renderer
+marked.setOptions( {
+    renderer: renderer,
+    gfm: true,
+    breaks: true
 } );
+
 
 export async function generateStaticParams ()
 {
