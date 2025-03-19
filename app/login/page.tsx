@@ -208,7 +208,7 @@ export default function LoginComponent ( { searchParams }: { searchParams: Promi
                             <span className="bg-white px-4 text-gray-900">Or continue with</span>
                         </div>
                     </div>
-                    <form className="flex flex-col gap-3" onSubmit={ handleLogin }>
+                    {/* <form className="flex flex-col gap-3" onSubmit={ handleLogin }>
                         <Input
                             name="email"
                             placeholder="Enter your email"
@@ -255,7 +255,7 @@ export default function LoginComponent ( { searchParams }: { searchParams: Promi
                         <Link href="/signup">
                             Create Account
                         </Link>
-                    </p>
+                    </p>*/}
                 </div>
             </div>
         </>
