@@ -55,9 +55,12 @@ export async function generateStaticParams ()
     return slugs.map( ( slug: string ) => ( { slug } ) );
 }
 
-export async function generateMetadata ( { params }: { params: { slug: string } } ): Promise<Metadata>
+export async function generateMetadata ( { params }: { params: Promise<{ slug: string }> } ): Promise<Metadata>
 {
-    const post = await getBlogPostBySlug( params.slug );
+    // Properly await the params promise as required in Next.js 15
+    const { slug } = await params;
+
+    const post = await getBlogPostBySlug( slug );
     if ( !post )
     {
         return {
@@ -67,20 +70,23 @@ export async function generateMetadata ( { params }: { params: { slug: string } 
     }
 
     // For meta description, use raw text without markdown formatting
-
+    const plainTextContent = post.content.replace( /[#*`_\[\]]/g, '' ).slice( 0, 160 );
 
     // Make sure image URLs are absolute
-    const siteUrl = 'https://CaseySpaulding.com';
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://CaseySpaulding.com';
     const imageUrl = post.featuredImage
-
+        ? ( post.featuredImage.startsWith( 'http' )
+            ? post.featuredImage
+            : `${ siteUrl }${ post.featuredImage }` )
+        : null;
 
     return {
         title: post.title,
-        description: post.excerpt,
+        description: post.excerpt || plainTextContent,
         openGraph: {
             title: post.title,
-            description: post.excerpt || '',
-            url: `${ siteUrl }/blog/${ params.slug }`,
+            description: post.excerpt || plainTextContent,
+            url: `${ siteUrl }/blog/${ slug }`,
             siteName: 'Casey Spaulding',
             images: imageUrl ? [ {
                 url: imageUrl,
@@ -94,9 +100,9 @@ export async function generateMetadata ( { params }: { params: { slug: string } 
         twitter: {
             card: 'summary_large_image',
             title: post.title,
-            description: post.excerpt || '',
-            images: imageUrl || '',
-            creator: '@caseyspaulding_',
+            description: post.excerpt || plainTextContent,
+            images: imageUrl ? [ { url: imageUrl, alt: post.title } ] : [],
+            creator: '@YourTwitterHandle',
         },
     };
 }
@@ -128,15 +134,15 @@ const MermaidInitializer = () =>
         `,
             } }
         />
-
     );
-
 };
 
-export default async function BlogPost ( { params }: { params: { slug: string } } )
+export default async function BlogPost ( { params }: { params: Promise<{ slug: string }> } )
 {
-    const post = await getBlogPostBySlug( params.slug );
+    // Properly await the params promise as required in Next.js 15
+    const { slug } = await params;
 
+    const post = await getBlogPostBySlug( slug );
     if ( !post )
     {
         return <div className="text-center text-xl text-red-600">Post not found</div>;
@@ -227,19 +233,10 @@ export default async function BlogPost ( { params }: { params: { slug: string } 
                         <div className="grid grid-cols-1 xl:grid-cols-4 gap-8 bg-white dark:bg-black rounded-2xl p-4">
                             <div className="xl:col-span-3">
                                 <div className="prose prose-lg dark:prose-invert max-w-none leading-relaxed text-lg markdown-content">
+                                    <div dangerouslySetInnerHTML={ { __html: htmlContent } } />
                                     <BlogContent htmlContent={ htmlContent } />
                                 </div>
                             </div>
-
-                            {/*<aside className="hidden xl:block xl:col-span-1 space-y-6 xl:space-y-10">
-                <div className="sticky top-20 space-y-6">
-                  <div className="p-6 rounded-2xl shadow-md text-center bg-gray-100 dark:bg-gray-700">
-                    <h3 className="text-lg font-bold text-blue-900 dark:text-blue-200 mb-2">
-                      Start Today!
-                    </h3>
-                  </div>
-                </div>
-              </aside>*/}
                         </div>
                     </article>
                 </div>
