@@ -178,7 +178,7 @@ export async function getAllBlogPosts ()
 export async function createBlogPost ( formData: FormData )
 {
     const title = formData.get( 'title' ) as string;
-    const content = formData.get( 'content' ) as string;
+    const content = formData.get( 'content' ) as string; // This is now Markdown content
     const excerpt = ( formData.get( 'excerpt' ) as string ) || '';
     const authorId = 1;
     const tags = ( formData.get( 'tags' ) as string )?.split( ',' ).map( tag => tag.trim() ).join( ',' ) || '';
@@ -192,7 +192,7 @@ export async function createBlogPost ( formData: FormData )
     const difficultyLevel = formData.get( 'difficultyLevel' ) as DifficultyLevel || null;
     const categories = JSON.parse( formData.get( 'categories' ) as string || '[]' );
     const technologies = JSON.parse( formData.get( 'technologies' ) as string || '[]' );
-    const publishedAt = isPublished ? new Date() : null;    // Set publishedAt if post is published
+    const publishedAt = isPublished ? new Date() : null;
 
     if ( !slug )
     {
@@ -208,8 +208,8 @@ export async function createBlogPost ( formData: FormData )
             return { success: false, message: 'A post with this slug already exists.' };
         }
 
-
-        // Insert new blog post
+        // Add a contentFormat field if you want to track which format is being used
+        // This allows for a smoother transition if you have existing HTML content
         await db.insert( blogPosts ).values( {
             title,
             content,
@@ -229,6 +229,7 @@ export async function createBlogPost ( formData: FormData )
             technologies,
             createdAt: new Date(),
             updatedAt: new Date(),
+            // Removed contentFormat as it's not in the schema
         } );
 
         revalidatePath( '/blog' );
@@ -265,9 +266,9 @@ function generateSlug ( title: string ): string
 export async function updateBlogPost ( id: number, formData: FormData )
 {
     const title = formData.get( 'title' ) as string;
-    const content = formData.get( 'content' ) as string;
+    const content = formData.get( 'content' ) as string; // This is now Markdown content
     const excerpt = ( formData.get( 'excerpt' ) as string ) || '';
-    const tags = formData.get( 'tags' ) as string || '';  // Don't split here, it's already in the correct format
+    const tags = formData.get( 'tags' ) as string || '';
     let slug = formData.get( 'slug' ) as string;
     const featuredImage = formData.get( 'featuredImage' ) as string;
     const metaTitle = formData.get( 'metaTitle' ) as string;
@@ -288,13 +289,14 @@ export async function updateBlogPost ( id: number, formData: FormData )
                 content,
                 excerpt,
                 authorId: 1,
-                tags,  // Use tags directly
+                tags,
                 slug,
-                featuredImage,  // This will now preserve the existing image URL if no new image was uploaded
+                featuredImage,
                 metaTitle,
                 metaDescription,
                 isPublished,
                 updatedAt: new Date(),
+                contentFormat: 'markdown', // Add this field to track the format
             } )
             .where( eq( blogPosts.id, id ) );
 

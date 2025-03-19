@@ -15,6 +15,13 @@
       "when": 1737938417543,
       "tag": "0001_wild_mordo",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1742409056897,
+      "tag": "0002_mute_the_watchers",
+      "breakpoints": true
     }
   ]
 }

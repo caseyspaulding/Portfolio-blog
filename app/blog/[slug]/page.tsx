@@ -1,9 +1,25 @@
 import React from 'react';
-import DOMPurify from 'isomorphic-dompurify';
 import { getBlogPostBySlug, getAllBlogSlugs } from '@/app/actions/blogActions';
 import type { Metadata } from 'next';
 import PageBackground from '@/components/PageBackGround';
+import { marked } from 'marked';
+import hljs from 'highlight.js';
+import 'highlight.js/styles/vs2015.css'; // Choose the syntax highlighting theme you want
 
+// Configure marked to use highlight.js
+marked.setOptions( {
+    highlight: ( code, language ) =>
+    {
+        if ( language && hljs.getLanguage( language ) )
+        {
+            return hljs.highlight( code, { language } ).value;
+        }
+        return hljs.highlightAuto( code ).value;
+    },
+    gfm: true, // GitHub Flavored Markdown
+    breaks: true, // Convert \n to <br>
+    smartypants: true // Use "smart" typographic punctuation
+} );
 
 export async function generateStaticParams ()
 {
@@ -23,19 +39,22 @@ export async function generateMetadata ( { params }: { params: Promise<{ slug: s
         };
     }
 
+    // For meta description, use raw text without markdown formatting
+    const plainTextContent = post.content.replace( /[#*`_\[\]]/g, '' ).slice( 0, 160 );
+
     return {
         title: post.title,
-        description: post.excerpt || post.content.slice( 0, 160 ),
+        description: post.excerpt || plainTextContent,
         openGraph: {
             title: post.title,
-            description: post.excerpt || post.content.slice( 0, 160 ),
-            url: `https://CaseySpaulding.com/blog/${ resolvedParams.slug }`, // Update to your website URL
+            description: post.excerpt || plainTextContent,
+            url: `https://CaseySpaulding.com/blog/${ resolvedParams.slug }`,
             images: post.featuredImage ? [ { url: post.featuredImage, alt: post.title } ] : [],
         },
         twitter: {
             card: 'summary_large_image',
             title: post.title,
-            description: post.excerpt || post.content.slice( 0, 160 ),
+            description: post.excerpt || plainTextContent,
             images: post.featuredImage ? [ { url: post.featuredImage, alt: post.title } ] : [],
         },
     };
@@ -44,10 +63,32 @@ export async function generateMetadata ( { params }: { params: Promise<{ slug: s
 function calculateReadTime ( content: string ): string
 {
     const wordsPerMinute = 200; // Average reading speed
-    const wordCount = content.split( ' ' ).length;
+    const wordCount = content.split( /\s+/ ).length; // More accurate word count
     const minutes = Math.ceil( wordCount / wordsPerMinute );
     return `${ minutes } min read`;
 }
+
+// Add this script to initialize mermaid diagrams if you have them
+const MermaidInitializer = () =>
+{
+    return (
+        <script
+            dangerouslySetInnerHTML={ {
+                __html: `
+          document.addEventListener('DOMContentLoaded', () => {
+            if (typeof mermaid !== 'undefined') {
+              mermaid.initialize({ 
+                startOnLoad: true,
+                theme: 'default',
+                securityLevel: 'loose'
+              });
+            }
+          });
+        `,
+            } }
+        />
+    );
+};
 
 export default async function BlogPost ( { params }: { params: Promise<{ slug: string }> } )
 {
@@ -59,15 +100,9 @@ export default async function BlogPost ( { params }: { params: Promise<{ slug: s
         return <div className="text-center text-xl text-red-600">Post not found</div>;
     }
 
-    const looseConfig = {
-        USE_PROFILES: { html: true, svg: true },
-        ALLOW_UNKNOWN_PROTOCOLS: true,
-        ALLOWED_TAGS: false as unknown as string[],  // force TS to accept it
-        ALLOWED_ATTR: false as unknown as string[],
-    };
+    // Convert markdown to HTML using marked
+    const htmlContent = await marked( post.content );
 
-    const rawHtml = post.content;
-    const sanitized = DOMPurify.sanitize( rawHtml, looseConfig );
     const readTime = calculateReadTime( post.content );
     let tags;
     try
@@ -85,9 +120,7 @@ export default async function BlogPost ( { params }: { params: Promise<{ slug: s
     return (
         <>
             <PageBackground>
-
-
-                <div className="font-space-grotesk  text-gray-800 dark:text-gray-100">
+                <div className="font-space-grotesk text-gray-800 dark:text-gray-100">
                     <article className="mx-auto max-w-6xl px-2 py-12 sm:px-4 lg:px-4">
                         <div className="relative mb-8 flex flex-col md:flex-row items-center md:items-stretch">
                             <div className="md:w-2/3 flex flex-col justify-center p-4 bg-white dark:bg-black rounded-tl-xl rounded-bl-xl">
@@ -111,7 +144,8 @@ export default async function BlogPost ( { params }: { params: Promise<{ slug: s
                                         year: 'numeric',
                                         month: 'long',
                                         day: 'numeric',
-                                    } ) } • { readTime }
+                                    } ) }{ ' ' }
+                                    • { readTime }
                                 </p>
                                 <div className="flex items-center text-base text-gray-500 dark:text-gray-400 leading-relaxed">
                                     { post.author?.avatarUrl && (
@@ -150,25 +184,25 @@ export default async function BlogPost ( { params }: { params: Promise<{ slug: s
 
                         <div className="grid grid-cols-1 xl:grid-cols-4 gap-8 bg-white dark:bg-black rounded-2xl p-4">
                             <div className="xl:col-span-3">
-                                <div className="prose prose-lg dark:prose-invert max-w-none leading-relaxed text-lg">
-                                    <div dangerouslySetInnerHTML={ { __html: rawHtml } } />
+                                <div className="prose prose-lg dark:prose-invert max-w-none leading-relaxed text-lg markdown-content">
+                                    <div dangerouslySetInnerHTML={ { __html: htmlContent } } />
                                 </div>
                             </div>
 
                             {/*<aside className="hidden xl:block xl:col-span-1 space-y-6 xl:space-y-10">
-                            <div className="sticky top-20 space-y-6">
-                                <div className="p-6 rounded-2xl shadow-md text-center bg-gray-100 dark:bg-gray-700">
-                                    <h3 className="text-lg font-bold text-blue-900 dark:text-blue-200 mb-2">
-                                        Start Today!
-                                    </h3>
-                                    
-                                </div>
-                            </div>
-                        </aside>*/}
+                <div className="sticky top-20 space-y-6">
+                  <div className="p-6 rounded-2xl shadow-md text-center bg-gray-100 dark:bg-gray-700">
+                    <h3 className="text-lg font-bold text-blue-900 dark:text-blue-200 mb-2">
+                      Start Today!
+                    </h3>
+                  </div>
+                </div>
+              </aside>*/}
                         </div>
                     </article>
                 </div>
             </PageBackground>
+            <MermaidInitializer />
         </>
     );
 }

@@ -20,7 +20,205 @@ gmp-map {
   z-index: 10;
   width: 300px;
 }
+.editor-preview pre, 
+.editor-preview-side pre {
+  white-space: pre-wrap !important;
+  word-wrap: break-word !important;
+  max-width: 100% !important;
+  overflow-x: auto !important;
+  padding: 1rem !important;
+  border-radius: 0.375rem !important;
+  background-color: #282c34 !important; /* Match with your chosen theme */
+}
+/* Markdown content styling */
+.markdown-content {
+  /* Base styling */
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  color: #24292e;
+}
 
+/* Dark mode support */
+.dark .markdown-content {
+  color: #e6edf3;
+}
+
+/* Code blocks */
+.markdown-content pre {
+  white-space: pre-wrap !important;
+  word-wrap: break-word !important;
+  max-width: 100% !important;
+  overflow-x: auto !important;
+  padding: 1rem !important;
+  border-radius: 0.375rem !important;
+  margin: 1rem 0 !important;
+  background-color: #1e1e1e !important; /* VS Code dark background */
+}
+
+.markdown-content code {
+  font-family: Menlo, Monaco, Consolas, 'Courier New', monospace !important;
+  font-size: 0.9em !important;
+  word-break: break-word !important;
+}
+
+/* Inline code */
+.markdown-content :not(pre) > code {
+  background-color: rgba(175, 184, 193, 0.2) !important;
+  padding: 0.2em 0.4em !important;
+  border-radius: 3px !important;
+  font-size: 85% !important;
+}
+
+/* Headings */
+.markdown-content h1,
+.markdown-content h2,
+.markdown-content h3,
+.markdown-content h4,
+.markdown-content h5,
+.markdown-content h6 {
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.markdown-content h1 {
+  font-size: 2em;
+  border-bottom: 1px solid #eaecef;
+  padding-bottom: 0.3em;
+}
+
+.markdown-content h2 {
+  font-size: 1.5em;
+  border-bottom: 1px solid #eaecef;
+  padding-bottom: 0.3em;
+}
+
+.markdown-content h3 {
+  font-size: 1.25em;
+}
+
+.markdown-content h4 {
+  font-size: 1em;
+}
+
+/* Lists */
+.markdown-content ul,
+.markdown-content ol {
+  padding-left: 2em;
+  margin-top: 0;
+  margin-bottom: 1em;
+}
+
+.markdown-content ul {
+  list-style-type: disc;
+}
+
+.markdown-content ol {
+  list-style-type: decimal;
+}
+
+.markdown-content li {
+  margin-bottom: 0.25em;
+}
+
+/* Links */
+.markdown-content a {
+  color: #0366d6;
+  text-decoration: none;
+}
+
+.markdown-content a:hover {
+  text-decoration: underline;
+}
+
+/* Dark mode links */
+.dark .markdown-content a {
+  color: #58a6ff;
+}
+
+/* Blockquotes */
+.markdown-content blockquote {
+  margin-left: 0;
+  padding-left: 1em;
+  color: #6a737d;
+  border-left: 3px solid #dfe2e5;
+}
+
+.dark .markdown-content blockquote {
+  color: #8b949e;
+  border-left-color: #3b434b;
+}
+
+/* Tables */
+.markdown-content table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 1em;
+  overflow-x: auto;
+  display: block;
+}
+
+.markdown-content table th,
+.markdown-content table td {
+  padding: 6px 13px;
+  border: 1px solid #dfe2e5;
+}
+
+.markdown-content table tr {
+  background-color: #fff;
+  border-top: 1px solid #c6cbd1;
+}
+
+.markdown-content table tr:nth-child(2n) {
+  background-color: #f6f8fa;
+}
+
+.dark .markdown-content table th,
+.dark .markdown-content table td {
+  border-color: #3b434b;
+}
+
+.dark .markdown-content table tr {
+  background-color: #0d1117;
+  border-top-color: #3b434b;
+}
+
+.dark .markdown-content table tr:nth-child(2n) {
+  background-color: #161b22;
+}
+
+/* Images */
+.markdown-content img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1em auto;
+}
+
+/* Horizontal rule */
+.markdown-content hr {
+  height: 0.25em;
+  padding: 0;
+  margin: 24px 0;
+  background-color: #e1e4e8;
+  border: 0;
+}
+
+.dark .markdown-content hr {
+  background-color: #3b434b;
+}
+
+/* Mermaid diagrams */
+.markdown-content .mermaid {
+  margin: 1em auto;
+  text-align: center;
+}
+
+.editor-preview code,
+.editor-preview-side code {
+  font-family: 'Menlo', 'Monaco', 'Consolas', 'Courier New', monospace !important;
+}
 /* Spinner */
 .spinner {
   position: relative;
@@ -31,6 +229,81 @@ gmp-map {
   border-radius: 50%;
 }
 
+.editor-preview pre, 
+.editor-preview-side pre {
+  white-space: pre-wrap !important;
+  word-wrap: break-word !important;
+  max-width: 100% !important;
+  overflow-x: auto !important;
+}
+
+.editor-preview code,
+.editor-preview-side code {
+  word-break: break-word !important;
+}
+/* Make code blocks wrap properly */
+.markdown-body pre, 
+.editor-preview pre, 
+.editor-preview-side pre {
+  white-space: pre-wrap !important;
+  word-wrap: break-word !important;
+  max-width: 100% !important;
+  overflow-x: auto !important;
+  padding: 1rem !important;
+  border-radius: 0.375rem !important;
+}
+
+.markdown-body code,
+.editor-preview code,
+.editor-preview-side code {
+  word-break: break-word !important;
+  font-family: 'Menlo', 'Monaco', 'Consolas', 'Courier New', monospace !important;
+}
+
+/* Enhanced styling for function names and other components */
+.hljs-function .hljs-title,
+.hljs-attr,
+.hljs-keyword,
+.hljs-built_in,
+.hljs-name {
+  color: #61afef !important; /* Bright blue for function names */
+}
+
+.hljs-params {
+  color: #d19a66 !important; /* Orange for parameters */
+}
+
+.hljs-string {
+  color: #98c379 !important; /* Green for strings */
+}
+
+.hljs-comment {
+  color: #7f848e !important; /* Grey for comments */
+  font-style: italic !important;
+}
+
+.hljs-number {
+  color: #d19a66 !important; /* Orange for numbers */
+}
+
+/* Line numbers if you want them */
+.hljs-ln-numbers {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  text-align: center;
+  color: #ccc;
+  border-right: 1px solid #CCC;
+  vertical-align: top;
+  padding-right: 5px !important;
+}
+
+.hljs-ln-code {
+  padding-left: 10px !important;
+}
 .spinner div {
   width: 6%;
   height: 16%;
@@ -331,4 +604,23 @@ gmp-map {
 
 .animate-float-fast {
   animation: float-fast 4s ease-in-out infinite;
+}
+
+/* These styles will affect all code blocks in your application */
+pre, pre[class*="language-"] {
+  white-space: pre-wrap !important;
+  word-wrap: break-word !important;
+  overflow-x: auto !important;
+  max-width: 100% !important;
+}
+
+code, code[class*="language-"] {
+  white-space: pre-wrap !important;
+  word-wrap: break-word !important;
+  word-break: break-word !important;
+}
+
+/* Specific overrides for Prism.js */
+.token {
+  word-break: break-word !important;
 }

@@ -1,76 +1,92 @@
 'use client';
 
-import React, { useEffect, useMemo, useRef, useState } from 'react';
-
+import React, { useEffect, useState, useRef } from 'react';
 import { createBlogPost } from '../app/actions/blogActions';
 import { createClient } from '@/utils/supabase/client';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import type { User } from '@supabase/supabase-js';
 import { Button } from '@nextui-org/button';
-import JoditEditor from 'jodit-react';
-import mermaid from 'mermaid';
-import DiagramModal from './DiagramModal';
-import 'prismjs';
-import 'prismjs/themes/prism-tomorrow.css';
-import 'prismjs/components/prism-javascript';
-import 'prismjs/components/prism-typescript';
-import 'prismjs/components/prism-jsx';
-import 'prismjs/components/prism-tsx';
-import 'prismjs/components/prism-css';
-import 'prismjs/components/prism-python';
-import 'prismjs/components/prism-java';
-import 'prismjs/components/prism-c';
-import 'prismjs/components/prism-cpp';
-import 'prismjs/components/prism-csharp';
-import 'prismjs/components/prism-rust';
-import 'prismjs/components/prism-go';
-import 'prismjs/components/prism-bash';
-import 'prismjs/components/prism-sql';
-import 'prismjs/components/prism-json';
-import 'prismjs/components/prism-yaml';
-import 'prismjs/components/prism-markdown';
 import { Card, CardContent } from './ui/card';
 import { Label } from './ui/label';
 import { Checkbox } from './ui/checkbox';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
-import { CATEGORIES, TECHNOLOGIES, DIFFICULTY_LEVELS, parseMetadataFromTags } from '@/constants/blogConstants';
+import { CATEGORIES, TECHNOLOGIES, DIFFICULTY_LEVELS } from '@/constants/blogConstants';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "@/components/ui/command";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Badge } from "@/components/ui/badge";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { cn } from '@/cn';
+import hljs from 'highlight.js';
+import 'highlight.js/styles/vs2015.css';
+import EasyMDE from 'easymde'; // Make sure to import this explicitly
+import 'easymde/dist/easymde.min.css';
+import { marked } from 'marked'; // Add this import for markdown parsing
+// Import SimpleMDE and styling
+import SimpleMDE from 'react-simplemde-editor';
+import 'easymde/dist/easymde.min.css';
 
-interface DiagramData
-{
-  id: string;
-  type: 'mermaid';
-  content: string;
-  title: string;
-  createdAt: string;
-  updatedAt: string;
+// Optional: Import mermaid for diagram rendering
+import mermaid from 'mermaid';
+
+// Diagram Modal Component
+interface DiagramModalProps {
+  onClose: () => void;
+  onSubmit: (data: { title: string; content: string }) => void;
 }
 
-
-interface Author
+const DiagramModal = ({ onClose, onSubmit }: DiagramModalProps) =>
 {
-  id: number;
-  name: string;
-}
+  const [ title, setTitle ] = useState( '' );
+  const [ content, setContent ] = useState( '' );
 
-interface CreateBlogPostResponse
-{
-  success: boolean;
-  message: string;
-}
+  const handleSubmit = () =>
+  {
+    onSubmit( { title, content } );
+    onClose();
+  };
+
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div className="bg-white p-6 rounded-lg w-full max-w-3xl">
+        <h2 className="text-xl font-bold mb-4">Create Mermaid Diagram</h2>
+
+        <div className="mb-4">
+          <Label htmlFor="diagram-title">Diagram Title</Label>
+          <Input
+            id="diagram-title"
+            value={ title }
+            onChange={ ( e ) => setTitle( e.target.value ) }
+            placeholder="Enter diagram title"
+          />
+        </div>
+
+        <div className="mb-4">
+          <Label htmlFor="diagram-content">Mermaid Code</Label>
+          <Textarea
+            id="diagram-content"
+            value={ content }
+            onChange={ ( e ) => setContent( e.target.value ) }
+            placeholder="Enter Mermaid diagram code"
+            className="min-h-[200px] font-mono"
+          />
+        </div>
+
+        <div className="flex justify-end space-x-2">
+          <Button onClick={ onClose } variant="ghost">Cancel</Button>
+          <Button onClick={ handleSubmit }>Insert Diagram</Button>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const BlogPostForm: React.FC = () =>
 {
   const router = useRouter();
   const supabase = createClient();
-  const editor = useRef( null );
 
   // State variables
   const [ user, setUser ] = useState<User | null>( null );
@@ -83,21 +99,14 @@ const BlogPostForm: React.FC = () =>
   const [ metaDescription, setMetaDescription ] = useState( '' );
   const [ isPublished, setIsPublished ] = useState( false );
   const [ featuredImage, setFeaturedImage ] = useState<File | null>( null );
-  const [ postImage, setPostImage ] = useState<File | null>( null );
-  const [ diagrams, setDiagrams ] = useState<DiagramData[]>( [] );
   const [ showDiagramModal, setShowDiagramModal ] = useState( false );
   const [ categories, setCategories ] = useState<string[]>( [] );
   const [ technologies, setTechnologies ] = useState<string[]>( [] );
-  const [ currentDiagram, setCurrentDiagram ] = useState( {
-    content: '',
-    title: ''
-  } );
   const [ selectedCategories, setSelectedCategories ] = useState<string[]>( [] );
   const [ selectedTechnologies, setSelectedTechnologies ] = useState<string[]>( [] );
   const [ difficultyLevel, setDifficultyLevel ] = useState<string>( 'Beginner' );
   const [ openCategories, setOpenCategories ] = useState( false );
   const [ openTechnologies, setOpenTechnologies ] = useState( false );
-
 
   const calculateReadingTime = ( text: string ): number =>
   {
@@ -105,14 +114,6 @@ const BlogPostForm: React.FC = () =>
     const textLength = text.trim().split( /\s+/ ).length;
     return Math.ceil( textLength / wordsPerMinute );
   };
-  // Initialize Prism.js when content changes
-  useEffect( () =>
-  {
-    if ( typeof window !== 'undefined' )
-    {
-      ( window as any ).Prism.highlightAll();
-    }
-  }, [ content ] );
 
   // Initialize mermaid
   useEffect( () =>
@@ -146,220 +147,70 @@ const BlogPostForm: React.FC = () =>
     checkUser();
   }, [ router, supabase ] );
 
-
-  useEffect( () =>
-  {
-
-  }, [ showDiagramModal ] );
-  // Configuration for the editor
-  interface JoditConfig
-  {
-    readonly: boolean;
-    placeholder: string;
-    buttons: Array<string | { name: string; icon: string; tooltip: string; exec: ( editor: any ) => boolean }>;
-    events: {
-      'insertDiagram.click': () => boolean;
-    };
-  }
-
-  const config = useMemo(
-    () => ( {
-      readonly: false,
-      placeholder: 'Start typing your blog post...',
-      height: 500, // Add a fixed height to prevent resizing issues
-      enableDragAndDropFileToEditor: true,
-      buttons: [
-        'source', '|',
-        'bold', 'italic', 'underline', '|',
-        'ul', 'ol', '|',
-        'font', 'fontsize', 'brush', 'paragraph', '|',
-        'image', 'table', 'link', '|',
-        'left', 'center', 'right', 'justify', '|',
-        'undo', 'redo', '|',
-        'hr', 'eraser', 'fullsize', '|',
+  // Configuration for SimpleMDE
+  const editorOptions: EasyMDE.Options = {
+    autofocus: true,
+    spellChecker: false,
+    toolbar: [
+      "bold" as const, "italic" as const, "heading" as const, "|" as const,
+      "quote" as const, "unordered-list" as const, "ordered-list" as const, "|" as const,
+      "link" as const, "image" as const, "|" as const,
+      "code" as const, "table" as const, "|" as const,
+      {
+        name: "custom-diagram",
+        action: () =>
         {
-          name: 'insertDiagram',
-          icon: '📊',
-          tooltip: 'Insert Mermaid Diagram',
-          exec: ( _editor: any ) =>
-          {
-            setShowDiagramModal( true );
-            return false;
-          }
+          setShowDiagramModal( true );
         },
+        className: "fa fa-project-diagram",
+        title: "Insert Mermaid Diagram",
+      } as EasyMDE.ToolbarIcon,
+      "|" as const,
+      "preview" as const, "side-by-side" as const, "fullscreen" as const, "|" as const,
+      "guide" as const
+    ],
+    renderingConfig: {
+      codeSyntaxHighlighting: true,
+    },
+    previewRender: function(plainText: string): string {
+      const html = marked.parse(plainText, { async: false }) as string;
+      
+      setTimeout(() => {
+        // Initialize mermaid diagrams in the preview if needed
+        if ( typeof mermaid !== 'undefined' )
         {
-          name: 'insertCode',
-          icon: '⌨️',
-          tooltip: 'Insert Code Block',
-          exec: ( editor ) =>
+          document.querySelectorAll( '.editor-preview .mermaid' ).forEach( ( el ) =>
           {
-            const language = prompt( 'Enter programming language (e.g., javascript, python, typescript):' );
-            if ( language )
-            {
-              const code = `<pre><code class="language-${ language }">\n// Your code here\n</code></pre>`;
-              editor.selection.insertHTML( code );
-            }
-            return false;
-          }
+            mermaid.init( undefined, el as HTMLElement );
+          } );
         }
-      ],
-      events: {
-        'change': () =>
+        // Re-highlight code blocks with Prism if needed
+        if ( typeof window !== 'undefined' && ( window as any ).Prism )
         {
-          if ( typeof window !== 'undefined' )
-          {
-            setTimeout( () =>
-            {
-              ( window as any ).Prism.highlightAll();
-            }, 0 );
-          }
+          ( window as any ).Prism.highlightAllUnder( document.querySelector( '.editor-preview' ) );
         }
-      },
-      askBeforePasteHTML: false, // Add this to prevent paste interruptions
-      defaultMode: 1,
-      removeButtons: [ 'about' ],
-      showXPathInStatusbar: false,
-      spellcheck: true,
-      editorCssClass: 'prose max-w-none', // If you're using Tailwind's typography plugin
-      style: {
-        background: '#ffffff',
-        color: '#000000',
-      },
-      colors: {
-        background: [ '#ffffff' ],
-        border: [ '#d1d5db' ],
-        buttons: [ '#000000' ],
-        icons: [ '#000000' ],
-        panel: [ '#ffffff' ],
-        text: [ '#000000' ],
-        textPanels: [ '#000000' ]
-      },
-      // Add custom CSS
-      css: `
-      .jodit-workplace {
-        background-color: #ffffff !important;
-      }
-      .jodit-wysiwyg {
-        background-color: #ffffff !important;
-        color: #000000 !important;
-      }
-      .jodit-toolbar__box {
-        background-color: #ffffff !important;
-        border-bottom: 1px solid #d1d5db !important;
-      }
-      .jodit-toolbar-button {
-        color: #000000 !important;
-      }
-      .jodit-toolbar-button:hover {
-        background-color: #f3f4f6 !important;
-      }
-      .jodit-toolbar-button__icon {
-        fill: #000000 !important;
-      }
-      .jodit-status-bar {
-        background-color: #ffffff !important;
-        border-top: 1px solid #d1d5db !important;
-        color: #000000 !important;
-      }
-      .jodit-wysiwyg pre {
-    white-space: pre-wrap; /* Enables wrapping */
-    word-wrap: break-word; /* Ensures long words are wrapped */
-    overflow-x: auto; /* Allows horizontal scrolling if necessary */
-    background: #1e1e1e; /* Existing background color */
-    border-radius: 4px; /* Existing rounded corners */
-    padding: 15px; /* Existing padding */
-    margin: 15px 0; /* Existing margin */
-}
+      }, 0);
 
-.jodit-wysiwyg code {
-    font-family: 'Monaco', 'Consolas', 'Courier New', monospace; /* Existing font family */
-    font-size: 14px; /* Existing font size */
-    color: #d4d4d4; /* Existing font color */
-    line-height: 1.4; /* Existing line height */
-}
-
-      .jodit-container {
-        border-color: #d1d5db !important;
-      }
-      .jodit-container:not(.jodit_inline) {
-        border: 1px solid #d1d5db !important;
-        border-radius: 0.375rem !important;
-      }
-      .jodit-placeholder {
-        color: #6b7280 !important;
-      }
-      .jodit-wysiwyg table {
-        border-collapse: collapse !important;
-        width: 100% !important;
-      }
-      .jodit-wysiwyg table td,
-      .jodit-wysiwyg table th {
-        border: 1px solid #d1d5db !important;
-        padding: 8px !important;
-      }
-      .jodit-toolbar-button.jodit-toolbar-button_size_middle {
-        background-color: transparent !important;
-      }
-      .jodit-toolbar-button.jodit-toolbar-button_size_middle:hover {
-        background-color: #f3f4f6 !important;
-      }
-      .jodit .jodit-workplace + .jodit-status-bar:not(:empty) {
-        border-top: 1px solid #d1d5db !important;
-        background-color: #ffffff !important;
-      }
-      .jodit-dialog__header {
-        background-color: #ffffff !important;
-        color: #000000 !important;
-      }
-      .jodit-dialog__content {
-        background-color: #ffffff !important;
-      }
-      .jodit-form__group {
-        background-color: #ffffff !important;
-      }
-      .jodit-input {
-        background-color: #ffffff !important;
-        color: #000000 !important;
-        border: 1px solid #d1d5db !important;
-      }
-      .jodit-button {
-        background-color: #ffffff !important;
-        color: #000000 !important;
-        border: 1px solid #d1d5db !important;
-      }
-      .jodit-button:hover {
-        background-color: #f3f4f6 !important;
-      }
-    `
-    } ),
-    []
-  );
-
-
-
-  const extractDiagramsFromContent = ( htmlContent: string ): DiagramData[] =>
-  {
-    const parser = new DOMParser();
-    const doc = parser.parseFromString( htmlContent, 'text/html' );
-    const diagramElements = doc.querySelectorAll( '.mermaid-diagram' );
-
-    return Array.from( diagramElements ).map( element =>
-    {
-      const id = element.getAttribute( 'data-diagram-id' ) || crypto.randomUUID();
-      const titleElement = element.querySelector( '.diagram-title' );
-      const mermaidElement = element.querySelector( '.mermaid' );
-
-      return {
-        id,
-        type: 'mermaid' as const,
-        title: titleElement?.textContent?.trim() || 'Untitled Diagram',
-        content: mermaidElement?.textContent?.trim() || '',
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString()
-      };
-    } );
+      return html;
+    },
   };
 
+
+  // Handle diagram insertion
+  const handleDiagramSubmit = ( diagramData: { title: string; content: string } ) =>
+  {
+    // Add the diagram in markdown format
+    const diagramMarkdown = `
+### ${ diagramData.title }
+
+\`\`\`mermaid
+${ diagramData.content }
+\`\`\`
+`;
+    setContent( prev => prev + diagramMarkdown );
+  };
+
+  // Image upload handler
   const handleImageUpload = async ( file: File | null ) =>
   {
     if ( !file )
@@ -391,101 +242,6 @@ const BlogPostForm: React.FC = () =>
     return publicUrl || '';
   };
 
-  // Handle uploading the blog post image and inserting it into the RichTextEditor
-  const handleBlogPostImageUpload = async () =>
-  {
-    if ( !postImage )
-    {
-      toast.error( 'Please select an image to upload.' );
-      return;
-    }
-
-    const imageUrl = await handleImageUpload( postImage );
-    if ( !imageUrl )
-    {
-      toast.error( 'Failed to upload the image.' );
-      return;
-    }
-
-    // Insert the image URL into the content
-    setContent( ( prevContent ) => `${ prevContent }<img src="${ imageUrl }" alt="Uploaded Image" />` );
-    setPostImage( null ); // Clear the selected image
-    toast.success( 'Image uploaded and inserted into the content.' );
-  };
-
-  // Enhanced diagram submission handler
-  const handleDiagramSubmit = ( diagramData: { title: string; content: string } ) =>
-  {
-    const now = new Date().toISOString();
-    const newDiagram: DiagramData = {
-      id: crypto.randomUUID(),
-      type: 'mermaid',
-      content: diagramData.content.trim(), // Ensure content is trimmed
-      title: diagramData.title,
-      createdAt: now,
-      updatedAt: now
-    };
-
-    // Validate diagram syntax before adding
-    try
-    {
-      mermaid.parse( diagramData.content );
-      setDiagrams( prev => [ ...prev, newDiagram ] );
-
-      // Insert enhanced placeholder with preview
-      const placeholderHtml = `
-     <div class="mermaid-diagram" data-diagram-id="${ newDiagram.id }">
-    <div class="diagram-header">
-      <div class="diagram-title text-lg font-semibold mb-2">${ newDiagram.title }</div>
-      <div class="diagram-metadata text-sm text-gray-500">
-        Created: ${ new Date( newDiagram.createdAt ).toLocaleDateString() }
-      </div>
-    </div>
-    <pre class="mermaid">
-      ${ newDiagram.content }
-    </pre>
-  </div>
-    `;
-      setContent( prev => `${ prev }${ placeholderHtml }` );
-
-      // Re-initialize mermaid to render the new diagram
-      setTimeout( () =>
-      {
-        mermaid.init( undefined, document.querySelectorAll( '.mermaid' ) );
-      }, 0 );
-
-    } catch ( error )
-    {
-      toast.error( 'Invalid diagram syntax. Please check your Mermaid code.' );
-      console.error( 'Mermaid syntax error:', error );
-      return;
-    }
-  };
-
-
-  const resetForm = () =>
-  {
-    setTitle( '' );
-    setContent( '' );
-    setExcerpt( '' );
-    setTags( '' );
-    setSlug( '' );
-    setMetaTitle( '' );
-    setMetaDescription( '' );
-    setIsPublished( false );
-    setDiagrams( [] );
-    setFeaturedImage( null );
-    setPostImage( null );
-
-    // Clear any existing mermaid diagrams
-    const existingDiagrams = document.querySelectorAll( '.mermaid' );
-    existingDiagrams.forEach( diagram =>
-    {
-      diagram.innerHTML = '';
-    } );
-  };
-
-
   const handleSubmit = async ( e: React.FormEvent ) =>
   {
     e.preventDefault();
@@ -498,8 +254,6 @@ const BlogPostForm: React.FC = () =>
 
     try
     {
-      // Extract diagrams before uploading image
-      const extractedDiagrams = extractDiagramsFromContent( content );
       const imageUrl = await handleImageUpload( featuredImage );
 
       if ( !imageUrl )
@@ -507,6 +261,7 @@ const BlogPostForm: React.FC = () =>
         toast.error( 'Failed to upload the image.' );
         return;
       }
+
       // Combine all metadata into tags
       const metadataTags = [
         ...selectedCategories,
@@ -514,6 +269,7 @@ const BlogPostForm: React.FC = () =>
         difficultyLevel,
         ...tags.split( ',' ).map( t => t.trim() ).filter( t => t )
       ].join( ', ' );
+
       const readingTime = calculateReadingTime( content );
       const formData = new FormData();
       formData.append( 'title', title );
@@ -521,7 +277,6 @@ const BlogPostForm: React.FC = () =>
       formData.append( 'excerpt', excerpt );
       formData.append( 'authorId', '1' ); // Hardcode the author ID as 1
       formData.append( 'tags', metadataTags );
-      formData.append( 'diagrams', JSON.stringify( extractedDiagrams ) );
       formData.append( 'slug', slug );
       formData.append( 'metaTitle', metaTitle );
       formData.append( 'metaDescription', metaDescription );
@@ -533,7 +288,7 @@ const BlogPostForm: React.FC = () =>
       formData.append( 'featuredImage', imageUrl );
       formData.append( 'publishedAt', new Date().toISOString() );
 
-      const response: CreateBlogPostResponse = await createBlogPost( formData );
+      const response = await createBlogPost( formData );
       if ( response.success )
       {
         toast.success( response.message );
@@ -549,13 +304,25 @@ const BlogPostForm: React.FC = () =>
     }
   };
 
+  const resetForm = () =>
+  {
+    setTitle( '' );
+    setContent( '' );
+    setExcerpt( '' );
+    setTags( '' );
+    setSlug( '' );
+    setMetaTitle( '' );
+    setMetaDescription( '' );
+    setIsPublished( false );
+    setFeaturedImage( null );
+    setSelectedCategories( [] );
+    setSelectedTechnologies( [] );
+  };
+
   if ( !user )
   {
     return <div>Loading...</div>;
   }
-
-
-
 
   return (
     <div className="min-h-screen bg-background p-6">
@@ -586,25 +353,6 @@ const BlogPostForm: React.FC = () =>
                 onChange={ ( e ) => setFeaturedImage( e.target.files?.[ 0 ] || null ) }
                 className="cursor-pointer"
               />
-            </div>
-
-            {/* Blog Post Image */ }
-            <div className="space-y-2">
-              <Label htmlFor="postImage">Blog Post Image</Label>
-              <Input
-                id="postImage"
-                type="file"
-                accept="image/*"
-                onChange={ ( e ) => setPostImage( e.target.files?.[ 0 ] || null ) }
-                className="cursor-pointer"
-              />
-              <Button
-                onClick={ handleBlogPostImageUpload }
-                variant="solid"
-                className="mt-2"
-              >
-                Upload and Insert Image
-              </Button>
             </div>
 
             {/* URL Slug */ }
@@ -643,6 +391,7 @@ const BlogPostForm: React.FC = () =>
                 className="min-h-[100px]"
               />
             </div>
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Difficulty Level */ }
               <div className="space-y-2">
@@ -737,17 +486,16 @@ const BlogPostForm: React.FC = () =>
                 ) }
               </div>
 
-
-              {/* Technologies */ }
+              {/* Technologies - Similar to Categories */ }
               <div className="space-y-2">
                 <Label>Technologies</Label>
                 <Popover open={ openTechnologies } onOpenChange={ setOpenTechnologies }>
                   <PopoverTrigger asChild>
                     <Button
-                      variant='bordered'
+                      variant="ghost"
                       role="combobox"
                       aria-expanded={ openTechnologies }
-                      className="w-full justify-between "
+                      className="w-full justify-between"
                     >
                       { selectedTechnologies.length > 0
                         ? `${ selectedTechnologies.length } selected`
@@ -756,6 +504,7 @@ const BlogPostForm: React.FC = () =>
                     </Button>
                   </PopoverTrigger>
                   <PopoverContent className="w-full bg-white p-0">
+                    {/* Command component for Technologies */ }
                     <Command>
                       <CommandInput placeholder="Search technologies..." />
                       <CommandEmpty>No technology found.</CommandEmpty>
@@ -765,19 +514,18 @@ const BlogPostForm: React.FC = () =>
                             key={ tech }
                             onSelect={ () =>
                             {
-                              // Update selectedTechnologies and call setTechnologies to persist
                               const updatedTechnologies = selectedTechnologies.includes( tech )
                                 ? selectedTechnologies.filter( ( item ) => item !== tech )
                                 : [ ...selectedTechnologies, tech ];
                               setSelectedTechnologies( updatedTechnologies );
-                              setTechnologies( updatedTechnologies ); // Ensure persistence in the database
+                              setTechnologies( updatedTechnologies );
                             } }
                           >
                             <Check
                               className={ cn(
                                 "mr-2 h-4 w-4",
                                 selectedTechnologies.includes( tech )
-                                  ? "opacity-50"
+                                  ? "opacity-100"
                                   : "opacity-0"
                               ) }
                             />
@@ -801,7 +549,7 @@ const BlogPostForm: React.FC = () =>
                             ( t ) => t !== tech
                           );
                           setSelectedTechnologies( updatedTechnologies );
-                          setTechnologies( updatedTechnologies ); // Ensure persistence in the database
+                          setTechnologies( updatedTechnologies );
                         } }
                       >
                         { tech } ×
@@ -810,8 +558,8 @@ const BlogPostForm: React.FC = () =>
                   </div>
                 ) }
               </div>
-
             </div>
+
             {/* Excerpt */ }
             <div className="space-y-2">
               <Label htmlFor="excerpt">Excerpt</Label>
@@ -825,45 +573,28 @@ const BlogPostForm: React.FC = () =>
               />
             </div>
 
-            {/* Content */ }
-            { showDiagramModal && (
-              <DiagramModal
-                onClose={ () =>
-                {
-                  console.log( 'Closing modal' );
-                  setShowDiagramModal( false );
-                } }
-                onSubmit={ ( diagram ) =>
-                {
-                  console.log( 'Submitting diagram:', diagram );
-                  handleDiagramSubmit( diagram );
-                } }
-              />
-            ) }
-
-            {/* Jodit Editor */ }
+            {/* SimpleMDE Editor */ }
             <div className="space-y-2">
               <Label htmlFor="content">Content</Label>
-              <div className="rounded-md border border-input">
-                <JoditEditor
-                  ref={ editor }
+              <div className="border border-input rounded-md overflow-hidden">
+                <SimpleMDE
                   value={ content }
-                  config={ config }
-
-                  onBlur={ ( newContent ) =>
-                  {
-                    if ( newContent !== content )
-                    {
-                      setContent( newContent );
-                    }
-                  } }
-                // Remove the onChange handler as it can interfere with typing
-                // The onBlur handler will save content when the editor loses focus
+                  onChange={ setContent }
+                  options={ editorOptions }
                 />
               </div>
+              <p className="text-sm text-gray-500">
+                Use markdown for formatting. For code blocks, use triple backticks followed by the language name: <code>```javascript</code>
+              </p>
             </div>
 
-            <input type="hidden" name="authorId" value="1" />
+            {/* Diagram Modal */ }
+            { showDiagramModal && (
+              <DiagramModal
+                onClose={ () => setShowDiagramModal( false ) }
+                onSubmit={ handleDiagramSubmit }
+              />
+            ) }
 
             {/* Tags */ }
             <div className="space-y-2">

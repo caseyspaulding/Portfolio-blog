@@ -264,7 +264,7 @@ export const blogPosts = pgTable( 'blog_posts', {
         .notNull()
         .references( () => authors.id ),
     diagrams: jsonb( 'diagrams' ).default( sql`'[]'` ),
-
+    contentFormat: text( 'content_format' ).default( 'markdown' ),
     // New fields
     readingTime: integer( 'reading_time' ), // in minutes
     difficultyLevel: varchar( 'difficulty_level', { length: 50 } ),
