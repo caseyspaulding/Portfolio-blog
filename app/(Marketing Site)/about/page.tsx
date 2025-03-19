@@ -4,6 +4,7 @@ import React, { SVGProps } from 'react';
 import Head from 'next/head';
 
 import { Metadata } from 'next';
+import Footer from '@/components/Footers/FooterTW';
 
 
 
