@@ -13,7 +13,8 @@ import { Card } from '@/components/card';
 import DiagramModal from '@/components/DiagramModal';
 import mermaid from 'mermaid';
 import { PostMetadata } from '@/components/PostMetaData';
-import { PostEditor } from '@/components/PostEditor';
+import { PostEditor } from '@/components/BlogPost/PostEditor';
+
 
 
 interface DiagramData
@@ -122,7 +123,6 @@ export default function EditPostPage ()
         fetchPost();
     }, [ id, router, idAsNumber ] );
 
-
     const handleDiagramSubmit = ( diagramData: { title: string; content: string } ) =>
     {
         const now = new Date().toISOString();
@@ -137,28 +137,25 @@ export default function EditPostPage ()
 
         try
         {
+            // Validate mermaid syntax
             mermaid.parse( diagramData.content );
+
+            // Add diagram to the collection
             setDiagrams( prev => [ ...prev, newDiagram ] );
 
-            const placeholderHtml = `
-                <div class="mermaid-diagram" data-diagram-id="${ newDiagram.id }">
-                    <div class="diagram-header">
-                        <div class="diagram-title text-lg font-semibold mb-2">${ newDiagram.title }</div>
-                        <div class="diagram-metadata text-sm text-gray-500">
-                            Created: ${ new Date( newDiagram.createdAt ).toLocaleDateString() }
-                        </div>
-                    </div>
-                    <pre class="mermaid">
-                        ${ newDiagram.content }
-                    </pre>
-                </div>
-            `;
-            setContent( prev => `${ prev }${ placeholderHtml }` );
+            // Create markdown format for the diagram
+            const diagramMarkdown = `
+### ${ diagramData.title }
 
-            setTimeout( () =>
-            {
-                mermaid.init( undefined, document.querySelectorAll( '.mermaid' ) );
-            }, 0 );
+\`\`\`mermaid
+${ diagramData.content }
+\`\`\`
+`;
+
+            // Append to the content
+            setContent( prev =>
+                prev ? `${ prev }\n\n${ diagramMarkdown }` : diagramMarkdown
+            );
 
         } catch ( error )
         {
@@ -166,6 +163,7 @@ export default function EditPostPage ()
             console.error( 'Mermaid syntax error:', error );
         }
     };
+
     const handleUpdate = async ( e: React.FormEvent ) =>
     {
         e.preventDefault();

@@ -209,6 +209,15 @@ gmp-map {
   background-color: #3b434b;
 }
 
+.editor-toolbar.sticky {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: var(--background);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
 /* Mermaid diagrams */
 .markdown-content .mermaid {
   margin: 1em auto;
@@ -606,21 +615,27 @@ gmp-map {
   animation: float-fast 4s ease-in-out infinite;
 }
 
-/* These styles will affect all code blocks in your application */
-pre, pre[class*="language-"] {
-  white-space: pre-wrap !important;
-  word-wrap: break-word !important;
-  overflow-x: auto !important;
-  max-width: 100% !important;
+/* Add this to your global CSS */
+.hljs {
+  color: #d4d4d4 !important; /* Light color for code text */
+  background-color: #1e1e1e !important; /* Dark background for code blocks */
 }
 
-code, code[class*="language-"] {
-  white-space: pre-wrap !important;
-  word-wrap: break-word !important;
-  word-break: break-word !important;
+.editor-preview pre code {
+  color: #d4d4d4 !important;
+  background-color: #1e1e1e !important;
 }
 
-/* Specific overrides for Prism.js */
-.token {
-  word-break: break-word !important;
+/* Additional styles for better visibility */
+.hljs-keyword, .hljs-selector-tag, .hljs-built_in, .hljs-name, .hljs-tag {
+  color: #569cd6 !important; /* Bright blue for keywords */
 }
+
+.hljs-string, .hljs-title, .hljs-section, .hljs-attribute, .hljs-literal, .hljs-template-tag, .hljs-template-variable, .hljs-type {
+  color: #ce9178 !important; /* Orange for strings */
+}
+
+.hljs-comment, .hljs-quote {
+  color: #6a9955 !important; /* Green for comments */
+}
+

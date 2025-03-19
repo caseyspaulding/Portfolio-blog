@@ -1,24 +1,20 @@
-import React from 'react';
+
+
 import { getBlogPostBySlug, getAllBlogSlugs } from '@/app/actions/blogActions';
 import type { Metadata } from 'next';
 import PageBackground from '@/components/PageBackGround';
 import { marked } from 'marked';
 import hljs from 'highlight.js';
-import 'highlight.js/styles/vs2015.css'; // Choose the syntax highlighting theme you want
+import 'highlight.js/styles/github.css'; // Choose the syntax highlighting theme you want
+import BlogContent from './BlogContent';
 
 // Configure marked to use highlight.js
 marked.setOptions( {
-    highlight: ( code, language ) =>
-    {
-        if ( language && hljs.getLanguage( language ) )
-        {
-            return hljs.highlight( code, { language } ).value;
-        }
-        return hljs.highlightAuto( code ).value;
-    },
+    renderer: new marked.Renderer(),
+
     gfm: true, // GitHub Flavored Markdown
     breaks: true, // Convert \n to <br>
-    smartypants: true // Use "smart" typographic punctuation
+
 } );
 
 export async function generateStaticParams ()
@@ -87,7 +83,9 @@ const MermaidInitializer = () =>
         `,
             } }
         />
+
     );
+
 };
 
 export default async function BlogPost ( { params }: { params: Promise<{ slug: string }> } )
@@ -186,6 +184,7 @@ export default async function BlogPost ( { params }: { params: Promise<{ slug: s
                             <div className="xl:col-span-3">
                                 <div className="prose prose-lg dark:prose-invert max-w-none leading-relaxed text-lg markdown-content">
                                     <div dangerouslySetInnerHTML={ { __html: htmlContent } } />
+                                    <BlogContent htmlContent={ htmlContent } />
                                 </div>
                             </div>
 
