@@ -11,10 +11,28 @@ import BlogContent from './BlogContent';
 // Configure marked to use highlight.js
 marked.setOptions( {
     renderer: new marked.Renderer(),
+    gfm: true,
+    breaks: true,
+    highlight: function ( code, lang )
+    {
+        if ( lang === 'mermaid' )
+        {
+            return `<div class="mermaid">${ code }</div>`;
+        }
 
-    gfm: true, // GitHub Flavored Markdown
-    breaks: true, // Convert \n to <br>
-
+        // For other languages, use highlight.js
+        if ( lang && hljs.getLanguage( lang ) )
+        {
+            try
+            {
+                return hljs.highlight( code, { language: lang } ).value;
+            } catch ( err )
+            {
+                console.error( err );
+            }
+        }
+        return hljs.highlightAuto( code ).value;
+    }
 } );
 
 export async function generateStaticParams ()
@@ -90,7 +108,7 @@ const MermaidInitializer = () =>
 
 export default async function BlogPost ( { params }: { params: Promise<{ slug: string }> } )
 {
-    const resolvedParams = await params; // Await the promise
+    const resolvedParams = await params;
     const post = await getBlogPostBySlug( resolvedParams.slug );
 
     if ( !post )

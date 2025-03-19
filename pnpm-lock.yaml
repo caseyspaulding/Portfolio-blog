@@ -278,12 +278,18 @@ importers:
       jszip:
         specifier: ^3.10.1
         version: 3.10.1
+      katex:
+        specifier: ^0.16.21
+        version: 0.16.21
       lucide-react:
         specifier: ^0.462.0
         version: 0.462.0(react@19.0.0)
       marked:
         specifier: ^15.0.7
         version: 15.0.7
+      marked-katex-extension:
+        specifier: ^5.1.4
+        version: 5.1.4(katex@0.16.21)(marked@15.0.7)
       mermaid:
         specifier: ^11.5.0
         version: 11.5.0
@@ -6929,6 +6935,12 @@ packages:
 
   markdown-table@3.0.4:
     resolution: {integrity: sha512-wiYz4+JrLyb/DqW2hkFJxP7Vd7JuTDm77fvbM8VfEQdmSMqcImWeeRbHwZjBjIFki/VaMK2BhFi7oUUZeM5bqw==}
+
+  marked-katex-extension@5.1.4:
+    resolution: {integrity: sha512-GQOio4vCp0laxB1IY+2oNVo5nbn82yWMDP/jILRYHmyu2WXMVlXCB+krq2/U2fQn+V9j8aqDmnNdrsgqG2AkGQ==}
+    peerDependencies:
+      katex: '>=0.16 <0.17'
+      marked: '>=4 <16'
 
   marked@15.0.7:
     resolution: {integrity: sha512-dgLIeKGLx5FwziAnsk4ONoGwHwGPJzselimvlVskE9XLN4Orv9u2VA3GWw/lYUqjfA0rUT/6fqKwfZJapP9BEg==}
@@ -17522,6 +17534,11 @@ snapshots:
       uc.micro: 2.1.0
 
   markdown-table@3.0.4: {}
+
+  marked-katex-extension@5.1.4(katex@0.16.21)(marked@15.0.7):
+    dependencies:
+      katex: 0.16.21
+      marked: 15.0.7
 
   marked@15.0.7: {}
 
