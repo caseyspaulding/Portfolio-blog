@@ -165,15 +165,15 @@ export default function LoginComponent ( { searchParams }: { searchParams: Promi
                 } }
             />
 
-            <div className="absolute inset-0 bg-blue-700 opacity-50"></div>
+            <div className="absolute inset-0 bg-blue-700"></div>
             {/* Login Card */ }
             <div className="relative z-10 flex flex-1 flex-col justify-center items-center px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
                 <div className="w-full max-w-md lg:w-96 bg-white p-6 rounded-3xl shadow-2xl">
                     <div className="mb-1">
-                        <h1 className="mt-2 text-2xl font-bold leading-9 tracking-tight text-gray-900 text-center">My Login Page</h1>
-                        <h2 className="mt-2 text-2xl font-bold leading-9 tracking-tight text-gray-900 text-center">Welcome Back</h2>
+                        <h1 className="mt-2 text-2xl font-bold leading-9 tracking-tight text-gray-900 text-center">Welcome</h1>
+                        <h2 className="mt-2 text-2xl font-bold leading-9 tracking-tight text-gray-900 text-center">My Login Page</h2>
                         <p className="mt-2 text-lg leading-6 text-gray-500 text-center">
-                            Built with Next.js, Supabase, and Tailwind CSS
+                            I login here to make blog posts and manage my website.
                         </p>
                     </div>
 
