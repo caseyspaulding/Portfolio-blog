@@ -24,7 +24,7 @@ interface Project
 
 const projects: Project[] = [
   {
-    title: 'REIstacks - Real Estate Investment Platform',
+    title: 'REIstacks - Real Estate Investment CRM Platform (Personal Project)',
     description: `A comprehensive CRM system I designed and built for real estate investors and wholesalers. This enterprise-grade application leverages a .NET 9 Web API backend with Azure cloud infrastructure and a modern Next.js frontend. The system incorporates advanced batch processing for bulk lead management and ML-powered dashboards for predictive analytics.`,
     role: 'Lead Developer & System Architect',
     duration: 'Nov 2025 - Present',
@@ -106,7 +106,7 @@ const projects: Project[] = [
     liveDemo: 'https://reistacks.com',
   },
   {
-    title: 'Event Ticketing Application',
+    title: 'Event Ticketing Application (Personal Project)',
     description: `A scalable ticketing platform built to handle multiple event organizers, venues, and hundreds of concurrent ticket purchases. I architected this system to ensure data integrity, security, and real-time functionality.`,
     role: 'Full Stack Developer',
     duration: 'May 2023 - Sept 2023',
@@ -147,7 +147,7 @@ const projects: Project[] = [
     liveDemo: 'https://eventjacket.com',
   },
   {
-    title: 'Tech Blog Platform',
+    title: 'Tech Blog Platform (Personal Project)',
     description: `A modern full-stack personal blog platform with a focus on technical content. I built this system to showcase technical diagrams, code samples, and in-depth articles with a custom content management system.`,
     role: 'Developer & Designer',
     duration: 'Jan 2023 - Apr 2023',
