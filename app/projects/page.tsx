@@ -202,8 +202,7 @@ export default function ProjectsPage ()
               </h1>
               <p className="text-lg text-gray-700 dark:text-gray-300 max-w-2xl mx-auto">
                 A showcase of my experience developing robust, scalable applications with modern technologies.
-                These projects demonstrate my expertise in full-stack development, system architecture, and
-                problem-solving.
+
               </p>
             </div>
 
@@ -221,7 +220,7 @@ export default function ProjectsPage ()
                   <div>
                     <h3 className="text-lg font-medium text-gray-900 dark:text-white">Frontend Development</h3>
                     <p className="mt-1 text-gray-600 dark:text-gray-400">
-                      Next.js, React, TypeScript, Tailwind CSS, responsive design, accessibility
+                      React, TypeScript, Next.js, Angular, Tailwind CSS, 508 Accessibility
                     </p>
                   </div>
                 </div>
@@ -235,7 +234,7 @@ export default function ProjectsPage ()
                   <div>
                     <h3 className="text-lg font-medium text-gray-900 dark:text-white">Backend Systems</h3>
                     <p className="mt-1 text-gray-600 dark:text-gray-400">
-                      .NET Core, C#, API development, serverless functions, authentication
+                      .NET, C#, API development, Serverless Functions, JWT Authentication
                     </p>
                   </div>
                 </div>
@@ -249,7 +248,7 @@ export default function ProjectsPage ()
                   <div>
                     <h3 className="text-lg font-medium text-gray-900 dark:text-white">Data & Infrastructure</h3>
                     <p className="mt-1 text-gray-600 dark:text-gray-400">
-                      PostgreSQL, SQL Server, ORM tools, AWS, Azure Cloud, database optimization
+                      SQL Server, Entity Framework, SSIS, SSMS, AWS, Azure Cloud, Database Optimization
                     </p>
                   </div>
                 </div>
