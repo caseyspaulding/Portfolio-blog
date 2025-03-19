@@ -12,13 +12,11 @@ const NavItem = ( {
   text,
   dropdown = null,
   onNavigate,
-  active = false
 }: {
   href: string;
   text: string;
   dropdown?: React.ReactNode;
   onNavigate?: () => void;
-  active?: boolean;
 } ) =>
 {
   if ( dropdown )
@@ -26,10 +24,7 @@ const NavItem = ( {
     return (
       <li className="relative">
         <HeadlessMenu>
-          <HeadlessMenu.Button className={ `flex items-center font-medium transition-colors duration-200 ${ active
-            ? 'text-blue-600 dark:text-blue-400'
-            : 'text-gray-700 hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400'
-            }` }>
+          <HeadlessMenu.Button className="flex items-center font-medium transition-colors duration-200 text-gray-700 hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400">
             { text }
             <ChevronDown className="ml-1 h-4 w-4" />
           </HeadlessMenu.Button>
@@ -43,10 +38,7 @@ const NavItem = ( {
     <li>
       <Link
         href={ href }
-        className={ `font-medium transition-colors duration-200 ${ active
-          ? 'text-blue-600 dark:text-blue-400'
-          : 'text-gray-700 hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400'
-          }` }
+        className="font-medium transition-colors duration-200 text-gray-700 hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400"
         onClick={ onNavigate }
       >
         { text }
@@ -73,7 +65,6 @@ const FreeToolsDropdown = ( { onNavigate }: { onNavigate?: () => void } ) => (
         ) }
       </HeadlessMenu.Item>
       {/* Add more tool links here */ }
-
     </div>
   </HeadlessMenu.Items>
 );
@@ -84,14 +75,10 @@ export default function Navbar ()
   const { theme, setTheme } = useTheme();
   const [ isMenuOpen, setIsMenuOpen ] = useState( false );
   const [ scrolled, setScrolled ] = useState( false );
-  const [ activePath, setActivePath ] = useState( '' );
 
   useEffect( () =>
   {
     setMounted( true );
-
-    // Set active path based on current URL
-    setActivePath( window.location.pathname );
 
     // Detect scroll for glass effect
     const handleScroll = () =>
@@ -119,16 +106,6 @@ export default function Navbar ()
     setIsMenuOpen( false );
   };
 
-  // Check if a path is active
-  const isActive = ( path: string ) =>
-  {
-    if ( path === '/' )
-    {
-      return activePath === '/';
-    }
-    return activePath.startsWith( path );
-  };
-
   return (
     <nav
       className={ `sticky top-0 z-50 transition-all duration-300 ${ scrolled
@@ -151,16 +128,15 @@ export default function Navbar ()
           {/* Desktop menu */ }
           <div className="hidden md:flex items-center space-x-6">
             <ul className="flex space-x-6">
-              <NavItem href="/blog" text="Blog" active={ isActive( '/blog' ) } />
-              <NavItem href="/projects" text="Projects" active={ isActive( '/projects' ) } />
+              <NavItem href="/blog" text="Blog" />
+              <NavItem href="/projects" text="Projects" />
               <NavItem
                 href="#"
                 text="Free Tools"
                 dropdown={ <FreeToolsDropdown /> }
-                active={ isActive( '/tools' ) }
               />
-              <NavItem href="/contact" text="Contact" active={ isActive( '/contact' ) } />
-              <NavItem href="/about" text="About" active={ isActive( '/about' ) } />
+              <NavItem href="/contact" text="Contact" />
+              <NavItem href="/about" text="About" />
             </ul>
 
             <div className="h-6 w-px bg-gray-300 dark:bg-gray-700"></div>
@@ -220,16 +196,13 @@ export default function Navbar ()
         <div className="md:hidden absolute w-full bg-white dark:bg-gray-900 shadow-lg rounded-b-xl border-t border-gray-200 dark:border-gray-800">
           <div className="px-4 py-4 space-y-3">
             <ul className="flex flex-col space-y-3">
-              <NavItem href="/blog" text="Blog" onNavigate={ closeMenu } active={ isActive( '/blog' ) } />
-              <NavItem href="/projects" text="Projects" onNavigate={ closeMenu } active={ isActive( '/projects' ) } />
-              <NavItem href="/contact" text="Contact" onNavigate={ closeMenu } active={ isActive( '/contact' ) } />
-              <NavItem href="/about" text="About" onNavigate={ closeMenu } active={ isActive( '/about' ) } />
+              <NavItem href="/blog" text="Blog" onNavigate={ closeMenu } />
+              <NavItem href="/projects" text="Projects" onNavigate={ closeMenu } />
+              <NavItem href="/contact" text="Contact" onNavigate={ closeMenu } />
+              <NavItem href="/about" text="About" onNavigate={ closeMenu } />
               <li>
                 <HeadlessMenu as="div" className="relative">
-                  <HeadlessMenu.Button className={ `flex items-center font-medium transition-colors duration-200 ${ isActive( '/tools' )
-                    ? 'text-blue-600 dark:text-blue-400'
-                    : 'text-gray-700 hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400'
-                    }` }>
+                  <HeadlessMenu.Button className="flex items-center font-medium transition-colors duration-200 text-gray-700 hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400">
                     Free Tools
                     <ChevronDown className="ml-1 h-4 w-4" />
                   </HeadlessMenu.Button>
@@ -242,7 +215,6 @@ export default function Navbar ()
                       >
                         QR Code Generator
                       </Link>
-
                     </div>
                   </div>
                 </HeadlessMenu>
