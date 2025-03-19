@@ -67,22 +67,19 @@ export async function generateMetadata ( { params }: { params: { slug: string } 
     }
 
     // For meta description, use raw text without markdown formatting
-    const plainTextContent = post.content.replace( /[#*`_\[\]]/g, '' ).slice( 0, 160 );
+
 
     // Make sure image URLs are absolute
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://CaseySpaulding.com';
+    const siteUrl = 'https://CaseySpaulding.com';
     const imageUrl = post.featuredImage
-        ? ( post.featuredImage.startsWith( 'http' )
-            ? post.featuredImage
-            : `${ siteUrl }${ post.featuredImage }` )
-        : null;
+
 
     return {
         title: post.title,
-        description: post.excerpt || plainTextContent,
+        description: post.excerpt,
         openGraph: {
             title: post.title,
-            description: post.excerpt || plainTextContent,
+            description: post.excerpt || '',
             url: `${ siteUrl }/blog/${ params.slug }`,
             siteName: 'Casey Spaulding',
             images: imageUrl ? [ {
@@ -97,8 +94,8 @@ export async function generateMetadata ( { params }: { params: { slug: string } 
         twitter: {
             card: 'summary_large_image',
             title: post.title,
-            description: post.excerpt || plainTextContent,
-            images: imageUrl ? [ { url: imageUrl, alt: post.title } ] : [],
+            description: post.excerpt || '',
+            images: imageUrl || '',
             creator: '@caseyspaulding_',
         },
     };
