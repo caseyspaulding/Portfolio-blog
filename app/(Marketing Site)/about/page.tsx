@@ -371,7 +371,7 @@ const CaseyAuthorPage = () =>
                                                 'Building scalable .NET APIs',
                                                 'Optimizing SQL Server performance',
                                                 'Cloud-native development with Azure',
-                                                'Developing cross-platform mobile apps',
+                                                'Developing AI solutions',
                                                 'Implementing DevOps automation in .NET projects'
                                             ].map( ( topic, index ) => (
                                                 <div key={ index } className="bg-gray-50 dark:bg-gray-700 rounded-lg p-3 text-center">
