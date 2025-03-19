@@ -12,7 +12,7 @@ import 'katex/dist/katex.min.css';
 import { Metadata } from 'next';
 
 const SITE_URL = 'https://CaseySpaulding.com';
-const DEFAULT_OG_IMAGE = '/images/opengraph-image.jpg';
+const DEFAULT_OG_IMAGE = 'https://kipgmksircieasquldkz.supabase.co/storage/v1/object/public/blogimages/public/opengraph-image1%20(17).png';
 
 export const metadata: Metadata = {
     title: 'Casey Spaulding - Blog and Portfolio',
