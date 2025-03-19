@@ -262,18 +262,22 @@ const BlogPostForm: React.FC = () =>
         color: #000000 !important;
       }
       .jodit-wysiwyg pre {
-        background: #1e1e1e !important;
-        border-radius: 4px !important;
-        padding: 15px !important;
-        margin: 15px 0 !important;
-        overflow-x: auto !important;
-      }
-      .jodit-wysiwyg code {
-        font-family: 'Monaco', 'Consolas', 'Courier New', monospace !important;
-        font-size: 14px !important;
-        line-height: 1.4 !important;
-        color: #d4d4d4 !important;
-      }
+    white-space: pre-wrap; /* Enables wrapping */
+    word-wrap: break-word; /* Ensures long words are wrapped */
+    overflow-x: auto; /* Allows horizontal scrolling if necessary */
+    background: #1e1e1e; /* Existing background color */
+    border-radius: 4px; /* Existing rounded corners */
+    padding: 15px; /* Existing padding */
+    margin: 15px 0; /* Existing margin */
+}
+
+.jodit-wysiwyg code {
+    font-family: 'Monaco', 'Consolas', 'Courier New', monospace; /* Existing font family */
+    font-size: 14px; /* Existing font size */
+    color: #d4d4d4; /* Existing font color */
+    line-height: 1.4; /* Existing line height */
+}
+
       .jodit-container {
         border-color: #d1d5db !important;
       }
