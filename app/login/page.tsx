@@ -201,9 +201,9 @@ export default function LoginComponent ( { searchParams }: { searchParams: Promi
                         ></div>
                     </div>
                     <div className="relative my-4">
-                        <div aria-hidden="true" className="absolute inset-0 flex items-center">
+                        {/*<div aria-hidden="true" className="absolute inset-0 flex items-center">
                             <div className="w-full border-t border-gray-200" />
-                        </div>
+                        </div>*/}
                         {/*<div className="relative flex justify-center text-sm font-medium leading-6">
                             <span className="bg-white px-4 text-gray-900">Or continue with</span>
                         </div>*/}
