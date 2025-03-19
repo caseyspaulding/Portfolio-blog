@@ -11,8 +11,8 @@ import ThemeProviders from './ThemeProvider';
 import 'katex/dist/katex.min.css';
 import { Metadata } from 'next';
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://CaseySpaulding.com';
-const DEFAULT_OG_IMAGE = '/images/og-default.jpg'; // Create a default OG image 1200×630px
+const SITE_URL = 'https://CaseySpaulding.com';
+const DEFAULT_OG_IMAGE = '/images/opengraph-image.jpg';
 
 export const metadata: Metadata = {
     title: 'Casey Spaulding - Blog and Portfolio',

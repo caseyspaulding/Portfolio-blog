@@ -40,7 +40,7 @@ export default function Index ()
                 <meta property="og:type" content="website" />
                 <meta
                     property="og:image"
-                    content="https://caseyspaulding.com/images/og-image.png"
+                    content="https://caseyspaulding.com/images/opengraph-image.png"
                 />
                 {/* Twitter meta tags */ }
                 <meta name="twitter:card" content="summary_large_image" />
