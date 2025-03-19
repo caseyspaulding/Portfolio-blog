@@ -233,7 +233,7 @@ export default async function BlogPost ( { params }: { params: Promise<{ slug: s
                         <div className="grid grid-cols-1 xl:grid-cols-4 gap-8 bg-white dark:bg-black rounded-2xl p-4">
                             <div className="xl:col-span-3">
                                 <div className="prose prose-lg dark:prose-invert max-w-none leading-relaxed text-lg markdown-content">
-                                    <div dangerouslySetInnerHTML={ { __html: htmlContent } } />
+                                   
                                     <BlogContent htmlContent={ htmlContent } />
                                 </div>
                             </div>
