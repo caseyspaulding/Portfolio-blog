@@ -99,7 +99,7 @@ export async function generateMetadata ( { params }: { params: { slug: string } 
             title: post.title,
             description: post.excerpt || plainTextContent,
             images: imageUrl ? [ { url: imageUrl, alt: post.title } ] : [],
-            creator: '@YourTwitterHandle',
+            creator: '@caseyspaulding_',
         },
     };
 }
