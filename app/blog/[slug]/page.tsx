@@ -1,4 +1,3 @@
-
 import { getBlogPostBySlug, getAllBlogSlugs } from '@/app/actions/blogActions';
 import type { Metadata } from 'next';
 import PageBackground from '@/components/PageBackGround';
@@ -50,17 +49,15 @@ marked.setOptions( {
     breaks: true
 } );
 
-
 export async function generateStaticParams ()
 {
     const slugs = await getAllBlogSlugs();
     return slugs.map( ( slug: string ) => ( { slug } ) );
 }
 
-export async function generateMetadata ( { params }: { params: Promise<{ slug: string }> } ): Promise<Metadata>
+export async function generateMetadata ( { params }: { params: { slug: string } } ): Promise<Metadata>
 {
-    const resolvedParams = await params; // Await the promise
-    const post = await getBlogPostBySlug( resolvedParams.slug );
+    const post = await getBlogPostBySlug( params.slug );
     if ( !post )
     {
         return {
@@ -72,20 +69,37 @@ export async function generateMetadata ( { params }: { params: Promise<{ slug: s
     // For meta description, use raw text without markdown formatting
     const plainTextContent = post.content.replace( /[#*`_\[\]]/g, '' ).slice( 0, 160 );
 
+    // Make sure image URLs are absolute
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://CaseySpaulding.com';
+    const imageUrl = post.featuredImage
+        ? ( post.featuredImage.startsWith( 'http' )
+            ? post.featuredImage
+            : `${ siteUrl }${ post.featuredImage }` )
+        : null;
+
     return {
         title: post.title,
         description: post.excerpt || plainTextContent,
         openGraph: {
             title: post.title,
             description: post.excerpt || plainTextContent,
-            url: `https://CaseySpaulding.com/blog/${ resolvedParams.slug }`,
-            images: post.featuredImage ? [ { url: post.featuredImage, alt: post.title } ] : [],
+            url: `${ siteUrl }/blog/${ params.slug }`,
+            siteName: 'Casey Spaulding',
+            images: imageUrl ? [ {
+                url: imageUrl,
+                width: 1200,
+                height: 630,
+                alt: post.title
+            } ] : [],
+            locale: 'en_US',
+            type: 'article',
         },
         twitter: {
             card: 'summary_large_image',
             title: post.title,
             description: post.excerpt || plainTextContent,
-            images: post.featuredImage ? [ { url: post.featuredImage, alt: post.title } ] : [],
+            images: imageUrl ? [ { url: imageUrl, alt: post.title } ] : [],
+            creator: '@YourTwitterHandle',
         },
     };
 }
@@ -122,10 +136,9 @@ const MermaidInitializer = () =>
 
 };
 
-export default async function BlogPost ( { params }: { params: Promise<{ slug: string }> } )
+export default async function BlogPost ( { params }: { params: { slug: string } } )
 {
-    const resolvedParams = await params;
-    const post = await getBlogPostBySlug( resolvedParams.slug );
+    const post = await getBlogPostBySlug( params.slug );
 
     if ( !post )
     {
@@ -217,7 +230,6 @@ export default async function BlogPost ( { params }: { params: Promise<{ slug: s
                         <div className="grid grid-cols-1 xl:grid-cols-4 gap-8 bg-white dark:bg-black rounded-2xl p-4">
                             <div className="xl:col-span-3">
                                 <div className="prose prose-lg dark:prose-invert max-w-none leading-relaxed text-lg markdown-content">
-                                    <div dangerouslySetInnerHTML={ { __html: htmlContent } } />
                                     <BlogContent htmlContent={ htmlContent } />
                                 </div>
                             </div>
