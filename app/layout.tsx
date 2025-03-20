@@ -26,6 +26,7 @@ export const metadata: Metadata = {
         title: 'Casey Spaulding - Blog and Portfolio',
         description: 'Personal blog and portfolio of Casey Spaulding, .NET Full Stack Developer',
 
+
     },
     twitter: {
         card: 'summary_large_image',
