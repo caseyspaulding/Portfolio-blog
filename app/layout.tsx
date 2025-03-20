@@ -25,20 +25,13 @@ export const metadata: Metadata = {
         siteName: 'Casey Spaulding',
         title: 'Casey Spaulding - Blog and Portfolio',
         description: 'Personal blog and portfolio of Casey Spaulding, .NET Full Stack Developer',
-        images: [
-            {
-                url: DEFAULT_OG_IMAGE,
-                width: 1200,
-                height: 630,
-                alt: 'Casey Spaulding - Blog and Portfolio',
-            },
-        ],
+
     },
     twitter: {
         card: 'summary_large_image',
         title: 'Casey Spaulding - Blog and Portfolio',
         description: 'Personal blog and portfolio of Casey Spaulding, .NET Full Stack Developer',
-        images: [ DEFAULT_OG_IMAGE ],
+
         creator: '@caseyspaulding_', // Replace with your Twitter handle
     },
     robots: {
