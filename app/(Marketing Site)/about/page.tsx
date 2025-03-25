@@ -199,12 +199,12 @@ const CaseyAuthorPage = () =>
                                         </p>
                                         <ul className="space-y-3 text-gray-700 dark:text-gray-300">
                                             { [
-                                                '.NET Framework (4.0+) & .NET Core for enterprise applications',
-                                                'C# Development for APIs, batch jobs, and services',
+                                                '.NET (Core or Framework) For Development of APIs, batch jobs, and services',
+                                                'Python (FastAPI) for development of ML/AI services',
                                                 'Azure Cloud Solutions: Azure SQL, Azure Functions, Azure App Service, and more',
-                                                'SQL Server, Entity Framework, SSMS, and SSIS',
-                                                'Frontend development with Angular or React',
-                                                'Agile & Scrum Development methodologies'
+                                                'SQL Server, Entity Framework, SSMS, SSIS, etc.',
+                                                'Frontend development with Angular or NextJs (React)',
+                                                'Agile & Scrum Development methodologies (Scaled Agile Framework (SAFe) Certified)'
                                             ].map( ( item, index ) => (
                                                 <li key={ index } className="flex items-start">
                                                     <svg className="h-5 w-5 text-blue-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -237,7 +237,7 @@ const CaseyAuthorPage = () =>
                                             </h3>
                                             <ul className="space-y-2 text-gray-700 dark:text-gray-300">
                                                 { [
-                                                    'Building RESTful APIs with .NET Core and C#',
+                                                    'Building RESTful APIs with .NET and C#',
                                                     'Implementing security best practices: JWT authentication and OAuth2',
                                                     'Database optimization using SQL Server indexing and query performance tuning'
                                                 ].map( ( item, index ) => (
@@ -261,8 +261,8 @@ const CaseyAuthorPage = () =>
                                             </h3>
                                             <ul className="space-y-2 text-gray-700 dark:text-gray-300">
                                                 { [
-                                                    'Developing responsive web applications with Angular',
-                                                    'Mobile development with .NET MAUI, Xamarin, and Kotlin'
+                                                    'Developing responsive web applications with Angular and NextJs',
+                                                    'Mobile development with .NET MAUI.'
                                                 ].map( ( item, index ) => (
                                                     <li key={ index } className="flex items-start">
                                                         <svg className="h-5 w-5 text-indigo-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

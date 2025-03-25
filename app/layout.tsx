@@ -25,14 +25,11 @@ export const metadata: Metadata = {
         siteName: 'Casey Spaulding',
         title: 'Casey Spaulding - Blog and Portfolio',
         description: 'Personal blog and portfolio of Casey Spaulding, .NET Full Stack Developer',
-
-
     },
     twitter: {
         card: 'summary_large_image',
         title: 'Casey Spaulding - Blog and Portfolio',
         description: 'Personal blog and portfolio of Casey Spaulding, .NET Full Stack Developer',
-
         creator: '@caseyspaulding_', // Replace with your Twitter handle
     },
     robots: {
