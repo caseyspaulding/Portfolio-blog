@@ -177,7 +177,7 @@ const CaseyAuthorPage = () =>
                                             I'm always open to discussing opportunities in enterprise software development and AI-driven solutions.
                                         </p>
                                         <a
-                                            href="mailto:casey@caseyspaulding.com"
+                                            href="mailto:casey.spaulding@me.com"
                                             className="inline-block w-full text-center bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition duration-300"
                                         >
                                             Get In Touch
