@@ -57,11 +57,14 @@ const CaseyAuthorPage = () =>
 
     // Added skills list for the skills section
     const skills = [
-        { name: '.NET & .NET Framework', level: 100 },
+        { name: '.NET or .NET Framework', level: 100 },
         { name: 'C#', level: 100 },
+        { name: 'Typescript', level: 75 },
+        { name: 'Python', level: 75 },
         { name: 'Azure Cloud Services', level: 100 },
         { name: 'SQL Server', level: 80 },
         { name: 'Angular', level: 75 },
+        { name: 'NextJs', level: 75 },
         { name: 'RESTful APIs', level: 100 },
     ];
 
