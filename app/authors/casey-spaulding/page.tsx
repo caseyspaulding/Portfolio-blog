@@ -2,11 +2,10 @@
 
 import React, { SVGProps } from 'react';
 import Head from 'next/head';
-import NavBar1 from '@/components/NavBarTW/NavBar1';
-import FooterFull from '@/components/Footers/FooterFull';
+
 import { Metadata } from 'next';
-import PageBackground from '@/components/PageBackGround';
-import P from 'react';
+import Footer from '@/components/Footers/FooterTW';
+
 
 
 export const metadata: Metadata = {
@@ -58,11 +57,14 @@ const CaseyAuthorPage = () =>
 
   // Added skills list for the skills section
   const skills = [
-    { name: '.NET & .NET Framework', level: 100 },
+    { name: '.NET or .NET Framework', level: 100 },
     { name: 'C#', level: 100 },
+    { name: 'Typescript', level: 75 },
+    { name: 'Python', level: 75 },
     { name: 'Azure Cloud Services', level: 100 },
     { name: 'SQL Server', level: 80 },
     { name: 'Angular', level: 75 },
+    { name: 'NextJs', level: 75 },
     { name: 'RESTful APIs', level: 100 },
   ];
 
@@ -134,7 +136,7 @@ const CaseyAuthorPage = () =>
                       About Me
                     </h2>
                     <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                      Hi, I'm <span className="font-semibold">Casey Spaulding</span>, an experienced full-stack developer, software engineer, and AI enthusiast with a deep love for technology and problem-solving.
+                      Hi, I'm <span className="font-semibold">Casey Spaulding</span>, an experienced .NET full-stack developer and AI enthusiast that specializes in building enterprise applications and cloud solutions.
                     </p>
                   </div>
                 </div>
@@ -175,7 +177,7 @@ const CaseyAuthorPage = () =>
                       I'm always open to discussing opportunities in enterprise software development and AI-driven solutions.
                     </p>
                     <a
-                      href="mailto:casey@caseyspaulding.com"
+                      href="mailto:casey.spaulding@me.com"
                       className="inline-block w-full text-center bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition duration-300"
                     >
                       Get In Touch
@@ -196,16 +198,16 @@ const CaseyAuthorPage = () =>
                       Professional Background
                     </h2>
                     <p className="text-gray-700 dark:text-gray-300 mb-4">
-                      With over <span className="font-semibold">three years of experience</span> in software development, I specialize in:
+                      With over <span className="font-semibold">five years of experience</span> in software development, I specialize in:
                     </p>
                     <ul className="space-y-3 text-gray-700 dark:text-gray-300">
                       { [
-                        '.NET Framework (4.0+) & .NET Core for enterprise applications',
-                        'C# Development for APIs, batch jobs, and services',
-                        'Azure Cloud Solutions: Azure SQL, Azure DevOps, and Azure App Services',
-                        'SQL Server and relational database optimization',
-                        'Frontend development with Angular',
-                        'Agile & Scrum Development methodologies'
+                        '.NET (Core or Framework) For Development of APIs, batch jobs, and services',
+                        'Python (FastAPI) for development of ML/AI services',
+                        'Azure Cloud Solutions: Azure SQL, Azure Functions, Azure App Service, and more',
+                        'SQL Server, Entity Framework, SSMS, SSIS, etc.',
+                        'Frontend development with Angular or NextJs (React)',
+                        'Agile & Scrum Development methodologies (Scaled Agile Framework (SAFe) Certified)'
                       ].map( ( item, index ) => (
                         <li key={ index } className="flex items-start">
                           <svg className="h-5 w-5 text-blue-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -238,7 +240,7 @@ const CaseyAuthorPage = () =>
                       </h3>
                       <ul className="space-y-2 text-gray-700 dark:text-gray-300">
                         { [
-                          'Building RESTful APIs with .NET Core and C#',
+                          'Building RESTful APIs with .NET and C#',
                           'Implementing security best practices: JWT authentication and OAuth2',
                           'Database optimization using SQL Server indexing and query performance tuning'
                         ].map( ( item, index ) => (
@@ -262,8 +264,8 @@ const CaseyAuthorPage = () =>
                       </h3>
                       <ul className="space-y-2 text-gray-700 dark:text-gray-300">
                         { [
-                          'Developing responsive web applications with Angular',
-                          'Mobile development with .NET MAUI, Xamarin, and Kotlin'
+                          'Developing responsive web applications with Angular and NextJs',
+                          'Mobile development with .NET MAUI.'
                         ].map( ( item, index ) => (
                           <li key={ index } className="flex items-start">
                             <svg className="h-5 w-5 text-indigo-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -308,29 +310,29 @@ const CaseyAuthorPage = () =>
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={ 2 } d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
                       </svg>
-                      Featured Blog Posts
+                      Featured Blog Posts & Articles
                     </h2>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       { [
                         {
-                          title: 'Building Secure .NET APIs with JWT and Azure AD',
+                          title: 'Building Secure .NET APIs with JWT Authentication',
                           excerpt: 'Learn how to implement secure authentication in your .NET Core APIs using JWT tokens and Azure Active Directory.',
-                          link: '#'
+                          link: 'https://www.caseyspaulding.com/blog/secure-multi-tenant-cookie-based-jwt-authentication'
                         },
                         {
-                          title: 'Automating Deployments with Azure DevOps and CI/CD',
+                          title: 'Automating Deployments with Azure DevOps or Github Actions (Coming Soon)',
                           excerpt: 'Step-by-step guide to setting up automated deployment pipelines using Azure DevOps for .NET applications.',
                           link: '#'
                         },
                         {
-                          title: 'Optimizing SQL Server Performance for .NET Applications',
+                          title: 'Optimizing SQL Server Performance for .NET Applications (Coming Soon)',
                           excerpt: 'Practical techniques to improve database performance in your .NET applications through indexing and query optimization.',
                           link: '#'
                         },
                         {
-                          title: 'Developing Cross-Platform Mobile Apps with .NET MAUI',
-                          excerpt: 'Explore the capabilities of .NET MAUI for building cross-platform mobile applications that run on iOS, Android, and Windows.',
+                          title: 'Building Scalable .NET APIs with Dapper ORM (Coming Soon)',
+                          excerpt: 'Learn how to build high-performance APIs using Dapper ORM for data access in .NET applications.',
                           link: '#'
                         }
                       ].map( ( post, index ) => (
@@ -373,7 +375,7 @@ const CaseyAuthorPage = () =>
                         'Building scalable .NET APIs',
                         'Optimizing SQL Server performance',
                         'Cloud-native development with Azure',
-                        'Developing cross-platform mobile apps',
+                        'Developing AI solutions',
                         'Implementing DevOps automation in .NET projects'
                       ].map( ( topic, index ) => (
                         <div key={ index } className="bg-gray-50 dark:bg-gray-700 rounded-lg p-3 text-center">
