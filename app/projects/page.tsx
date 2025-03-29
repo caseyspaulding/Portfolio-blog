@@ -220,7 +220,7 @@ export default function ProjectsPage ()
                   <div>
                     <h3 className="text-lg font-medium text-gray-900 dark:text-white">Frontend Development</h3>
                     <p className="mt-1 text-gray-600 dark:text-gray-400">
-                      React, TypeScript, Next.js, Angular, Tailwind CSS, 508 Accessibility
+                      React, TypeScript, Next.js, Angular, 508 Accessibility
                     </p>
                   </div>
                 </div>
