@@ -53,7 +53,7 @@ export default function RootLayout ( { children }: PropsWithChildren )
                     <ThemeProviders>
                         <NavBar />
                         <Analytics />
-                       
+
                         <ClientProviders>
                             { children }
                         </ClientProviders>
