@@ -198,10 +198,10 @@ export default function ProjectsPage ()
             {/* Header section */ }
             <div className="text-center mb-16">
               <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-700 dark:from-blue-400 dark:to-indigo-500">
-                Professional Portfolio
+                Portfolio
               </h1>
               <p className="text-lg text-gray-700 dark:text-gray-300 max-w-2xl mx-auto">
-                A showcase of my experience developing robust, scalable applications with modern technologies.
+                A few projects that showcase my skills and experience in full-stack development.
 
               </p>
             </div>

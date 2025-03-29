@@ -53,18 +53,7 @@ export default function RootLayout ( { children }: PropsWithChildren )
                     <ThemeProviders>
                         <NavBar />
                         <Analytics />
-                        <Script
-                            strategy="afterInteractive"
-                            src="https://www.googletagmanager.com/gtag/js?id=G-M6F4XVZM25"
-                        />
-                        <Script id="gtag-init" strategy="afterInteractive">
-                            { `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-M6F4XVZM25');
-            `}
-                        </Script>
+                       
                         <ClientProviders>
                             { children }
                         </ClientProviders>
