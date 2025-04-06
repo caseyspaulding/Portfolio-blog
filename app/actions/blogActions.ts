@@ -6,6 +6,9 @@ import { db } from '@/db';
 import { authors, BlogDiagram, blogPosts, Category, DifficultyLevel } from '@/db/schemas/schema';
 import { eq, sql, desc } from 'drizzle-orm';
 import { revalidatePath } from 'next/cache';
+import { writeFile, mkdir } from 'fs/promises';
+import path from 'path';
+import { v4 as uuidv4 } from 'uuid';
 
 export type BlogPostWithAuthor = BlogPost & {
     author: {
@@ -27,15 +30,55 @@ interface Author
     avatarUrl?: string | null;
 }
 
-
-
-
 type FilterParams = {
     category?: Category | 'all';
     difficultyLevel?: DifficultyLevel | 'all';
 };
 
+// New function to handle image uploads
+export async function uploadImage ( formData: FormData )
+{
+    try
+    {
+        const file = formData.get( 'image' ) as File;
 
+        if ( !file )
+        {
+            return { success: false, message: 'No image file provided' };
+        }
+
+        // Create uploads directory if it doesn't exist
+        const uploadsDir = path.join( process.cwd(), 'public', 'uploads' );
+        await mkdir( uploadsDir, { recursive: true } );
+
+        // Generate unique filename
+        const uniqueId = uuidv4();
+        const fileName = file.name.replace( /\s+/g, '-' ).toLowerCase();
+        const fileExt = path.extname( fileName );
+        const uniqueFileName = `${ uniqueId }${ fileExt }`;
+        const filePath = path.join( uploadsDir, uniqueFileName );
+
+        // Convert file to buffer and save
+        const bytes = await file.arrayBuffer();
+        const buffer = Buffer.from( bytes );
+        await writeFile( filePath, buffer );
+
+        // Return the image URL (relative to public folder)
+        const imageUrl = `/uploads/${ uniqueFileName }`;
+        return {
+            success: true,
+            imageUrl,
+            message: 'Image uploaded successfully'
+        };
+    } catch ( error )
+    {
+        console.error( 'Error uploading image:', error );
+        return {
+            success: false,
+            message: 'Failed to upload image'
+        };
+    }
+}
 
 export async function getAuthorBySlug ( slug: string ): Promise<Author | null>
 {
@@ -79,7 +122,6 @@ export async function getBlogPostBySlug ( slug: string ): Promise<BlogPostWithAu
                     updatedAt: blogPosts.updatedAt,
                     publishedAt: blogPosts.publishedAt,
                     tags: blogPosts.tags,
-
                     readingTime: blogPosts.readingTime,
                     difficultyLevel: blogPosts.difficultyLevel,
                     metaTitle: blogPosts.metaTitle,
@@ -112,7 +154,7 @@ export async function getBlogPostBySlug ( slug: string ): Promise<BlogPostWithAu
         const post: BlogPostWithAuthor = {
             ...result.post,
             diagrams: parsedDiagrams,
-            author: result.author, // Allow `null` to propagate
+            author: result.author,
         };
 
         return post;
@@ -149,13 +191,11 @@ export async function getAllBlogPosts ()
                 },
             } )
             .from( blogPosts )
-            .where( eq( blogPosts.isPublished, true ) ) // Only get published posts
-            .orderBy( desc( blogPosts.publishedAt ) ); // Correctly use desc for sorting
+            .where( eq( blogPosts.isPublished, true ) )
+            .orderBy( desc( blogPosts.publishedAt ) );
 
-        // Transform the results to match the BlogPost type
         const posts = results.map( ( result ) => ( {
             ...result.post,
-            // Ensure diagrams is always an array
             diagrams: Array.isArray( result.post.diagrams )
                 ? result.post.diagrams
                 : [],
@@ -178,7 +218,7 @@ export async function getAllBlogPosts ()
 export async function createBlogPost ( formData: FormData )
 {
     const title = formData.get( 'title' ) as string;
-    const content = formData.get( 'content' ) as string; // This is now Markdown content
+    const content = formData.get( 'content' ) as string; // Markdown content with embedded images
     const excerpt = ( formData.get( 'excerpt' ) as string ) || '';
     const authorId = 1;
     const tags = ( formData.get( 'tags' ) as string )?.split( ',' ).map( tag => tag.trim() ).join( ',' ) || '';
@@ -208,8 +248,6 @@ export async function createBlogPost ( formData: FormData )
             return { success: false, message: 'A post with this slug already exists.' };
         }
 
-        // Add a contentFormat field if you want to track which format is being used
-        // This allows for a smoother transition if you have existing HTML content
         await db.insert( blogPosts ).values( {
             title,
             content,
@@ -229,7 +267,6 @@ export async function createBlogPost ( formData: FormData )
             technologies,
             createdAt: new Date(),
             updatedAt: new Date(),
-            // Removed contentFormat as it's not in the schema
         } );
 
         revalidatePath( '/blog' );
@@ -250,23 +287,22 @@ export async function getAllBlogSlugs ()
     return slugs;
 }
 
-
 // Helper function to generate a slug from a title
 function generateSlug ( title: string ): string
 {
     return title
         .toLowerCase()
         .trim()
-        .replace( /[^\w\s-]/g, '' ) // Remove invalid characters
-        .replace( /\s+/g, '-' ) // Replace spaces with hyphens
-        .replace( /--+/g, '-' ) // Replace multiple hyphens with a single hyphen
-        .substring( 0, 255 ); // Limit slug length to 255 characters
+        .replace( /[^\w\s-]/g, '' )
+        .replace( /\s+/g, '-' )
+        .replace( /--+/g, '-' )
+        .substring( 0, 255 );
 }
 
 export async function updateBlogPost ( id: number, formData: FormData )
 {
     const title = formData.get( 'title' ) as string;
-    const content = formData.get( 'content' ) as string; // This is now Markdown content
+    const content = formData.get( 'content' ) as string; // Markdown content with embedded images
     const excerpt = ( formData.get( 'excerpt' ) as string ) || '';
     const tags = formData.get( 'tags' ) as string || '';
     let slug = formData.get( 'slug' ) as string;
@@ -274,6 +310,11 @@ export async function updateBlogPost ( id: number, formData: FormData )
     const metaTitle = formData.get( 'metaTitle' ) as string;
     const metaDescription = formData.get( 'metaDescription' ) as string;
     const isPublished = formData.get( 'isPublished' ) === 'true';
+    const diagrams = JSON.parse( formData.get( 'diagrams' ) as string || '[]' );
+    const readingTime = parseInt( formData.get( 'readingTime' ) as string, 10 ) || null;
+    const difficultyLevel = formData.get( 'difficultyLevel' ) as DifficultyLevel || null;
+    const categories = JSON.parse( formData.get( 'categories' ) as string || '[]' );
+    const technologies = JSON.parse( formData.get( 'technologies' ) as string || '[]' );
 
     if ( !slug )
     {
@@ -288,17 +329,23 @@ export async function updateBlogPost ( id: number, formData: FormData )
                 title,
                 content,
                 excerpt,
-                authorId: 1,
                 tags,
                 slug,
                 featuredImage,
                 metaTitle,
                 metaDescription,
                 isPublished,
+                diagrams,
+                readingTime,
+                difficultyLevel,
+                categories,
+                technologies,
                 updatedAt: new Date(),
-                contentFormat: 'markdown', // Add this field to track the format
             } )
             .where( eq( blogPosts.id, id ) );
+
+        revalidatePath( '/blog' );
+        revalidatePath( `/blog/${ slug }` );
 
         return { success: true, message: 'Blog post updated successfully' };
     } catch ( error )
@@ -308,12 +355,12 @@ export async function updateBlogPost ( id: number, formData: FormData )
     }
 }
 
-
 export async function deletePost ( postId: number )
 {
     try
     {
         await db.delete( blogPosts ).where( eq( blogPosts.id, postId ) );
+        revalidatePath( '/blog' );
         return { success: true };
     } catch ( error )
     {
@@ -321,7 +368,6 @@ export async function deletePost ( postId: number )
         return { success: false, error };
     }
 }
-
 
 interface FilterOptions
 {
@@ -360,7 +406,7 @@ export async function getFilteredBlogPosts ( filters: FilterOptions )
                 // Combine filters with AND
                 return filters.length > 0 ? sql`${ sql.join( filters, ' AND ' ) }` : undefined;
             } )
-            .orderBy( sql`${ blogPosts.createdAt } DESC` ); // Order by latest posts
+            .orderBy( sql`${ blogPosts.createdAt } DESC` );
 
         const results = await query.execute();
 

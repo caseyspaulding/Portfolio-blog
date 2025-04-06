@@ -102,7 +102,7 @@ export async function generateMetadata ( { params }: { params: Promise<{ slug: s
             title: post.title,
             description: post.excerpt || plainTextContent,
             images: imageUrl ? [ { url: imageUrl, alt: post.title } ] : [],
-            creator: '@YourTwitterHandle',
+            creator: '@caseyspaulding_',
         },
     };
 }

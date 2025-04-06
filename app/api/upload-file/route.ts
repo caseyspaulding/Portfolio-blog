@@ -10,7 +10,7 @@ export async function POST ( request: Request )
     const { fileName, fileContent } = await request.json();
 
     const params = {
-      Bucket: "your-bucket-name",
+      Bucket: "blogimages",
       Key: fileName,
       Body: fileContent,
     };

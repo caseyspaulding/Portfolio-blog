@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 import mermaid from 'mermaid';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/github.css';
+import './blog-content.css';
 
 export default function BlogContent ( { htmlContent }: { htmlContent: string } )
 {
@@ -38,7 +39,7 @@ export default function BlogContent ( { htmlContent }: { htmlContent: string } )
   }, [ htmlContent ] );
 
   return (
-    <div className="prose prose-lg dark:prose-invert max-w-none leading-relaxed text-lg markdown-content">
+    <div className="prose prose-lg dark:prose-invert max-w-none leading-relaxed text-lg markdown-content ">
       <div ref={ contentRef } dangerouslySetInnerHTML={ { __html: htmlContent } } />
     </div>
   );
