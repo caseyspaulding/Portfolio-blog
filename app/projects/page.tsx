@@ -210,7 +210,7 @@ export default function ProjectsPage ()
                   <div>
                     <h3 className="text-lg font-medium text-gray-900 dark:text-white">Frontend Development</h3>
                     <p className="mt-1 text-gray-600 dark:text-gray-400">
-                      React, TypeScript, Next.js, Angular, 508 Accessibility
+                      React, Angular, Blazor, 508 Accessibility
                     </p>
                   </div>
                 </div>
@@ -238,7 +238,7 @@ export default function ProjectsPage ()
                   <div>
                     <h3 className="text-lg font-medium text-gray-900 dark:text-white">Data & Infrastructure</h3>
                     <p className="mt-1 text-gray-600 dark:text-gray-400">
-                      SQL Server, Entity Framework, SSIS, SSMS, AWS, Azure Cloud, Database Optimization
+                      SQL Server, Entity Framework, SSIS, SSMS, Azure, Database Optimization
                     </p>
                   </div>
                 </div>
