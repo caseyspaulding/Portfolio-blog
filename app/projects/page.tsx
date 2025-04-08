@@ -97,9 +97,9 @@ const projects: Project[] = [
   },
   {
     title: 'Event Ticketing Application (Personal Project)',
-    description: `A scalable ticketing platform built to handle multiple event organizers, venues, and hundreds of concurrent ticket purchases. I architected this system to ensure data integrity, security, and real-time functionality.`,
+    description: `A ticketing platform built to handle multiple event organizers, venues, and hundreds of concurrent ticket purchases.`,
     role: 'Full Stack Developer',
-    duration: 'May 2023 - Sept 2023',
+    duration: 'May 2024 - Sept 2024',
     keyFeatures: [
       'QR code ticket generation and validation',
       'Secure ticket scanner with real-time validation',
