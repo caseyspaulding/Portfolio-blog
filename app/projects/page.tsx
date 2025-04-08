@@ -26,7 +26,7 @@ const projects: Project[] = [
   {
     title: 'REIstacks - Real Estate Investment CRM Platform (Personal Project)',
     description: `A comprehensive CRM system I designed and built for real estate investors and wholesalers. This enterprise-grade application leverages a .NET 9 Web API backend with Azure cloud infrastructure and a modern Next.js frontend. The system incorporates advanced batch processing for bulk lead management and ML-powered dashboards for predictive analytics.`,
-    role: 'Lead Developer & System Architect',
+    role: 'Full Stack Developer',
     duration: 'Nov 2025 - Present',
     keyFeatures: [
       'Lead management with detailed property analysis',
@@ -139,7 +139,7 @@ const projects: Project[] = [
   {
     title: 'Tech Blog Platform (Personal Project)',
     description: `A modern full-stack personal blog platform with a focus on technical content. I built this system to showcase technical diagrams, code samples, and in-depth articles with a custom content management system.`,
-    role: 'Developer & Designer',
+    role: 'Full Stack Developer',
     duration: 'Jan 2023 - Apr 2023',
     keyFeatures: [
       'Custom content management dashboard',
