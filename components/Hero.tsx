@@ -70,7 +70,7 @@ export default function Hero ( { theme }: { theme: string } )
           </h1>
 
           <p className="text-xl text-gray-700 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
-            Let's Build.
+            Let’s build something great.
           </p>
 
           {/* Skills Section */ }
