@@ -1,5 +1,5 @@
 import { forwardRef, useEffect, useState } from "react";
-import { Spinner } from "@nextui-org/react";
+import { Loader2 } from "lucide-react"; // Import Loader2 icon from lucide-react
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>
 {
@@ -46,7 +46,7 @@ const MyButton = forwardRef<HTMLButtonElement, ButtonProps>(
             <button ref={ ref } { ...props } className={ `relative ${ props.className }` }>
                 { showSpinner ? (
                     <>
-                        <Spinner className="animate-spin mr-2" size="sm" />
+                        <Loader2 className="animate-spin mr-2 h-4 w-4" />
                         { loadingMessage }
                     </>
                 ) : (

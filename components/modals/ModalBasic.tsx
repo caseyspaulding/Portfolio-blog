@@ -1,6 +1,7 @@
 
-import { Button } from '@nextui-org/button';
+
 import React, { useState, useEffect } from 'react';
+import { Button } from '../ui/button';
 
 
 const ModalBasic = ( { isOpen, onClose, slug }:
@@ -33,15 +34,12 @@ const ModalBasic = ( { isOpen, onClose, slug }:
             No, Thanks
           </button>
           <Button
-            href={ `/dashboard/${ encodeURIComponent( slug ) }/events/${ slug }/create-tickets` }
-            as='a'
-            className='px-4 py-2 bg-primary text-white rounded-lg'
-
-          
+            asChild
+            className="bg-primary text-white rounded-lg"
           >
-            
+            <a href={ `/dashboard/${ encodeURIComponent( slug ) }/events/${ slug }/create-tickets` }>
               Yes, Create Tickets
-          
+            </a>
           </Button>
         </div>
       </div>

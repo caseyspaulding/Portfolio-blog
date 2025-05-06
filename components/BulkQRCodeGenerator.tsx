@@ -5,7 +5,8 @@ import * as QRCode from 'qrcode'; // Import the 'qrcode' package
 import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
 import { TextArea } from './TextArea';
-import { Button } from '@nextui-org/button';
+import { Button } from './ui/button';
+
 
 export default function BulkQRCodeGenerator ()
 {
@@ -87,7 +88,7 @@ export default function BulkQRCodeGenerator ()
           <Button
             type="button"
             onClick={ handleBulkGenerate }
-            className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-3xl"
+            className="mt-4 rounded-3xl bg-blue-500" // simplified classes
             disabled={ isGenerating }
           >
             { isGenerating ? 'Generating...' : 'Generate Bulk QR Codes' }

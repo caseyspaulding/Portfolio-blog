@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Button } from '@nextui-org/react';
+import { Button } from './ui/button';
+
 
 interface FileUploadButtonProps
 {
@@ -91,20 +92,20 @@ export function FileUploadButton ( {
         {/* Error Message */ }
         { error && <p className="text-red-500 mb-2">{ error }</p> }
         {/* Upload Button */ }
-        <Button
-          as="label"
-          className="bg-blue-700 text-white px-5 py-3 text-xl rounded-md cursor-pointer"
-          radius="sm"
-        >
-          { buttonText }
+        <div className="relative">
+          <Button
+            className="bg-blue-700 text-white rounded-md text-xl"
+          >
+            { buttonText }
+          </Button>
           <input
             type="file"
             accept={ accept }
             multiple={ multiple }
             onChange={ handleFileChange }
-            style={ { display: 'none' } }
+            className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
           />
-        </Button>
+        </div>
       </div>
     </div>
   );

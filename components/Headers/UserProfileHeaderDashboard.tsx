@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { BuildingOfficeIcon, CheckCircleIcon } from "@heroicons/react/24/outline";
-import { Button } from "@nextui-org/button";
-import { useParams } from 'next/navigation'; // Import useParams from Next.js
+import { Button } from "@/components/ui/button"; // Changed to shadcn Button import
+import { useParams } from 'next/navigation';
 
 interface UserProfileHeaderProps
 {
@@ -21,8 +21,8 @@ const UserProfileHeaderDashboard: React.FC<UserProfileHeaderProps> = ( {
 } ) =>
 {
   const [ greeting, setGreeting ] = useState( "Good Morning" );
-  const params = useParams(); // Get route parameters using useParams
-  const orgId = params.org; // Retrieve orgId from the URL params
+  const params = useParams();
+  const orgId = params.org;
 
   useEffect( () =>
   {
@@ -85,25 +85,25 @@ const UserProfileHeaderDashboard: React.FC<UserProfileHeaderProps> = ( {
             </div>
           </div>
           <div className="mt-6 flex flex-col space-y-3 md:flex-row md:space-x-3 md:space-y-0 md:ml-4 md:mt-0">
+            {/* Changed to shadcn Button with appropriate variant and styling */ }
             <Button
-              as="a"
-              href={ `/dashboard/${ orgId }/events` } // Use orgId from params
-              className="w-full md:w-auto inline-flex items-center rounded-3xl bg-white px-3 py-2 text-lg font-normal text-gray-900 shadow-sm ring-1 ring-inset ring-blue-300 hover:bg-blue-50 hover:ring-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+              asChild
+              variant="outline"
+              className="w-full md:w-auto rounded-3xl bg-white px-3 py-2 text-lg font-normal text-gray-900 ring-1 ring-inset ring-blue-300 hover:bg-blue-50 hover:ring-blue-500"
             >
-              Manage Events
+              <a href={ `/dashboard/${ orgId }/events` }>Manage Events</a>
             </Button>
+            {/* Changed to shadcn Button with appropriate variant and styling */ }
             <Button
-              as="a"
-              href={ `/dashboard/${ orgId }/events/new` } // Use orgId from params
-              className="w-full md:w-auto inline-flex items-center rounded-3xl bg-blue-700 px-3 py-2 text-lg font-normal text-white shadow-sm hover:bg-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-600"
+              asChild
+              className="w-full md:w-auto rounded-3xl bg-blue-700 px-3 py-2 text-lg font-normal text-white hover:bg-blue-600"
             >
-              Create Event
+              <a href={ `/dashboard/${ orgId }/events/new` }>Create Event</a>
             </Button>
           </div>
         </div>
       </div>
     </div>
-
   );
 };
 

@@ -1,5 +1,6 @@
+import { Spinner } from "flowbite-react";
 import { forwardRef, useEffect, useState } from "react";
-import { Spinner } from "@nextui-org/react";
+
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>
 {

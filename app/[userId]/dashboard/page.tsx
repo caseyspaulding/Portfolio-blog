@@ -1,5 +1,4 @@
-import { Button } from "@nextui-org/button";
-
+import { Button } from "@/components/ui/button"; // Changed to shadcn Button
 
 export default function UserDashboard ()
 {
@@ -13,16 +12,20 @@ export default function UserDashboard ()
           Explore the latest events and manage your tickets.
         </p>
         <div className="flex flex-col items-center space-y-4">
-          <Button href="/events">
-            <a className="w-full inline-block text-center bg-orange-500 text-white font-medium py-2 px-4 rounded-md hover:bg-orange-600 transition duration-300">
-              Checkout Events
-            </a>
+          {/* Changed to shadcn Button pattern with asChild */ }
+          <Button
+            asChild
+            className="w-full bg-orange-500 hover:bg-orange-600"
+          >
+            <a href="/events">Checkout Events</a>
           </Button>
-          {/* You can add more links or buttons here for other user actions */ }
-          <Button href="/my-tickets">
-            <a className="w-full inline-block text-center bg-blue-500 text-white font-medium py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300">
-              View My Tickets
-            </a>
+
+          {/* Changed to shadcn Button pattern with asChild */ }
+          <Button
+            asChild
+            className="w-full bg-blue-500 hover:bg-blue-600"
+          >
+            <a href="/my-tickets">View My Tickets</a>
           </Button>
         </div>
       </div>

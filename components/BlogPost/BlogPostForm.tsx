@@ -6,7 +6,7 @@ import { createClient } from '@/utils/supabase/client';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import type { User } from '@supabase/supabase-js';
-import { Button } from '@nextui-org/button';
+
 import 'highlight.js/lib/languages/csharp';
 import 'highlight.js/styles/vs2015.css';
 import 'highlight.js/lib/languages/typescript';
@@ -38,6 +38,7 @@ import { Textarea } from '../ui/textarea';
 import { createBlogPost } from '@/app/actions/blogActions';
 import { Card, CardContent } from '../ui/card';
 import { Checkbox } from '../ui/checkbox';
+import { Button } from '../ui/button';
 
 // Diagram Modal Component
 interface DiagramModalProps
@@ -84,7 +85,7 @@ const DiagramModal = ( { onClose, onSubmit }: DiagramModalProps ) =>
         </div>
 
         <div className="flex justify-end space-x-2">
-          <Button onClick={ onClose } variant="ghost">Cancel</Button>
+          <Button variant="ghost" onClick={ onClose }>Cancel</Button>
           <Button onClick={ handleSubmit }>Insert Diagram</Button>
         </div>
       </div>

@@ -5,7 +5,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "@/components/ui/command";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Badge } from "@/components/ui/badge";
-import { Button } from '@nextui-org/button';
+
 import { Check, ChevronsUpDown } from "lucide-react";
 import { cn } from '@/cn';
 import
@@ -14,6 +14,7 @@ import
     TECHNOLOGIES,
     DIFFICULTY_LEVELS
   } from '@/constants/blogConstants';
+import { Button } from '@/components/ui/button';
 
 interface CategoriesProps
 {
@@ -78,6 +79,7 @@ const Categories: React.FC<CategoriesProps> = ( {
               role="combobox"
               aria-expanded={ openCategories }
               className="w-full justify-between"
+              onClick={ () => {/* your toggle logic */ } }
             >
               { selectedCategories.length > 0
                 ? `${ selectedCategories.length } selected`
@@ -147,10 +149,11 @@ const Categories: React.FC<CategoriesProps> = ( {
         <Popover open={ openTechnologies } onOpenChange={ setOpenTechnologies }>
           <PopoverTrigger asChild>
             <Button
-              variant='bordered'
+              variant="outline" // shadcn uses "outline" instead of "bordered"
               role="combobox"
               aria-expanded={ openTechnologies }
               className="w-full justify-between"
+              onClick={ () => {/* your toggle logic */ } }
             >
               { selectedTechnologies.length > 0
                 ? `${ selectedTechnologies.length } selected`

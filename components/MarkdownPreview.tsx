@@ -4,41 +4,44 @@ import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
-import { Tabs, Tab } from '@nextui-org/tabs';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"; // Changed to shadcn Tabs
 
 // Add this component inside your BlogPostForm
 const MarkdownPreview = ( { content }: { content: string } ) =>
 {
   // Convert HTML to Markdown (simplified)
-  interface CodeBlockMatch {
+  interface CodeBlockMatch
+  {
     language: string;
     content: string;
   }
 
-  interface HtmlToMarkdownFunction {
-    (html: string): string;
+  interface HtmlToMarkdownFunction
+  {
+    ( html: string ): string;
   }
 
-  const htmlToMarkdown: HtmlToMarkdownFunction = (html) => {
+  const htmlToMarkdown: HtmlToMarkdownFunction = ( html ) =>
+  {
     // This is a basic implementation
     // For more comprehensive conversion, consider using a library like turndown
     let markdown: string = html;
 
     // Replace basic HTML elements with markdown equivalents
-    markdown = markdown.replace(/<h1>(.*?)<\/h1>/g, '# $1\n\n');
-    markdown = markdown.replace(/<h2>(.*?)<\/h2>/g, '## $1\n\n');
-    markdown = markdown.replace(/<h3>(.*?)<\/h3>/g, '### $1\n\n');
-    markdown = markdown.replace(/<p>(.*?)<\/p>/g, '$1\n\n');
-    markdown = markdown.replace(/<strong>(.*?)<\/strong>/g, '**$1**');
-    markdown = markdown.replace(/<em>(.*?)<\/em>/g, '*$1*');
-    markdown = markdown.replace(/<a href="(.*?)">(.*?)<\/a>/g, '[$2]($1)');
-    markdown = markdown.replace(/<ul>(.*?)<\/ul>/g, '$1\n');
-    markdown = markdown.replace(/<li>(.*?)<\/li>/g, '- $1\n');
-    markdown = markdown.replace(/<br>/g, '\n');
+    markdown = markdown.replace( /<h1>(.*?)<\/h1>/g, '# $1\n\n' );
+    markdown = markdown.replace( /<h2>(.*?)<\/h2>/g, '## $1\n\n' );
+    markdown = markdown.replace( /<h3>(.*?)<\/h3>/g, '### $1\n\n' );
+    markdown = markdown.replace( /<p>(.*?)<\/p>/g, '$1\n\n' );
+    markdown = markdown.replace( /<strong>(.*?)<\/strong>/g, '**$1**' );
+    markdown = markdown.replace( /<em>(.*?)<\/em>/g, '*$1*' );
+    markdown = markdown.replace( /<a href="(.*?)">(.*?)<\/a>/g, '[$2]($1)' );
+    markdown = markdown.replace( /<ul>(.*?)<\/ul>/g, '$1\n' );
+    markdown = markdown.replace( /<li>(.*?)<\/li>/g, '- $1\n' );
+    markdown = markdown.replace( /<br>/g, '\n' );
 
     // Handle code blocks (preserve them)
-    markdown = markdown.replace(/<pre><code class="language-(.*?)">([\s\S]*?)<\/code><\/pre>/g,
-      '```$1\n$2\n```\n\n');
+    markdown = markdown.replace( /<pre><code class="language-(.*?)">([\s\S]*?)<\/code><\/pre>/g,
+      '```$1\n$2\n```\n\n' );
 
     return markdown;
   };

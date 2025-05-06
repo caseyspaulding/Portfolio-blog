@@ -2,7 +2,8 @@
 
 import { useEffect, useRef, useState } from 'react';
 import QrScanner from 'qr-scanner';
-import { Button } from '@nextui-org/button';
+import { Button } from '../ui/button';
+
 
 interface QrCodeScannerProps
 {
@@ -190,14 +191,15 @@ export default function QrCodeScanner ( { qrCodeSuccessCallback, onError }: QrCo
           </select>
           <Button
             onClick={ handleToggleScan }
-            className={ `px-4 py-2 w-full rounded-3xl ${ isScanning ? 'bg-red-500 hover:bg-red-600' : 'bg-blue-500 hover:bg-blue-600'
-              } text-white text-xl` }
+            className={ `w-full rounded-3xl text-xl ${ isScanning ? 'bg-red-500 hover:bg-red-600' : 'bg-blue-500 hover:bg-blue-600'
+              }` }
           >
             { isScanning ? 'Stop Scanning' : 'Start Scanning' }
           </Button>
+
           <Button
             onClick={ toggleFlash }
-            className="px-4 py-2 w-full bg-blue-500 text-white rounded-3xl text-lg hover:bg-blue-600"
+            className="w-full bg-blue-500 hover:bg-blue-600 rounded-3xl text-lg"
           >
             Flash: { isFlashOn ? 'On' : 'Off' }
           </Button>

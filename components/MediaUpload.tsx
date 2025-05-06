@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { createClient } from "@/utils/supabase/client";
-import { Button } from '@nextui-org/react';
+
 import { saveFormHeaderMedia } from '@/app/actions/formActions';
+import { Button } from './ui/button';
 
 
 interface MediaUploadProps
@@ -63,10 +64,17 @@ export const MediaUpload: React.FC<MediaUploadProps> = ( { formId } ) =>
   return (
     <div>
       { previewFile && <img src={ previewFile } alt="Preview" style={ { maxWidth: '100%' } } /> }
-      <Button as="label" disabled={ uploading }>
-        { uploading ? 'Uploading...' : 'Upload Header Image' }
-        <input type="file" onChange={ handleFileChange } style={ { display: 'none' } } />
-      </Button>
+      <div className="relative">
+        <Button disabled={ uploading }>
+          { uploading ? 'Uploading...' : 'Upload Header Image' }
+        </Button>
+        <input
+          type="file"
+          onChange={ handleFileChange }
+          className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+          disabled={ uploading }
+        />
+      </div>
     </div>
   );
 };

@@ -2,7 +2,8 @@
 import React from 'react';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Button } from '@nextui-org/button';
+import { Button } from '@/components/ui/button';
+
 
 interface MediaUploadProps
 {
@@ -57,7 +58,7 @@ const MediaUpload: React.FC<MediaUploadProps> = ( {
         ) }
         <Button
           onClick={ handleBlogPostImageUpload }
-          variant="solid"
+          variant="default" // shadcn uses "default" instead of "solid"
           className="mt-2"
           disabled={ !postImage }
         >

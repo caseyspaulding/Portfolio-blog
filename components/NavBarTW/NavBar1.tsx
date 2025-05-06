@@ -9,10 +9,11 @@ import { Bars3CenterLeftIcon, BookmarkIcon, BookmarkSquareIcon, BuildingStorefro
 import { createClient } from "@/utils/supabase/client";
 import React from "react";
 
-import { Button } from "@nextui-org/button";
+
 import { useUser } from "@/contexts/UserContext";
 import { BookDashedIcon, User } from "lucide-react";
 import { Json } from "@/database.types";
+import { Button } from "../ui/button";
 
 
 // Define your UserType
@@ -388,21 +389,19 @@ export default function NavBar1 ()
                 ) : (
                   <div className="mt-6">
                     <Button
-                      as='a'
-                      href="/signup"
-                      className="flex w-full items-center rounded-3xl justify-center border border-transparent bg-blue-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-600"
+                      asChild
+                      className="w-full rounded-3xl bg-blue-500 hover:bg-blue-600"
                     >
-                      Create Account
+                      <a href="/signup">Create Account</a>
                     </Button>
                     <p className="mt-6 mr-2 mb-2 text-center text-base font-medium text-gray-100">
                       Existing customer?
-
                     </p>
                     <Button
-                      as='a'
-                      href="/login"
-                      className="flex w-full items-center rounded-3xl justify-center border border-transparent bg-blue-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-600">
-                      Sign in
+                      asChild
+                      className="w-full rounded-3xl bg-blue-500 hover:bg-blue-600"
+                    >
+                      <a href="/login">Sign in</a>
                     </Button>
                   </div>
                 ) }

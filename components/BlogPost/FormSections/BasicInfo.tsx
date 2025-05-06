@@ -1,6 +1,6 @@
 // components/BlogPost/Editor/EditorTabs.tsx
 import React, { useRef } from 'react';
-import { Tabs, Tab } from '@nextui-org/react';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"; // shadcn Tabs
 import JoditEditor from 'jodit-react';
 
 import { JoditConfig } from '../types';
@@ -29,12 +29,17 @@ const EditorTabs: React.FC<EditorTabsProps> = ( {
 
   return (
     <Tabs
-      aria-label="Editor Options"
-      selectedKey={ viewMode }
-      onSelectionChange={ ( key ) => setViewMode( key as string ) }
+      defaultValue={ viewMode }
+      onValueChange={ setViewMode }
       className="mb-4"
     >
-      <Tab key="editor" title="Rich Editor">
+      <TabsList className="grid w-full grid-cols-3">
+        <TabsTrigger value="editor">Rich Editor</TabsTrigger>
+        <TabsTrigger value="markdown">Markdown Preview</TabsTrigger>
+        <TabsTrigger value="raw-markdown">Raw Markdown</TabsTrigger>
+      </TabsList>
+
+      <TabsContent value="editor">
         <div className="rounded-md border border-input">
           <JoditEditor
             ref={ editor }
@@ -49,17 +54,19 @@ const EditorTabs: React.FC<EditorTabsProps> = ( {
             } }
           />
         </div>
-      </Tab>
-      <Tab key="markdown" title="Markdown Preview">
+      </TabsContent>
+
+      <TabsContent value="markdown">
         <MarkdownPreview content={ content } />
-      </Tab>
-      <Tab key="raw-markdown" title="Raw Markdown">
+      </TabsContent>
+
+      <TabsContent value="raw-markdown">
         <div className="rounded-md border border-input p-4">
           <pre className="whitespace-pre-wrap">
             { rawMarkdown || "No markdown content yet. Use the Rich Editor and add markdown with the M↓ button." }
           </pre>
         </div>
-      </Tab>
+      </TabsContent>
     </Tabs>
   );
 };
