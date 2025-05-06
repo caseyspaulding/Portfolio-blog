@@ -6,11 +6,14 @@ import { Toaster } from 'react-hot-toast';
 import { AppProgressBar as ProgressBar } from 'next-nprogress-bar';
 import Script from 'next/script';
 import MermaidThemer from '@/components/MermaidTheme';
-
-
+import { PrimeReactProvider } from 'primereact/api';
+import 'primereact/resources/primereact.min.css';
+import 'primeicons/primeicons.css';
 // Lazy load non-essential components
 const UserProvider = React.lazy( () => import( '@/contexts/UserContext' ) );
-
+import 'primereact/resources/themes/lara-light-indigo/theme.css';
+import 'primereact/resources/primereact.min.css';
+import 'primeicons/primeicons.css';
 export default function ClientProviders ( { children }: { children: React.ReactNode } )
 {
   return (
@@ -36,6 +39,7 @@ export default function ClientProviders ( { children }: { children: React.ReactN
         } }
       />
       <Toaster />
+      <PrimeReactProvider>
       <Suspense fallback={ <div>Loading...</div> }>
         <MermaidThemer />
         <UserProvider initialUser={ null }>
@@ -47,7 +51,8 @@ export default function ClientProviders ( { children }: { children: React.ReactN
         color="#155ce9"
         options={ { showSpinner: false } }
         shallowRouting
-      />
+        />
+      </PrimeReactProvider>
     </>
   );
 }

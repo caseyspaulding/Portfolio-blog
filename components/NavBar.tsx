@@ -121,7 +121,7 @@ export default function Navbar ()
               className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400"
               onClick={ closeMenu }
             >
-              Casey Spaulding
+              <img src="/icon0.svg" className="h-8 w-8" alt="logo" />
             </Link>
           </div>
 

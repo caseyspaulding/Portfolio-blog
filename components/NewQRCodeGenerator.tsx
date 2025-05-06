@@ -8,8 +8,9 @@ import { TextArea } from "./TextArea";
 import { CheckboxField } from "./CheckboxField";
 import { SelectField } from "./SelectField";
 import { ImageUploadField } from "./ImageUploadField";
-import { Button } from "@nextui-org/button";
+
 import React from "react";
+import { Button } from "primereact/button";
 
 export default function NewQRCodeGenerator ()
 {

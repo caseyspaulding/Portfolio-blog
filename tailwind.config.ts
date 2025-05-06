@@ -1,4 +1,4 @@
-import { nextui } from '@nextui-org/react';
+
 import type { Config } from 'tailwindcss';
 
 export default {
@@ -68,7 +68,7 @@ export default {
 		},
 	},
 	plugins: [
-		nextui(), // NextUI plugin for Tailwind
+	
 		require( 'tailwindcss-animate' ), // Custom animations
 		require( 'flowbite-typography' ), // Flowbite React plugin
 		require( '@tailwindcss/typography' ), // Add typography plugin for markdown
