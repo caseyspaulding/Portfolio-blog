@@ -4,8 +4,8 @@ import { createClient } from '@/utils/supabase/client';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import type { User } from '@supabase/supabase-js';
-import { Button } from '@nextui-org/button';
-
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 type Posts = {
     id: number;
@@ -13,9 +13,6 @@ type Posts = {
     content: string;
     created_at: string;
 };
-
-
-
 
 const AdminDashboard = () =>
 {
@@ -61,9 +58,11 @@ const AdminDashboard = () =>
         <div className="min-h-screen bg-gray-100 py-8">
             <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h1 className="text-3xl font-bold text-gray-800 mb-8 text-center">Blog Admin Dashboard</h1>
-                <Button
-                    as='a'
-                    href='/admin/dashboard'>Dashboard</Button>
+
+                {/* Shadcn Button with Link */ }
+                <Link href="/admin/dashboard" passHref>
+                    <Button>Dashboard</Button>
+                </Link>
             </div>
         </div>
     );
