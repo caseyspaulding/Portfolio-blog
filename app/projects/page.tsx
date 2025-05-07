@@ -20,10 +20,30 @@ interface Project
 
 const projects: Project[] = [
   {
+    title: 'DocJacket - Transaction Coordination Platform',
+    description: `An AI-enhanced transaction management system for real estate transaction coordinators that streamlines document handling, automates deadline tracking, and ensures compliance. Replaces spreadsheets with an intelligent cloud-based solution.`,
+    role: 'Full Stack Developer',
+    duration: 'May 2025 - Present',
+    keyFeatures: [
+      'Smart document intake with AI data extraction',
+      'Automated timeline and deadline management',
+      'Compliance monitoring with document verification',
+      'Status update automation and client portal',
+      'Commission calculation and tracking'
+    ],
+    technologies: [
+      '.NET 8', 'C#', 'Azure AI', 'SQL', 'Entity Framework Core',
+      'Next.js', 'TypeScript', 'SignalR', 'ML.NET', 'Azure App Services', "Azure Blob Storage", "Azure Functions"
+    ],
+    image: '/images/docjacket-screenshot.png',
+    liveDemo: 'https://docjacket.com',
+    github: 'https://github.com/caseyspaulding/docjacket',
+  },
+  {
     title: 'REIstacks - Real Estate Investment CRM',
     description: `A comprehensive CRM system for real estate investors and wholesalers with .NET 9 Web API backend, Azure cloud infrastructure, and a Next.js frontend. Features ML-powered dashboards and batch processing for bulk lead management.`,
     role: 'Full Stack Developer',
-    duration: 'Nov 2025 - Present',
+    duration: 'Nov 2024 - Apr 2025',
     keyFeatures: [
       'Lead management with property analysis',
       'ML-powered investment opportunity scoring',
@@ -87,26 +107,26 @@ export default function ProjectsPage ()
           <div className="container mx-auto">
             {/* Header section */ }
             <div className="text-center mb-16">
-              <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-700 dark:from-blue-400 dark:to-indigo-500">
+              <h1 className="text-4xl md:text-5xl font-bold mb-6 pb-1 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-700 dark:from-blue-400 dark:to-indigo-500">
                 Projects
               </h1>
               <p className="text-lg text-gray-700 dark:text-gray-300 max-w-2xl mx-auto">
-                Showcasing my experience in full-stack development with .NET and modern web technologies.
+
               </p>
             </div>
 
-            {/* Skills summary */ }
-            <div className="mb-12 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Skills summary - Now with blue background */ }
+            <div className="mb-12 bg-gradient-to-r from-blue-600 to-indigo-700 rounded-xl shadow-lg p-6">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                 <div className="flex items-start">
                   <div className="mr-4 flex-shrink-0">
-                    <div className="flex items-center justify-center h-10 w-10 rounded-md bg-blue-600 dark:bg-blue-700 text-white">
+                    <div className="flex items-center justify-center h-10 w-10 rounded-md bg-white text-blue-600">
                       <Code className="h-5 w-5" />
                     </div>
                   </div>
                   <div>
-                    <h3 className="text-lg font-medium text-gray-900 dark:text-white">Frontend</h3>
-                    <p className="mt-1 text-gray-600 dark:text-gray-400">
+                    <h3 className="text-lg font-medium text-white">Frontend</h3>
+                    <p className="mt-1 text-blue-100">
                       React, Angular, Blazor
                     </p>
                   </div>
@@ -114,13 +134,13 @@ export default function ProjectsPage ()
 
                 <div className="flex items-start">
                   <div className="mr-4 flex-shrink-0">
-                    <div className="flex items-center justify-center h-10 w-10 rounded-md bg-blue-600 dark:bg-blue-700 text-white">
+                    <div className="flex items-center justify-center h-10 w-10 rounded-md bg-white text-blue-600">
                       <Server className="h-5 w-5" />
                     </div>
                   </div>
                   <div>
-                    <h3 className="text-lg font-medium text-gray-900 dark:text-white">Backend</h3>
-                    <p className="mt-1 text-gray-600 dark:text-gray-400">
+                    <h3 className="text-lg font-medium text-white">Backend</h3>
+                    <p className="mt-1 text-blue-100">
                       .NET, C#, API development
                     </p>
                   </div>
@@ -128,59 +148,63 @@ export default function ProjectsPage ()
 
                 <div className="flex items-start">
                   <div className="mr-4 flex-shrink-0">
-                    <div className="flex items-center justify-center h-10 w-10 rounded-md bg-blue-600 dark:bg-blue-700 text-white">
+                    <div className="flex items-center justify-center h-10 w-10 rounded-md bg-white text-blue-600">
                       <Database className="h-5 w-5" />
                     </div>
                   </div>
                   <div>
-                    <h3 className="text-lg font-medium text-gray-900 dark:text-white">Data</h3>
-                    <p className="mt-1 text-gray-600 dark:text-gray-400">
-                      SQL Server, Entity Framework, Azure
+                    <h3 className="text-lg font-medium text-white">Data</h3>
+                    <p className="mt-1 text-blue-100">
+                      SQL Server, Entity Framework, Azure SQL
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start">
+                  <div className="mr-4 flex-shrink-0">
+                    <div className="flex items-center justify-center h-10 w-10 rounded-md bg-white text-blue-600">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M12 2a8 8 0 0 1 8 8v4a8 8 0 0 1-16 0v-4a8 8 0 0 1 8-8z" />
+                        <path d="M9.5 2A12.5 12.5 0 0 0 12 22a12.5 12.5 0 0 0 2.5-20" />
+                        <path d="M12 18v4" />
+                        <path d="M8 18c0-4 8-4 8 0" />
+                      </svg>
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-medium text-white">AI</h3>
+                    <p className="mt-1 text-blue-100">
+                      Azure AI Foundry, ML.NET, Semantic Kernel
                     </p>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Projects list */ }
-            <div className="space-y-12">
+            {/* Redesigned Projects list with images on top */ }
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               { projects.map( ( project ) => (
-                <div key={ project.title } className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
-                  <div className="md:flex">
-                    {/* Project image */ }
-                    <div className="md:flex-shrink-0 md:w-1/3 relative h-60 md:h-auto">
-                      <Image
-                        src={ project.image }
-                        alt={ project.title }
-                        className="w-full h-full object-cover"
-                        width={ 500 }
-                        height={ 300 }
-                      />
-                    </div>
+                <div key={ project.title } className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden flex flex-col h-full">
+                  {/* Project image on top */ }
+                  <div className="relative h-64 w-full">
+                    <Image
+                      src={ project.image }
+                      alt={ project.title }
+                      className="w-full h-full object-cover object-center"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      priority
+                    />
+                  </div>
 
-                    {/* Project content */ }
-                    <div className="p-6 md:p-8 md:w-2/3">
-                      {/* Header with title and links */ }
-                      <div className="flex flex-wrap items-center justify-between mb-4">
-                        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{ project.title }</h2>
-                        <div className="flex space-x-3 mt-2 md:mt-0">
-                          { project.github && (
-                            <Link href={ project.github } target="_blank" rel="noopener noreferrer"
-                              className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300">
-                              <Github className="h-6 w-6" />
-                            </Link>
-                          ) }
-                          { project.liveDemo && (
-                            <Link href={ project.liveDemo } target="_blank" rel="noopener noreferrer"
-                              className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
-                              <ExternalLink className="h-6 w-6" />
-                            </Link>
-                          ) }
-                        </div>
-                      </div>
+                  {/* Project content */ }
+                  <div className="p-6 flex-grow">
+                    {/* Header with title */ }
+                    <div className="mb-3">
+                      <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{ project.title }</h2>
 
                       {/* Role and duration */ }
-                      <div className="mb-4">
+                      <div className="mb-3">
                         <span className="inline-block bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 px-3 py-1 text-sm font-medium rounded-full mr-2">
                           { project.role }
                         </span>
@@ -188,45 +212,54 @@ export default function ProjectsPage ()
                           { project.duration }
                         </span>
                       </div>
+                    </div>
 
-                      {/* Description */ }
-                      <p className="text-gray-600 dark:text-gray-300 mb-4">
-                        { project.description }
-                      </p>
+                    {/* Description */ }
+                    <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">
+                      { project.description }
+                    </p>
 
-                      {/* Key features */ }
-                      { project.keyFeatures && (
-                        <div className="mb-4">
-                          <h3 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-2">
-                            Key Features
-                          </h3>
-                          <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-1">
-                            { project.keyFeatures.slice( 0, 6 ).map( ( feature, i ) => (
-                              <li key={ i } className="flex items-center text-sm">
-                                <ChevronRight className="h-4 w-4 text-blue-600 dark:text-blue-400 mr-2 flex-shrink-0" />
-                                <span className="text-gray-600 dark:text-gray-300">{ feature }</span>
-                              </li>
-                            ) ) }
-                          </ul>
-                        </div>
-                      ) }
-
-                      {/* Technologies */ }
-                      <div>
-                        <h3 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-2">
-                          Technologies
-                        </h3>
-                        <div className="flex flex-wrap gap-2">
-                          { project.technologies.map( ( tech ) => (
-                            <span
-                              key={ tech }
-                              className="inline-block px-3 py-1 text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300 rounded-full"
-                            >
-                              { tech }
-                            </span>
-                          ) ) }
-                        </div>
+                    {/* Technologies */ }
+                    <div className="mb-4">
+                      <h3 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-2">
+                        Technologies
+                      </h3>
+                      <div className="flex flex-wrap gap-2">
+                        { project.technologies.slice( 0, 6 ).map( ( tech ) => (
+                          <span
+                            key={ tech }
+                            className="inline-block px-3 py-1 text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300 rounded-full"
+                          >
+                            { tech }
+                          </span>
+                        ) ) }
+                        { project.technologies.length > 6 && (
+                          <span className="inline-block px-3 py-1 text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300 rounded-full">
+                            +{ project.technologies.length - 6 } more
+                          </span>
+                        ) }
                       </div>
+                    </div>
+                  </div>
+
+                  {/* Action footer */ }
+                  <div className="px-6 py-4 bg-gray-50 dark:bg-gray-700/30 border-t border-gray-100 dark:border-gray-700 flex justify-between items-center">
+                    { project.liveDemo && (
+                      <Link href={ project.liveDemo }
+                        className="inline-flex items-center px-4 py-2 bg-blue-600 dark:bg-blue-500 text-white text-sm font-medium rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors duration-200"
+                        target="_blank" rel="noopener noreferrer">
+                        View Now
+                        <ChevronRight className="ml-1 h-4 w-4" />
+                      </Link>
+                    ) }
+
+                    <div className="flex space-x-4">
+                      { project.github && (
+                        <Link href={ project.github } target="_blank" rel="noopener noreferrer"
+                          className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300">
+                          <Github className="h-5 w-5" />
+                        </Link>
+                      ) }
                     </div>
                   </div>
                 </div>

@@ -130,11 +130,11 @@ export default function Navbar ()
             <ul className="flex space-x-6">
               <NavItem href="/blog" text="Blog" />
               <NavItem href="/projects" text="Projects" />
-              <NavItem
+              {/*<NavItem
                 href="#"
                 text="Free Tools"
                 dropdown={ <FreeToolsDropdown /> }
-              />
+              />*/}
               <NavItem href="/contact" text="Contact" />
               <NavItem href="/about" text="About" />
             </ul>
@@ -201,7 +201,7 @@ export default function Navbar ()
               <NavItem href="/contact" text="Contact" onNavigate={ closeMenu } />
               <NavItem href="/about" text="About" onNavigate={ closeMenu } />
               <li>
-                <HeadlessMenu as="div" className="relative">
+                {/*<HeadlessMenu as="div" className="relative">
                   <HeadlessMenu.Button className="flex items-center font-medium transition-colors duration-200 text-gray-700 hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400">
                     Free Tools
                     <ChevronDown className="ml-1 h-4 w-4" />
@@ -217,7 +217,7 @@ export default function Navbar ()
                       </Link>
                     </div>
                   </div>
-                </HeadlessMenu>
+                </HeadlessMenu>*/}
               </li>
             </ul>
           </div>
