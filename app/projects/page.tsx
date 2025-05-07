@@ -106,16 +106,15 @@ export default function ProjectsPage ()
       <PageBackground>
         <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="container mx-auto">
-            {/* Header section */ }
-            <div className="text-center mb-16">
-              <h1 className="text-4xl md:text-5xl font-bold mb-6 pb-1 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-700 dark:from-blue-400 dark:to-indigo-500">
+            {/* Header section with blue background */ }
+            <div className="text-center mb-16 bg-gradient-to-r from-blue-500 to-blue-700 rounded-xl shadow-lg p-6">
+              <h1 className="text-4xl md:text-5xl font-bold mb-2 text-white">
                 Projects
               </h1>
-              <p className="text-lg text-gray-700 dark:text-gray-300 max-w-2xl mx-auto">
+              <p className="text-lg text-blue-100 max-w-2xl mx-auto">
 
               </p>
             </div>
-
 
             {/* Redesigned Projects list with images on top */ }
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -177,69 +176,7 @@ export default function ProjectsPage ()
                       </div>
                     </div>
                   </div>
-                  {/* Skills summary - Now with blue background */ }
-                  <div className="mb-12 bg-gradient-to-r from-blue-600 to-indigo-700 rounded-xl shadow-lg p-6">
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                      <div className="flex items-start">
-                        <div className="mr-4 flex-shrink-0">
-                          <div className="flex items-center justify-center h-10 w-10 rounded-md bg-white text-blue-600">
-                            <Code className="h-5 w-5" />
-                          </div>
-                        </div>
-                        <div>
-                          <h3 className="text-lg font-medium text-white">Frontend</h3>
-                          <p className="mt-1 text-blue-100">
-                            React, Angular, Blazor
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-start">
-                        <div className="mr-4 flex-shrink-0">
-                          <div className="flex items-center justify-center h-10 w-10 rounded-md bg-white text-blue-600">
-                            <Server className="h-5 w-5" />
-                          </div>
-                        </div>
-                        <div>
-                          <h3 className="text-lg font-medium text-white">Backend</h3>
-                          <p className="mt-1 text-blue-100">
-                            .NET, C#, API development
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-start">
-                        <div className="mr-4 flex-shrink-0">
-                          <div className="flex items-center justify-center h-10 w-10 rounded-md bg-white text-blue-600">
-                            <Database className="h-5 w-5" />
-                          </div>
-                        </div>
-                        <div>
-                          <h3 className="text-lg font-medium text-white">Data</h3>
-                          <p className="mt-1 text-blue-100">
-                            SQL Server, Entity Framework, Azure SQL
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-start">
-                        <div className="mr-4 flex-shrink-0">
-                          <div className="flex items-center justify-center h-10 w-10 rounded-md bg-white text-blue-600">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-6">
-                              <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 0 0 2.25-2.25V6.75a2.25 2.25 0 0 0-2.25-2.25H6.75A2.25 2.25 0 0 0 4.5 6.75v10.5a2.25 2.25 0 0 0 2.25 2.25Zm.75-12h9v9h-9v-9Z" />
-                            </svg>
-
-                          </div>
-                        </div>
-                        <div>
-                          <h3 className="text-lg font-medium text-white">AI</h3>
-                          <p className="mt-1 text-blue-100">
-                            Azure AI Foundry, ML.NET, Semantic Kernel
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                 
 
                   {/* Action footer */ }
                   <div className="px-6 py-4 bg-gray-50 dark:bg-gray-700/30 border-t border-gray-100 dark:border-gray-700 flex justify-between items-center">
@@ -264,7 +201,69 @@ export default function ProjectsPage ()
                 </div>
               ) ) }
             </div>
+            {/* Skills summary - Now with blue background */ }
+            <div className="mb-12 bg-gradient-to-r mt-12 from-blue-600 to-indigo-700 rounded-xl shadow-lg p-6">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div className="flex items-start">
+                  <div className="mr-4 flex-shrink-0">
+                    <div className="flex items-center justify-center h-10 w-10 rounded-md bg-white text-blue-600">
+                      <Code className="h-5 w-5" />
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-medium text-white">Frontend</h3>
+                    <p className="mt-1 text-blue-100">
+                      React, Angular, Blazor
+                    </p>
+                  </div>
+                </div>
 
+                <div className="flex items-start">
+                  <div className="mr-4 flex-shrink-0">
+                    <div className="flex items-center justify-center h-10 w-10 rounded-md bg-white text-blue-600">
+                      <Server className="h-5 w-5" />
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-medium text-white">Backend</h3>
+                    <p className="mt-1 text-blue-100">
+                      .NET, C#, API development
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start">
+                  <div className="mr-4 flex-shrink-0">
+                    <div className="flex items-center justify-center h-10 w-10 rounded-md bg-white text-blue-600">
+                      <Database className="h-5 w-5" />
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-medium text-white">Data</h3>
+                    <p className="mt-1 text-blue-100">
+                      SQL Server, Entity Framework, Azure SQL
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start">
+                  <div className="mr-4 flex-shrink-0">
+                    <div className="flex items-center justify-center h-10 w-10 rounded-md bg-white text-blue-600">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 0 0 2.25-2.25V6.75a2.25 2.25 0 0 0-2.25-2.25H6.75A2.25 2.25 0 0 0 4.5 6.75v10.5a2.25 2.25 0 0 0 2.25 2.25Zm.75-12h9v9h-9v-9Z" />
+                      </svg>
+
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-medium text-white">AI</h3>
+                    <p className="mt-1 text-blue-100">
+                      Azure AI Foundry, ML.NET, Semantic Kernel
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
             {/* Call to action */ }
             <div className="mt-12 bg-gradient-to-r from-blue-600 to-indigo-700 rounded-xl shadow-lg overflow-hidden">
               <div className="px-6 py-8 sm:px-8 sm:py-10 text-center sm:text-left flex flex-col sm:flex-row items-center justify-between">

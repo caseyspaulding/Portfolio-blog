@@ -35,7 +35,7 @@ export default function Hero ( { theme }: { theme: string } )
             <div className="text-center md:text-left md:col-span-7">
               {/* Title & Role */ }
               <div className="mb-4">
-                <span className="inline-block text-sm font-semibold py-2 px-5 rounded-full bg-blue-100 text-blue-700 dark:bg-blue-900/70 dark:text-blue-300 shadow-sm">
+                <span className="inline-block text-sm font-semibold py-1 px-5 rounded-full bg-blue-600 text-white dark:bg-blue-900/70 dark:text-blue-300 shadow-sm">
                   .NET Full Stack Developer
                 </span>
               </div>
