@@ -22,7 +22,7 @@ const projects: Project[] = [
   {
 
     title: 'DocJacket - Transaction Coordination Platform',
-    description: `An AI-enhanced transaction management system for real estate transaction coordinators that streamlines document handling, automates deadline tracking, and ensures compliance. Replaces spreadsheets with an intelligent cloud-based solution.`,
+    description: `An AI-CoPilot transaction management system for real estate transaction coordinators that streamlines document handling, automates deadline tracking, and ensures compliance. Replaces spreadsheets with an intelligent cloud-based solution.`,
     role: 'Full Stack Developer',
     duration: 'May 2025 - Present',
     keyFeatures: [
@@ -164,12 +164,10 @@ export default function ProjectsPage ()
                 <div className="flex items-start">
                   <div className="mr-4 flex-shrink-0">
                     <div className="flex items-center justify-center h-10 w-10 rounded-md bg-white text-blue-600">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M12 2a8 8 0 0 1 8 8v4a8 8 0 0 1-16 0v-4a8 8 0 0 1 8-8z" />
-                        <path d="M9.5 2A12.5 12.5 0 0 0 12 22a12.5 12.5 0 0 0 2.5-20" />
-                        <path d="M12 18v4" />
-                        <path d="M8 18c0-4 8-4 8 0" />
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 0 0 2.25-2.25V6.75a2.25 2.25 0 0 0-2.25-2.25H6.75A2.25 2.25 0 0 0 4.5 6.75v10.5a2.25 2.25 0 0 0 2.25 2.25Zm.75-12h9v9h-9v-9Z" />
                       </svg>
+
                     </div>
                   </div>
                   <div>
