@@ -116,69 +116,6 @@ export default function ProjectsPage ()
               </p>
             </div>
 
-            {/* Skills summary - Now with blue background */ }
-            <div className="mb-12 bg-gradient-to-r from-blue-600 to-indigo-700 rounded-xl shadow-lg p-6">
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                <div className="flex items-start">
-                  <div className="mr-4 flex-shrink-0">
-                    <div className="flex items-center justify-center h-10 w-10 rounded-md bg-white text-blue-600">
-                      <Code className="h-5 w-5" />
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-medium text-white">Frontend</h3>
-                    <p className="mt-1 text-blue-100">
-                      React, Angular, Blazor
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start">
-                  <div className="mr-4 flex-shrink-0">
-                    <div className="flex items-center justify-center h-10 w-10 rounded-md bg-white text-blue-600">
-                      <Server className="h-5 w-5" />
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-medium text-white">Backend</h3>
-                    <p className="mt-1 text-blue-100">
-                      .NET, C#, API development
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start">
-                  <div className="mr-4 flex-shrink-0">
-                    <div className="flex items-center justify-center h-10 w-10 rounded-md bg-white text-blue-600">
-                      <Database className="h-5 w-5" />
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-medium text-white">Data</h3>
-                    <p className="mt-1 text-blue-100">
-                      SQL Server, Entity Framework, Azure SQL
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start">
-                  <div className="mr-4 flex-shrink-0">
-                    <div className="flex items-center justify-center h-10 w-10 rounded-md bg-white text-blue-600">
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 0 0 2.25-2.25V6.75a2.25 2.25 0 0 0-2.25-2.25H6.75A2.25 2.25 0 0 0 4.5 6.75v10.5a2.25 2.25 0 0 0 2.25 2.25Zm.75-12h9v9h-9v-9Z" />
-                      </svg>
-
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-medium text-white">AI</h3>
-                    <p className="mt-1 text-blue-100">
-                      Azure AI Foundry, ML.NET, Semantic Kernel
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
 
             {/* Redesigned Projects list with images on top */ }
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -237,6 +174,69 @@ export default function ProjectsPage ()
                             +{ project.technologies.length - 6 } more
                           </span>
                         ) }
+                      </div>
+                    </div>
+                  </div>
+                  {/* Skills summary - Now with blue background */ }
+                  <div className="mb-12 bg-gradient-to-r from-blue-600 to-indigo-700 rounded-xl shadow-lg p-6">
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+                      <div className="flex items-start">
+                        <div className="mr-4 flex-shrink-0">
+                          <div className="flex items-center justify-center h-10 w-10 rounded-md bg-white text-blue-600">
+                            <Code className="h-5 w-5" />
+                          </div>
+                        </div>
+                        <div>
+                          <h3 className="text-lg font-medium text-white">Frontend</h3>
+                          <p className="mt-1 text-blue-100">
+                            React, Angular, Blazor
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="flex items-start">
+                        <div className="mr-4 flex-shrink-0">
+                          <div className="flex items-center justify-center h-10 w-10 rounded-md bg-white text-blue-600">
+                            <Server className="h-5 w-5" />
+                          </div>
+                        </div>
+                        <div>
+                          <h3 className="text-lg font-medium text-white">Backend</h3>
+                          <p className="mt-1 text-blue-100">
+                            .NET, C#, API development
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="flex items-start">
+                        <div className="mr-4 flex-shrink-0">
+                          <div className="flex items-center justify-center h-10 w-10 rounded-md bg-white text-blue-600">
+                            <Database className="h-5 w-5" />
+                          </div>
+                        </div>
+                        <div>
+                          <h3 className="text-lg font-medium text-white">Data</h3>
+                          <p className="mt-1 text-blue-100">
+                            SQL Server, Entity Framework, Azure SQL
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="flex items-start">
+                        <div className="mr-4 flex-shrink-0">
+                          <div className="flex items-center justify-center h-10 w-10 rounded-md bg-white text-blue-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-6">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 0 0 2.25-2.25V6.75a2.25 2.25 0 0 0-2.25-2.25H6.75A2.25 2.25 0 0 0 4.5 6.75v10.5a2.25 2.25 0 0 0 2.25 2.25Zm.75-12h9v9h-9v-9Z" />
+                            </svg>
+
+                          </div>
+                        </div>
+                        <div>
+                          <h3 className="text-lg font-medium text-white">AI</h3>
+                          <p className="mt-1 text-blue-100">
+                            Azure AI Foundry, ML.NET, Semantic Kernel
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
