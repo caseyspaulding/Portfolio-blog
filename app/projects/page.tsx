@@ -36,7 +36,7 @@ const projects: Project[] = [
       '.NET 8', 'C#', 'Azure AI', 'SQL', 'Entity Framework Core',
       'Next.js', 'TypeScript', 'SignalR', 'ML.NET', 'Azure App Services', "Azure Blob Storage", "Azure Functions"
     ],
-    image: '/images/docjacket-screenshot.png',
+    image: '/images/screenshots/screenshot-docjacket.png',
     liveDemo: 'https://docjacket.com',
     github: 'https://github.com/caseyspaulding/docjacket',
   },
