@@ -20,6 +20,7 @@ interface Project
 
 const projects: Project[] = [
   {
+
     title: 'DocJacket - Transaction Coordination Platform',
     description: `An AI-enhanced transaction management system for real estate transaction coordinators that streamlines document handling, automates deadline tracking, and ensures compliance. Replaces spreadsheets with an intelligent cloud-based solution.`,
     role: 'Full Stack Developer',
