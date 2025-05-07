@@ -104,10 +104,10 @@ export default function ProjectsPage ()
   return (
     <div>
       <PageBackground>
-        <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <main className="max-w-6xl mx-auto px-2 sm:px-6 lg:px-8 py-6">
           <div className="container mx-auto">
             {/* Header section with blue background */ }
-            <div className="text-center mb-16 bg-gradient-to-r from-blue-500 to-blue-700 rounded-xl shadow-lg p-6">
+            <div className="text-center mb-4 bg-gradient-to-r from-blue-500 to-blue-700 rounded-xl shadow-lg p-6">
               <h1 className="text-4xl md:text-5xl font-bold mb-2 text-white">
                 Projects
               </h1>
@@ -176,7 +176,7 @@ export default function ProjectsPage ()
                       </div>
                     </div>
                   </div>
-                 
+
 
                   {/* Action footer */ }
                   <div className="px-6 py-4 bg-gray-50 dark:bg-gray-700/30 border-t border-gray-100 dark:border-gray-700 flex justify-between items-center">
