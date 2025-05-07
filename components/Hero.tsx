@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { Github, Linkedin, Mail, ArrowRight, Code, Server, Database } from 'lucide-react';
+import { Github, Linkedin, Mail, ArrowRight } from 'lucide-react';
 
 export default function Hero ( { theme }: { theme: string } )
 {
@@ -28,100 +28,134 @@ export default function Hero ( { theme }: { theme: string } )
           ></div>
         </div>
 
-        {/* Hero Content - Improved Centered Layout */ }
-        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 py-10 sm:py-10 lg:py-10 text-center">
-          {/* Profile Image + Status - Enhanced */ }
-          <div className="mb-8 inline-block relative">
-            <div className="absolute -inset-1.5 bg-gradient-to-r from-blue-600 to-blue-400 rounded-full blur-md opacity-10"></div>
-
-            <div className="relative rounded-full overflow-hidden border-3 border-white dark:border-gray-800 shadow-xl w-32 h-32 sm:w-36 sm:h-36 mx-auto">
-              <Image
-                src="/images/avatars/caseyProfilePic.jpg"
-                alt="Casey Spaulding"
-                layout="fill"
-                objectFit="cover"
-                className="rounded-full"
-                priority
-              />
-
-              <div className="absolute -right-1 -bottom-1 bg-white dark:bg-gray-800 rounded-full p-1 shadow-md">
-                <span className="flex h-3 w-3">
-                  <span className="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-green-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+        {/* Hero Content - Optimized for all devices */ }
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 py-12 md:py-20">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
+            {/* Left Column - Profile Info */ }
+            <div className="text-center md:text-left md:col-span-7">
+              {/* Title & Role */ }
+              <div className="mb-4">
+                <span className="inline-block text-sm font-semibold py-2 px-5 rounded-full bg-blue-100 text-blue-700 dark:bg-blue-900/70 dark:text-blue-300 shadow-sm">
+                  .NET Full Stack Developer
                 </span>
               </div>
+
+              {/* Name */ }
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-700 dark:from-blue-400 dark:to-indigo-500">
+                  Casey Spaulding
+                </span>
+              </h1>
+
+              {/* Tagline */ }
+              <p className="text-lg sm:text-xl text-gray-700 dark:text-gray-300 mb-6 max-w-md mx-auto md:mx-0">
+                Let's build something great.
+              </p>
+
+              {/* Current Project & Learning - Simplified with minimal dots and left-aligned on mobile */ }
+              <div className="space-y-4 mb-8 mx-auto md:mx-0 text-left max-w-md">
+                {/* Current Project */ }
+                <div className="flex items-center gap-2">
+                  <span className="flex h-2 w-2 mt-1">
+                    <span className="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-green-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                  </span>
+                  <div>
+                    <span className="block text-sm text-gray-500 dark:text-gray-400">Currently building</span>
+                    <Link href="/projects" className="font-bold text-blue-600 dark:text-blue-400 hover:underline">
+                      DocJacket: AI-powered transaction management
+                    </Link>
+                  </div>
+                </div>
+
+                {/* Learning Focus */ }
+                <div className="flex items-center gap-2">
+                  <span className="flex h-2 w-2 mt-1">
+                    <span className="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-green-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                  </span>
+                  <div>
+                    <span className="block text-sm text-gray-500 dark:text-gray-400">Learning focus</span>
+                    <span className="font-bold text-gray-800 dark:text-gray-200">
+                      Incorporating AI into Enterprise Applications
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* CTA Buttons */ }
+              <div className="flex flex-wrap gap-4 justify-center md:justify-start">
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center px-6 py-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                >
+                  Get in Touch
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Link>
+
+                <Link
+                  href="/projects"
+                  className="inline-flex items-center px-6 py-3 rounded-lg bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 font-medium shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border border-gray-200 dark:border-gray-700"
+                >
+                  View Projects
+                </Link>
+              </div>
             </div>
-          </div>
 
-          {/* Title & Role - Enhanced */ }
-          <div className="mb-6">
-            <span className="inline-block text-sm font-semibold py-2 px-5 rounded-full bg-blue-100 text-blue-700 dark:bg-blue-900/70 dark:text-blue-300 mb-3 shadow-sm">
-              .NET Full Stack Developer
-            </span>
-          </div>
+            {/* Right Column - Image & Social */ }
+            <div className="flex flex-col items-center md:col-span-5">
+              {/* Profile Image */ }
+              <div className="mb-8 relative">
+                <div className="absolute -inset-3 bg-gradient-to-r from-blue-600 to-blue-400 rounded-full blur-md opacity-10"></div>
+                <div className="relative rounded-full overflow-hidden border-3 border-white dark:border-gray-800 shadow-xl w-40 h-40 sm:w-48 sm:h-48">
+                  <Image
+                    src="/images/avatars/caseyProfilePic.jpg"
+                    alt="Casey Spaulding"
+                    layout="fill"
+                    objectFit="cover"
+                    className="rounded-full"
+                    priority
+                  />
+                  <div className="absolute -right-1 -bottom-1 bg-white dark:bg-gray-800 rounded-full p-1 shadow-md">
+                    <span className="flex h-3 w-3">
+                      <span className="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-green-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
 
-          {/* Name - Enhanced Typography */ }
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold mb-6">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-700 dark:from-blue-400 dark:to-indigo-500">
-              Casey Spaulding
-            </span>
-          </h1>
+              {/* Social Links */ }
+              <div className="flex justify-center gap-4">
+                <Link
+                  href="https://www.linkedin.com/in/caseyspaulding/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center h-10 w-10 rounded-full bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                  aria-label="LinkedIn Profile"
+                >
+                  <Linkedin className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+                </Link>
 
-          {/* Tagline - Enhanced */ }
-          <p className="text-xl sm:text-2xl text-gray-700 dark:text-gray-300 mb-10 max-w-2xl mx-auto">
-            Let's build something great.
-          </p>
+                <Link
+                  href="https://github.com/caseyspaulding"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center h-10 w-10 rounded-full bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                  aria-label="GitHub Profile"
+                >
+                  <Github className="h-5 w-5 text-gray-800 dark:text-gray-200" />
+                </Link>
 
-          {/* Skills Section - Enhanced Layout */ }
-
-
-          {/* Social Links - Enhanced */ }
-          <div className="flex justify-center gap-5 mb-10">
-            <Link
-              href="https://www.linkedin.com/in/caseyspaulding/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center h-12 w-12 rounded-full bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
-              aria-label="LinkedIn Profile"
-            >
-              <Linkedin className="h-5 w-5 text-blue-600 dark:text-blue-400" />
-            </Link>
-
-            <Link
-              href="https://github.com/caseyspaulding"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center h-12 w-12 rounded-full bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
-              aria-label="GitHub Profile"
-            >
-              <Github className="h-5 w-5 text-gray-800 dark:text-gray-200" />
-            </Link>
-
-            <Link
-              href="mailto:casey.spaulding@me.com"
-              className="flex items-center justify-center h-12 w-12 rounded-full bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
-              aria-label="Email me"
-            >
-              <Mail className="h-5 w-5 text-blue-600 dark:text-blue-400" />
-            </Link>
-          </div>
-
-          {/* CTA Buttons - Enhanced */ }
-          <div className="flex flex-wrap gap-5 justify-center">
-            <Link
-              href="/contact"
-              className="inline-flex items-center px-8 py-3.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
-            >
-              Get in Touch
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Link>
-
-            <Link
-              href="/projects"
-              className="inline-flex items-center px-8 py-3.5 rounded-lg bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 font-medium shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border border-gray-200 dark:border-gray-700"
-            >
-              View Projects
-            </Link>
+                <Link
+                  href="mailto:casey.spaulding@me.com"
+                  className="flex items-center justify-center h-10 w-10 rounded-full bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                  aria-label="Email me"
+                >
+                  <Mail className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>
