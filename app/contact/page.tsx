@@ -99,20 +99,29 @@ export default function Contact ()
           </div>
         </div>
 
-        {/* Calendly Section - Full Width */ }
+        {/* Google Calendar Section */ }
         <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl mb-10">
           <div className="p-6 border-b border-gray-200 dark:border-gray-700">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Schedule a Meeting</h2>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+              Schedule a Meeting
+            </h2>
             <p className="mt-2 text-gray-600 dark:text-gray-300">
               Choose a time that works for you, and I'll be happy to discuss your project or answer any questions.
             </p>
           </div>
 
-          {/* Calendly widget - Fixed height container */ }
-          <div className="w-full h-screen max-h-[800px]">
-            <div
-              className="calendly-inline-widget w-full h-full"
-              data-url="https://calendly.com/casey-docjacket/30min?hide_gdpr_banner=1&background_color=ffffff&text_color=333333&primary_color=3a4ef6"
+          {/* Google Calendar widget container */ }
+          <div
+            id="booking-widget"
+            className="w-full h-screen max-h-[800px]"
+          >
+            <iframe
+              src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1AARzlHiVQMbzwUB43x6SYc4r7-Ynlithw8aBLSD7wAdnL0Bjk5HAO-xY73WYcYF1M1ckbIT7V?gv=true"
+              style={ { border: 0 } }
+              width="100%"
+              height="100%"
+              frameBorder="0"
+              title="Book time with Casey"
             />
           </div>
         </div>
