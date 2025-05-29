@@ -41,7 +41,7 @@ const projects: Project[] = [
   },
   {
     title: 'National Receipt System',
-    description: `Enterprise modernization legacy Receipt application, transitioning from ASP.NET WebForms to Angular + .NET 8 serverless architecture. Serves thousands of employees across county offices nationwide for tracking customer service interactions.`,
+    description: `Enterprise modernization legacy receipt application, transitioning from ASP.NET WebForms to Angular + .NET 8 serverless architecture. Serves thousands of employees across county offices nationwide for tracking customer service interactions.`,
     role: 'Senior Developer',
     duration: 'Jan 2024 - Present',
     keyFeatures: [
