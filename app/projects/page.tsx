@@ -40,8 +40,8 @@ const projects: Project[] = [
     github: 'https://github.com/caseyspaulding/docjacket',
   },
   {
-    title: 'RFS - Receipt for Service System',
-    description: `Enterprise modernization of USDA's legacy Receipt for Service application, transitioning from ASP.NET WebForms to Angular + .NET 8 serverless architecture. Serves thousands of USDA employees across county offices nationwide for tracking customer service interactions.`,
+    title: 'Receipt System',
+    description: `Enterprise modernization legacy Receipt application, transitioning from ASP.NET WebForms to Angular + .NET 8 serverless architecture. Serves thousands of employees across county offices nationwide for tracking customer service interactions.`,
     role: 'Senior Developer',
     duration: 'Jan 2024 - Present',
     keyFeatures: [
@@ -59,8 +59,8 @@ const projects: Project[] = [
     image: '/images/screenshots/rfs-architecture-svg.svg',
   },
   {
-    title: 'USDA Customer ID Link Manager',
-    description: `Enterprise modernization project for USDA's customer identity management system. Led the decoupling of legacy ASP.NET WebForms application from direct database access to API-based architecture, serving thousands of agricultural customers nationwide.`,
+    title: 'Customer Link Manager',
+    description: `Enterprise modernization project for customer identity management system. Led the decoupling of legacy ASP.NET WebForms application from direct database access to API-based architecture, serving thousands of agricultural customers nationwide.`,
     role: 'Senior Developer',
     duration: 'Jan 2024 - Dec 2024',
     keyFeatures: [
