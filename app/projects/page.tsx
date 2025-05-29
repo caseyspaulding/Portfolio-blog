@@ -20,7 +20,6 @@ interface Project
 
 const projects: Project[] = [
   {
-
     title: 'DocJacket - Transaction Coordination Platform',
     description: `An AI-CoPilot transaction management system for real estate transaction coordinators that streamlines document handling, automates deadline tracking, and ensures compliance. Replaces spreadsheets with an intelligent cloud-based solution.`,
     role: 'Full Stack Developer',
@@ -39,6 +38,43 @@ const projects: Project[] = [
     image: '/images/screenshots/screenshot-docjacket.png',
     liveDemo: 'https://docjacket.com',
     github: 'https://github.com/caseyspaulding/docjacket',
+  },
+  {
+    title: 'RFS - Receipt for Service System',
+    description: `Enterprise modernization of USDA's legacy Receipt for Service application, transitioning from ASP.NET WebForms to Angular + .NET 8 serverless architecture. Serves thousands of USDA employees across county offices nationwide for tracking customer service interactions.`,
+    role: 'Senior Developer',
+    duration: 'Jan 2024 - Present',
+    keyFeatures: [
+      'Legacy WebForms to Angular/API modernization',
+      'Multi-agency support (FSA, NRCS, RD) with conditional workflows',
+      'AWS Lambda serverless backend architecture',
+      'Integration with CARS, ARC-PLC, and ECP systems',
+      'PDF generation and email functionality',
+      'AWS Cognito + eAuth authentication integration'
+    ],
+    technologies: [
+      '.NET 8', 'C#', 'Angular', 'TypeScript', 'AWS Lambda',
+      'Entity Framework Core', 'SQL Server', 'AWS Cognito', 'SignalR', 'AWS S3'
+    ],
+    image: '/images/screenshots/rfs-architecture-svg.svg',
+  },
+  {
+    title: 'USDA Customer ID Link Manager',
+    description: `Enterprise modernization project for USDA's customer identity management system. Led the decoupling of legacy ASP.NET WebForms application from direct database access to API-based architecture, serving thousands of agricultural customers nationwide.`,
+    role: 'Senior Developer',
+    duration: 'Jan 2024 - Dec 2024',
+    keyFeatures: [
+      'Legacy system modernization and API decoupling',
+      'Serverless audit system with AWS Lambda',
+      'Transaction reporting with CSV/Excel export',
+      'Federal compliance and audit trail maintenance',
+      'Manual and automated customer linkage workflows'
+    ],
+    technologies: [
+      '.NET Core', 'C#', 'AWS Lambda', 'Entity Framework Core', 'SQL Server',
+      'ASP.NET WebForms', 'OpenAPI/Swagger', 'REST APIs', 'Government Systems'
+    ],
+    image: '/images/screenshots/clads-architecture-diagram.svg',
   },
   {
     title: 'REIstacks - Real Estate Investment CRM',

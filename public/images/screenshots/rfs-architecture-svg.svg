@@ -1,0 +1,323 @@
+<svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f7fafc;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#edf2f7;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Shadows -->
+    <filter id="shadow">
+      <feDropShadow dx="2" dy="4" stdDeviation="3" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  
+  <!-- Title -->
+  <text x="600" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#2d3748">
+    RFS - Receipt for Service Architecture
+  </text>
+  <text x="600" y="65" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#718096">
+    Legacy WebForms → Modern Angular + .NET 8 Serverless
+  </text>
+  
+  <!-- Legacy System (Left Side) -->
+  <g id="legacy-system">
+    <rect x="50" y="120" width="200" height="300" rx="10" fill="#fed7d7" stroke="#e53e3e" stroke-width="2" filter="url(#shadow)"/>
+    <text x="150" y="145" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#c53030">
+      LEGACY SYSTEM
+    </text>
+    
+    <!-- WebForms -->
+    <rect x="70" y="160" width="160" height="50" rx="5" fill="#fff5f5" stroke="#fc8181"/>
+    <text x="150" y="185" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#c53030">
+      ASP.NET WebForms
+    </text>
+    
+    <!-- Direct DB Access -->
+    <rect x="70" y="220" width="160" height="50" rx="5" fill="#fff5f5" stroke="#fc8181"/>
+    <text x="150" y="240" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#c53030">
+      Direct Database
+    </text>
+    <text x="150" y="255" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#c53030">
+      Access
+    </text>
+    
+    <!-- Monolithic -->
+    <rect x="70" y="280" width="160" height="50" rx="5" fill="#fff5f5" stroke="#fc8181"/>
+    <text x="150" y="305" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#c53030">
+      Monolithic
+    </text>
+    
+    <!-- Manual Processes -->
+    <rect x="70" y="340" width="160" height="50" rx="5" fill="#fff5f5" stroke="#fc8181"/>
+    <text x="150" y="365" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#c53030">
+      Manual Processes
+    </text>
+  </g>
+  
+  <!-- Arrow -->
+  <g id="migration-arrow">
+    <path d="M 280 270 Q 350 270 420 270" stroke="#4299e1" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+    <text x="350" y="250" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2b6cb0">
+      MODERNIZATION
+    </text>
+    <defs>
+      <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+        <polygon points="0 0, 10 3.5, 0 7" fill="#4299e1"/>
+      </marker>
+    </defs>
+  </g>
+  
+  <!-- Modern System (Right Side) -->
+  <g id="modern-system">
+    <!-- Frontend -->
+    <rect x="450" y="120" width="200" height="120" rx="10" fill="#e6fffa" stroke="#38b2ac" stroke-width="2" filter="url(#shadow)"/>
+    <text x="550" y="145" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2c7a7b">
+      FRONTEND
+    </text>
+    
+    <rect x="470" y="160" width="160" height="35" rx="5" fill="#f0fdfa" stroke="#4fd1c7"/>
+    <text x="550" y="180" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#2c7a7b">
+      Angular SPA
+    </text>
+    
+    <rect x="470" y="200" width="160" height="35" rx="5" fill="#f0fdfa" stroke="#4fd1c7"/>
+    <text x="550" y="220" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#2c7a7b">
+      TypeScript + FPAC Design
+    </text>
+    
+    <!-- Backend -->
+    <rect x="450" y="260" width="200" height="160" rx="10" fill="#ebf8ff" stroke="#3182ce" stroke-width="2" filter="url(#shadow)"/>
+    <text x="550" y="285" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2c5282">
+      BACKEND
+    </text>
+    
+    <rect x="470" y="300" width="160" height="35" rx="5" fill="#f7fafc" stroke="#63b3ed"/>
+    <text x="550" y="320" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#2c5282">
+      .NET 8 Web API
+    </text>
+    
+    <rect x="470" y="340" width="160" height="35" rx="5" fill="#f7fafc" stroke="#63b3ed"/>
+    <text x="550" y="360" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#2c5282">
+      AWS Lambda
+    </text>
+    
+    <rect x="470" y="380" width="160" height="35" rx="5" fill="#f7fafc" stroke="#63b3ed"/>
+    <text x="550" y="400" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#2c5282">
+      Entity Framework Core
+    </text>
+  </g>
+  
+  <!-- AWS Cloud -->
+  <g id="aws-cloud">
+    <rect x="700" y="120" width="200" height="300" rx="10" fill="#fff5e6" stroke="#ed8936" stroke-width="2" filter="url(#shadow)"/>
+    <text x="800" y="145" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#c05621">
+      AWS CLOUD
+    </text>
+    
+    <!-- S3 -->
+    <rect x="720" y="160" width="160" height="35" rx="5" fill="#fffaf0" stroke="#f6ad55"/>
+    <text x="800" y="180" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#c05621">
+      S3 (Static Hosting)
+    </text>
+    
+    <!-- Lambda -->
+    <rect x="720" y="200" width="160" height="35" rx="5" fill="#fffaf0" stroke="#f6ad55"/>
+    <text x="800" y="220" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#c05621">
+      Lambda Functions
+    </text>
+    
+    <!-- Cognito -->
+    <rect x="720" y="240" width="160" height="35" rx="5" fill="#fffaf0" stroke="#f6ad55"/>
+    <text x="800" y="260" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#c05621">
+      Cognito + eAuth
+    </text>
+    
+    <!-- API Gateway -->
+    <rect x="720" y="280" width="160" height="35" rx="5" fill="#fffaf0" stroke="#f6ad55"/>
+    <text x="800" y="300" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#c05621">
+      API Gateway
+    </text>
+    
+    <!-- EC2 Database -->
+    <rect x="720" y="320" width="160" height="35" rx="5" fill="#fffaf0" stroke="#f6ad55"/>
+    <text x="800" y="340" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#c05621">
+      EC2 (SQL Server)
+    </text>
+    
+    <!-- SignalR -->
+    <rect x="720" y="360" width="160" height="35" rx="5" fill="#fffaf0" stroke="#f6ad55"/>
+    <text x="800" y="380" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#c05621">
+      SignalR Hub
+    </text>
+  </g>
+  
+  <!-- External Integrations -->
+  <g id="integrations">
+    <rect x="950" y="120" width="200" height="300" rx="10" fill="#f0fff4" stroke="#48bb78" stroke-width="2" filter="url(#shadow)"/>
+    <text x="1050" y="145" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2f855a">
+      INTEGRATIONS
+    </text>
+    
+    <!-- CARS -->
+    <rect x="970" y="160" width="160" height="30" rx="5" fill="#f7fafc" stroke="#68d391"/>
+    <text x="1050" y="178" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#2f855a">
+      CARS System
+    </text>
+    
+    <!-- ARC-PLC -->
+    <rect x="970" y="195" width="160" height="30" rx="5" fill="#f7fafc" stroke="#68d391"/>
+    <text x="1050" y="213" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#2f855a">
+      ARC-PLC System
+    </text>
+    
+    <!-- ECP -->
+    <rect x="970" y="230" width="160" height="30" rx="5" fill="#f7fafc" stroke="#68d391"/>
+    <text x="1050" y="248" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#2f855a">
+      ECP System
+    </text>
+    
+    <!-- SCIMS -->
+    <rect x="970" y="265" width="160" height="30" rx="5" fill="#f7fafc" stroke="#68d391"/>
+    <text x="1050" y="283" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#2f855a">
+      SCIMS Service
+    </text>
+    
+    <!-- NRT -->
+    <rect x="970" y="300" width="160" height="30" rx="5" fill="#f7fafc" stroke="#68d391"/>
+    <text x="1050" y="318" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#2f855a">
+      NRT Database
+    </text>
+    
+    <!-- Farmers.gov -->
+    <rect x="970" y="335" width="160" height="30" rx="5" fill="#f7fafc" stroke="#68d391"/>
+    <text x="1050" y="353" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#2f855a">
+      Farmers.gov
+    </text>
+    
+    <!-- MRT Services -->
+    <rect x="970" y="370" width="160" height="30" rx="5" fill="#f7fafc" stroke="#68d391"/>
+    <text x="1050" y="388" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#2f855a">
+      MRT Services
+    </text>
+  </g>
+  
+  <!-- Connection Lines -->
+  <g id="connections" stroke="#718096" stroke-width="2" fill="none">
+    <!-- Frontend to Backend -->
+    <line x1="650" y1="200" x2="450" y2="340"/>
+    
+    <!-- Backend to AWS -->
+    <line x1="650" y1="340" x2="700" y2="280"/>
+    
+    <!-- AWS to Integrations -->
+    <line x1="900" y1="280" x2="950" y2="280"/>
+  </g>
+  
+  <!-- Key Benefits -->
+  <g id="benefits">
+    <rect x="50" y="480" width="1100" height="280" rx="10" fill="#f7fafc" stroke="#a0aec0" stroke-width="1" filter="url(#shadow)"/>
+    <text x="600" y="510" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#2d3748">
+      Modernization Benefits
+    </text>
+    
+    <!-- Benefits Row 1 -->
+    <g id="benefits-row1">
+      <!-- Scalability -->
+      <rect x="80" y="530" width="200" height="80" rx="5" fill="#e6fffa" stroke="#38b2ac"/>
+      <text x="180" y="555" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2c7a7b">
+        Scalability
+      </text>
+      <text x="180" y="575" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#2c7a7b">
+        Serverless auto-scaling
+      </text>
+      <text x="180" y="590" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#2c7a7b">
+        Handles peak loads
+      </text>
+      
+      <!-- Performance -->
+      <rect x="300" y="530" width="200" height="80" rx="5" fill="#ebf8ff" stroke="#3182ce"/>
+      <text x="400" y="555" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2c5282">
+        Performance
+      </text>
+      <text x="400" y="575" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#2c5282">
+        SPA responsiveness
+      </text>
+      <text x="400" y="590" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#2c5282">
+        API efficiency
+      </text>
+      
+      <!-- Maintainability -->
+      <rect x="520" y="530" width="200" height="80" rx="5" fill="#f0fff4" stroke="#48bb78"/>
+      <text x="620" y="555" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2f855a">
+        Maintainability
+      </text>
+      <text x="620" y="575" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#2f855a">
+        Separation of concerns
+      </text>
+      <text x="620" y="590" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#2f855a">
+        Modern frameworks
+      </text>
+      
+      <!-- Cost Efficiency -->
+      <rect x="740" y="530" width="200" height="80" rx="5" fill="#fff5e6" stroke="#ed8936"/>
+      <text x="840" y="555" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#c05621">
+        Cost Efficiency
+      </text>
+      <text x="840" y="575" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#c05621">
+        Pay-per-use model
+      </text>
+      <text x="840" y="590" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#c05621">
+        Reduced infrastructure
+      </text>
+    </g>
+    
+    <!-- Benefits Row 2 -->
+    <g id="benefits-row2">
+      <!-- Security -->
+      <rect x="190" y="630" width="200" height="80" rx="5" fill="#fef5e7" stroke="#f6ad55"/>
+      <text x="290" y="655" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#c05621">
+        Security
+      </text>
+      <text x="290" y="675" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#c05621">
+        AWS Cognito + eAuth
+      </text>
+      <text x="290" y="690" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#c05621">
+        Federal compliance
+      </text>
+      
+      <!-- User Experience -->
+      <rect x="410" y="630" width="200" height="80" rx="5" fill="#e6fffa" stroke="#38b2ac"/>
+      <text x="510" y="655" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2c7a7b">
+        User Experience
+      </text>
+      <text x="510" y="675" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#2c7a7b">
+        Modern UI/UX
+      </text>
+      <text x="510" y="690" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#2c7a7b">
+        Mobile responsive
+      </text>
+      
+      <!-- Integration -->
+      <rect x="630" y="630" width="200" height="80" rx="5" fill="#f0fff4" stroke="#48bb78"/>
+      <text x="730" y="655" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2f855a">
+        Integration
+      </text>
+      <text x="730" y="675" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#2f855a">
+        RESTful APIs
+      </text>
+      <text x="730" y="690" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#2f855a">
+        Seamless connectivity
+      </text>
+    </g>
+  </g>
+  
+  <!-- Multi-Agency Support -->
+  <g id="multi-agency">
+    <text x="600" y="740" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#4a5568">
+      Multi-Agency Support: FSA (Primary) • NRCS • RD
+    </text>
+  </g>
+</svg>
