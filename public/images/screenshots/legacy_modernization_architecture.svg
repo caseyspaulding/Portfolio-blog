@@ -1,0 +1,173 @@
+<svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="legacyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff6b6b;stop-opacity:0.1" />
+      <stop offset="100%" style="stop-color:#ff6b6b;stop-opacity:0.3" />
+    </linearGradient>
+    <linearGradient id="modernGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4ecdc4;stop-opacity:0.1" />
+      <stop offset="100%" style="stop-color:#4ecdc4;stop-opacity:0.3" />
+    </linearGradient>
+    <linearGradient id="cloudGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#45b7d1;stop-opacity:0.1" />
+      <stop offset="100%" style="stop-color:#45b7d1;stop-opacity:0.3" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Title -->
+  <text x="600" y="30" text-anchor="middle" class="title" style="font-size:24px;font-weight:bold;fill:#333;">Legacy System Modernization Architecture</text>
+  
+  <!-- Legacy System Section -->
+  <g id="legacy-section">
+    <rect x="50" y="80" width="300" height="350" fill="url(#legacyGrad)" stroke="#ff6b6b" stroke-width="2" rx="10"/>
+    <text x="200" y="105" text-anchor="middle" style="font-size:18px;font-weight:bold;fill:#333;">Legacy System</text>
+    
+    <!-- Legacy Components -->
+    <rect x="70" y="120" width="260" height="80" fill="#ffebee" stroke="#f44336" stroke-width="1" rx="5"/>
+    <text x="200" y="140" text-anchor="middle" style="font-size:14px;font-weight:bold;fill:#333;">ASP.NET WebForms</text>
+    <text x="200" y="158" text-anchor="middle" style="font-size:12px;fill:#666;">Monolithic Application</text>
+    <text x="200" y="175" text-anchor="middle" style="font-size:12px;fill:#666;">Tight Coupling</text>
+    <text x="200" y="192" text-anchor="middle" style="font-size:12px;fill:#666;">ViewState Management</text>
+    
+    <rect x="70" y="220" width="260" height="60" fill="#fff3e0" stroke="#ff9800" stroke-width="1" rx="5"/>
+    <text x="200" y="240" text-anchor="middle" style="font-size:14px;font-weight:bold;fill:#333;">SQL Server</text>
+    <text x="200" y="258" text-anchor="middle" style="font-size:12px;fill:#666;">Traditional Database</text>
+    <text x="200" y="275" text-anchor="middle" style="font-size:12px;fill:#666;">Direct Queries</text>
+    
+    <rect x="70" y="300" width="260" height="60" fill="#f3e5f5" stroke="#9c27b0" stroke-width="1" rx="5"/>
+    <text x="200" y="320" text-anchor="middle" style="font-size:14px;font-weight:bold;fill:#333;">Legacy Auth</text>
+    <text x="200" y="338" text-anchor="middle" style="font-size:12px;fill:#666;">Session-based</text>
+    <text x="200" y="355" text-anchor="middle" style="font-size:12px;fill:#666;">Server State</text>
+    
+    <!-- Performance Issues -->
+    <text x="200" y="395" text-anchor="middle" style="font-size:12px;font-weight:bold;fill:#d32f2f;">Issues:</text>
+    <text x="200" y="410" text-anchor="middle" style="font-size:11px;fill:#d32f2f;">• 3-8s Response Times</text>
+    <text x="200" y="425" text-anchor="middle" style="font-size:11px;fill:#d32f2f;">• 200-300 Concurrent Users</text>
+  </g>
+  
+  <!-- Modernized System Section -->
+  <g id="modern-section">
+    <rect x="450" y="80" width="700" height="650" fill="url(#modernGrad)" stroke="#4ecdc4" stroke-width="2" rx="10"/>
+    <text x="800" y="105" text-anchor="middle" style="font-size:18px;font-weight:bold;fill:#333;">Modernized System</text>
+    
+    <!-- Frontend -->
+    <rect x="470" y="120" width="200" height="100" fill="#e8f5e8" stroke="#4caf50" stroke-width="1" rx="5"/>
+    <text x="570" y="140" text-anchor="middle" style="font-size:14px;font-weight:bold;fill:#333;">Angular Frontend</text>
+    <text x="570" y="158" text-anchor="middle" style="font-size:12px;fill:#666;">TypeScript</text>
+    <text x="570" y="175" text-anchor="middle" style="font-size:12px;fill:#666;">Component-based</text>
+    <text x="570" y="192" text-anchor="middle" style="font-size:12px;fill:#666;">Federal Design System</text>
+    <text x="570" y="209" text-anchor="middle" style="font-size:12px;fill:#666;">Reactive Forms</text>
+    
+    <!-- API Gateway -->
+    <rect x="720" y="120" width="200" height="100" fill="#e3f2fd" stroke="#2196f3" stroke-width="1" rx="5"/>
+    <text x="820" y="140" text-anchor="middle" style="font-size:14px;font-weight:bold;fill:#333;">API Gateway</text>
+    <text x="820" y="158" text-anchor="middle" style="font-size:12px;fill:#666;">Request Routing</text>
+    <text x="820" y="175" text-anchor="middle" style="font-size:12px;fill:#666;">Rate Limiting</text>
+    <text x="820" y="192" text-anchor="middle" style="font-size:12px;fill:#666;">Authentication</text>
+    <text x="820" y="209" text-anchor="middle" style="font-size:12px;fill:#666;">Monitoring</text>
+    
+    <!-- Authentication -->
+    <rect x="960" y="120" width="170" height="100" fill="#fff3e0" stroke="#ff9800" stroke-width="1" rx="5"/>
+    <text x="1045" y="140" text-anchor="middle" style="font-size:14px;font-weight:bold;fill:#333;">Auth Service</text>
+    <text x="1045" y="158" text-anchor="middle" style="font-size:12px;fill:#666;">AWS Cognito</text>
+    <text x="1045" y="175" text-anchor="middle" style="font-size:12px;fill:#666;">Federal SSO</text>
+    <text x="1045" y="192" text-anchor="middle" style="font-size:12px;fill:#666;">JWT Tokens</text>
+    
+    <!-- Serverless Functions -->
+    <rect x="470" y="250" width="660" height="120" fill="url(#cloudGrad)" stroke="#45b7d1" stroke-width="1" rx="5"/>
+    <text x="800" y="275" text-anchor="middle" style="font-size:16px;font-weight:bold;fill:#333;">AWS Serverless Layer</text>
+    
+    <!-- Individual Lambda Functions -->
+    <rect x="490" y="290" width="120" height="60" fill="#e8f5e8" stroke="#4caf50" stroke-width="1" rx="3"/>
+    <text x="550" y="310" text-anchor="middle" style="font-size:12px;font-weight:bold;fill:#333;">Receipt API</text>
+    <text x="550" y="325" text-anchor="middle" style="font-size:10px;fill:#666;">.NET 8</text>
+    <text x="550" y="338" text-anchor="middle" style="font-size:10px;fill:#666;">Lambda</text>
+    
+    <rect x="630" y="290" width="120" height="60" fill="#e8f5e8" stroke="#4caf50" stroke-width="1" rx="3"/>
+    <text x="690" y="310" text-anchor="middle" style="font-size:12px;font-weight:bold;fill:#333;">Search API</text>
+    <text x="690" y="325" text-anchor="middle" style="font-size:10px;fill:#666;">.NET 8</text>
+    <text x="690" y="338" text-anchor="middle" style="font-size:10px;fill:#666;">Lambda</text>
+    
+    <rect x="770" y="290" width="120" height="60" fill="#e8f5e8" stroke="#4caf50" stroke-width="1" rx="3"/>
+    <text x="830" y="310" text-anchor="middle" style="font-size:12px;font-weight:bold;fill:#333;">PDF API</text>
+    <text x="830" y="325" text-anchor="middle" style="font-size:10px;fill:#666;">.NET 8</text>
+    <text x="830" y="338" text-anchor="middle" style="font-size:10px;fill:#666;">Lambda</text>
+    
+    <rect x="910" y="290" width="120" height="60" fill="#e8f5e8" stroke="#4caf50" stroke-width="1" rx="3"/>
+    <text x="970" y="310" text-anchor="middle" style="font-size:12px;font-weight:bold;fill:#333;">Integration API</text>
+    <text x="970" y="325" text-anchor="middle" style="font-size:10px;fill:#666;">.NET 8</text>
+    <text x="970" y="338" text-anchor="middle" style="font-size:10px;fill:#666;">Lambda</text>
+    
+    <rect x="1050" y="290" width="70" height="60" fill="#e8f5e8" stroke="#4caf50" stroke-width="1" rx="3"/>
+    <text x="1085" y="310" text-anchor="middle" style="font-size:12px;font-weight:bold;fill:#333;">More...</text>
+    <text x="1085" y="325" text-anchor="middle" style="font-size:10px;fill:#666;">Auto-scale</text>
+    
+    <!-- Database Layer -->
+    <rect x="470" y="400" width="200" height="80" fill="#fff3e0" stroke="#ff9800" stroke-width="1" rx="5"/>
+    <text x="570" y="425" text-anchor="middle" style="font-size:14px;font-weight:bold;fill:#333;">SQL Server</text>
+    <text x="570" y="443" text-anchor="middle" style="font-size:12px;fill:#666;">AWS EC2</text>
+    <text x="570" y="460" text-anchor="middle" style="font-size:12px;fill:#666;">Entity Framework</text>
+    <text x="570" y="477" text-anchor="middle" style="font-size:12px;fill:#666;">Optimized Queries</text>
+    
+    <!-- External Integrations -->
+    <rect x="720" y="400" width="200" height="80" fill="#f3e5f5" stroke="#9c27b0" stroke-width="1" rx="5"/>
+    <text x="820" y="425" text-anchor="middle" style="font-size:14px;font-weight:bold;fill:#333;">External Systems</text>
+    <text x="820" y="443" text-anchor="middle" style="font-size:12px;fill:#666;">Federal System A</text>
+    <text x="820" y="460" text-anchor="middle" style="font-size:12px;fill:#666;">Federal System B</text>
+    <text x="820" y="477" text-anchor="middle" style="font-size:12px;fill:#666;">Identity Services</text>
+    
+    <!-- Monitoring -->
+    <rect x="960" y="400" width="170" height="80" fill="#ffebee" stroke="#f44336" stroke-width="1" rx="5"/>
+    <text x="1045" y="425" text-anchor="middle" style="font-size:14px;font-weight:bold;fill:#333;">Monitoring</text>
+    <text x="1045" y="443" text-anchor="middle" style="font-size:12px;fill:#666;">CloudWatch</text>
+    <text x="1045" y="460" text-anchor="middle" style="font-size:12px;fill:#666;">X-Ray Tracing</text>
+    <text x="1045" y="477" text-anchor="middle" style="font-size:12px;fill:#666;">Custom Metrics</text>
+    
+    <!-- Performance Improvements -->
+    <rect x="470" y="510" width="660" height="100" fill="#e8f5e8" stroke="#4caf50" stroke-width="1" rx="5"/>
+    <text x="800" y="535" text-anchor="middle" style="font-size:16px;font-weight:bold;fill:#333;">Performance Improvements</text>
+    
+    <text x="570" y="560" text-anchor="middle" style="font-size:12px;font-weight:bold;fill:#2e7d32;">Response Time:</text>
+    <text x="570" y="575" text-anchor="middle" style="font-size:11px;fill:#2e7d32;">200-500ms</text>
+    <text x="570" y="590" text-anchor="middle" style="font-size:11px;fill:#2e7d32;">85% improvement</text>
+    
+    <text x="800" y="560" text-anchor="middle" style="font-size:12px;font-weight:bold;fill:#2e7d32;">Scalability:</text>
+    <text x="800" y="575" text-anchor="middle" style="font-size:11px;fill:#2e7d32;">1000+ users</text>
+    <text x="800" y="590" text-anchor="middle" style="font-size:11px;fill:#2e7d32;">Auto-scaling</text>
+    
+    <text x="1030" y="560" text-anchor="middle" style="font-size:12px;font-weight:bold;fill:#2e7d32;">Cost:</text>
+    <text x="1030" y="575" text-anchor="middle" style="font-size:11px;fill:#2e7d32;">Pay-per-use</text>
+    <text x="1030" y="590" text-anchor="middle" style="font-size:11px;fill:#2e7d32;">60% reduction</text>
+    
+    <!-- Benefits -->
+    <rect x="470" y="640" width="660" height="80" fill="#e3f2fd" stroke="#2196f3" stroke-width="1" rx="5"/>
+    <text x="800" y="665" text-anchor="middle" style="font-size:16px;font-weight:bold;fill:#333;">Key Benefits</text>
+    <text x="570" y="685" text-anchor="middle" style="font-size:11px;fill:#1976d2;">• Modern UX</text>
+    <text x="570" y="700" text-anchor="middle" style="font-size:11px;fill:#1976d2;">• Testable Code</text>
+    <text x="800" y="685" text-anchor="middle" style="font-size:11px;fill:#1976d2;">• Faster Development</text>
+    <text x="800" y="700" text-anchor="middle" style="font-size:11px;fill:#1976d2;">• Better Reliability</text>
+    <text x="1030" y="685" text-anchor="middle" style="font-size:11px;fill:#1976d2;">• Enhanced Security</text>
+    <text x="1030" y="700" text-anchor="middle" style="font-size:11px;fill:#1976d2;">• Compliance Ready</text>
+  </g>
+  
+  <!-- Migration Arrow -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" 
+            refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333" />
+    </marker>
+  </defs>
+  
+  <path d="M 350 255 Q 400 255 450 255" stroke="#333" stroke-width="3" 
+        fill="none" marker-end="url(#arrowhead)"/>
+  <text x="400" y="240" text-anchor="middle" style="font-size:14px;font-weight:bold;fill:#333;">Migration</text>
+  <text x="400" y="275" text-anchor="middle" style="font-size:12px;fill:#666;">Incremental</text>
+  <text x="400" y="290" text-anchor="middle" style="font-size:12px;fill:#666;">Parallel Systems</text>
+  
+  <!-- Data Flow Arrows -->
+  <path d="M 570 220 L 570 250" stroke="#666" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <path d="M 820 220 L 820 250" stroke="#666" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <path d="M 550 350 L 550 400" stroke="#666" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <path d="M 830 350 L 830 400" stroke="#666" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  
+</svg>

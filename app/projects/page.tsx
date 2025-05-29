@@ -56,10 +56,10 @@ const projects: Project[] = [
       '.NET 8', 'C#', 'Angular', 'TypeScript', 'AWS Lambda',
       'Entity Framework Core', 'SQL Server', 'AWS Cognito', 'SignalR', 'AWS S3'
     ],
-    image: '/images/screenshots/rfs-architecture-svg.svg',
+    image: '/images/screenshots/legacy_modernization_architecture.svg',
   },
   {
-    title: 'Customer Link Manager',
+    title: 'ID Link Manager',
     description: `Enterprise modernization project for customer identity management system. Led the decoupling of legacy ASP.NET WebForms application from direct database access to API-based architecture, serving thousands of agricultural customers nationwide.`,
     role: 'Senior Developer',
     duration: 'Jan 2024 - Dec 2024',
